@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import pandas as pd
+import numpy as np
 import os
 import re
 
@@ -109,7 +110,14 @@ class Board(object):
 
     def __scan_for_thermocouples(self):
         ''' Scans for thermocouple columns '''
-        self.thermocouples = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
+        possible_thermocouples = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
+        ## series where index is thermocouples and column is a True/False value depending on whether all items in column are 0
+        tc_series = self.df[possible_thermocouples].apply(lambda x: np.all(x==0))
+        i = 0
+        for tc_all_zero in tc_series:
+            if not tc_all_zero:
+                self.thermocouples.append(tc_series.index[i]) # append only thermocouples that were used in the test
+            i += 1
 
     def __create_samples(self):
         ''' Creates a sample object for each system on the board '''

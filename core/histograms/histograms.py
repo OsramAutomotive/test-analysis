@@ -43,7 +43,9 @@ def histogram_of_each_system(test, mode, temp, limits=None):
         
         if limits: ## if doing limit analysis
             LL, UL = limits[temp][mode.mode_tag][voltage][0], limits[temp][mode.mode_tag][voltage][1]
-        title = ' '.join([mode.board_mode, str(temp), str(voltage), ' LL:', str(LL), ' UL:', str(UL)])
+            title = ' '.join([mode.board_mode, str(temp), str(voltage), ' LL:', str(LL), ' UL:', str(UL)])
+        else:
+            title = ' '.join([mode.board_mode, str(temp), str(voltage)])
         fig.canvas.set_window_title(title)
         fig.suptitle(title, fontsize = 14, fontweight='bold')
 

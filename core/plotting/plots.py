@@ -60,14 +60,13 @@ def format_subplot_legends(test, axes):
     voltage_labels = axes[0].get_legend_handles_labels()[1]
     axes[0].legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5))
     for i in range(len(test.modes)+2):
-        if i == 0:
+        if i == 0:  
             continue
-        if i < 2:
+        if i == 1:  # temperature profile
             axes[i].legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
-                           labels = test.systems)
-        elif i == 2:
-            ## where to place legend based on number of modes being plotted
-            vert = {1:0.5, 2:-0.25 , 3:-1.0 , 4:-1.75 , 5:-2.5 , 6:-3.25, 7: -4.0}
+                           labels = test.thermocouples)
+        elif i == 2: # where to place currents legend based on number of modes being plotted
+            vert = {1:0.5, 2:-0.25 , 3:-1.0 , 4:-1.75 , 5:-2.5 , 6:-3.25, 7: -4.0, 8: -4.75}
             axes[i].legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, vert[len(test.modes)]),
                            labels = test.systems)
         else:

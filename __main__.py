@@ -11,10 +11,12 @@ from core.limits.limits_parser import *
 prepath = r"\\Chfile1\ecs_landrive\Automotive_Lighting\LED\P552 MCA Headlamp\P552 MCA Aux\ADVPR\PV Aux"
 
 #endpath = r"\\TL A&B\Initial Tri Temp FT\-40C rerun\Raw Data"
-endpath = r"\\TL A&B\LTO\Raw Data"
+#endpath = r"\\TL A&B\LTO\Raw Data"
 #endpath = r"\\TL E\HTEnd\HTEnd restart\Raw Data"
-#endpath = r"\\TL A&B\PTC\Raw Data"
+endpath = r"\\TL A&B\PTC\Raw Data"
 #endpath = r"\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\85C 9V DRL+TURN (DRL on B2 no Vsense)\Raw Data"
+#endpath = "\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\85C 9V DRL+TURN (B4 w Vsense)\Raw Data"
+
 
 datapath = prepath + endpath
 
@@ -26,11 +28,13 @@ limits = Limits(limits_file, ws)
 
 
 ## Build/Analysis
-# test = TestStation(3456, datapath, -40, 85)
+test = TestStation(3456, datapath, -40, 85)
 #test = TestStation(256, datapath, 85)
-test = TestStation(3456, datapath, -40)
+#test = TestStation(3456, datapath, -40)
+
 
 #make_mode_histograms(test, system_by_system=True, limits = limits.lim)
+#make_mode_histograms(test, system_by_system=True)
 plot_modes(test)
 #web_plot_board_currents(test)
 
