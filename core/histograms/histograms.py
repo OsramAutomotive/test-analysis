@@ -18,29 +18,11 @@ def make_mode_histograms(test, system_by_system=True, limits=None):
     print('complete.')
     plt.show('hold') ## wait until all plots are built to show them
 
-def make_subplot_layout(num):
-    nrows, ncols = 0, 0
-    if num > 10:
-        nrows, ncols = 3, 4
-    elif num == 10:
-        nrows, ncols = 2, 5
-    elif num == 9:
-        nrows, ncols = 3, 3
-    elif num > 6:
-        nrows, ncols = 2, 4
-    elif num > 4:
-        nrows, ncols = 2, 3
-    elif num == 4:
-        nrows, ncols = 2, 2
-    else:
-        nrows, ncols = 1, num   
-    return nrows, ncols
-
 def histogram_of_each_system(test, mode, temp, limits=None):
     for voltage in mode.voltages: ## make plot for mode in each voltage
         num_subplots = len(mode.systems)
         fig = plt.figure()
-        
+        bar_color = determine_bar_color(temp)
         if limits: ## if doing limit analysis
             LL, UL = limits[temp][mode.mode_tag][voltage][0], limits[temp][mode.mode_tag][voltage][1]
             title = ' '.join([mode.board_mode, str(temp), str(voltage), ' LL:', str(LL), ' UL:', str(UL)])
@@ -52,11 +34,12 @@ def histogram_of_each_system(test, mode, temp, limits=None):
         nrows, ncols = make_subplot_layout(num_subplots)
         i = 1
         for system in mode.systems:
-            current_data = pd.to_numeric(mode.df[system], downcast='float')
+            filtered_df = mode.filter_temp_and_voltage(mode.df[[mode.AMB_TEMP, mode.VSETPOINT, system]], temp, voltage)
+            current_data = pd.to_numeric(filtered_df[system], downcast='float')
             avg = current_data.mean()
             ax = fig.add_subplot(nrows, ncols, i)
             ax.set_title(test.systems[i-1])
-            ax.hist(current_data.dropna())  ## drop NaN values
+            ax.hist(current_data.dropna(), color=bar_color)  ## drop NaN values
             ax.axvline(avg, color='#228B22', linestyle='solid', linewidth=4)
             if limits:
                 ax.axvline(LL, color='red', linestyle='dashed', linewidth=2)
@@ -95,5 +78,29 @@ def histogram_of_mode(test, mode, temp, limits=None):
 
     plt.tight_layout()
     plt.subplots_adjust(top=0.87, bottom=0.05, left=0.07, right=0.97)
-    
+  
+def make_subplot_layout(num):
+    nrows, ncols = 0, 0
+    if num > 10:
+        nrows, ncols = 3, 4
+    elif num == 10:
+        nrows, ncols = 2, 5
+    elif num == 9:
+        nrows, ncols = 3, 3
+    elif num > 6:
+        nrows, ncols = 2, 4
+    elif num > 4:
+        nrows, ncols = 2, 3
+    elif num == 4:
+        nrows, ncols = 2, 2
+    else:
+        nrows, ncols = 1, num   
+    return nrows, ncols
 
+def determine_bar_color(temp):
+    if temp == 23:
+        return 'green'
+    elif temp > 23:
+        return 'orange'
+    else:
+        return 'blue'

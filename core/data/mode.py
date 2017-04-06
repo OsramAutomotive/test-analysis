@@ -48,9 +48,8 @@ class Mode(object):
             self.multimode = True     
 
     def __make_hist_dict(self):
-        empty_hist_dict = dict.fromkeys(self.voltages)
         for temp in self.temps:
-            self.hist_dict[temp] = empty_hist_dict.copy()
+            self.hist_dict[temp] = dict.fromkeys(self.voltages)
 
     def __populate_hist_dict(self, df):    
         for temp in self.temps:

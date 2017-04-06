@@ -13,10 +13,10 @@ prepath = r"\\Chfile1\ecs_landrive\Automotive_Lighting\LED\P552 MCA Headlamp\P55
 #endpath = r"\\TL A&B\Initial Tri Temp FT\-40C rerun\Raw Data"
 #endpath = r"\\TL A&B\LTO\Raw Data"
 #endpath = r"\\TL E\HTEnd\HTEnd restart\Raw Data"
-endpath = r"\\TL A&B\PTC\Raw Data"
+#endpath = r"\\TL A&B\PTC\Raw Data"
 #endpath = r"\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\85C 9V DRL+TURN (DRL on B2 no Vsense)\Raw Data"
 #endpath = "\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\85C 9V DRL+TURN (B4 w Vsense)\Raw Data"
-
+endpath = r"\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\90C 9V (full PTC FC cycle)\Raw Data"
 
 datapath = prepath + endpath
 
@@ -32,9 +32,8 @@ test = TestStation(3456, datapath, -40, 85)
 #test = TestStation(256, datapath, 85)
 #test = TestStation(3456, datapath, -40)
 
-
-#make_mode_histograms(test, system_by_system=True, limits = limits.lim)
+#plot_modes(test)
+make_mode_histograms(test, system_by_system=True, limits = limits.lim)
 #make_mode_histograms(test, system_by_system=True)
-plot_modes(test)
 #web_plot_board_currents(test)
 
