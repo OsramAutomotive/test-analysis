@@ -9,11 +9,10 @@ import matplotlib.dates as dates
 from matplotlib import style
 from .. re_and_global import *
 
-def check_for_and_load_limits(limits):
+def check_and_load_limits(limits):
     module_names_dict = {}
     LL, UL = 0, 0
     if limits:
-        module_names_dict = {}
         for board in limits.boards_dict:
             module_names_dict[board] = limits.boards_dict[board]
     return module_names_dict, LL, UL
@@ -96,7 +95,7 @@ def set_figure_size(fig, save=False):
 def plot_modes(test, limits=None):
     ''' Creates a temporal plot of the functional cycle, temperature profile, and test mode currents '''
     print('Plotting temporal plot...')
-    # module_names_dict, LL, UL = check_for_and_load_limits(limits)  # get module names if limits passed
+    # module_names_dict, LL, UL = check_and_load_limits(limits)  # get module names if limits passed
     fig, axes = set_up_plot_area(test)  # set up figure and axes for plotting
     axes[0].plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.VSETPOINT], 'k--', 
                       linewidth=3, zorder=10)  # plot voltage setpoint on first subplot

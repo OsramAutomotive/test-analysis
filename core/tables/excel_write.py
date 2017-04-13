@@ -4,17 +4,16 @@
 for out of spec currents/voltages and color modes as well. '''
 
 import xlsxwriter
+from core.data.mode import *
 
 COLOR_DICT = { 'LB': '#FF5C5C', 'HB': '#FCFBE3', 'LBHB': '#7647A2', 'DRL': '#ADD8E6', 'PARK': '#FFA500', 
                'TURN': '#DA70D6', 'DRLTURN': '#40E0D0', 'PARKTURN': '#FF8C00' }
 
-def create_wb_and_ws(filename):
-    ''' Create a blank workbook and add a worksheet '''
-    wb = xlsxwriter.Workbook('!output/' + filename + '.xlsx')
-    ws = wb.add_worksheet(sheetname)
-    return wb, ws
+def create_wb(filename):
+    ''' Create a blank workbook '''
+    return xlsxwriter.Workbook('!output/' + filename + '.xlsx')
 
-def excel_write_title_header(row_start, wb, wos, width, title_header):
+def write_title_header(row_start, wb, wos, width, title_header):
     ''' Write a test title header for the table '''
     row, col = row_start, 0
     title_format = wb.add_format({'align': 'center', 'border': True, 'bold': True, 'font_color': 'black'})
@@ -37,7 +36,7 @@ def write_mode_temp_header(row_start, wb, ws, color_dict):
 
 def write_limits_header(row_start, limits):
     ''' Write limits header into the row after row_start '''
-    row, col = row_start+1, 0
+    row, col = row_start, 0
     voltage_lim_string = ' '.join([str(voltage)+u'\N{PLUS-MINUS SIGN}'+'0.5V'])
     limits_string = ''
     if 'outage' in mode.lower():
@@ -49,9 +48,9 @@ def write_limits_header(row_start, limits):
                                       'font_color': 'black', 'bg_color': '#D3D3D3'})
     worksheet.merge_range(row, col, row, len(data[0])-1, limits_string, lim_format)
 
-def write_voltage_and_current_data(row_start):
+def write_voltage_and_current_data(row_start, data):
     ''' Starting from 3rd row, write in voltage/current data '''
-    row = row_start+2
+    row = row_start
     d_format = workbook.add_format({'align':'center', 'border': True, 'font_color': 'black'})
     for data_line in (data):
         col = 0
@@ -63,14 +62,22 @@ def highlight_workbook(wb, ws):
     out_of_spec_format = wb.add_format({'bg_color': 'yellow', 'font_color': 'red'})
     ws.conditional_format('A1:O600', {'type': 'text', 'criteria': 'containing', 'value': 'Out of Spec', 'format': out_of_spec_format})
 
-def write_single_table(row_start, workbook, worksheet, product, test_title, mode, temperature, voltage, LL, UL, data):
-    write_mode_temp_header(row_start, wb, ws, color_dict)
-    write_limits_header(row_start, limits)
-    write_voltage_and_current_data()
+def write_single_table(row_start, wb, ws, mode, temperature, voltage, LL, UL, stats):
+    write_title_header(row_start, wb, ws, width, title_header)
+    write_mode_temp_header(row_start+1, wb, ws, color_dict)
+    write_limits_header(row_start+2, limits)
+    row = write_voltage_and_current_data(row_start+3, stats)
+    return row
 
+def fill_stats(test, limits=False):
+    ''' This function fills the mode objects with stats from test using mode method '''
+    wb = create_wb('test')
+    for temp in test.temps:
+        ws = wb.add_worksheet(str(temp) + 'C') # add ws with temp as name
+        row_start = 0  # start at row zero
+        for mode in test.modes:
+            print('\n\n\n*********', mode, '*********')
+            mode.get_system_by_system_mode_stats(temp, limits)
 
-
-
-
-def write_excel_analysis_file():
-    pass
+def write_excel_tables():
+    row_start = write_single_table(row_start, wb, ws, mode, temp, voltage, LL, UL, stats)

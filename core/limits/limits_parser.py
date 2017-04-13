@@ -14,7 +14,7 @@ class Limits(object):
     def __init__(self, filepath, sheet):
         self.filepath = filepath
         self.sheet = sheet
-        self.product, self.rev, self.row23, self.rowm40, self.row85, self.row45, self.row60, \
+        self.product, self.rev, self.row23, self.rowm40, self.row85, self.row45, self.row60, self.row70, \
         self.mode_cols, self.modes, self.boards_dict, self.outage_link, self.mm_lims = get_info(self.filepath, self.sheet)
         self.lim = {}  ## holds CURRENT limits in dictionary: 
                        ## temp -> board_mode(w/o B6) -> voltage -> tuple(LL,UL)
@@ -37,7 +37,7 @@ class Limits(object):
             self.bmodes = [m.replace(line, board, 1) for m in self.bmodes]
 
     def create_empty_limits(self):
-        temps = [23, -40, 85, 45, 60]
+        temps = [23, -40, 85, 45, 60, 70]
         for temp in temps:  ## make empty dicts of dicts format
             self.lim[temp] = {}
             for bmode in self.bmodes:
@@ -46,7 +46,7 @@ class Limits(object):
     def fill_limits(self):
         wb = load_workbook(self.filepath, read_only=True)
         ws = wb[self.sheet]
-        temps = {23:self.row23, -40:self.rowm40, 85:self.row85, 45:self.row45, 60:self.row60}
+        temps = {23:self.row23, -40:self.rowm40, 85:self.row85, 45:self.row45, 60:self.row60, 70:self.row70}
         modes = dict(zip(self.bmodes.copy(), self.mode_cols.copy()))
         for temp in temps:
             t_row = temps[temp]
@@ -121,6 +121,8 @@ def get_info(workbook, sheet):
                 row45 = cell.row
             elif cell.value == '60C':
                 row60 = cell.row
+            elif cell.value == '70C':
+                row70 = cell.row
             ## find mode columns
             if cell.value == 'Modes':
                 m_row = cell.row
@@ -131,7 +133,7 @@ def get_info(workbook, sheet):
             elif (cell.row == m_row) and (cell.column > m_col):
                 mode_cols.append(cell.column)
                 modes.append(cell.value)
-    return product, rev, row23, rowm40, row85, row45, row60, mode_cols, modes, boards_dict, outage_link, mm_lims
+    return product, rev, row23, rowm40, row85, row45, row60, row70, mode_cols, modes, boards_dict, outage_link, mm_lims
 
 def print_cells(workbook, sheet):
     wb = load_workbook(file, read_only=True)

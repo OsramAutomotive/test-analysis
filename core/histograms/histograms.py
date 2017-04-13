@@ -37,6 +37,7 @@ def histogram_of_each_system(test, mode, temp, limits=None):
             filtered_df = mode.filter_temp_and_voltage(mode.df[[mode.AMB_TEMP, mode.VSETPOINT, system]], temp, voltage)
             current_data = pd.to_numeric(filtered_df[system], downcast='float')
             avg = current_data.mean()
+            sigma = current_data.std()
             ax = fig.add_subplot(nrows, ncols, i)
             ax.set_title(test.systems[i-1])
             ax.hist(current_data.dropna(), color=bar_color)  ## drop NaN values
@@ -44,6 +45,9 @@ def histogram_of_each_system(test, mode, temp, limits=None):
             if limits:
                 ax.axvline(LL, color='red', linestyle='dashed', linewidth=2)
                 ax.axvline(UL, color='red', linestyle='dashed', linewidth=2)
+            else:
+                ax.axvline(avg-3*sigma, color='b', linestyle='dotted', linewidth=2)
+                ax.axvline(avg+3*sigma, color='b', linestyle='dotted', linewidth=2)
             ax.set_xlabel('Current (A)')
             ax.set_ylabel('Frequency')
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
@@ -51,24 +55,34 @@ def histogram_of_each_system(test, mode, temp, limits=None):
 
 def histogram_of_mode(test, mode, temp, limits=None):
     fig = plt.figure()
-    title = ' '.join([mode.board_mode, str(temp)])
+    if limits: ## if doing limit analysis
+        LL, UL = limits[temp][mode.mode_tag][voltage][0], limits[temp][mode.mode_tag][voltage][1]
+        title = ' '.join([mode.board_mode, str(temp), ' LL:', str(LL), ' UL:', str(UL)])
+    else:
+        title = ' '.join([mode.board_mode, str(temp)])
     fig.canvas.set_window_title(title)
     fig.suptitle(title, fontsize = 14, fontweight='bold')
     nrows, ncols = len(mode.voltages), 1
-    
+
     i = 1
     for voltage in mode.voltages: # make subplot for each voltage
-        current_data = mode.hist_dict[temp][voltage]
+        #current_data = mode.hist_dict[temp][voltage]
+        dframe = mode.hist_dict[temp][voltage]
+        current_data = mode.strip_index_and_melt_to_series(dframe)
         avg = current_data.mean()
+        sigma = current_data.std()
         minus_ten = round(avg*0.9, 3)
         plus_ten = round(avg*1.1, 3)
 
         ax = fig.add_subplot(nrows, ncols, i)
         ax.hist(current_data.dropna(), color='g')  ## drop NaN values
         ax.axvline(avg, color='k', linestyle='solid', linewidth=2)
-        ax.axvline(minus_ten, color='b', linestyle='dotted', linewidth=2)
-        ax.axvline(plus_ten, color='b', linestyle='dotted', linewidth=2)
-        
+        if limits:
+            ax.axvline(LL, color='red', linestyle='dashed', linewidth=2)
+            ax.axvline(UL, color='red', linestyle='dashed', linewidth=2)
+        else:
+            ax.axvline(avg-3*sigma, color='b', linestyle='dotted', linewidth=2)
+            ax.axvline(avg+3*sigma, color='b', linestyle='dotted', linewidth=2)
         ax.set_title(str(voltage) + 'V')
         ax.set_xlabel('Current (A)', fontsize=8)
         ax.set_ylabel('Frequency', fontsize=8)

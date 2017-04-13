@@ -3,7 +3,7 @@
 import pandas as pd
 import re
 
-from core.data.helper import *
+from core.data.helpers import *
 from core.re_and_global import *
 
 
@@ -34,6 +34,7 @@ class Mode(object):
         self.hist_dict = {}  # temp -> voltage -> df of currents only at that temp/voltage combo
         self.multimode = False  # placeholder -> scans later to see if multimode or not
         self.df = pd.DataFrame() # dataframe of mode currents (added together if multi-mode)
+        self.stats = {}
         
         self.__scan_for_multimode()
         self.__make_hist_dict()
@@ -56,8 +57,9 @@ class Mode(object):
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
                 dframe = self.filter_temp_and_voltage(self.df, temp, voltage)
-                dframe_for_hist = self.strip_index(dframe)
-                self.hist_dict[temp][voltage] = dframe_for_hist
+                #dframe_for_hist = self.strip_index_and_melt_to_series(dframe)
+                #self.hist_dict[temp][voltage] = dframe_for_hist
+                self.hist_dict[temp][voltage] = dframe
 
     def filter_temp_and_voltage(self, df, temp, voltage):
         dframe = df.loc[(df[self.VSETPOINT] == voltage) &
@@ -75,7 +77,24 @@ class Mode(object):
                     dframe[sys_col_label] = dframe[sys_col_label] + pd.to_numeric(dframe[sys+' '+b], downcast='float')
         return dframe
 
-    def strip_index(self, dframe):
+    def strip_index_and_melt_to_series(self, dframe):
         hist_dframe = pd.melt(dframe, value_vars=self.systems, value_name='currents')
         hist_dframe = pd.to_numeric(hist_dframe['currents'], downcast='float')
         return hist_dframe
+
+    def get_system_by_system_mode_stats(self, temp, limits=False):
+        self.stats[temp] = {}
+        for voltage in self.voltages:
+            self.stats[temp][voltage] = {}
+            if limits:
+                lower_limit, upper_limit = get_limits_at_mode_temp_voltage(limits, self, temp, voltage)
+            print('\n==> VOLTAGE AT', voltage, 'V')
+            for system in self.systems:
+                out_of_spec = 'NA'
+                sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
+                print(system, 'MIN: '+str(sys_min), 'MAX: '+str(sys_max), 'MEAN: '+str(mean), 'STD: '+str(std))
+                if limits:
+                    out_of_spec = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
+                    print('OUT OF SPEC: '+str(out_of_spec))
+                self.stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec]
+

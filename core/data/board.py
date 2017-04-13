@@ -24,7 +24,7 @@ class Board(object):
         system => list of used test positions and system numbers (used for df query)
         df => dataframe of just this board
     """
-    
+
     AMB_TEMP = 'Amb Temp TC1'
     VSETPOINT = 'VSetpoint'
 

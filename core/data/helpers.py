@@ -27,4 +27,18 @@ def copy_and_remove_b6_from(a_list):
         b_list.remove('B6')  # remove outage
     except ValueError:
         pass  # do nothing
-    return b_list  
+    return b_list
+
+def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
+    try:  ## get current limits from limits file
+        lower_limit, upper_limit = limits.lim[temp][mode.mode_tag][voltage][0], limits.lim[temp][mode.mode_tag][voltage][1]
+        return lower_limit, upper_limit
+    except:
+        raise
+
+def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
+    return (sys_min < lower_limit) or (sys_max > upper_limit)
+
+def get_system_stats_at_mode_temp_voltage(system, mode, temp, voltage):
+    series = mode.hist_dict[temp][voltage][system]
+    return series.min(), series.max(), series.mean(), series.std()
