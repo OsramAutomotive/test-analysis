@@ -26,19 +26,24 @@ class Mode(object):
         self.test = test
         self.board_mode = board_mode
         self.mode_tag = board_mode.replace('B6', '') # outage removed
+        self.name = '' # actual name of mode (e.g. - 'DRLTURN')
         self.temps = temps
         self.voltages = voltages
         self.board_ids = re.findall('..', board_mode) # split string every 2 chars
         self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
         self.systems = [' '.join([sys, self.mode_tag]) for sys in test.systems]
         self.hist_dict = {}  # temp -> voltage -> df of currents only at that temp/voltage combo
-        self.multimode = False  # placeholder -> scans later to see if multimode or not
+        self.multimode = False  # placeholder -> scans later to check if multimode or not
         self.df = pd.DataFrame() # dataframe of mode currents (added together if multi-mode)
-        self.stats = {}
+        self.voltage_senses = [] # holds voltage sense positions for boards on in mode
+        self.vsense_stats = {} # basic stats of vsenses
+        self.current_stats = {} # basic stats of currents 
         
         self.__scan_for_multimode()
         self.__make_hist_dict()
         self.__populate_hist_dict(df)
+        self.__scan_for_voltage_senses()
+        self.__get_mode_name()
 
     def __repr__(self):
         return '{}: {}'.format(self.__class__.__name__,
@@ -56,19 +61,21 @@ class Mode(object):
         for temp in self.temps:
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
-                dframe = self.filter_temp_and_voltage(self.df, temp, voltage)
-                #dframe_for_hist = self.strip_index_and_melt_to_series(dframe)
-                #self.hist_dict[temp][voltage] = dframe_for_hist
+                dframe = filter_temp_and_voltage(self.df, temp, voltage)
                 self.hist_dict[temp][voltage] = dframe
 
-    def filter_temp_and_voltage(self, df, temp, voltage):
-        dframe = df.loc[(df[self.VSETPOINT] == voltage) &
-                        (df[self.AMB_TEMP] > (temp-TEMPERATURE_TOLERANCE)) &
-                        (df[self.AMB_TEMP] < (temp+TEMPERATURE_TOLERANCE))]
-        return dframe
+    def __scan_for_voltage_senses(self):
+        ''' Scans for voltage sense columns '''
+        self.voltage_senses = [vsense+' '+board for board in self.current_board_ids for vsense in self.test.voltage_senses]
+
+    def __get_mode_name(self):
+        if self.test.limits:
+            self.name = self.mode_tag
+            for board in self.current_board_ids:
+                self.name = self.name.replace(board, self.test.limits.boards_dict[board])
 
     def create_multimode_cols(self, dframe):
-        ''' NEED TO FIX: returned dframe is not holding multimode added current columns  '''
+        ''' Adds multimode current column for each system '''
         if self.multimode:  # if mode is a multimode (multiple current boards ON)
             for sys in self.test.systems: # for each system (without appended board/mode tag label)
                 sys_col_label = sys + ' ' + self.mode_tag 
@@ -83,12 +90,22 @@ class Mode(object):
         return hist_dframe
 
     def get_system_by_system_mode_stats(self, temp, limits=False):
-        self.stats[temp] = {}
+        self.current_stats[temp] = {}
+        self.vsense_stats[temp] = {}
         for voltage in self.voltages:
-            self.stats[temp][voltage] = {}
+            self.current_stats[temp][voltage] = {}
+            self.vsense_stats[temp][voltage] = {}
             if limits:
                 lower_limit, upper_limit = get_limits_at_mode_temp_voltage(limits, self, temp, voltage)
             print('\n==> VOLTAGE AT', voltage, 'V')
+
+            for vsense in self.voltage_senses:
+                vsense_min, vsense_max, mean = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
+                out_of_spec = check_if_out_of_spec(voltage-VOLTAGE_TOLERANCE, voltage+VOLTAGE_TOLERANCE, vsense_min, vsense_max)
+                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, mean, out_of_spec]
+                print(vsense, 'MIN: '+str(vsense_min), 'MAX: '+str(vsense_max), 'MEAN: '+str(mean))
+                print('OUT OF SPEC: '+str(out_of_spec))
+
             for system in self.systems:
                 out_of_spec = 'NA'
                 sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
@@ -96,5 +113,5 @@ class Mode(object):
                 if limits:
                     out_of_spec = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
                     print('OUT OF SPEC: '+str(out_of_spec))
-                self.stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec]
+                self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec]
 

@@ -32,9 +32,10 @@ class TestStation(object):
     AMB_TEMP = 'Amb Temp TC1'
     VSETPOINT = 'VSetpoint'
 
-    def __init__(self, boards, folder, *temps):
+    def __init__(self, boards, folder, limits=False, *temps):
         self.folder = folder
         self.systems = []
+        self.limits = limits
         self.voltages = []
         self.temps = temps
         self.voltage_senses = []

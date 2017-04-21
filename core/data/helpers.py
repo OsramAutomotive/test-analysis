@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+from core.re_and_global import * 
+
 ### ------- Helper Functions for data package ------- ###
 
 def rename_columns(mdf, board, columns):
@@ -36,9 +38,23 @@ def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
     except:
         raise
 
+def filter_temp_and_voltage(df, temp, voltage):
+    dframe = df.loc[(df[VSETPOINT] == voltage) &
+                    (df[AMB_TEMP] > (temp-TEMPERATURE_TOLERANCE)) &
+                    (df[AMB_TEMP] < (temp+TEMPERATURE_TOLERANCE))]
+    return dframe
+
 def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
     return (sys_min < lower_limit) or (sys_max > upper_limit)
 
 def get_system_stats_at_mode_temp_voltage(system, mode, temp, voltage):
     series = mode.hist_dict[temp][voltage][system]
     return series.min(), series.max(), series.mean(), series.std()
+
+def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
+    dframe = filter_temp_and_voltage(mode.df, temp, voltage)
+    series = dframe[vsense]
+    return series.min(), series.max(), series.mean()
+
+
+    

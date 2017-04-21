@@ -1,46 +1,115 @@
 #!/usr/bin/python3
-
-from core.data.test_station import *
-from core.plotting.plots import *
-from core.histograms.histograms import *
-from core.limits.limits_parser import *
-from core.analysis.analysis import *
+# -*- coding: utf-8 -*-
 
 
-### ----------------- TESTING ---------------- ###
-## Setup
-#prepath = r"\\Chfile1\ecs_landrive\Automotive_Lighting\LED\P552 MCA Headlamp\P552 MCA Aux\ADVPR\PV Aux"
+import sys
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import *
 
-#endpath = r"\\TL A&B\Initial Tri Temp FT\-40C rerun\Raw Data"
-#endpath = r"\\TL A&B\LTO\Raw Data"
-#endpath = r"\\TL E\HTEnd\HTEnd restart\Raw Data"
-#endpath = r"\\TL A&B\PTC\Raw Data"
-#endpath = r"\\TL A&B\Humidity\Raw Data"
-#endpath = r"\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\85C 9V DRL+TURN (DRL on B2 no Vsense)\Raw Data"
-#endpath = "\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\85C 9V DRL+TURN (B4 w Vsense)\Raw Data"
-#endpath = r"\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\90C 9V (full PTC FC cycle)\Raw Data"
-#endpath = r"\\TL A&B\PTC\System 83 DRL-TURN issue\Troubleshooting testing\90C 9V (condensed PTC FC cycle)\Raw Data"
-#endpath = r"\\TL A&B\Sys 83 troubleshooting\System 83 DRL-TURN issue\Troubleshooting testing\90C 9V 9.5V 10V\Raw Data"
+class Example(QWidget):
+    
+    def __init__(self):
+        super().__init__()
+        self.data_folder = ''
+        self.limits_file = ''
+        self.temp_buttons = []
+        self.board_buttons = []
+        self.init_ui()
 
-#datapath = prepath + endpath
-datapath = r"\\Chfile1\ecs_landrive\Automotive_Lighting\LED\A1XC\DVPR\Thermal Cycle Profile Development\Raw Data\powered\B1 to B9"
+    def init_ui(self):      
+        grid = QGridLayout()
+        self.setLayout(grid)
+        grid.setSpacing(10)
 
-#limits_file = r"\\Chfile1\ecs_landrive\Automotive_Lighting\LED\P552 MCA Headlamp\P552 MCA Aux\ADVPR\PV Aux\Limits\P552 MCA PV AUX LIMITS.xlsx"
-#limits_file = r"\\Chfile1\ecs_landrive\Automotive_Lighting\LED\P552 MCA Headlamp\P552 MCA Aux\ADVPR\PV Aux\Limits\P552 MCA PV AUX LIMITS DRL on B2.xlsx"
-limits_file = r"\\Chfile1\ecs_landrive\Automotive_Lighting\LED\A1XC\DVPR\Limits\A1XC Limits.xlsx"
-ws = "Sheet1"
-limits = Limits(limits_file, ws)
+        order = [self.data_folder, self.limits_file, self.temp_buttons, self.board_buttons]
+
+        self.data_folder_label = QLabel('(No folder selected)', self)
+        self.data_folder_button = FolderButton('Select Data Folder', self.data_folder_label, self)
+        grid.addWidget(self.data_folder_button, 0, 0)
+        grid.addWidget(self.data_folder_label, 0, 1)
+
+        self.limits_label = QLabel('(No folder selected)', self)
+        self.limits_button = FolderButton('Select Data Folder', self.data_folder_label, self)
+        grid.addWidget(self.data_folder_button, 0, 0)
+        grid.addWidget(self.data_folder_label, 0, 1)
+
+        self.temp_buttons = self.populate_buttons(DataButton, ['-40C', '23C', '85C'], 1, grid)
+        self.board_buttons = self.populate_buttons(DataButton, ['B1','B2','B3','B4','B5','B6'], 2, grid) 
+
+        self.move(300, 150) # center window
+        self.setWindowTitle('Testing...')
+        self.show()
 
 
-## Build/Analysis
-#test = TestStation(3456, datapath, 85)
-#test = TestStation(256, datapath, 85)
-#test = TestStation(3456, datapath, -40, 85)
-#test = TestStation(3456, datapath, 45, 60)
-test = TestStation(3456, datapath, 70)
+    def populate_buttons(self, button_type, text_list, row, grid):
+        button_list = []
+        positions = [(row, j) for j in range(len(text_list))]
+        for position, text in zip(positions, text_list):
+            button = button_type(text, self)
+            grid.addWidget(button, *position)
+            button_list.append(button)
+        return button_list
 
-plot_modes(test)
-#make_mode_histograms(test, system_by_system=True, limits = limits.lim)
-make_mode_histograms(test, system_by_system=False)
-#web_plot_board_currents(test)
-fill_stats(test, limits = limits)
+    def get_row(self, widget):
+        ''' Idea: get row for passed widget or widget group '''
+        pass
+
+
+class DataButton(QPushButton):
+    
+    def __init__(self, name, ui):
+        super().__init__()
+        self.init_button(name)
+    
+    def init_button(self, name):
+        self.setText(name)
+        self.name = name
+        self.pressed = False
+        self.setCheckable(True)
+        self.clicked[bool].connect(self.toggle)
+
+    def toggle(self):
+        self.pressed = not self.pressed
+        if self.pressed:
+            self.setStyleSheet('background-color: green; color: green;')
+        else:
+            self.setStyleSheet('background-color: None; color: None;')
+
+
+class FolderButton(QPushButton):
+
+    def __init__(self, text, label, ui):
+        super().__init__()
+        self.setText(text)
+        self.label = label
+        self.name = ''
+        self.clicked.connect(self.pressed)
+
+    def pressed(self):
+        self.name = str(QFileDialog.getExistingDirectory(self, "Select Directory for Data Analysis"))
+        self.label.setText(self.name)
+
+
+class LimitsButton(QPushButton):
+
+''' do this instead:
+http://stackoverflow.com/questions/31728253/pyqt-open-file-dialog-display-path-name
+'''
+
+    def __init__(self, text, label, ui):
+        super().__init__()
+        self.setText(text)
+        self.label = label
+        self.name = ''
+        self.clicked.connect(self.pressed)
+
+    def pressed(self):
+        self.name = str(QFileDialog.getExistingDirectory(self, "Select Directory for Data Analysis"))
+        self.label.setText(self.name)
+
+
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())

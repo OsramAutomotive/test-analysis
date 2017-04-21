@@ -31,9 +31,9 @@ class Limits(object):
         self.print_mm_lims()
 
     def translate_modes(self):
-        brd_line_pairs = self.boards_dict
-        for board in brd_line_pairs:
-            line = brd_line_pairs[board]
+        board_line_pairs = self.boards_dict
+        for board in board_line_pairs:
+            line = board_line_pairs[board]
             self.bmodes = [m.replace(line, board, 1) for m in self.bmodes]
 
     def create_empty_limits(self):

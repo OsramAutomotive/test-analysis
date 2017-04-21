@@ -11,6 +11,13 @@ SYSTEM_COLOR_LIST = ['brown', '#9932CC', 'maroon', 'red', 'olive', 'yellow',
                      'green', 'black', 'teal', 'navy', 'blue', 'fuchsia']
 SYSTEM_MARKER_LIST = ['H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D']
 
+### TABLE COLORS ###
+TABLE_COLOR_DICT = { 'LB': '#FF5C5C', 'HB': '#FCFBE3', 'LBHB': '#7647A2', 'DRL': '#ADD8E6', 'PARK': '#FFA500', 
+               		 'TURN': '#DA70D6', 'DRLTURN': '#40E0D0', 'PARKTURN': '#FF8C00' }
+
+### COLUMNS CONSTANTS ###
+AMB_TEMP = 'Amb Temp TC1'
+VSETPOINT = 'VSetpoint'
 
 ### TOLERANCE VARIABLES ###
 TEMPERATURE_TOLERANCE = 5
