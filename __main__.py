@@ -24,6 +24,7 @@ class TestAnalysisUI(QWidget):
         self.temp_buttons = []
         self.board_buttons = []
         self.analysis_buttons = []
+        self.stylesheet = 'styles\style_blue.qss'
         self.init_ui()
 
     def init_ui(self):
@@ -46,7 +47,7 @@ class TestAnalysisUI(QWidget):
         grid.addWidget(self.limits_text_box, 1, 1, 1, 6)
 
         ## temperature/board/analysis buttons
-        self.temp_buttons = self.populate_buttons('Temperatures:', TempButton, ['-40C', '23C', '45C', '60C', '85C'], 2, grid)
+        self.temp_buttons = self.populate_buttons('Temperatures:', TempButton, ['-40C', '23C', '45C', '60C', '70C', '85C'], 2, grid)
         self.board_buttons = self.populate_buttons('Boards:', DataButton, ['B1','B2','B3','B4','B5','B6'], 3, grid) 
         self.analysis_buttons = self.populate_buttons('Analysis:', DataButton, ['Plot', 'Histograms', 'Tables'], 4, grid)
 
@@ -60,9 +61,10 @@ class TestAnalysisUI(QWidget):
         grid.addWidget(self.analyze_button, 6, 2, 1, 3)
 
         ## gui window properties
-        self.move(300, 150) # center window
+        self.setStyleSheet(open(self.stylesheet, "r").read())
         self.setWindowTitle('Automotive Testing Data Analysis')
         self.setWindowIcon(QIcon('images\car.png'))
+        self.move(300, 150) # center window
         self.show()
 
     def populate_buttons(self, label, button_type, text_list, row, grid):
@@ -128,9 +130,9 @@ class DataButton(QPushButton):
     def toggle(self):
         self.pressed = not self.pressed
         if self.pressed:
-            self.setStyleSheet('background-color: green; color: green;')
+            self.setStyleSheet('background-color: green')
         else:
-            self.setStyleSheet('background-color: None; color: None;')
+            self.setStyleSheet('background-color: default')
 
 
 class TempButton(DataButton):

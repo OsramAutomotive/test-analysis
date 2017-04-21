@@ -15,19 +15,19 @@ SYSTEM_MARKER_LIST = ['H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D']
 TABLE_COLOR_DICT = { 'LB': '#FF5C5C', 'HB': '#FCFBE3', 'LBHB': '#7647A2', 'DRL': '#ADD8E6', 'PARK': '#FFA500', 
                		 'TURN': '#DA70D6', 'DRLTURN': '#40E0D0', 'PARKTURN': '#FF8C00' }
 
-### COLUMNS CONSTANTS ###
+### DATAFRAME COLUMN CONSTANTS ###
 AMB_TEMP = 'Amb Temp TC1'
 VSETPOINT = 'VSetpoint'
+ON_OFF = 'Board on/off'
 
-### TOLERANCE VARIABLES ###
+### TOLERANCE CONSTANTS ###
 TEMPERATURE_TOLERANCE = 5
 VOLTAGE_TOLERANCE = 0.5
 
-###### REGULAR EXPRESSIONS  ######
+### REGULAR EXPRESSIONS  ###
 REGEX_TEMPS = 'TC.*'
 REGEX_SYSTEMS = '^TP[0-9]*:\s\S+'
 REGEX_VOLTAGE_SENSES = '^VSense\s[1-2]'
-ON_OFF = 'Board on/off'
 
 def REGEX_BOARDFILE(board):
     return '^\d{8}_\d{6}_.*_\d{2}_'+board+'.txt$'
