@@ -32,7 +32,8 @@ class TestStation(object):
     AMB_TEMP = 'Amb Temp TC1'
     VSETPOINT = 'VSetpoint'
 
-    def __init__(self, boards, folder, limits=False, *temps):
+    def __init__(self, name, boards, folder, limits=False, *temps):
+        self.name = name
         self.folder = folder
         self.systems = []
         self.limits = limits
@@ -46,7 +47,7 @@ class TestStation(object):
         self.b1 = 'Not Used'
         self.b2 = 'Not Used'
         self.b3 = 'Not Used'
-        self.b4 = 'Not Used'       
+        self.b4 = 'Not Used'
         self.b5 = 'Not Used'
         self.b6 = 'Not Used'
         self.b7 = 'Not Used' # Tesla needs extra fake Board 7 for analysis
@@ -54,6 +55,7 @@ class TestStation(object):
         self.mode_df_dict = {}  # holds mode_df for each data mask
         self.mode_ids = []
         self.modes = []
+        self.outage = False
 
         self.__create_boards(boards)
         self.__set_on_boards()
@@ -152,6 +154,10 @@ class TestStation(object):
     def __make_modes(self):
         for mode_id in self.mode_ids:
             self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
+
+    def __scan_for_outage(self):
+        if any(board.outage for board in self.boards):
+            self.outage = True
 
     def print_board_numbers(self):
         ''' Prints the ON boards used in test station for test '''

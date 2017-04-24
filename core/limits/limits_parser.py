@@ -26,9 +26,6 @@ class Limits(object):
         self.create_empty_limits()
         self.fill_limits()
         self.fill_outage()
-        self.pp_limits()
-        self.pp_outage()
-        self.print_mm_lims()
 
     def translate_modes(self):
         board_line_pairs = self.boards_dict
@@ -83,8 +80,14 @@ class Limits(object):
     def pp_outage(self):
         pp = pprint.PrettyPrinter()
         pp.pprint(self.outage)
+
     def print_mm_lims(self):
         print(self.mm_lims)
+
+    def print_all_lims(self):
+        self.pp_limits()
+        self.pp_outage()
+        self.print_mm_lims()
 
 
 def get_info(workbook, sheet):

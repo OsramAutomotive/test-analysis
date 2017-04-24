@@ -18,7 +18,7 @@ def check_and_load_limits(limits):
     return module_names_dict, LL, UL
 
 def set_up_plot_area(test, pstyle='ggplot'):
-    title = test.folder
+    title = test.name
     style.use(pstyle)  ## set formatting style to use for matplotlib
     fig, axes = plt.subplots(nrows=len(test.modes)+2, ncols=1, 
                              sharex=True, figsize=(15,11))  ## create plot space with app num of subplots
@@ -76,7 +76,7 @@ def format_subplot_legends(test, axes):
 
 def titles_and_labels(test, axes):
     for i in range(len(test.modes)):
-        axes[i+2].set_title(test.modes[i])
+        axes[i+2].set_title(test.modes[i].name)
         axes[i+2].set_ylabel("Current (A)")
     axes[0].set_ylabel("Voltage (V)")
     axes[0].set_ylim([0,20])
@@ -95,7 +95,6 @@ def set_figure_size(fig, save=False):
 def plot_modes(test, limits=None):
     ''' Creates a temporal plot of the functional cycle, temperature profile, and test mode currents '''
     print('Plotting temporal plot...')
-    # module_names_dict, LL, UL = check_and_load_limits(limits)  # get module names if limits passed
     fig, axes = set_up_plot_area(test)  # set up figure and axes for plotting
     axes[0].plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.VSETPOINT], 'k--', 
                       linewidth=3, zorder=10)  # plot voltage setpoint on first subplot

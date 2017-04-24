@@ -26,7 +26,7 @@ class Mode(object):
         self.test = test
         self.board_mode = board_mode
         self.mode_tag = board_mode.replace('B6', '') # outage removed
-        self.name = '' # actual name of mode (e.g. - 'DRLTURN')
+        self.name = self.board_mode # actual name of mode (e.g. - 'DRLTURN')
         self.temps = temps
         self.voltages = voltages
         self.board_ids = re.findall('..', board_mode) # split string every 2 chars
@@ -46,8 +46,8 @@ class Mode(object):
         self.__get_mode_name()
 
     def __repr__(self):
-        return '{}: {}'.format(self.__class__.__name__,
-                               self.board_mode)
+        return '{}: {} ({})'.format(self.__class__.__name__,
+                               self.name, self.board_mode)
 
     def __scan_for_multimode(self):
         if len(self.current_board_ids) > 1:
@@ -89,7 +89,7 @@ class Mode(object):
         hist_dframe = pd.to_numeric(hist_dframe['currents'], downcast='float')
         return hist_dframe
 
-    def get_system_by_system_mode_stats(self, temp, limits=False):
+    def get_system_by_system_mode_stats(self, temp, limits=None):
         self.current_stats[temp] = {}
         self.vsense_stats[temp] = {}
         for voltage in self.voltages:
@@ -107,7 +107,7 @@ class Mode(object):
                 print('OUT OF SPEC: '+str(out_of_spec))
 
             for system in self.systems:
-                out_of_spec = 'NA'
+                out_of_spec = None
                 sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
                 print(system, 'MIN: '+str(sys_min), 'MAX: '+str(sys_max), 'MEAN: '+str(mean), 'STD: '+str(std))
                 if limits:
