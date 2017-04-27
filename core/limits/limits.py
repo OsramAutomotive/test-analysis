@@ -16,20 +16,28 @@ class Limits(object):
         self.wb = load_workbook(self.filepath, read_only=True)
         self.ws = self.wb[self.sheet]
         self.boards = boards  # e.g. - 'B1' or 'B4'
+        self.temps = temps  # integers, e.g. - 85 or -40 or 23
+
+        self.lim = {} # holds current limits
         self.modules = []  # e.g. - 'PARK' or 'TURN'
         self.board_modes = []  # e.g. - 'B3B4' or 'B2'
         self.module_modes = []  # e.g. - 'DRLTURN' or 'PARK'
         self.board_module_pairs = {}  # keys: boards; values: modules
-        self.temps = temps  # integers, e.g. - 85 or -40 or 23
         self.temp_rows = {}  # row reference for each temperature
         self.mode_row = ''   # row in which mode headers are located
-        self.mode_cols = {}  # column for each mode header
-        self.outage_link_board = '' 
+        self.mode_cols = {}  # column for each board_mode key
+        self.outage_link_board = ''
+        self.voltage_column = 2
+        self.voltage_header_row = 13
+        self.voltages = []
 
         self.__get_boards()
         self.__get_temp_rows()
         self.__get_mode_row()
         self.__get_modes_and_mode_cols()
+        self.__get_voltage_header()
+        self.__get_voltages()
+        self.fill_limits()
 
 
     def __get_boards(self):
@@ -67,7 +75,26 @@ class Limits(object):
                 if cell.column and cell.value and any(module in cell.value for module in self.modules):
                     self.module_modes.append(cell.value)
                     board_mode = self.translate_module_mode_to_board_mode(cell.value)
+                    self.board_modes.append(board_mode)
                     self.mode_cols[board_mode] = cell.column
+
+    def __get_voltage_header(self):
+        ''' Info '''
+        cell_range = self.ws.get_squared_range(min_col=self.voltage_column, min_row=1, max_col=self.voltage_column, max_row=100)
+        for row in cell_range:
+            for cell in row:
+                value_string = str(cell.value).lower()
+                if cell.value and (value_string == 'voltages') or (value_string == 'voltage'):
+                    self.voltage_header_row = cell.row
+
+    def __get_voltages(self):
+        cell_range = self.ws.get_squared_range(min_col=self.voltage_column, min_row=self.voltage_header_row+1, 
+                                               max_col=self.voltage_column, max_row=self.voltage_header_row+10)
+        for row in cell_range:
+            for cell in row:
+                if cell.value and (cell.value not in self.voltages):
+                    self.voltages.append(cell.value)
+
 
     def translate_module_mode_to_board_mode(self, module_mode):
         ''' Input: e.g. - 'DRLTURN' or 'LB' 
@@ -78,41 +105,30 @@ class Limits(object):
         return board_mode
 
     def get_b1_row(self):
-        ''' Finds the row of the first board label '''
+        ''' Finds the row of the 'B1' label '''
         cell_range = self.ws.get_squared_range(min_col=1, min_row=1, max_col=1, max_row=11)
         for row in cell_range:
             for cell in row:
                 if cell.value and cell.value.lower() == 'b1':
                     self.b1_row = cell.row
 
-    # def fill_limits(self):
-    #     wb = load_workbook(self.filepath, read_only=True)
-    #     ws = wb[self.sheet]
-    #     temps = {23:self.row23, -40:self.rowm40, 85:self.row85, 45:self.row45, 60:self.row60, 70:self.row70}
-    #     modes = dict(zip(self.bmodes.copy(), self.mode_cols.copy()))
-    #     for temp in temps:
-    #         t_row = temps[temp]
-    #         for mode in modes:
-    #             m_col = modes[mode]
-    #             for i in range(3):
-    #                 voltage = ws.cell(row=t_row+i, column=2).value  ## hard-coded column 2 for voltages
-    #                 min = ws.cell(row=t_row+i, column=m_col).value
-    #                 max = ws.cell(row=t_row+i, column=m_col+1).value
-    #                 min = round(float(min), 3)
-    #                 max = round(float(max), 3)
-    #                 voltage = float(voltage)
-    #                 self.lim[temp][mode][voltage] = (min, max)
+    def fill_limits(self):
+        ''' Build limits dictionary from limits file '''
+        for temp in self.temps:
+            temp_row = self.temp_rows[temp]
+            self.lim[temp] = {}
+            for board_mode, column in self.mode_cols.items():
+                self.lim[temp][board_mode] = {}
+                for i in range(len(self.voltages)):
+                    voltage = float(self.ws.cell(row=temp_row+i, column=self.voltage_column).value)
+                    min = self.ws.cell(row=temp_row+i, column=column).value
+                    max = self.ws.cell(row=temp_row+i, column=column+1).value
+                    min = round(float(min), 3)
+                    max = round(float(max), 3)
+                    self.lim[temp][board_mode][voltage] = (min, max)
 
-
-path = r"C:\Users\bruno\Desktop\P552 MCA PV AUX LIMITS.xlsx"
-boards = ['B1', 'B2', 'B3', 'B4', 'B5', 'B6']
-temps = [-40, 60, 85]
-limits = Limits(path, "Sheet1", boards, temps)
-
-print(limits.temp_rows)
-print(limits.board_module_pairs)
-print('MODULES:', limits.modules)
-print('\nMode Row ===>', limits.mode_row, '\n')
-print('MODULE MODES:', limits.module_modes)
-print('BOARD MODES:', limits.board_modes)
-print('Mode Columns:', limits.mode_cols)
+    def print_info(self):
+        print('Board/Module Pairs:', self.board_module_pairs)
+        print('\nMode Columns:', self.mode_cols, '\n')
+        pp = pprint.PrettyPrinter()
+        pp.pprint(self.lim)

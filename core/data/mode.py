@@ -72,7 +72,7 @@ class Mode(object):
         if self.test.limits:
             self.name = self.mode_tag
             for board in self.current_board_ids:
-                self.name = self.name.replace(board, self.test.limits.boards_dict[board])
+                self.name = self.name.replace(board, self.test.limits.board_module_pairs[board])
 
     def create_multimode_cols(self, dframe):
         ''' Adds multimode current column for each system '''

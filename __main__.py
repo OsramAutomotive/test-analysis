@@ -6,7 +6,7 @@ from core.data.test_station import *
 from core.plotting.plots import *
 from core.histograms.histograms import *
 from core.tables.excel_write import *
-from core.limits.limits_parser import *
+from core.limits.limits import *
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer
@@ -18,7 +18,7 @@ from random import randint
 TEMPERATURES = ['-40C', '23C', '45C', '60C', '70C', '85C']
 BOARDS = ['B1','B2','B3','B4','B5','B6']
 ANALYSIS_TOOLS = ['Plot', 'Histograms', 'Tables', 'Out of Spec']
-PLOT_INFO = 'Create a temporal plot of the test'
+PLOT_INFO = 'Create a temporal plot of the selected test'
 HIST_INFO = 'Plot current histograms at each temp/mode/voltage'
 TABLE_INFO = 'Generate an excel file with basic stats for each DUT at each temp/mode/voltage'
 OUT_OF_SPEC_INFO = 'Generate a file containing only raw data that was out of spec'
@@ -189,8 +189,8 @@ class AnalyzeButton(QPushButton):
         temps = [t.temp for t in self.ui.temp_buttons if t.pressed]
         boards = [b.name for b in self.ui.board_buttons if b.pressed]
         datapath = self.ui.data_folder
-        limits = self.load_limits()     
-       
+        limits = self.load_limits(boards, temps)     
+
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)
             test = TestStation(test_name, boards, datapath, limits, *temps)
@@ -207,7 +207,7 @@ class AnalyzeButton(QPushButton):
         print('Boards:', boards, '\n')
         print('Limits File:', self.ui.limits_file)
         if limits:
-            limits.print_all_lims()
+            limits.print_info()
 
     def run_analysis(self, analysis_name, test, limits):
         if analysis_name == 'Plot':
@@ -221,9 +221,9 @@ class AnalyzeButton(QPushButton):
         else:
             print('Analysis tool not found')
 
-    def load_limits(self):
+    def load_limits(self, boards, temps):
         if self.ui.limits_file:
-            return Limits(self.ui.limits_file, 'Sheet1')
+            return Limits(self.ui.limits_file, 'Sheet1', BOARDS, temps)
         else:
             return None
 
