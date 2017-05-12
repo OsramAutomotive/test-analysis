@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from core.data.test_station import *
-from core.plotting.plots import *
-from core.histograms.histograms import *
-from core.tables.excel_write import *
+from core.data_import.test_station import *
+from core.analysis.plots import *
+from core.analysis.histograms import *
+from core.analysis.tables import *
 from core.limits.limits import *
 
 from PyQt5.QtWidgets import *

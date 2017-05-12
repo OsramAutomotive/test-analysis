@@ -5,9 +5,9 @@ import numpy as np
 import os
 import re
 
-from core.data.sample import *
+from core.data_import.sample import *
 from core.re_and_global import *
-from core.data.helpers import *
+from core.data_import.helpers import *
 
 
 ## parsing function for datetime index on dataframes

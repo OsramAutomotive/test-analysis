@@ -4,7 +4,7 @@
 for out of spec currents/voltages and color modes as well. '''
 
 import xlsxwriter
-from core.data.mode import *
+from core.data_import.mode import *
 from core.re_and_global import *
 
 def create_wb(filename):

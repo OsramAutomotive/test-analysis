@@ -9,9 +9,9 @@ import itertools
 import pandas as pd
 
 from .. re_and_global import *
-from core.data.helpers import *
-from core.data.board import *
-from core.data.mode import *
+from core.data_import.helpers import *
+from core.data_import.board import *
+from core.data_import.mode import *
 
 pd.options.mode.chained_assignment = None  # default='warn'
 
