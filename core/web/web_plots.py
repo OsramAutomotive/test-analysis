@@ -12,15 +12,6 @@ def web_set_up_plot_area(test):
     fig.suptitle('title', fontsize = 20, fontweight= 'bold')  ## main title for entire figure
     return fig, axes
 
-def set_up_date_time(test, ax):
-    ax.plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.vsetpoint], 'k--', 
-                      linewidth=3, zorder=10)
-    date_fmt = '%m/%d/%y %H:%M:%S'
-    formatter = dates.DateFormatter(date_fmt)
-    locator = dates.AutoDateLocator()
-    ax.xaxis.set_major_formatter(formatter)
-    ax.xaxis.set_major_locator(locator)
-
 
 ### TESTING...
 import mpld3

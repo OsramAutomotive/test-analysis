@@ -44,6 +44,7 @@ class TestStation(object):
         self.on_off = [ON_OFF]
         self.boards = []
         self.board_ids = []
+        self.current_board_ids = []
         self.b1 = 'Not Used'
         self.b2 = 'Not Used'
         self.b3 = 'Not Used'
@@ -56,6 +57,7 @@ class TestStation(object):
         self.mode_ids = []
         self.modes = []
         self.outage = False
+        self.out_of_spec_df = pd.DataFrame()
 
         self.__create_boards(boards)
         self.__set_on_boards()
@@ -100,6 +102,7 @@ class TestStation(object):
     def __set_board_ids(self):
         for board in self.boards:
             self.board_ids.append(board.id)
+        self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
 
     def __set_systems(self):
         ''' Sets the systems tested to the systems scanned on the first board '''

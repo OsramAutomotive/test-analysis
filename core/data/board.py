@@ -7,6 +7,7 @@ import re
 
 from core.data.sample import *
 from core.re_and_global import *
+from core.data.helpers import *
 
 
 ## parsing function for datetime index on dataframes
@@ -19,7 +20,8 @@ class Board(object):
     Example highlights::
         test => belongs to a test station object that describes the test
         folder => directory folder of data that was analyzed
-        id => 'B3'
+        id => e.g. - 'B3'
+        name => e.g. - 'DRL'
         board => board object (includes board id)
         system => list of used test positions and system numbers (used for df query)
         df => dataframe of just this board
@@ -31,6 +33,7 @@ class Board(object):
     def __init__(self, test, board_number):
         self.test = test
         self.id = ''
+        self.name = '(Module name not pulled from limits file)'  # e.g. - 'DRL'
         self.folder = test.folder
         self.files = []
         self.df = pd.DataFrame()
@@ -38,10 +41,10 @@ class Board(object):
         self.voltage_senses = []
         self.thermocouples = []
         self.outage = False
-        self.module = '(Module name not pulled from limits file)'  # e.g. - 'DRL'
         self.samples = []
         
         self.__set_bnum(board_number)
+        self.__get_board_name()
         self.__set_outage()
         self.__build_dataframe()
         self.__delete_empty_columns()
@@ -52,7 +55,7 @@ class Board(object):
 
     def __repr__(self):
         return '{}: {} {}'.format(self.__class__.__name__,
-                               self.id, self.module)
+                               self.id, self.name)
 
     def __set_bnum(self, board_number):
         if type(board_number) == int:
@@ -74,9 +77,14 @@ class Board(object):
         for filename in os.listdir(self.folder):
             if bool(re.search(REGEX_BOARDFILE(self.id), filename)):
                 try:
-                    next_file_df = pd.read_csv( self.folder+'\\'+filename, parse_dates={'Date Time': [0,1]},
-                                        date_parser=date_parser, index_col='Date Time', sep='\t',
-                                        skipfooter=1, engine='python', usecols=range(22))
+                    if run_from_ipython():  # if running from ipython (jupyter)
+                        next_file_df = pd.read_csv( self.folder+'/'+ filename, 
+                                       parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
+                                       index_col='Date Time', sep='\t', engine='python', usecols=range(22))
+                    else:  # else running on local machine
+                        next_file_df = pd.read_csv( os.path.abspath(os.path.join(os.sep, self.folder, filename)), 
+                                       parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
+                                       index_col='Date Time', sep='\t', engine='python', usecols=range(22))
                 except Exception:
                     print('The following error occurred while attempting to convert the ' \
                           'data files to pandas dataframes:\n\n')
@@ -87,9 +95,9 @@ class Board(object):
             self.df = self.df.replace(['OFF','No Reading'], [0,0])
             self.df = self.df.astype(float)
         except TypeError as e:
-            print(e)    
+            print(e)
         print('...dataframe complete.')
-        
+
     def __delete_empty_columns(self):
         ''' Deletes emtpy columns in dataframe '''
         for col in self.df.columns.copy():
@@ -118,6 +126,11 @@ class Board(object):
             if not tc_all_zero:
                 self.thermocouples.append(tc_series.index[i]) # append only thermocouples that were used in the test
             i += 1
+
+    def __get_board_name(self):
+        ''' Pull name of board (e.g. 'DRL') from limits file (if provided) '''
+        if self.test.limits:
+            self.name = self.test.limits.board_module_pairs[self.id]
 
     def __create_samples(self):
         ''' Creates a sample object for each system on the board '''

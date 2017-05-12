@@ -37,7 +37,8 @@ class Mode(object):
         self.df = pd.DataFrame() # dataframe of mode currents (added together if multi-mode)
         self.voltage_senses = [] # holds voltage sense positions for boards on in mode
         self.vsense_stats = {} # basic stats of vsenses
-        self.current_stats = {} # basic stats of currents 
+        self.current_stats = {} # basic stats of currents
+        self.out_of_spec = pd.DataFrame()
         
         self.__scan_for_multimode()
         self.__make_hist_dict()
@@ -69,6 +70,7 @@ class Mode(object):
         self.voltage_senses = [vsense+' '+board for board in self.current_board_ids for vsense in self.test.voltage_senses]
 
     def __get_mode_name(self):
+        ''' Pull name of mode from limits file (if provided) '''
         if self.test.limits:
             self.name = self.mode_tag
             for board in self.current_board_ids:
@@ -90,6 +92,7 @@ class Mode(object):
         return hist_dframe
 
     def get_system_by_system_mode_stats(self, temp, limits=None):
+        ''' Get voltage/current statistics and limit analysis for this mode '''
         self.current_stats[temp] = {}
         self.vsense_stats[temp] = {}
         for voltage in self.voltages:
@@ -97,21 +100,30 @@ class Mode(object):
             self.vsense_stats[temp][voltage] = {}
             if limits:
                 lower_limit, upper_limit = get_limits_at_mode_temp_voltage(limits, self, temp, voltage)
-            print('\n==> VOLTAGE AT', voltage, 'V')
 
+            ## voltage analysis
             for vsense in self.voltage_senses:
                 vsense_min, vsense_max, mean = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
-                out_of_spec = check_if_out_of_spec(voltage-VOLTAGE_TOLERANCE, voltage+VOLTAGE_TOLERANCE, vsense_min, vsense_max)
-                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, mean, out_of_spec]
-                print(vsense, 'MIN: '+str(vsense_min), 'MAX: '+str(vsense_max), 'MEAN: '+str(mean))
-                print('OUT OF SPEC: '+str(out_of_spec))
+                out_of_spec_bool = check_if_out_of_spec(voltage-VOLTAGE_TOLERANCE, voltage+VOLTAGE_TOLERANCE, vsense_min, vsense_max)
+                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, mean, out_of_spec_bool]
 
+            ## current analysis
             for system in self.systems:
                 out_of_spec = None
                 sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
-                print(system, 'MIN: '+str(sys_min), 'MAX: '+str(sys_max), 'MEAN: '+str(mean), 'STD: '+str(std))
                 if limits:
-                    out_of_spec = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
-                    print('OUT OF SPEC: '+str(out_of_spec))
-                self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec]
+                    out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
+                self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec_bool]
 
+    def get_out_of_spec_data(self):
+        ''' Method for retrieving out_of_spec data from test in this mode '''
+        for temp in self.temps:
+            for voltage in self.voltages:
+                df, out_of_spec_df = pd.DataFrame(), pd.DataFrame()
+                df = filter_temp_and_voltage(self.df, temp, voltage)
+                lower_limit, upper_limit = get_limits_at_mode_temp_voltage(self.test.limits, self, temp, voltage)
+                
+                ## select all rows where any system has out of spec currents
+                out_of_spec_df = df.loc[ (df[self.systems].values<lower_limit).any(1) | (df[self.systems].values>upper_limit).any(1) ]
+                if not out_of_spec_df.empty:  ## if out_of_spec df is not empty
+                    write_out_of_spec_to_file(df, self, temp, voltage)

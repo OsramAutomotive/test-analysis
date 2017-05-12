@@ -90,6 +90,15 @@ def set_figure_size(fig, save=False):
     fig.subplots_adjust(top=0.90, bottom=0.11, left=0.06, right=0.90, hspace=0.33)
     plt.show('hold')
 
+def set_up_date_time(test, ax):
+    ax.plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.vsetpoint], 'k--', 
+                      linewidth=3, zorder=10)
+    date_fmt = '%m/%d/%y %H:%M:%S'
+    formatter = dates.DateFormatter(date_fmt)
+    locator = dates.AutoDateLocator()
+    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_major_locator(locator)
+    
 
 ### MAIN PLOTTING FUNCTIONS ###
 def plot_modes(test, limits=None):
@@ -114,4 +123,4 @@ def plot_boards(test, limits=None, pstyle = 'ggplot'):
     print('Plotting temporal plot...')
     # module_names_dict, LL, UL = check_for_and_load_limits(limits)  # get module names if limits passed
     fig, axes = set_up_plot_area(test)  # set up figure and axes for plotting
-    set_up_date_time(test, axes)  # format and plot date time index
+    # set_up_date_time(test, axes)  # format and plot date time index

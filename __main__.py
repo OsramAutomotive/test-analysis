@@ -11,10 +11,9 @@ from core.limits.limits import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QIcon
-from random import randint
 
 
-## constants
+## constants for user input parameters
 TEMPERATURES = ['-40C', '23C', '45C', '60C', '70C', '85C']
 BOARDS = ['B1','B2','B3','B4','B5','B6']
 ANALYSIS_TOOLS = ['Plot', 'Histograms', 'Tables', 'Out of Spec']
@@ -28,7 +27,7 @@ TEXTFIELD_WIDTH = max(len(TEMPERATURES), len(BOARDS))
 
 
 class TestAnalysisUI(QWidget):
-    
+
     def __init__(self):
         super().__init__()
         self.test_name = ''
@@ -43,9 +42,10 @@ class TestAnalysisUI(QWidget):
         self.init_ui()
 
     def init_ui(self):
+        ## use grid layout for GUI
         grid = QGridLayout()
         self.setLayout(grid)
-        grid.setSpacing(10)
+        grid.setSpacing(10)  # spacing between widgets
 
         ## data folder
         self.data_folder_textfield = QLineEdit('(No Folder Selected)', self)
@@ -82,6 +82,7 @@ class TestAnalysisUI(QWidget):
         self.show()
 
     def populate_buttons(self, grid, row, label, button_type, text_list, info=None):
+        ''' Populates button list onto GUI '''
         grid.addWidget(QLabel(label), row, 0)
         button_list = []
         positions = [(row, j+1) for j in range(len(text_list))]
@@ -104,7 +105,7 @@ class FolderButton(QPushButton):
         self.ui = ui
         self.setText(text)
         self.text_box = text_box
-        self.name = ''
+        self.name = r''
         self.clicked.connect(self.set_folder)
         self.setToolTip('Select the directory containing the raw data of the test you would like to analyze')
 
@@ -189,7 +190,7 @@ class AnalyzeButton(QPushButton):
         temps = [t.temp for t in self.ui.temp_buttons if t.pressed]
         boards = [b.name for b in self.ui.board_buttons if b.pressed]
         datapath = self.ui.data_folder
-        limits = self.load_limits(boards, temps)     
+        limits = self.load_limits(boards, temps)
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)
@@ -198,7 +199,8 @@ class AnalyzeButton(QPushButton):
                 if analysis_type.pressed:
                     self.run_analysis(analysis_type.name, test, limits)
         else:
-            print('You must select a data folder, temperatures, and test boards')
+            print('\nYou must select a data folder, temperatures, and test boards')
+        print('\n\n\n ==> Analysis complete.')
 
     def print_test_conditions(self, test_name, temps, boards, limits):
         print('\nTest Name:', test_name)
@@ -215,9 +217,10 @@ class AnalyzeButton(QPushButton):
         elif analysis_name == 'Histograms':
             make_mode_histograms(test, system_by_system=False, limits=limits)
         elif analysis_name == 'Tables':
-            fill_stats(test, limits)
-        elif anlaysis_name == 'Out of Spec':
-            pass
+            fill_stats(test, limits, write_to_excel=True)
+        elif analysis_name == 'Out of Spec':
+            for mode in test.modes:
+                mode.get_out_of_spec_data()
         else:
             print('Analysis tool not found')
 

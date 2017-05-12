@@ -39,7 +39,6 @@ class Limits(object):
         self.__get_voltages()
         self.fill_limits()
 
-
     def __get_boards(self):
         self.get_b1_row()
         i = 0
@@ -52,7 +51,7 @@ class Limits(object):
         self.modules = [self.board_module_pairs[board] for board in self.boards]
 
     def __get_temp_rows(self):
-        cell_range = self.ws.get_squared_range(min_col=1, min_row=1, max_col=1, max_row=100)
+        cell_range = self.ws.get_squared_range(min_col=1, min_row=1, max_col=1, max_row=self.ws.max_row)
         for row in cell_range:
             for cell in row:
                 for temp in self.temps:
@@ -60,7 +59,7 @@ class Limits(object):
                         self.temp_rows[temp] = cell.row
 
     def __get_mode_row(self):
-        cell_range = self.ws.get_squared_range(min_col=1, min_row=1, max_col=1, max_row=100)
+        cell_range = self.ws.get_squared_range(min_col=1, min_row=1, max_col=1, max_row=self.ws.max_row)
         for row in cell_range:
             for cell in row:
                 value_string = str(cell.value).lower()
@@ -69,7 +68,8 @@ class Limits(object):
 
     def __get_modes_and_mode_cols(self):
         ''' Finds all modes and their column numbers ''' 
-        cell_range = self.ws.get_squared_range(min_col=1, min_row=self.mode_row, max_col=100, max_row=self.mode_row)
+        cell_range = self.ws.get_squared_range(min_col=1, min_row=self.mode_row, 
+                                               max_col=self.ws.max_column, max_row=self.mode_row)
         for row in cell_range:
             for cell in row:
                 if cell.column and cell.value and any(module in cell.value for module in self.modules):
@@ -80,7 +80,8 @@ class Limits(object):
 
     def __get_voltage_header(self):
         ''' Info '''
-        cell_range = self.ws.get_squared_range(min_col=self.voltage_column, min_row=1, max_col=self.voltage_column, max_row=100)
+        cell_range = self.ws.get_squared_range(min_col=self.voltage_column, min_row=1, 
+                                               max_col=self.voltage_column, max_row=self.ws.max_row)
         for row in cell_range:
             for cell in row:
                 value_string = str(cell.value).lower()
@@ -132,3 +133,5 @@ class Limits(object):
         print('\nMode Columns:', self.mode_cols, '\n')
         pp = pprint.PrettyPrinter()
         pp.pprint(self.lim)
+
+
