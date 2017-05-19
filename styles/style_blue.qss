@@ -152,6 +152,29 @@ stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
 }
 
 
+AnalyzeButton
+{
+    color: #2F4F4F;
+    background-color: #ffffc1;
+    border-width: 1px;
+    border-color: #76797C;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 2px;
+    outline: none;
+}
+
+AnalyzeButton:hover, AnalyzeButton:focus {
+    background-color: #ffffc1;
+    color: black;
+}
+
+AnalyzeButton:pressed
+{
+    background-color: #ffff66;
+    padding-top: -15px;
+    padding-bottom: -17px;
+}
 
 
 QComboBox:!editable {

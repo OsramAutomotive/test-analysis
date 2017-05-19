@@ -8,6 +8,7 @@ from core.analysis.histograms import *
 from core.analysis.tables import *
 from core.limits.limits import *
 
+import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QIcon
@@ -198,9 +199,10 @@ class AnalyzeButton(QPushButton):
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
                     self.run_analysis(analysis_type.name, test, limits)
+            print('\n\n\n ==> Analysis complete.')
+            plt.show('hold') ## show all plots (if there were any)
         else:
             print('\nYou must select a data folder, temperatures, and test boards')
-        print('\n\n\n ==> Analysis complete.')
 
     def print_test_conditions(self, test_name, temps, boards, limits):
         print('\nTest Name:', test_name)
@@ -223,6 +225,7 @@ class AnalyzeButton(QPushButton):
                 mode.get_out_of_spec_data()
         else:
             print('Analysis tool not found')
+
 
     def load_limits(self, boards, temps):
         if self.ui.limits_file:

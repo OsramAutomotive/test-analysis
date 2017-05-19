@@ -3,7 +3,7 @@
 ''' This module contains functions that create current histograms using matplotlib. '''
 
 import pandas as pd
-import matplotlib.pyplot as plt, mpld3
+import matplotlib.pyplot as plt
 import matplotlib.dates as dates
 from core.data_import.helpers import *
 
@@ -17,7 +17,7 @@ def make_mode_histograms(test, system_by_system=True, limits=None):
             else:
                 histogram_of_mode(test, mode, temp, limits)
     print('complete.')
-    plt.show('hold') ## wait until all plots are built to show them
+    # plt.show('hold') ## wait until all plots are built to show them
 
 def histogram_of_each_system(test, mode, temp, limits=None):
     for voltage in mode.voltages: ## make plot for mode in each voltage
@@ -42,13 +42,13 @@ def histogram_of_each_system(test, mode, temp, limits=None):
             ax = fig.add_subplot(nrows, ncols, i)
             ax.set_title(test.systems[i-1])
             ax.hist(current_data.dropna(), color=bar_color)  ## drop NaN values
-            ax.axvline(avg, color='#228B22', linestyle='solid', linewidth=4)
+            ax.axvline(avg, color='dimgray', linestyle='dotted', linewidth=4)
             if limits:
                 ax.axvline(LL, color='red', linestyle='dashed', linewidth=2)
                 ax.axvline(UL, color='red', linestyle='dashed', linewidth=2)
             else:
-                ax.axvline(avg-3*sigma, color='b', linestyle='dotted', linewidth=2)
-                ax.axvline(avg+3*sigma, color='b', linestyle='dotted', linewidth=2)
+                ax.axvline(avg-3*sigma, color='b', linestyle='dashed', linewidth=2)
+                ax.axvline(avg+3*sigma, color='b', linestyle='dashed', linewidth=2)
             ax.set_xlabel('Current (A)')
             ax.set_ylabel('Frequency')
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
@@ -76,14 +76,14 @@ def histogram_of_mode(test, mode, temp, limits=None):
         plus_ten = round(avg*1.1, 3)
 
         ax = fig.add_subplot(nrows, ncols, i)
-        ax.hist(current_data.dropna(), color='g')  ## drop NaN values
-        ax.axvline(avg, color='k', linestyle='solid', linewidth=2)
+        ax.hist(current_data.dropna(), color='dimgray')  ## drop NaN values
+        ax.axvline(avg, color='k', linestyle='dotted', linewidth=2)
         if limits:
             ax.axvline(LL, color='red', linestyle='dashed', linewidth=2)
             ax.axvline(UL, color='red', linestyle='dashed', linewidth=2)
         else:
-            ax.axvline(avg-3*sigma, color='b', linestyle='dotted', linewidth=2)
-            ax.axvline(avg+3*sigma, color='b', linestyle='dotted', linewidth=2)
+            ax.axvline(avg-3*sigma, color='b', linestyle='dashed', linewidth=2)
+            ax.axvline(avg+3*sigma, color='b', linestyle='dashed', linewidth=2)
         ax.set_title(subtitle)
         ax.set_xlabel('Current (A)', fontsize=8)
         ax.set_ylabel('Frequency', fontsize=8)
