@@ -145,36 +145,19 @@ stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
 stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
 }	
 
-QPushButton:hover, QToolButton:hover,QComboBox:hover, QCheckBox:hover, QRadioButton:hover {
+QPushButton:hover, QToolButton:hover,QComboBox:hover, QRadioButton:hover {
 background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
 stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
 stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
 }
 
-
-AnalyzeButton
-{
-    color: #2F4F4F;
-    background-color: #ffffc1;
-    border-width: 1px;
-    border-color: #76797C;
-    border-style: solid;
-    padding: 5px;
-    border-radius: 2px;
-    outline: none;
+/* original (included check box)
+QPushButton:hover, QToolButton:hover,QComboBox:hover, QCheckBox:hover, QRadioButton:hover {
+background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
+stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
 }
-
-AnalyzeButton:hover, AnalyzeButton:focus {
-    background-color: #ffffc1;
-    color: black;
-}
-
-AnalyzeButton:pressed
-{
-    background-color: #ffff66;
-    padding-top: -15px;
-    padding-bottom: -17px;
-}
+*/
 
 
 QComboBox:!editable {
@@ -277,6 +260,9 @@ QRadioButton {
    border-radius: 8px;
 }
 
+
+
+/*
 QCheckBox {  
    background:transparent;
    min-width: 80px;  
@@ -292,11 +278,12 @@ QCheckBox {
    padding:3px;
    border-radius: 8px;
 }
+*/
 
 QPushButton {
   border-style:none;
-  min-width: 80px;  
-  min-height: 20px;    
+  min-width: 80px;
+  min-height: 20px;
   border-left: 1px solid rgb(255, 255, 255);
   border-top: 1px solid rgb(255, 255, 255);
     
@@ -310,7 +297,7 @@ QPushButton {
   border-radius: 8px;
 }
 
-QPushButton::pressed {
+QPushButton:pressed {
   border-style:none;   
   border-top: 2px solid rgb(136, 163, 205);
   border-left: 2px solid rgb(136, 163, 205);
@@ -343,6 +330,8 @@ QToolButton {
   border-radius: 8px;
 }
 
+
+/*
 QCheckBox:checked, QRadioButton:checked {
 background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
 stop: 0  rgb(217, 231, 247), stop: 0.8 rgb(194, 216, 242),
@@ -363,7 +352,7 @@ stop: 0.2 rgb(194, 216, 242), stop: 1.0 rgb(217, 231, 247));
   border-top: 1px solid rgb(136, 163, 205);
   border-left: 1px solid rgb(136, 163, 205);
 }
-
+*/
 
 QToolButton:pressed {
   border-top: 2px solid rgb(136, 163, 205);
@@ -953,3 +942,69 @@ QTimeEdit::down-arrow:pressed {
     width: 1px; 
     height: 1px; 
 } 
+
+
+
+
+
+
+/* Additional custom styling */
+
+AnalyzeButton
+{
+    color: #284444;
+    background-color: #d3d39c;
+    border-width: 1px;
+    border-color: #76797C;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 2px;
+    outline: none;
+}
+
+AnalyzeButton:hover {
+    background-color: #ffffc1;
+    color: black;
+    font-weight: bold;
+}
+
+AnalyzeButton:focus {
+  background-color: #ffff66;
+}
+
+AnalyzeButton:pressed
+{
+  padding-top: -15px;
+  padding-bottom: -17px;
+}
+
+
+DataButton:hover {
+  color: #2F4F4F;
+  background-color: #88e188;
+}
+
+
+QCheckBox
+{
+    spacing: 5px;
+    outline: none;
+    margin-bottom: 2px;
+    color: rgb(59, 90, 130);
+    background: none;
+}
+
+QCheckBox:hover {
+  color: #2F4F4F;
+}
+
+QCheckBox:disabled
+{
+  color: #76797C;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+}
+

@@ -12,6 +12,19 @@ def rename_columns(mdf, board, columns):
         mdf.rename(columns={column_label: column_label+' '+board.id}, inplace=True)
     return mdf
 
+def rotate_mask(mask, n):
+    ''' e.g. - 1000 => 0100 '''
+    return mask[-n:] + mask[:-n]
+
+def create_turn_mask(boards):
+    turn_mask = ''
+    for b in boards:
+        if b == 'B5' or b == 'B6':
+            turn_mask += '1'
+        else:
+            turn_mask += '0'
+    return turn_mask
+
 def mask_to_mode(mask, board_ids):
     ''' Translates a board mask (e.g.- '1001') 
         to a board mode (e.g.- 'B3B4') '''
@@ -60,6 +73,7 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
     dframe = filter_temp_and_voltage(mode.df, temp, voltage)
     series = dframe[vsense]
     return series.min(), series.max(), series.mean()
+
 
 
 ### Out of spec helpers

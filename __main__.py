@@ -65,14 +65,20 @@ class TestAnalysisUI(QWidget):
         self.board_buttons = self.populate_buttons(grid, 3, 'Boards:', DataButton, BOARDS) 
         self.analysis_buttons = self.populate_buttons(grid, 4, 'Analysis:', ToolTipButton, ANALYSIS_TOOLS, info=ANALYSIS_TOOLTIP_INFO)
 
+        ## analysis conditions
+        self.conditions_label = QLabel('Conditions:')
+        grid.addWidget(self.conditions_label, 5, 0, 1, 1)
+        self.multimode_box = QCheckBox('Multimode?')
+        grid.addWidget(self.multimode_box, 5, 1, 1, 1)
+
         ## test name
-        grid.addWidget(QLabel('Test Name:'), 5, 0)
+        grid.addWidget(QLabel('Test Name:'), 6, 0)
         self.test_name = QLineEdit('', self)
-        grid.addWidget(self.test_name, 5, 1, 1, TEXTFIELD_WIDTH)
+        grid.addWidget(self.test_name, 6, 1, 1, TEXTFIELD_WIDTH)
 
         ## analyze button
         self.analyze_button = AnalyzeButton('Analyze', self)
-        grid.addWidget(self.analyze_button, 6, 2, 1, 3)
+        grid.addWidget(self.analyze_button, 7, 2, 1, 3)
 
         ## gui window properties
         self.setStyleSheet(open(self.stylesheet, "r").read())
@@ -142,8 +148,8 @@ class DataButton(QPushButton):
     def init_button(self, name):
         self.setText(name)
         self.name = name
-        self.pressed = False
         self.setCheckable(True)
+        self.pressed = False
         self.clicked[bool].connect(self.toggle)
 
     def toggle(self):
@@ -152,7 +158,6 @@ class DataButton(QPushButton):
             self.setStyleSheet('background-color: #9ACD32') # yellowgreen when pressed
         else:
             self.setStyleSheet('background-color: None')
-
 
 class TempButton(DataButton):
 
@@ -192,10 +197,11 @@ class AnalyzeButton(QPushButton):
         boards = [b.name for b in self.ui.board_buttons if b.pressed]
         datapath = self.ui.data_folder
         limits = self.load_limits(boards, temps)
+        multimode = self.ui.multimode_box.isChecked()
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)
-            test = TestStation(test_name, boards, datapath, limits, *temps)
+            test = TestStation(test_name, boards, datapath, limits, multimode, *temps)
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
                     self.run_analysis(analysis_type.name, test, limits)
