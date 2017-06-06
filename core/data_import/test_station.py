@@ -161,9 +161,10 @@ class TestStation(object):
             data = pd.DataFrame  ## make copy of 'mother' dataframe
             for board in self.boards:
                 mode = board.id
-                data = self.mdf.loc[(self.mdf[ON_OFF+' '+mode] == 1.0)]
-                if not data.empty:
-                    self.mode_df_dict[mode] = data
+                if mode != 'B6': ## skip outage board 
+                    data = self.mdf.loc[(self.mdf[ON_OFF+' '+mode] == 1.0)]
+                    if not data.empty:
+                        self.mode_df_dict[mode] = data
 
         self.mode_ids = list(self.mode_df_dict.keys())  ## assign mode ids
         self.mode_ids = sorted(sorted(self.mode_ids), key=lambda x: len(x))  ## order by length first, then board number

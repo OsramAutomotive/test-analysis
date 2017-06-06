@@ -65,21 +65,34 @@ def filter_temp_and_voltage(df, temp, voltage):
 ### Stats helpers
 def get_system_stats_at_mode_temp_voltage(system, mode, temp, voltage):
     ''' Return basic stats for input system at mode/temp/voltage condition '''
-    series = mode.hist_dict[temp][voltage][system]
-    return series.min(), series.max(), series.mean(), series.std()
+    decimal_places = 3
+    if temp in mode.hist_dict:
+        if voltage in mode.hist_dict[temp]:
+            series = mode.hist_dict[temp][voltage][system]
+        if not series.empty:
+            return round(series.min(), decimal_places), round(series.max(), decimal_places), \
+                   round(series.mean(), decimal_places), round(series.std(), decimal_places)
+    return 'NA', 'NA', 'NA', 'NA'
 
 def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
     ''' Return basic stats for vsense at mode/temp/voltage condition '''
+    decimal_places = 3
     dframe = filter_temp_and_voltage(mode.df, temp, voltage)
     series = dframe[vsense]
-    return series.min(), series.max(), series.mean()
-
+    if not series.empty:
+        return round(series.min(), decimal_places), round(series.max(), decimal_places), \
+               round(series.mean(), decimal_places)
+    else:
+        return 'NA', 'NA', 'NA'
 
 
 ### Out of spec helpers
 def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
     ''' Return True/False if system min/max is out of spec '''
-    return (sys_min < lower_limit) or (sys_max > upper_limit)
+    if isinstance(sys_min, float):
+        return (sys_min < lower_limit) or (sys_max > upper_limit)
+    else:
+        return sys_min  ## return 'NA'
 
 def write_out_of_spec_to_file(df, mode, temp, voltage):
     ''' Append out of spec mode/temp/voltage condition to out of spec file '''
@@ -88,6 +101,15 @@ def write_out_of_spec_to_file(df, mode, temp, voltage):
                 mode.name, str(voltage) + 'V', '\n']))
     df.to_csv('!output//out_of_spec.txt', header=df.columns,
                               index=True, sep='\t', mode='a')
+
+
+## Dictionary cleaner
+def clean_empty_keys(d):
+    if not isinstance(d, (dict, list)):
+        return d
+    if isinstance(d, list):
+        return [v for v in (clean_empty_keys(v) for v in d) if v]
+    return {k: v for k, v in ((k, clean_empty_keys(v)) for k, v in d.items()) if v}
 
 
 ### Ipython helper (jupyter)

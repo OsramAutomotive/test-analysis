@@ -63,7 +63,12 @@ class Mode(object):
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
                 dframe = filter_temp_and_voltage(self.df, temp, voltage)
-                self.hist_dict[temp][voltage] = dframe
+                if not dframe.empty:
+                    self.hist_dict[temp][voltage] = dframe
+                else:
+                    self.hist_dict[temp].pop(voltage, None)
+            if not self.hist_dict[temp]:
+                self.hist_dict.pop(temp, None)
 
     def __scan_for_voltage_senses(self):
         ''' Scans for voltage sense columns '''

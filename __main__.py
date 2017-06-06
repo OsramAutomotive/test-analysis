@@ -228,7 +228,8 @@ class AnalyzeButton(QPushButton):
             fill_stats(test, limits, write_to_excel=True)
         elif analysis_name == 'Out of Spec':
             for mode in test.modes:
-                mode.get_out_of_spec_data()
+                if limits:
+                    mode.get_out_of_spec_data()
         else:
             print('Analysis tool not found')
 

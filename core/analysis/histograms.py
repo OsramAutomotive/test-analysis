@@ -13,9 +13,11 @@ def make_mode_histograms(test, system_by_system=True, limits=None):
     for mode in test.modes:
         for temp in mode.temps:         
             if system_by_system:
-                histogram_of_each_system(test, mode, temp, limits)
+                if temp in mode.hist_dict:
+                    histogram_of_each_system(test, mode, temp, limits)
             else:
-                histogram_of_mode(test, mode, temp, limits)
+                if temp in mode.hist_dict:
+                    histogram_of_mode(test, mode, temp, limits)
     print('complete.')
     # plt.show('hold') ## wait until all plots are built to show them
 

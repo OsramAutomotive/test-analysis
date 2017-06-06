@@ -53,11 +53,12 @@ def write_voltage_and_current_data(row_start, wb, ws, mode, temp, voltage, limit
     row = row_start
     decimal_places = 3
     d_format = wb.add_format({'align':'center', 'border': True, 'font_color': 'black'})
+
     header = ['TP:'] + mode.voltage_senses + mode.test.systems
-    minimums = ['Min:'] + [round(mode.vsense_stats[temp][voltage][vsense][0], decimal_places) for vsense in mode.voltage_senses] + \
-                          [round(mode.current_stats[temp][voltage][system][0], decimal_places) for system in mode.systems]
-    maximums = ['Max:'] + [round(mode.vsense_stats[temp][voltage][vsense][1], decimal_places) for vsense in mode.voltage_senses] + \
-                          [round(mode.current_stats[temp][voltage][system][1], decimal_places) for system in mode.systems]
+    minimums = ['Min:'] + [mode.vsense_stats[temp][voltage][vsense][0] for vsense in mode.voltage_senses] + \
+                          [mode.current_stats[temp][voltage][system][0] for system in mode.systems]
+    maximums = ['Max:'] + [mode.vsense_stats[temp][voltage][vsense][1] for vsense in mode.voltage_senses] + \
+                          [mode.current_stats[temp][voltage][system][1] for system in mode.systems]
     check_data = ['Check Data:'] + ['Out of Spec' if mode.vsense_stats[temp][voltage][vsense][-1] else 'G' for vsense in mode.voltage_senses]
     if limits:
         check_data += ['Out of Spec' if mode.current_stats[temp][voltage][system][-1] else 'G' for system in mode.systems]
