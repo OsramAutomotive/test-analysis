@@ -39,12 +39,14 @@ class Mode(object):
         self.vsense_stats = {} # basic stats of vsenses
         self.current_stats = {} # basic stats of currents
         self.out_of_spec = pd.DataFrame()
-        
+        self.has_led_binning = False
+        self.led_bins = []
+
         self.__scan_for_multimode()
         self.__make_hist_dict()
         self.__populate_hist_dict(df)
         self.__scan_for_voltage_senses()
-        self.__get_mode_name()
+        self.__get_mode_name_and_set_binning()
 
     def __repr__(self):
         return '{}: {} ({})'.format(self.__class__.__name__,
@@ -74,12 +76,15 @@ class Mode(object):
         ''' Scans for voltage sense columns '''
         self.voltage_senses = [vsense+' '+board for board in self.current_board_ids for vsense in self.test.voltage_senses]
 
-    def __get_mode_name(self):
+    def __get_mode_name_and_set_binning(self):
         ''' Pull name of mode from limits file (if provided) '''
         if self.test.limits:
             self.name = self.mode_tag
             for board in self.current_board_ids:
                 self.name = self.name.replace(board, self.test.limits.board_module_pairs[board])
+                if board in self.test.limits.led_binning_dict:
+                    self.has_led_binning = True
+                    self.led_bins = self.test.limits.led_binning_dict[board]
 
     def create_multimode_cols(self, dframe):
         ''' Adds multimode current column for each system '''
@@ -103,8 +108,6 @@ class Mode(object):
         for voltage in self.voltages:
             self.current_stats[temp][voltage] = {}
             self.vsense_stats[temp][voltage] = {}
-            if limits:
-                lower_limit, upper_limit = get_limits_at_mode_temp_voltage(limits, self, temp, voltage)
 
             ## voltage analysis
             for vsense in self.voltage_senses:
@@ -117,6 +120,11 @@ class Mode(object):
                 out_of_spec = None
                 sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
                 if limits:
+                    if self.has_led_binning:
+                        mode_limit_dict = get_limits_for_system_with_binning(limits, self, temp, voltage, system)
+                    else:
+                        mode_limit_dict = get_limits_at_mode_temp_voltage(limits, self, temp, voltage)
+                    lower_limit, upper_limit = mode_limit_dict['LL'], mode_limit_dict['UL']
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
                 self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec_bool]
 
@@ -126,9 +134,13 @@ class Mode(object):
             for voltage in self.voltages:
                 df, out_of_spec_df = pd.DataFrame(), pd.DataFrame()
                 df = filter_temp_and_voltage(self.df, temp, voltage)
-                lower_limit, upper_limit = get_limits_at_mode_temp_voltage(self.test.limits, self, temp, voltage)
+                mode_limit_dict = get_limits_at_mode_temp_voltage(self.test.limits, self, temp, voltage)
                 
-                ## select all rows where any system has out of spec currents
-                out_of_spec_df = df.loc[ (df[self.systems].values<lower_limit).any(1) | (df[self.systems].values>upper_limit).any(1) ]
-                if not out_of_spec_df.empty:  ## if out_of_spec df is not empty
-                    write_out_of_spec_to_file(df, self, temp, voltage)
+                if self.has_led_binning:
+                    pass ### TO DO: Make this work for LED binning
+                else:
+                    lower_limit, upper_limit = mode_limit_dict['LL'] , mode_limit_dict['UL']
+                    ## select all rows where any system has out of spec currents
+                    out_of_spec_df = df.loc[ (df[self.systems].values<lower_limit).any(1) | (df[self.systems].values>upper_limit).any(1) ]
+                    if not out_of_spec_df.empty:  ## if out_of_spec df is not empty
+                        write_out_of_spec_to_file(df, self, temp, voltage)

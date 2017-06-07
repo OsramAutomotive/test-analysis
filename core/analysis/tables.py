@@ -35,15 +35,14 @@ def write_mode_temp_header(row_start, wb, ws, width, limits, color_dict, mode, t
 def write_limits_header(row_start, wb, ws, width, limits, mode, temp, voltage):
     ''' Write limits header into the row after row_start '''
     row, col = row_start, 0
+    limits_string = ' '.join(['Limits:  ', 'Vin ', str(voltage)+u'\N{PLUS-MINUS SIGN}'+str(VOLTAGE_TOLERANCE)+'V'])
     if limits:
-        LL, UL = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
-    else:
-        LL, UL = None, None
-    if False:  ## temporary until outage is implemented
-        limits_string = 'LL: ' + str(LL) + '  UL: ' + str(UL)
-    else:
-        limits_string = ' '.join(['Limits:  ', 'Vin ', str(voltage)+u'\N{PLUS-MINUS SIGN}'+str(VOLTAGE_TOLERANCE)+'V', 
-                                               'Iin '+str(LL)+' to '+ str(UL) + ' A'])
+        mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
+        if mode.has_led_binning:  ## led binning
+            for lim_label, lim_value in sorted(mode_limits_dict.items()):
+                limits_string += '  ' + lim_label + ': ' + str(lim_value) 
+        else: ## no led binning
+            limits_string += '  Iin '+str(mode_limits_dict['LL'])+' to '+ str(mode_limits_dict['UL']) + ' A'
     lim_format = wb.add_format({'align':'center', 'border': True, 'bold': True,
                                       'font_color': 'black', 'bg_color': '#D3D3D3'})
     ws.merge_range(row, col, row, width, limits_string, lim_format)

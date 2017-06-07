@@ -65,13 +65,9 @@ def histogram_of_mode(test, mode, temp, limits=None):
 
     i = 1
     for voltage in mode.voltages: # make subplot for each voltage
-        if limits: ## if doing limit analysis
-            LL, UL = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
-            subtitle = ' '.join([str(voltage)+'V', ' LL:', str(LL), ' UL:', str(UL)])
-        else:
-            subtitle = str(voltage)+'V' 
+        subtitle = str(voltage)+'V'
         dframe = mode.hist_dict[temp][voltage]
-        current_data = mode.strip_index_and_melt_to_series(dframe)
+        current_data = mode.strip_index_and_melt_to_series(dframe) ## put all system currents in single series
         avg = current_data.mean()
         sigma = current_data.std()
         minus_ten = round(avg*0.9, 3)
@@ -80,10 +76,14 @@ def histogram_of_mode(test, mode, temp, limits=None):
         ax = fig.add_subplot(nrows, ncols, i)
         ax.hist(current_data.dropna(), color='dimgray')  ## drop NaN values
         ax.axvline(avg, color='k', linestyle='dotted', linewidth=2)
-        if limits:
-            ax.axvline(LL, color='red', linestyle='dashed', linewidth=2)
-            ax.axvline(UL, color='red', linestyle='dashed', linewidth=2)
-        else:
+        if limits:  ## show current limits
+            mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
+            for lim_label, lim_value in sorted(mode_limits_dict.items()):
+                subtitle += '  ' + lim_label + ': ' + str(lim_value)            
+                ax.axvline(lim_value, color='b', linestyle='dashed', linewidth=2)
+        else:  ## show +- 3 standard deviations
+            subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN} 3' + u'\N{GREEK SMALL LETTER SIGMA}: ' + \
+                        str(round(avg-3*sigma, 3)) + ' to ' + str(round(avg+3*sigma, 3))
             ax.axvline(avg-3*sigma, color='b', linestyle='dashed', linewidth=2)
             ax.axvline(avg+3*sigma, color='b', linestyle='dashed', linewidth=2)
         ax.set_title(subtitle)
