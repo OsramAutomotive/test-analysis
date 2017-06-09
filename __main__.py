@@ -26,7 +26,6 @@ ANALYSIS_TOOLTIP_INFO = [PLOT_INFO, HIST_INFO, TABLE_INFO, OUT_OF_SPEC_INFO]
 
 TEXTFIELD_WIDTH = max(len(TEMPERATURES), len(BOARDS))
 
-
 class TestAnalysisUI(QWidget):
 
     def __init__(self):
@@ -70,6 +69,8 @@ class TestAnalysisUI(QWidget):
         grid.addWidget(self.conditions_label, 5, 0, 1, 1)
         self.multimode_box = QCheckBox('Multimode?')
         grid.addWidget(self.multimode_box, 5, 1, 1, 1)
+        self.limit_analysis_box = QCheckBox('Limit Analysis?')
+        grid.addWidget(self.limit_analysis_box, 5, 2, 1, 1)
 
         ## test name
         grid.addWidget(QLabel('Test Name:'), 6, 0)
@@ -197,11 +198,12 @@ class AnalyzeButton(QPushButton):
         boards = [b.name for b in self.ui.board_buttons if b.pressed]
         datapath = self.ui.data_folder
         limits = self.load_limits(boards, temps)
+        run_limit_analysis = self.ui.limit_analysis_box.isChecked()
         multimode = self.ui.multimode_box.isChecked()
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)
-            test = TestStation(test_name, boards, datapath, limits, multimode, *temps)
+            test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, multimode, *temps)
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
                     self.run_analysis(analysis_type.name, test, limits)

@@ -32,11 +32,12 @@ class TestStation(object):
     AMB_TEMP = 'Amb Temp TC1'
     VSETPOINT = 'VSetpoint'
 
-    def __init__(self, name, boards, folder, limits=False, multimode= False, *temps):
+    def __init__(self, name, boards, folder, limits=None, run_limit_analysis=False, multimode= False, *temps):
         self.name = name
         self.folder = folder
         self.systems = []
         self.limits = limits
+        self.run_limit_analysis = run_limit_analysis
         self.voltages = []
         self.temps = temps
         self.voltage_senses = []

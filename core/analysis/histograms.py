@@ -26,7 +26,7 @@ def histogram_of_each_system(test, mode, temp, limits=None):
         num_subplots = len(mode.systems)
         fig = plt.figure()
         bar_color = determine_bar_color(temp)
-        if limits: ## if doing limit analysis
+        if limits and test.run_limit_analysis: ## if doing limit analysis
             LL, UL = limits.lim[temp][mode.mode_tag][voltage][0], limits.lim[temp][mode.mode_tag][voltage][1]
             title = ' '.join([mode.name, str(temp), str(voltage), ' LL:', str(LL), ' UL:', str(UL)])
         else:
@@ -45,7 +45,7 @@ def histogram_of_each_system(test, mode, temp, limits=None):
             ax.set_title(test.systems[i-1])
             ax.hist(current_data.dropna(), color=bar_color)  ## drop NaN values
             ax.axvline(avg, color='dimgray', linestyle='dotted', linewidth=4)
-            if limits:
+            if limits and test.run_limit_analysis:
                 ax.axvline(LL, color='red', linestyle='dashed', linewidth=2)
                 ax.axvline(UL, color='red', linestyle='dashed', linewidth=2)
             else:
@@ -76,16 +76,20 @@ def histogram_of_mode(test, mode, temp, limits=None):
         ax = fig.add_subplot(nrows, ncols, i)
         ax.hist(current_data.dropna(), color='dimgray')  ## drop NaN values
         ax.axvline(avg, color='k', linestyle='dotted', linewidth=2)
-        if limits:  ## show current limits
+        if limits and test.run_limit_analysis:  ## show current limits
             mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
             for lim_label, lim_value in sorted(mode_limits_dict.items()):
                 subtitle += '  ' + lim_label + ': ' + str(lim_value)            
-                ax.axvline(lim_value, color='b', linestyle='dashed', linewidth=2)
-        else:  ## show +- 3 standard deviations
-            subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN} 3' + u'\N{GREEK SMALL LETTER SIGMA}: ' + \
-                        str(round(avg-3*sigma, 3)) + ' to ' + str(round(avg+3*sigma, 3))
-            ax.axvline(avg-3*sigma, color='b', linestyle='dashed', linewidth=2)
-            ax.axvline(avg+3*sigma, color='b', linestyle='dashed', linewidth=2)
+                ax.axvline(lim_value, color='orangered', linestyle='dashed', linewidth=2)
+        else:  ## show +- 3 standard deviations (or +- 10%)
+            subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN} 10%: ' + \
+                        str(round(avg*0.9, 3)) + ' to ' + str(round(avg*1.1, 3))
+            ax.axvline(avg*0.9, color='b', linestyle='dashed', linewidth=2)
+            ax.axvline(avg*1.1, color='b', linestyle='dashed', linewidth=2)
+            # subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN} 3' + u'\N{GREEK SMALL LETTER SIGMA}: ' + \
+            #             str(round(avg-3*sigma, 3)) + ' to ' + str(round(avg+3*sigma, 3))
+            # ax.axvline(avg-3*sigma, color='b', linestyle='dashed', linewidth=2)
+            # ax.axvline(avg+3*sigma, color='b', linestyle='dashed', linewidth=2)
         ax.set_title(subtitle)
         ax.set_xlabel('Current (A)', fontsize=8)
         ax.set_ylabel('Frequency', fontsize=8)
