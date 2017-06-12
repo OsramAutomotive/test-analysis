@@ -84,7 +84,7 @@ def write_single_table(row_start, wb, ws, test, mode, temp, limits):
         write_limits_header(row_start+1, wb, ws, width, test, mode, temp, voltage, limits)
         row_start = write_voltage_and_current_data(row_start+2, wb, ws, test, mode, temp, voltage, limits)
         if test.outage:
-            pass
+            pass  ## TO DO: implement outage analysis
     return row_start+2
 
 def fill_stats(test, limits=None, write_to_excel=True):

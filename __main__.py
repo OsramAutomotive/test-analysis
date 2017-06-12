@@ -71,6 +71,8 @@ class TestAnalysisUI(QWidget):
         grid.addWidget(self.multimode_box, 5, 1, 1, 1)
         self.limit_analysis_box = QCheckBox('Limit Analysis?')
         grid.addWidget(self.limit_analysis_box, 5, 2, 1, 1)
+        self.raw_merge_box = QCheckBox('Raw Merge?')
+        grid.addWidget(self.raw_merge_box, 5, 3, 1, 1)        
 
         ## test name
         grid.addWidget(QLabel('Test Name:'), 6, 0)
@@ -201,6 +203,7 @@ class AnalyzeButton(QPushButton):
         limits = self.load_limits(boards, temps)
         run_limit_analysis = self.ui.limit_analysis_box.isChecked()
         multimode = self.ui.multimode_box.isChecked()
+        raw_merge = self.ui.raw_merge_box.isChecked()
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)
@@ -208,6 +211,9 @@ class AnalyzeButton(QPushButton):
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
                     self.run_analysis(analysis_type.name, test, limits)
+            if raw_merge:
+                test.mdf.to_csv(r'!output/'+'raw_data_all_boards.txt', header=test.mdf.columns,
+                                index=True, sep='\t', mode='w')
             print('\n\n\n ==> Analysis complete.')
         else:
             print('\nYou must select a data folder, temperatures, and test boards')
