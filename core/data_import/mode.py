@@ -101,6 +101,12 @@ class Mode(object):
         hist_dframe = pd.to_numeric(hist_dframe['currents'], downcast='float')
         return hist_dframe
 
+    def strip_index_and_melt_to_series_for_binning(self, dframe, led_bin):
+        systems = [system for system in self.systems if led_bin in system]
+        hist_dframe = pd.melt(dframe, value_vars=systems, value_name='currents')
+        hist_dframe = pd.to_numeric(hist_dframe['currents'], downcast='float')
+        return hist_dframe
+
     def get_system_by_system_mode_stats(self, temp, limits=None):
         ''' Get voltage/current statistics and limit analysis for this mode '''
         self.current_stats[temp] = {}

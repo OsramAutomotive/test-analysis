@@ -193,6 +193,7 @@ class AnalyzeButton(QPushButton):
         self.clicked[bool].connect(self.analyze)
 
     def analyze(self):
+        test, limits = None, None ## clear test objects (from prevoius usage)
         test_name = self.ui.test_name.text()
         temps = [t.temp for t in self.ui.temp_buttons if t.pressed]
         boards = [b.name for b in self.ui.board_buttons if b.pressed]
@@ -208,7 +209,6 @@ class AnalyzeButton(QPushButton):
                 if analysis_type.pressed:
                     self.run_analysis(analysis_type.name, test, limits)
             print('\n\n\n ==> Analysis complete.')
-            plt.show('hold') ## show all plots (if there were any)
         else:
             print('\nYou must select a data folder, temperatures, and test boards')
 

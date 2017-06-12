@@ -48,7 +48,7 @@ def copy_and_remove_b6_from(a_list):
 def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
     ''' Attempt to pull mode/temp/voltage condition current limits from limits file '''
     if mode.has_led_binning:
-        mode_limits_dict = get_limits_with_binning(limits, mode, temp, voltage)
+        mode_limits_dict = get_all_mode_limits_with_binning(limits, mode, temp, voltage)
     else:
         mode_limits_dict = get_limits_without_binning(limits, mode, temp, voltage)
     return mode_limits_dict
@@ -61,7 +61,7 @@ def get_limits_without_binning(limits, mode, temp, voltage):
     except:
         raise
 
-def get_limits_with_binning(limits, mode, temp, voltage):
+def get_all_mode_limits_with_binning(limits, mode, temp, voltage):
     mode_bin_limits_dict = {}
     for led_bin in mode.led_bins:
         module_header = led_bin + ' ' + mode.name
@@ -70,6 +70,16 @@ def get_limits_with_binning(limits, mode, temp, voltage):
             mode_bin_limits_dict[led_bin+' UL'] = limits.lim[temp][module_header][voltage][1]
         except:
             raise
+    return mode_bin_limits_dict
+
+def get_limit_for_single_led_bin(led_bin, limits, mode, temp, voltage):
+    mode_bin_limits_dict = {}
+    module_header = led_bin + ' ' + mode.name
+    try:
+        mode_bin_limits_dict[led_bin+' LL'] = limits.lim[temp][module_header][voltage][0]
+        mode_bin_limits_dict[led_bin+' UL'] = limits.lim[temp][module_header][voltage][1]
+    except:
+        raise
     return mode_bin_limits_dict
 
 def get_limits_for_system_with_binning(limits, mode, temp, voltage, system):

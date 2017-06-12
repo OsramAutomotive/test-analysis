@@ -20,41 +20,41 @@ multimode = False
 ##limits.print_info()
 limits = Limits(limits_file, 'Sheet1', BOARDS, temps)
 
-test = TestStation('Test', boards, datapath, limits, multimode, *temps)
+test = TestStation('Test', boards, datapath, limits, True, multimode, *temps)
 
 #make_mode_histograms(test, system_by_system=False, limits=limits)
 #fill_stats(test, limits, write_to_excel=True)
 
 
 
-def get_voltage(i):
-    r = i%3
-    if r == 0:
-        return '8V'
-    elif r == 1:
-        return '13.5V'
-    else:
-        return '16V'
-
-amb = 'Amb Temp TC1'
-vset = 'VSetpoint'
-i = 1
-for board in [test.b2, test.b4, test.b5]:
-    df8, df13, df16 = pd.DataFrame(), pd.DataFrame(),pd.DataFrame()
-    df8 = board.df[board.df[vset]==8.0]
-    df13 = board.df[board.df[vset]==13.5]
-    df16 = board.df[board.df[vset]==16]
-    import pdb; pdb.set_trace()
-    for df in [df8, df13, df16]:
-        fig = plt.figure(i)
-        voltage = get_voltage(i)
-        fig.canvas.set_window_title('Current vs. Temp: '+board.name+' '+voltage)
-        plt.title('Current vs. Temp: '+board.name+' '+voltage)
-        plt.xlabel('Temperature (C)')
-        plt.ylabel('Current (A)')
-        for sys in board.systems:
-            plt.scatter(df[amb], df[sys], alpha=0.5, label=sys)
-        plt.legend(bbox_to_anchor=(1.0, 0.5))
-        plt.subplots_adjust(right=0.77)
-        i+=1
+##def get_voltage(i):
+##    r = i%3
+##    if r == 0:
+##        return '8V'
+##    elif r == 1:
+##        return '13.5V'
+##    else:
+##        return '16V'
+##
+##amb = 'Amb Temp TC1'
+##vset = 'VSetpoint'
+##i = 1
+##for board in [test.b2, test.b4, test.b5]:
+##    df8, df13, df16 = pd.DataFrame(), pd.DataFrame(),pd.DataFrame()
+##    df8 = board.df[board.df[vset]==8.0]
+##    df13 = board.df[board.df[vset]==13.5]
+##    df16 = board.df[board.df[vset]==16]
+##    import pdb; pdb.set_trace()
+##    for df in [df8, df13, df16]:
+##        fig = plt.figure(i)
+##        voltage = get_voltage(i)
+##        fig.canvas.set_window_title('Current vs. Temp: '+board.name+' '+voltage)
+##        plt.title('Current vs. Temp: '+board.name+' '+voltage)
+##        plt.xlabel('Temperature (C)')
+##        plt.ylabel('Current (A)')
+##        for sys in board.systems:
+##            plt.scatter(df[amb], df[sys], alpha=0.5, label=sys)
+##        plt.legend(bbox_to_anchor=(1.0, 0.5))
+##        plt.subplots_adjust(right=0.77)
+##        i+=1
             

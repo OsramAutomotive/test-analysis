@@ -22,6 +22,8 @@ def make_mode_histograms(test, system_by_system=True, limits=None):
     # plt.show('hold') ## wait until all plots are built to show them
 
 def histogram_of_each_system(test, mode, temp, limits=None):
+    ### TO DO ---> implement LED binning for system-by-system
+
     for voltage in mode.voltages: ## make plot for mode in each voltage
         num_subplots = len(mode.systems)
         fig = plt.figure()
@@ -56,10 +58,67 @@ def histogram_of_each_system(test, mode, temp, limits=None):
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
             i += 1
 
+
 def histogram_of_mode(test, mode, temp, limits=None):
+    if mode.has_led_binning:
+        for led_bin in mode.led_bins: ## make each bin histogram
+            histogram_of_mode_with_binning(test, mode, temp, limits, led_bin)
+    else:
+        histogram_of_mode_no_binning(test, mode, temp, limits)
+            
+
+def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin):
+
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
-    main_title = ' '.join([mode.name, str(temp)])
+    main_title = ' '.join([test.name, mode.name, str(temp), ' LED bin', led_bin])
+    fig.canvas.set_window_title(main_title)
+    fig.suptitle(main_title, fontsize = 14, fontweight='bold')
+
+    i = 1
+    for voltage in mode.voltages: # make subplot for each voltage
+        subtitle = str(voltage)+'V'
+        dframe = mode.hist_dict[temp][voltage]
+        current_data = mode.strip_index_and_melt_to_series_for_binning(dframe, led_bin) ## put all system currents in single series
+        avg = current_data.mean()
+        sigma = current_data.std()
+        minus_ten = round(avg*0.9, 3)
+        plus_ten = round(avg*1.1, 3)
+
+        ax = fig.add_subplot(nrows, ncols, i)
+        ax.hist(current_data.dropna(), color='dimgray')  ## drop NaN values
+        ax.axvline(avg, color='k', linestyle='dotted', linewidth=2)
+        if limits and test.run_limit_analysis:  ## show current limits
+            mode_limits_dict = get_limit_for_single_led_bin(led_bin, limits, mode, temp, voltage)
+            for lim_label, lim_value in sorted(mode_limits_dict.items()):
+                subtitle += '  ' + lim_label + ': ' + str(lim_value)
+                ax.axvline(lim_value, color='orangered', linestyle='dashed', linewidth=2)
+        else:  ## show +- 3 standard deviations (or +- 10%)
+            subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN} 10%: ' + \
+                        str(round(avg*0.9, 3)) + ' to ' + str(round(avg*1.1, 3))
+            ax.axvline(avg*0.9, color='b', linestyle='dashed', linewidth=2)
+            ax.axvline(avg*1.1, color='b', linestyle='dashed', linewidth=2)
+            # subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN} 3' + u'\N{GREEK SMALL LETTER SIGMA}: ' + \
+            #             str(round(avg-3*sigma, 3)) + ' to ' + str(round(avg+3*sigma, 3))
+            # ax.axvline(avg-3*sigma, color='b', linestyle='dashed', linewidth=2)
+            # ax.axvline(avg+3*sigma, color='b', linestyle='dashed', linewidth=2)
+        ax.set_title(subtitle)
+        ax.set_xlabel('Current (A)', fontsize=8)
+        ax.set_ylabel('Frequency', fontsize=8)
+        plt.setp(ax.get_xticklabels(), fontsize=8)
+        plt.setp(ax.get_yticklabels(), fontsize=8)
+        i += 1
+
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.87, bottom=0.05, left=0.07, right=0.97)
+
+
+
+def histogram_of_mode_no_binning(test, mode, temp, limits=None):
+
+    fig = plt.figure()
+    nrows, ncols = len(mode.voltages), 1
+    main_title = ' '.join([test.name, mode.name, str(temp)])
     fig.canvas.set_window_title(main_title)
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
 
@@ -79,7 +138,7 @@ def histogram_of_mode(test, mode, temp, limits=None):
         if limits and test.run_limit_analysis:  ## show current limits
             mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
             for lim_label, lim_value in sorted(mode_limits_dict.items()):
-                subtitle += '  ' + lim_label + ': ' + str(lim_value)            
+                subtitle += '  ' + lim_label + ': ' + str(lim_value)
                 ax.axvline(lim_value, color='orangered', linestyle='dashed', linewidth=2)
         else:  ## show +- 3 standard deviations (or +- 10%)
             subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN} 10%: ' + \
