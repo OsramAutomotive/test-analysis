@@ -129,8 +129,11 @@ class Board(object):
 
     def __get_board_name(self):
         ''' Pull name of board (e.g. 'DRL') from limits file (if provided) '''
-        if self.test.limits:
+        #if self.test.limits:
+        try:
             self.name = self.test.limits.board_module_pairs[self.id]
+        except:
+            print('Could not load board name')
 
     def __create_samples(self):
         ''' Creates a sample object for each system on the board '''

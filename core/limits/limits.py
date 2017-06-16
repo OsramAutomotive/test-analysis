@@ -10,13 +10,14 @@ from openpyxl import Workbook, load_workbook
 import pprint
 
 class Limits(object):
-    def __init__(self, filepath, sheet, boards, temps):
+    def __init__(self, filepath, sheet, boards, temps, binning=False):
         self.filepath = filepath
         self.sheet = sheet
         self.wb = load_workbook(self.filepath, read_only=True)
         self.ws = self.wb[self.sheet]
         self.boards = boards  # e.g. - 'B1' or 'B4'
         self.temps = temps  # integers, e.g. - 85 or -40 or 23
+        self.binning = binning # boolean for if LED binning used for project limits file
 
         self.lim = {} # holds current limits
         self.modules = []  # e.g. - 'PARK' or 'TURN'
@@ -30,6 +31,8 @@ class Limits(object):
         self.voltage_column = 2
         self.voltage_header_row = 13
         self.voltages = []
+        self.b1_row = None
+        self.led_binning_dict = {}
 
         self.__get_boards()
         self.__get_temp_rows()
@@ -47,6 +50,9 @@ class Limits(object):
             link = self.ws.cell(row = self.b1_row+i, column = 3).value
             if link == 'Y':
                 self.outage_link_board = board
+            led_bins = self.ws.cell(row = self.b1_row+i, column = 4).value
+            if led_bins:
+                self.led_binning_dict[board] = led_bins.split(' ')
             i += 1
         self.modules = [self.board_module_pairs[board] for board in self.boards]
 
@@ -67,16 +73,17 @@ class Limits(object):
                     self.mode_row = cell.row
 
     def __get_modes_and_mode_cols(self):
-        ''' Finds all modes and their column numbers ''' 
+        ''' Finds all modes and their column numbers, including variable led binning ''' 
         cell_range = self.ws.get_squared_range(min_col=1, min_row=self.mode_row, 
                                                max_col=self.ws.max_column, max_row=self.mode_row)
         for row in cell_range:
             for cell in row:
                 if cell.column and cell.value and any(module in cell.value for module in self.modules):
-                    self.module_modes.append(cell.value)
-                    board_mode = self.translate_module_mode_to_board_mode(cell.value)
-                    self.board_modes.append(board_mode)
-                    self.mode_cols[board_mode] = cell.column
+                    module_mode = cell.value
+                    self.module_modes.append(module_mode)
+                    #board_mode = self.translate_module_mode_to_board_mode(cell.value)
+                    #self.board_modes.append(board_mode)
+                    self.mode_cols[module_mode] = cell.column
 
     def __get_voltage_header(self):
         ''' Info '''
@@ -114,6 +121,12 @@ class Limits(object):
                     self.b1_row = cell.row
 
     def fill_limits(self):
+        if self.led_binning_dict:
+            self.fill_limits_binning()
+        else:
+            self.fill_limits_no_binning()
+
+    def fill_limits_no_binning(self):
         ''' Build limits dictionary from limits file '''
         for temp in self.temps:
             temp_row = self.temp_rows[temp]
@@ -127,6 +140,21 @@ class Limits(object):
                     min = round(float(min), 3)
                     max = round(float(max), 3)
                     self.lim[temp][board_mode][voltage] = (min, max)
+
+    def fill_limits_binning(self):
+        ''' Build limits dictionary from limits file '''
+        for temp in self.temps:
+            temp_row = self.temp_rows[temp]
+            self.lim[temp] = {}
+            for module_mode, column in self.mode_cols.items():
+                self.lim[temp][module_mode] = {}
+                for i in range(len(self.voltages)):
+                    voltage = float(self.ws.cell(row=temp_row+i, column=self.voltage_column).value)
+                    min = self.ws.cell(row=temp_row+i, column=column).value
+                    max = self.ws.cell(row=temp_row+i, column=column+1).value
+                    min = round(float(min), 3)
+                    max = round(float(max), 3)
+                    self.lim[temp][module_mode][voltage] = (min, max)
 
     def print_info(self):
         print('Board/Module Pairs:', self.board_module_pairs)

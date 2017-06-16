@@ -1,0 +1,42 @@
+Test Station SN: 10
+Product: Tesla M3 PV
+Software Version:  2.1.13
+Test Name: Tesla M3 PV 9pt.xlsx
+SN 1: HY 5K Sys 97/873
+SN 2: HY 8J Sys 98/874
+SN 3: HY 5K Sys 99/875
+SN 4: HY 8J Sys 100/877
+SN 5: HY 5K Sys 101/848
+SN 6: HY 8J Sys 102/879
+SN 7: 
+SN 8: 
+SN 9: 
+SN 10: 
+SN 11: 
+SN 12: 
+
+6/2/2017	1:08:59 PM	Started Test
+6/2/2017	1:26:42 PM	Stop from Test Duration Complete    Test Duration:  00:17:43
+Number of Test Cycles Completed 4
+
+Run Times	Check Fuse	NA	Reverse	NA	CHMSL	StopTurn	Outage
+1: 00:17:43	0	0	0	0	0	0	36
+2: 00:17:43	0	0	0	0	0	0	36
+3: 00:17:43	0	0	0	0	0	0	36
+4: 00:17:43	0	0	0	0	0	0	36
+5: 00:17:43	0	0	0	0	0	0	36
+6: 00:17:43	0	0	0	0	0	0	36
+7: 00:00:00	0	0	0	0	0	0	0
+8: 00:00:00	0	0	0	0	0	0	0
+9: 00:00:00	0	0	0	0	0	0	0
+10: 00:00:00	0	0	0	0	0	0	0
+11: 00:00:00	0	0	0	0	0	0	0
+12: 00:00:00	0	0	0	0	0	0	0
+
+Board	Volt Check
+NA	0
+Reverse	0
+NA	0
+CHMSL	0
+StopTurn	0
+
