@@ -73,8 +73,8 @@ class TestAnalysisUI(QWidget):
         grid.addWidget(self.limit_analysis_box, 5, 2, 1, 1)
         self.raw_merge_box = QCheckBox('Raw Merge')
         grid.addWidget(self.raw_merge_box, 5, 3, 1, 1)        
-        self.hists_by_tp_box = QCheckBox('Hists by Test Pos')
-        grid.addWidget(self.hists_by_tp_box, 5, 4, 1, 1)  
+        self.hist_by_tp_box = QCheckBox('Hists by Test Pos')
+        grid.addWidget(self.hist_by_tp_box, 5, 4, 1, 1)   
 
         ## test name
         grid.addWidget(QLabel('Test Name:'), 6, 0)
@@ -206,7 +206,7 @@ class AnalyzeButton(QPushButton):
         run_limit_analysis = self.ui.limit_analysis_box.isChecked()
         multimode = self.ui.multimode_box.isChecked()
         raw_merge = self.ui.raw_merge_box.isChecked()
-        hists_by_tp = self.ui.hists_by_tp_box.isChecked()
+        hists_by_tp = self.ui.hist_by_tp_box.isChecked()
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)

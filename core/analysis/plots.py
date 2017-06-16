@@ -82,7 +82,7 @@ def set_figure_size(fig, save=False):
     print('...complete.\n')
     plt.tight_layout()
     fig.subplots_adjust(top=0.90, bottom=0.11, left=0.06, right=0.90, hspace=0.33)
-    plt.show('hold')
+    #plt.show('hold')
 
 def set_up_date_time(test, ax):
     ax.plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.vsetpoint], 'k--', 

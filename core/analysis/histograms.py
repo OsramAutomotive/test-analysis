@@ -19,7 +19,7 @@ def make_mode_histograms(test, system_by_system=True, limits=None):
                 if temp in mode.hist_dict:
                     histogram_of_mode(test, mode, temp, limits)
     print('complete.')
-    plt.show('hold') ## wait until all plots are built to show them
+    # plt.show('hold') ## wait until all plots are built to show them
 
 def histogram_of_each_system(test, mode, temp, limits=None):
     ### TO DO ---> implement LED binning for system-by-system
@@ -30,9 +30,9 @@ def histogram_of_each_system(test, mode, temp, limits=None):
         bar_color = determine_bar_color(temp)
         if limits and test.run_limit_analysis: ## if doing limit analysis
             LL, UL = limits.lim[temp][mode.mode_tag][voltage][0], limits.lim[temp][mode.mode_tag][voltage][1]
-            title = ' '.join([mode.name, str(temp)+u'\N{DEGREE SIGN}C', str(voltage)+'V', ' LL:', str(LL), ' UL:', str(UL)])
+            title = ' '.join([mode.name, str(temp), str(voltage), ' LL:', str(LL), ' UL:', str(UL)])
         else:
-            title = ' '.join([mode.name, str(temp)+u'\N{DEGREE SIGN}C', str(voltage)+'V'])
+            title = ' '.join([mode.name, str(temp), str(voltage)])
         fig.canvas.set_window_title(title)
         fig.suptitle(title, fontsize = 14, fontweight='bold')
 
@@ -71,7 +71,7 @@ def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin):
 
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
-    main_title = ' '.join([test.name, mode.name, str(temp)+u'\N{DEGREE SIGN}C', ' LED bin', led_bin])
+    main_title = ' '.join([test.name, mode.name, str(temp), ' LED bin', led_bin])
     fig.canvas.set_window_title(main_title)
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
 
