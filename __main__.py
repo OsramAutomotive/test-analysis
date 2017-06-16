@@ -26,7 +26,6 @@ ANALYSIS_TOOLTIP_INFO = [PLOT_INFO, HIST_INFO, TABLE_INFO, OUT_OF_SPEC_INFO]
 
 TEXTFIELD_WIDTH = max(len(TEMPERATURES), len(BOARDS))
 
-
 class TestAnalysisUI(QWidget):
 
     def __init__(self):
@@ -68,8 +67,14 @@ class TestAnalysisUI(QWidget):
         ## analysis conditions
         self.conditions_label = QLabel('Conditions:')
         grid.addWidget(self.conditions_label, 5, 0, 1, 1)
-        self.multimode_box = QCheckBox('Multimode?')
+        self.multimode_box = QCheckBox('Multimode')
         grid.addWidget(self.multimode_box, 5, 1, 1, 1)
+        self.limit_analysis_box = QCheckBox('Limit Analysis')
+        grid.addWidget(self.limit_analysis_box, 5, 2, 1, 1)
+        self.raw_merge_box = QCheckBox('Raw Merge')
+        grid.addWidget(self.raw_merge_box, 5, 3, 1, 1)        
+        self.hists_by_tp_box = QCheckBox('Hists by Test Pos')
+        grid.addWidget(self.hists_by_tp_box, 5, 4, 1, 1)  
 
         ## test name
         grid.addWidget(QLabel('Test Name:'), 6, 0)
@@ -192,21 +197,27 @@ class AnalyzeButton(QPushButton):
         self.clicked[bool].connect(self.analyze)
 
     def analyze(self):
+        test, limits = None, None ## clear test objects (from prevoius usage)
         test_name = self.ui.test_name.text()
         temps = [t.temp for t in self.ui.temp_buttons if t.pressed]
         boards = [b.name for b in self.ui.board_buttons if b.pressed]
         datapath = self.ui.data_folder
         limits = self.load_limits(boards, temps)
+        run_limit_analysis = self.ui.limit_analysis_box.isChecked()
         multimode = self.ui.multimode_box.isChecked()
+        raw_merge = self.ui.raw_merge_box.isChecked()
+        hists_by_tp = self.ui.hists_by_tp_box.isChecked()
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)
-            test = TestStation(test_name, boards, datapath, limits, multimode, *temps)
+            test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, multimode, *temps)
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
-                    self.run_analysis(analysis_type.name, test, limits)
+                    self.run_analysis(analysis_type.name, test, limits, hists_by_tp)
+            if raw_merge:
+                test.mdf.to_csv(r'!output/'+'raw_data_all_boards.txt', header=test.mdf.columns,
+                                index=True, sep='\t', mode='w')
             print('\n\n\n ==> Analysis complete.')
-            plt.show('hold') ## show all plots (if there were any)
         else:
             print('\nYou must select a data folder, temperatures, and test boards')
 
@@ -219,11 +230,11 @@ class AnalyzeButton(QPushButton):
         if limits:
             limits.print_info()
 
-    def run_analysis(self, analysis_name, test, limits):
+    def run_analysis(self, analysis_name, test, limits, hists_by_tp):
         if analysis_name == 'Plot':
             plot_modes(test)
         elif analysis_name == 'Histograms':
-            make_mode_histograms(test, system_by_system=False, limits=limits)
+            make_mode_histograms(test, system_by_system=hists_by_tp, limits=limits)
         elif analysis_name == 'Tables':
             fill_stats(test, limits, write_to_excel=True)
         elif analysis_name == 'Out of Spec':

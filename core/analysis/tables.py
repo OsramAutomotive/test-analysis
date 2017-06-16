@@ -32,23 +32,22 @@ def write_mode_temp_header(row_start, wb, ws, width, limits, color_dict, mode, t
                                     'font_color': 'black', 'bg_color': bg_color})
     ws.merge_range(row, col, row, width, mode_string, h_format)
 
-def write_limits_header(row_start, wb, ws, width, limits, mode, temp, voltage):
+def write_limits_header(row_start, wb, ws, width, test, mode, temp, voltage, limits):
     ''' Write limits header into the row after row_start '''
     row, col = row_start, 0
-    if limits:
-        LL, UL = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
-    else:
-        LL, UL = None, None
-    if False:  ## temporary until outage is implemented
-        limits_string = 'LL: ' + str(LL) + '  UL: ' + str(UL)
-    else:
-        limits_string = ' '.join(['Limits:  ', 'Vin ', str(voltage)+u'\N{PLUS-MINUS SIGN}'+str(VOLTAGE_TOLERANCE)+'V', 
-                                               'Iin '+str(LL)+' to '+ str(UL) + ' A'])
+    limits_string = ' '.join(['Limits:  ', 'Vin ', str(voltage)+u'\N{PLUS-MINUS SIGN}'+str(VOLTAGE_TOLERANCE)+'V'])
+    if limits and test.run_limit_analysis:
+        mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
+        if mode.has_led_binning:  ## led binning
+            for lim_label, lim_value in sorted(mode_limits_dict.items()):
+                limits_string += '  ' + lim_label + ': ' + str(lim_value) 
+        else: ## no led binning
+            limits_string += '  Iin '+str(mode_limits_dict['LL'])+' to '+ str(mode_limits_dict['UL']) + ' A'
     lim_format = wb.add_format({'align':'center', 'border': True, 'bold': True,
                                       'font_color': 'black', 'bg_color': '#D3D3D3'})
     ws.merge_range(row, col, row, width, limits_string, lim_format)
 
-def write_voltage_and_current_data(row_start, wb, ws, mode, temp, voltage, limits):
+def write_voltage_and_current_data(row_start, wb, ws, test, mode, temp, voltage, limits):
     ''' Starting from 3rd row, write in voltage/current data '''
     row = row_start
     decimal_places = 3
@@ -60,7 +59,7 @@ def write_voltage_and_current_data(row_start, wb, ws, mode, temp, voltage, limit
     maximums = ['Max:'] + [mode.vsense_stats[temp][voltage][vsense][1] for vsense in mode.voltage_senses] + \
                           [mode.current_stats[temp][voltage][system][1] for system in mode.systems]
     check_data = ['Check Data:'] + ['Out of Spec' if mode.vsense_stats[temp][voltage][vsense][-1] else 'G' for vsense in mode.voltage_senses]
-    if limits:
+    if limits and test.run_limit_analysis:
         check_data += ['Out of Spec' if mode.current_stats[temp][voltage][system][-1] else 'G' for system in mode.systems]
     else:
         check_data += ['NA' for system in mode.systems]
@@ -82,10 +81,10 @@ def write_single_table(row_start, wb, ws, test, mode, temp, limits):
     color_dict = TABLE_COLOR_DICT
     for voltage in mode.voltages:
         write_mode_temp_header(row_start, wb, ws, width, limits, color_dict, mode, temp, voltage)
-        write_limits_header(row_start+1, wb, ws, width, limits, mode, temp, voltage)
-        row_start = write_voltage_and_current_data(row_start+2, wb, ws, mode, temp, voltage, limits)
+        write_limits_header(row_start+1, wb, ws, width, test, mode, temp, voltage, limits)
+        row_start = write_voltage_and_current_data(row_start+2, wb, ws, test, mode, temp, voltage, limits)
         if test.outage:
-            pass
+            pass  ## TO DO: implement outage analysis
     return row_start+2
 
 def fill_stats(test, limits=None, write_to_excel=True):

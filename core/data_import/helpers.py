@@ -47,12 +47,56 @@ def copy_and_remove_b6_from(a_list):
 
 def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
     ''' Attempt to pull mode/temp/voltage condition current limits from limits file '''
+    if mode.has_led_binning:
+        mode_limits_dict = get_all_mode_limits_with_binning(limits, mode, temp, voltage)
+    else:
+        mode_limits_dict = get_limits_without_binning(limits, mode, temp, voltage)
+    return mode_limits_dict
+
+def get_limits_without_binning(limits, mode, temp, voltage):
     try:
-        lower_limit = limits.lim[temp][mode.mode_tag][voltage][0]
-        upper_limit = limits.lim[temp][mode.mode_tag][voltage][1]
-        return lower_limit, upper_limit
+        lower_limit = limits.lim[temp][mode.name][voltage][0]
+        upper_limit = limits.lim[temp][mode.name][voltage][1]
+        return {'LL': lower_limit, 'UL': upper_limit}
     except:
         raise
+
+def get_all_mode_limits_with_binning(limits, mode, temp, voltage):
+    mode_bin_limits_dict = {}
+    for led_bin in mode.led_bins:
+        module_header = led_bin + ' ' + mode.name
+        try:
+            mode_bin_limits_dict[led_bin+' LL'] = limits.lim[temp][module_header][voltage][0]
+            mode_bin_limits_dict[led_bin+' UL'] = limits.lim[temp][module_header][voltage][1]
+        except:
+            raise
+    return mode_bin_limits_dict
+
+def get_limit_for_single_led_bin(led_bin, limits, mode, temp, voltage):
+    mode_bin_limits_dict = {}
+    module_header = led_bin + ' ' + mode.name
+    try:
+        mode_bin_limits_dict[led_bin+' LL'] = limits.lim[temp][module_header][voltage][0]
+        mode_bin_limits_dict[led_bin+' UL'] = limits.lim[temp][module_header][voltage][1]
+    except:
+        raise
+    return mode_bin_limits_dict
+
+def get_limits_for_system_with_binning(limits, mode, temp, voltage, system):
+    led_bin = get_system_bin(mode, system)
+    module_header = led_bin + ' ' + mode.name
+    try:
+        lower_limit = limits.lim[temp][module_header][voltage][0]
+        upper_limit = limits.lim[temp][module_header][voltage][1]
+        return {'LL': lower_limit, 'UL': upper_limit}
+    except:
+        raise
+
+def get_system_bin(mode, system):
+    possible_bins = system.split(' ')
+    for led_bin in possible_bins:
+        if led_bin in mode.led_bins:
+            return led_bin
 
 def filter_temp_and_voltage(df, temp, voltage):
     ''' Filter input dataframe (df) for temp voltage condition'''

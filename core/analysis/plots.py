@@ -67,7 +67,8 @@ def format_subplot_legends(test, axes):
             except AttributeError as e:
                 print(e)
 
-def set_titles_and_labels(test, axes):
+def set_titles_and_labels(test, fig, axes):
+    fig.canvas.set_window_title('temporal plot')
     for i in range(len(test.modes)):
         axes[i+2].set_title(test.modes[i].name)
         axes[i+2].set_ylabel("Current (A)")
@@ -81,7 +82,7 @@ def set_figure_size(fig, save=False):
     print('...complete.\n')
     plt.tight_layout()
     fig.subplots_adjust(top=0.90, bottom=0.11, left=0.06, right=0.90, hspace=0.33)
-    #plt.show('hold')
+    plt.show('hold')
 
 def set_up_date_time(test, ax):
     ax.plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.vsetpoint], 'k--', 
@@ -107,7 +108,7 @@ def plot_modes(test, limits=None):
     plot_mode_currents(test, axes)  ## subplots 3 to XX (up to 6): mode currents
     
     format_subplot_legends(test, axes) ## format or remove legends
-    set_titles_and_labels(test, axes) ## give axis labels and titles to subplots
+    set_titles_and_labels(test, fig, axes) ## give axis labels and titles to subplots
     set_figure_size(fig) ## set fig size
 
 
