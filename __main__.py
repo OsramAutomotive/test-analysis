@@ -67,12 +67,14 @@ class TestAnalysisUI(QWidget):
         ## analysis conditions
         self.conditions_label = QLabel('Conditions:')
         grid.addWidget(self.conditions_label, 5, 0, 1, 1)
-        self.multimode_box = QCheckBox('Multimode?')
+        self.multimode_box = QCheckBox('Multimode')
         grid.addWidget(self.multimode_box, 5, 1, 1, 1)
-        self.limit_analysis_box = QCheckBox('Limit Analysis?')
+        self.limit_analysis_box = QCheckBox('Limit Analysis')
         grid.addWidget(self.limit_analysis_box, 5, 2, 1, 1)
-        self.raw_merge_box = QCheckBox('Raw Merge?')
+        self.raw_merge_box = QCheckBox('Raw Merge')
         grid.addWidget(self.raw_merge_box, 5, 3, 1, 1)        
+        self.hist_by_tp_box = QCheckBox('Hists by Test Pos')
+        grid.addWidget(self.hist_by_tp_box, 5, 4, 1, 1)   
 
         ## test name
         grid.addWidget(QLabel('Test Name:'), 6, 0)
@@ -204,13 +206,14 @@ class AnalyzeButton(QPushButton):
         run_limit_analysis = self.ui.limit_analysis_box.isChecked()
         multimode = self.ui.multimode_box.isChecked()
         raw_merge = self.ui.raw_merge_box.isChecked()
+        hists_by_tp = self.ui.hist_by_tp_box.isChecked()
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits)
             test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, multimode, *temps)
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
-                    self.run_analysis(analysis_type.name, test, limits)
+                    self.run_analysis(analysis_type.name, test, limits, hists_by_tp)
             if raw_merge:
                 test.mdf.to_csv(r'!output/'+'raw_data_all_boards.txt', header=test.mdf.columns,
                                 index=True, sep='\t', mode='w')
@@ -227,11 +230,11 @@ class AnalyzeButton(QPushButton):
         if limits:
             limits.print_info()
 
-    def run_analysis(self, analysis_name, test, limits):
+    def run_analysis(self, analysis_name, test, limits, hists_by_tp):
         if analysis_name == 'Plot':
             plot_modes(test)
         elif analysis_name == 'Histograms':
-            make_mode_histograms(test, system_by_system=False, limits=limits)
+            make_mode_histograms(test, system_by_system=hists_by_tp, limits=limits)
         elif analysis_name == 'Tables':
             fill_stats(test, limits, write_to_excel=True)
         elif analysis_name == 'Out of Spec':
