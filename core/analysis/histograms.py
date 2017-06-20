@@ -19,7 +19,7 @@ def make_mode_histograms(test, system_by_system=True, limits=None):
                 if temp in mode.hist_dict:
                     histogram_of_mode(test, mode, temp, limits)
     print('complete.')
-    # plt.show('hold') ## wait until all plots are built to show them
+    plt.show()
 
 def histogram_of_each_system(test, mode, temp, limits=None):
     ### TO DO ---> implement LED binning for system-by-system
