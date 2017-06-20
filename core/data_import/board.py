@@ -129,7 +129,6 @@ class Board(object):
 
     def __get_board_name(self):
         ''' Pull name of board (e.g. 'DRL') from limits file (if provided) '''
-        #if self.test.limits:
         try:
             self.name = self.test.limits.board_module_pairs[self.id]
         except:
@@ -139,3 +138,39 @@ class Board(object):
         ''' Creates a sample object for each system on the board '''
         for system in self.systems:
             self.samples.append(Sample(system, self))
+
+    def get_system_by_system_outage_stats(self, limits=None):
+        if self.outage:
+            df_on = filter_board_on_or_off(self.df, 1)
+            df_off = filter_board_on_or_off(self.df, 0)
+            self.outage_stats = {'ON':{}, 'OFF': {}}
+            for temp in self.test.temps:
+                self.get_outage_off_stats(df_off, temp, limits)
+                self.get_outage_on_stats(df_on, temp, limits)
+
+    def get_outage_off_stats(self, df_off, temp, limits=None):
+        ''' OFF analysis (not voltage based) '''
+        out_of_spec_bool = 'NA'
+        self.outage_stats['OFF'][temp] = {}
+        for sys in self.systems:
+            outage_min, outage_max, mean = get_outage_off_stats_single_sys(df_off, self, sys, temp)
+            if limits:
+                lower_limit = self.test.limits.lim[self.name]['OFF'][0]
+                upper_limit = self.test.limits.lim[self.name]['OFF'][1]
+                out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
+            self.outage_stats['OFF'][temp][sys] = [outage_min, outage_max, mean, out_of_spec_bool]
+
+    def get_outage_on_stats(self, df_on, temp, limits=None):
+        ''' ON analysis (voltage based) '''
+        self.outage_stats['ON'][temp] = {}
+        for voltage in self.test.voltages:
+            self.outage_stats['ON'][temp][voltage] = {}
+            out_of_spec_bool = 'NA'
+            for sys in self.systems:
+                outage_min, outage_max, mean = get_outage_on_stats_at_temp_voltage(df_on, self, sys, temp, voltage)
+                if limits:
+                    lower_limit = self.test.limits.lim[self.name]['ON'][voltage][0]
+                    upper_limit = self.test.limits.lim[self.name]['ON'][voltage][1]
+                    out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
+                self.outage_stats['ON'][temp][voltage][sys] = [outage_min, outage_max, mean, out_of_spec_bool]
+

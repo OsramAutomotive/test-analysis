@@ -45,6 +45,8 @@ def copy_and_remove_b6_from(a_list):
         pass  # do nothing
     return b_list
 
+
+### Limits helpers
 def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
     ''' Attempt to pull mode/temp/voltage condition current limits from limits file '''
     if mode.has_led_binning:
@@ -98,11 +100,24 @@ def get_system_bin(mode, system):
         if led_bin in mode.led_bins:
             return led_bin
 
+
+### Dataframe filter functions
 def filter_temp_and_voltage(df, temp, voltage):
     ''' Filter input dataframe (df) for temp voltage condition'''
     dframe = df.loc[(df[VSETPOINT] == voltage) &
                     (df[AMB_TEMP] > (temp-TEMPERATURE_TOLERANCE)) &
                     (df[AMB_TEMP] < (temp+TEMPERATURE_TOLERANCE))]
+    return dframe
+
+def filter_temperature(df, temp):
+    ''' Filter input dataframe (df) for temperature condition'''
+    dframe = df.loc[(df[AMB_TEMP] > (temp-TEMPERATURE_TOLERANCE)) &
+                    (df[AMB_TEMP] < (temp+TEMPERATURE_TOLERANCE))]
+    return dframe
+
+def filter_board_on_or_off(df, board_on_off_code):
+    ''' board_on_off_code: 0 is off, 1 is on, 2 is flashing '''
+    dframe = df.loc[(df[ON_OFF] == board_on_off_code)]
     return dframe
 
 
@@ -130,13 +145,35 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
         return 'NA', 'NA', 'NA'
 
 
+### Outage analysis helpers
+def get_outage_on_stats_at_temp_voltage(df, board, system, temp, voltage):
+    ''' Return basic stats for outage at temp/voltage condition'''
+    decimal_places = 3
+    dframe = filter_temp_and_voltage(df, temp, voltage)
+    series = dframe[system]
+    if not series.empty:
+        return round(series.min(), decimal_places), round(series.max(), decimal_places), \
+               round(series.mean(), decimal_places)
+    else:
+        return 'NA', 'NA', 'NA'
+
+def get_outage_off_stats_single_sys(df, board, system, temp):
+    decimal_places = 3
+    dframe = filter_temperature(df, temp)
+    series = dframe[system]
+    if not series.empty:
+        return round(series.min(), decimal_places), round(series.max(), decimal_places), \
+               round(series.mean(), decimal_places)
+    else:
+        return 'NA', 'NA', 'NA'
+
 ### Out of spec helpers
 def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
     ''' Return True/False if system min/max is out of spec '''
     if isinstance(sys_min, float):
         return (sys_min < lower_limit) or (sys_max > upper_limit)
     else:
-        return sys_min  ## return 'NA'
+        return sys_min
 
 def write_out_of_spec_to_file(df, mode, temp, voltage):
     ''' Append out of spec mode/temp/voltage condition to out of spec file '''

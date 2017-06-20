@@ -12,13 +12,14 @@ SYSTEM_COLOR_LIST = ['brown', '#9932CC', 'maroon', 'red', 'olive', 'yellow',
                      'magenta', '#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', 
                      '#ffff33', '#a65628', '#f781bf', 'burlywood', 'chartreuse', 'lime']
 SYSTEM_MARKER_LIST = ['H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D', 
-					  'H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D']
+            'H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D']
 
 ### TABLE COLORS ###
 TABLE_COLOR_DICT = { 'LB':'#FF5C5C', 'HB':'#FCFBE3', 'LBHB':'#7647A2', 'DRL':'#ADD8E6', 'PARK':'#FFA500', 
-               		 'TURN':'#DA70D6', 'DRLTURN':'#40E0D0', 'PARKTURN':'#FF8C00',
-                      'Stop ECE': '#c39be1', 'Reverse':'#d9d9d9', 'Stop SAE':'#9751cb',
-                      'CHMSL':'#de0000', 'Turn ECE':'#ff3f3f', 'Fog':'#808080', 'Turn SAE':'#702fa1' }
+                     'TURN':'#DA70D6', 'DRLTURN':'#40E0D0', 'PARKTURN':'#FF8C00',
+                     'Stop ECE': '#c39be1', 'Reverse':'#d9d9d9', 'Stop SAE':'#9751cb',
+                     'CHMSL':'#de0000', 'Turn ECE':'#ff3f3f', 'Fog':'#808080', 'Turn SAE':'#702fa1',
+                     'OUTAGE':'yellow', 'Diagnostic':'yellow', 'DIAGNOSTIC': 'yellow'}
 
 ### DATAFRAME COLUMN CONSTANTS ###
 AMB_TEMP = 'Amb Temp TC1'

@@ -28,6 +28,7 @@ class Limits(object):
         self.mode_row = ''   # row in which mode headers are located
         self.mode_cols = {}  # column for each board_mode key
         self.outage_link_board = ''
+        self.outage_present = False
         self.voltage_column = 2
         self.voltage_header_row = 13
         self.voltages = []
@@ -40,7 +41,8 @@ class Limits(object):
         self.__get_modes_and_mode_cols()
         self.__get_voltage_header()
         self.__get_voltages()
-        self.fill_limits()
+        self.fill_current_limits()
+        self.fill_outage_limits()
 
     def __get_boards(self):
         self.get_b1_row()
@@ -50,6 +52,7 @@ class Limits(object):
             link = self.ws.cell(row = self.b1_row+i, column = 3).value
             if link == 'Y':
                 self.outage_link_board = board
+                self.outage_present = True
             led_bins = self.ws.cell(row = self.b1_row+i, column = 4).value
             if led_bins:
                 self.led_binning_dict[board] = led_bins.split(' ')
@@ -120,7 +123,7 @@ class Limits(object):
                 if cell.value and cell.value.lower() == 'b1':
                     self.b1_row = cell.row
 
-    def fill_limits(self):
+    def fill_current_limits(self):
         if self.led_binning_dict:
             self.fill_limits_binning()
         else:
@@ -135,11 +138,11 @@ class Limits(object):
                 self.lim[temp][board_mode] = {}
                 for i in range(len(self.voltages)):
                     voltage = float(self.ws.cell(row=temp_row+i, column=self.voltage_column).value)
-                    min = self.ws.cell(row=temp_row+i, column=column).value
-                    max = self.ws.cell(row=temp_row+i, column=column+1).value
-                    min = round(float(min), 3)
-                    max = round(float(max), 3)
-                    self.lim[temp][board_mode][voltage] = (min, max)
+                    lim_min = self.ws.cell(row=temp_row+i, column=column).value
+                    lim_max = self.ws.cell(row=temp_row+i, column=column+1).value
+                    lim_min = round(float(lim_min), 3)
+                    lim_max = round(float(lim_max), 3)
+                    self.lim[temp][board_mode][voltage] = (lim_min, lim_max)
 
     def fill_limits_binning(self):
         ''' Build limits dictionary from limits file '''
@@ -150,11 +153,28 @@ class Limits(object):
                 self.lim[temp][module_mode] = {}
                 for i in range(len(self.voltages)):
                     voltage = float(self.ws.cell(row=temp_row+i, column=self.voltage_column).value)
-                    min = self.ws.cell(row=temp_row+i, column=column).value
-                    max = self.ws.cell(row=temp_row+i, column=column+1).value
-                    min = round(float(min), 3)
-                    max = round(float(max), 3)
-                    self.lim[temp][module_mode][voltage] = (min, max)
+                    lim_min = self.ws.cell(row=temp_row+i, column=column).value
+                    lim_max = self.ws.cell(row=temp_row+i, column=column+1).value
+                    lim_min = round(float(lim_min), 3)
+                    lim_max = round(float(lim_max), 3)
+                    self.lim[temp][module_mode][voltage] = (lim_min, lim_max)
+
+    def fill_outage_limits(self):
+        if self.outage_present:
+            outage = self.board_module_pairs['B6']
+            self.lim[outage] = {}
+            ## OFF limits
+            off_min = self.ws.cell(row=5, column=7).value
+            off_max = self.ws.cell(row=5, column=8).value
+            self.lim[outage]['OFF'] = (off_min, off_max)
+            ## ON limits
+            i = 0
+            self.lim[outage]['ON'] = {}
+            for voltage in self.voltages:
+                on_min = self.ws.cell(row=8+i, column=7).value
+                on_max = self.ws.cell(row=8+i, column=8).value
+                self.lim[outage]['ON'][voltage] = (on_min, on_max)
+                i+=1
 
     def print_info(self):
         print('Board/Module Pairs:', self.board_module_pairs)

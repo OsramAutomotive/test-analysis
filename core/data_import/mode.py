@@ -123,7 +123,7 @@ class Mode(object):
 
             ## current analysis
             for system in self.systems:
-                out_of_spec = None
+                out_of_spec_bool = 'NA'
                 sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
                 if limits:
                     if self.has_led_binning:
@@ -135,7 +135,7 @@ class Mode(object):
                 self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec_bool]
 
     def get_out_of_spec_data(self):
-        ''' Method for retrieving out_of_spec data from test in this mode '''
+        ''' Method for retrieving out_of_spec raw data from test in this mode '''
         for temp in self.temps:
             for voltage in self.voltages:
                 df, out_of_spec_df = pd.DataFrame(), pd.DataFrame()
