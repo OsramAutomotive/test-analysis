@@ -152,15 +152,14 @@ class Outage(Board):
     def __init__(self, test, board_number):
         Board.__init__(self, test, board_number)
         self.outage = True
+        self.outage_stats = {'ON':{}, 'OFF': {}}
 
-    def get_system_by_system_outage_stats(self, limits=None):
+    def get_system_by_system_outage_stats(self, temp, limits=None):
         if self.outage:
             df_on = filter_board_on_or_off(self.df, 1)
             df_off = filter_board_on_or_off(self.df, 0)
-            self.outage_stats = {'ON':{}, 'OFF': {}}
-            for temp in self.test.temps:
-                self.get_outage_off_stats(df_off, temp, limits)
-                self.get_outage_on_stats(df_on, temp, limits)
+            self.get_outage_off_stats(df_off, temp, limits)
+            self.get_outage_on_stats(df_on, temp, limits)
 
     def get_outage_off_stats(self, df_off, temp, limits=None):
         ''' OFF analysis (not voltage based) '''

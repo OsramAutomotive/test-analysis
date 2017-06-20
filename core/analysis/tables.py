@@ -202,7 +202,7 @@ def fill_stats(test, limits=None, write_to_excel=True):
             if write_to_excel:
                 row_start = write_single_table(row_start, wb, ws, test, mode, temp, limits)
         if test.outage and write_to_excel:
-            test.b6.get_system_by_system_outage_stats(limits)
+            test.b6.get_system_by_system_outage_stats(temp, limits)
             row_start = write_outage_on_table(row_start, wb, ws, test, test.b6, temp, limits)
             row_start = write_outage_off_table(row_start, wb, ws, test, test.b6, temp, limits)
         highlight_workbook(wb, ws)
