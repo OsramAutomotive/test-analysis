@@ -19,7 +19,7 @@ TABLE_COLOR_DICT = { 'LB':'#FF5C5C', 'HB':'#FCFBE3', 'LBHB':'#7647A2', 'DRL':'#A
                      'TURN':'#DA70D6', 'DRLTURN':'#40E0D0', 'PARKTURN':'#FF8C00',
                      'Stop ECE': '#c39be1', 'Reverse':'#d9d9d9', 'Stop SAE':'#9751cb',
                      'CHMSL':'#de0000', 'Turn ECE':'#ff3f3f', 'Fog':'#808080', 'Turn SAE':'#702fa1',
-                     'OUTAGE':'yellow', 'Diagnostic':'yellow', 'DIAGNOSTIC': 'yellow'}
+                     'Outage':'#ffff99', 'OUTAGE':'#ffff99', 'Diagnostic':'#ffff99', 'DIAGNOSTIC': '#ffff99'}
 
 ### DATAFRAME COLUMN CONSTANTS ###
 AMB_TEMP = 'Amb Temp TC1'
