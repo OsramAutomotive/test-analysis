@@ -181,5 +181,6 @@ class Limits(object):
         print('\nMode Columns:', self.mode_cols, '\n')
         pp = pprint.PrettyPrinter()
         pp.pprint(self.lim)
+        print('\n\n')
 
 

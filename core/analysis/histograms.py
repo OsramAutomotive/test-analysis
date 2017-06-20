@@ -61,7 +61,7 @@ def histogram_of_each_system(test, mode, temp, limits=None):
             else:
                 ax.axvline(avg-3*sigma, color='b', linestyle='dashed', linewidth=2)
                 ax.axvline(avg+3*sigma, color='b', linestyle='dashed', linewidth=2)
-            ax.set_title(test.systems[i-1])
+            ax.set_title(test.systems[i-1]+'\n'+'(Avg: '+str(round(avg,3))+'A)')
             ax.set_xlabel('Current (A)')
             ax.set_ylabel('Frequency')
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
@@ -190,4 +190,4 @@ def determine_bar_color(temp):
     elif temp > 23:
         return 'orange'
     else:
-        return 'blue'
+        return '#7F7FFF' ## pale blue
