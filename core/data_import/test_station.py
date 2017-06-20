@@ -126,7 +126,8 @@ class TestStation(object):
             if self.mdf.empty:  ## if mdf is empty, assign mdf to first board dataframe 
                 self.mdf = board.df.copy() 
             else:  ## append board df with board id suffix for matching columns
-                self.mdf = self.mdf.join(board.df[self.on_off+self.voltage_senses+self.systems], rsuffix=' '+board.id)
+                self.mdf = self.mdf.join(board.df[self.on_off+self.voltage_senses+self.systems], 
+                                         rsuffix=' '+board.id)
         rename_columns(self.mdf, self.boards[0], self.on_off+self.voltage_senses+self.systems) ## rename columns of first df appended
 
     def __scan_for_vsetpoints(self):

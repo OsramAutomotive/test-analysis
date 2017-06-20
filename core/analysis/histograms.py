@@ -71,13 +71,12 @@ def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin):
 
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
-    main_title = ' '.join([test.name, mode.name, str(temp), ' LED bin', led_bin])
+    main_title = ' '.join([test.name, mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C', ' LED bin', led_bin])
     fig.canvas.set_window_title(main_title)
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
 
     i = 1
     for voltage in mode.voltages: # make subplot for each voltage
-        subtitle = str(voltage)+'V'
         dframe = mode.hist_dict[temp][voltage]
         current_data = mode.strip_index_and_melt_to_series_for_binning(dframe, led_bin) ## put all system currents in single series
         avg = current_data.mean()
@@ -85,6 +84,7 @@ def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin):
         minus_ten = round(avg*0.9, 3)
         plus_ten = round(avg*1.1, 3)
 
+        subtitle = str(voltage)+'V'+'  Avg: '+str(round(avg, 3))
         ax = fig.add_subplot(nrows, ncols, i)
         ax.hist(current_data.dropna(), color='dimgray')  ## drop NaN values
         ax.axvline(avg, color='k', linestyle='dotted', linewidth=2)
@@ -118,13 +118,12 @@ def histogram_of_mode_no_binning(test, mode, temp, limits=None):
 
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
-    main_title = ' '.join([test.name, mode.name, str(temp)])
+    main_title = ' '.join([test.name, mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C'])
     fig.canvas.set_window_title(main_title)
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
 
     i = 1
     for voltage in mode.voltages: # make subplot for each voltage
-        subtitle = str(voltage)+'V'
         dframe = mode.hist_dict[temp][voltage]
         current_data = mode.strip_index_and_melt_to_series(dframe) ## put all system currents in single series
         avg = current_data.mean()
@@ -132,6 +131,7 @@ def histogram_of_mode_no_binning(test, mode, temp, limits=None):
         minus_ten = round(avg*0.9, 3)
         plus_ten = round(avg*1.1, 3)
 
+        subtitle = str(voltage)+'V'+'  Avg: '+str(round(avg, 3))
         ax = fig.add_subplot(nrows, ncols, i)
         ax.hist(current_data.dropna(), color='dimgray')  ## drop NaN values
         ax.axvline(avg, color='k', linestyle='dotted', linewidth=2)
