@@ -45,7 +45,6 @@ class Board(object):
         
         self.__set_bnum(board_number)
         self.__get_board_name()
-        self.__set_outage()
         self.__build_dataframe()
         self.__delete_empty_columns()
         self.__scan_for_systems()
@@ -65,10 +64,6 @@ class Board(object):
                 self.id = board_number.upper()
             else:
                 self.id = 'B' + board_number
-
-    def __set_outage(self):
-        ''' True/False if board is Outage '''
-        self.outage = '6' in self.id
 
     def __build_dataframe(self):
         ''' Builds all files in folder for board into a single dataframe 
@@ -139,6 +134,25 @@ class Board(object):
         for system in self.systems:
             self.samples.append(Sample(system, self))
 
+
+class Outage(Board):
+    """
+    Holds information and test data collected on an outage test station board.
+
+    Example highlights::
+        test => belongs to a test station object that describes the test
+        folder => directory folder of data that was analyzed
+        id => e.g. - 'B3'
+        name => e.g. - 'DRL'
+        board => board object (includes board id)
+        system => list of used test positions and system numbers (used for df query)
+        df => dataframe of just this board
+    """
+
+    def __init__(self, test, board_number):
+        Board.__init__(self, test, board_number)
+        self.outage = True
+
     def get_system_by_system_outage_stats(self, limits=None):
         if self.outage:
             df_on = filter_board_on_or_off(self.df, 1)
@@ -150,13 +164,13 @@ class Board(object):
 
     def get_outage_off_stats(self, df_off, temp, limits=None):
         ''' OFF analysis (not voltage based) '''
-        out_of_spec_bool = 'NA'
         self.outage_stats['OFF'][temp] = {}
         for sys in self.systems:
+            out_of_spec_bool = 'NA'
             outage_min, outage_max, mean = get_outage_off_stats_single_sys(df_off, self, sys, temp)
             if limits:
-                lower_limit = self.test.limits.lim[self.name]['OFF'][0]
-                upper_limit = self.test.limits.lim[self.name]['OFF'][1]
+                lim_dict = get_limits_for_outage_off(limits, self)
+                lower_limit, upper_limit = lim_dict['LL'], lim_dict['UL']
                 out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
             self.outage_stats['OFF'][temp][sys] = [outage_min, outage_max, mean, out_of_spec_bool]
 
@@ -165,12 +179,12 @@ class Board(object):
         self.outage_stats['ON'][temp] = {}
         for voltage in self.test.voltages:
             self.outage_stats['ON'][temp][voltage] = {}
-            out_of_spec_bool = 'NA'
             for sys in self.systems:
+                out_of_spec_bool = 'NA'
                 outage_min, outage_max, mean = get_outage_on_stats_at_temp_voltage(df_on, self, sys, temp, voltage)
                 if limits:
-                    lower_limit = self.test.limits.lim[self.name]['ON'][voltage][0]
-                    upper_limit = self.test.limits.lim[self.name]['ON'][voltage][1]
+                    lim_dict = get_limits_for_outage_on(limits, self, voltage)
+                    lower_limit, upper_limit = lim_dict['LL'], lim_dict['UL']
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
                 self.outage_stats['ON'][temp][voltage][sys] = [outage_min, outage_max, mean, out_of_spec_bool]
 

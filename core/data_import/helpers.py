@@ -100,6 +100,21 @@ def get_system_bin(mode, system):
         if led_bin in mode.led_bins:
             return led_bin
 
+def get_limits_for_outage_off(limits, board):
+    try:
+        lower_limit = limits.lim[board.name]['OFF'][0]
+        upper_limit = limits.lim[board.name]['OFF'][1]
+        return {'LL': lower_limit, 'UL': upper_limit}
+    except:
+        raise
+
+def get_limits_for_outage_on(limits, board, voltage):
+    try:
+        lower_limit = limits.lim[board.name]['ON'][voltage][0]
+        upper_limit = limits.lim[board.name]['ON'][voltage][1]
+        return {'LL': lower_limit, 'UL': upper_limit}
+    except:
+        raise
 
 ### Dataframe filter functions
 def filter_temp_and_voltage(df, temp, voltage):

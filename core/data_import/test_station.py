@@ -92,7 +92,7 @@ class TestStation(object):
             elif '5' in board:
                 self.b5 = Board(self, board)
             elif '6' in board:
-                self.b6 = Board(self, board)
+                self.b6 = Outage(self, board)
             elif '7' in board:
                 self.b7 = Board(self, board)
 
