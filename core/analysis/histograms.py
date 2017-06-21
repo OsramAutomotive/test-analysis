@@ -37,7 +37,7 @@ def histogram_of_each_system(test, mode, temp, limits=None):
                 title += '  LL: ' + str(LL) + '  UL: ' + str(UL)
         else:
             title = ' '.join([mode.name, str(temp), str(voltage)])
-        fig.canvas.set_window_title(title)
+        fig.canvas.set_window_title(title.replace('\n', ' '))
         fig.suptitle(title, fontsize = 14, fontweight='bold')
 
         nrows, ncols = make_subplot_layout(num_subplots)
@@ -80,7 +80,7 @@ def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin):
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
     main_title = ' '.join([test.name+'\n', mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C', ' LED bin', led_bin])
-    fig.canvas.set_window_title(main_title)
+    fig.canvas.set_window_title(main_title.replace('\n', ' '))
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
 
     i = 1
@@ -125,7 +125,7 @@ def histogram_of_mode_no_binning(test, mode, temp, limits=None):
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
     main_title = ' '.join([test.name+'\n', mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C'])
-    fig.canvas.set_window_title(main_title)
+    fig.canvas.set_window_title(main_title.replace('\n', ' '))
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
 
     i = 1
