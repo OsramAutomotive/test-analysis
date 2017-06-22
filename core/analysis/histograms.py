@@ -19,7 +19,6 @@ def make_mode_histograms(test, system_by_system=True, limits=None):
                 if temp in mode.hist_dict:
                     histogram_of_mode(test, mode, temp, limits)
     print('complete.')
-    plt.show()
 
 def histogram_of_each_system(test, mode, temp, limits=None):
     for voltage in mode.voltages: ## make plot for mode in each voltage
@@ -66,6 +65,7 @@ def histogram_of_each_system(test, mode, temp, limits=None):
             ax.set_ylabel('Frequency')
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
             i += 1
+    plt.tight_layout()
 
 def histogram_of_mode(test, mode, temp, limits=None):
     if mode.has_led_binning:

@@ -109,7 +109,6 @@ def plot_modes(test, limits=None):
     format_subplot_legends(test, axes) ## format or remove legends
     set_titles_and_labels(test, fig, axes) ## give axis labels and titles to subplots
     set_figure_size(fig) ## set fig size
-    plt.show()
 
 
 def plot_boards(test, limits=None, pstyle = 'ggplot'):

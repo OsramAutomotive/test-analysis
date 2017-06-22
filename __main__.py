@@ -29,7 +29,7 @@ DEFAULT_PCTG_TOL = 10
 
 TEXTFIELD_WIDTH = max(len(TEMPERATURES), len(BOARDS))
 SELECT_WIDTH = 120
-CELL_WIDTH = 30
+CELL_WIDTH = 50
 TOL_WIDTH = 5
 
 class TestAnalysisUI(QWidget):
@@ -250,9 +250,12 @@ class AnalyzeButton(QPushButton):
         multimode = self.ui.multimode_box.isChecked()
         raw_merge = self.ui.raw_merge_box.isChecked()
         hists_by_tp = self.ui.hist_by_tp_box.isChecked()
+        temperature_tolerance = float(self.ui.temp_tol_field.text())
+        voltage_tolerance = float(self.ui.voltage_tol_field.text())
+        percent_multiplier = int(self.ui.pctg_tol_field.text())/100.0  ## e.g. - 10% altered to 0.10
 
         if boards and temps and datapath:
-            self.print_test_conditions(test_name, temps, boards, limits)
+            self.print_test_conditions(test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance)
             test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, multimode, *temps)
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
@@ -261,14 +264,20 @@ class AnalyzeButton(QPushButton):
                 test.mdf.to_csv(r'!output/'+'raw_data_all_boards.txt', header=test.mdf.columns,
                                 index=True, sep='\t', mode='w')
             print('\n\n\n ==> Analysis complete.')
+            try:
+                plt.show()
+            except:
+                print('There are no plots to show')
         else:
             print('\nYou must select a data folder, temperatures, and test boards')
 
-    def print_test_conditions(self, test_name, temps, boards, limits):
+    def print_test_conditions(self, test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance):
         print('\nTest Name:', test_name)
         print('Data Folder:', self.ui.data_folder)
         print('Temperatures:', temps)
         print('Boards:', boards, '\n')
+        print('Temp Tolerance:', temperature_tolerance)
+        print('Voltage Tolerance:', voltage_tolerance)
         print('Limits File:', self.ui.limits_file)
         if limits:
             limits.print_info()
@@ -286,7 +295,6 @@ class AnalyzeButton(QPushButton):
                     mode.get_out_of_spec_data()
         else:
             print('Analysis tool not found')
-
 
     def load_limits(self, boards, temps):
         if self.ui.limits_file:
