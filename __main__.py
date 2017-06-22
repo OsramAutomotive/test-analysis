@@ -252,14 +252,15 @@ class AnalyzeButton(QPushButton):
         hists_by_tp = self.ui.hist_by_tp_box.isChecked()
         temperature_tolerance = float(self.ui.temp_tol_field.text())
         voltage_tolerance = float(self.ui.voltage_tol_field.text())
-        percent_multiplier = int(self.ui.pctg_tol_field.text())/100.0  ## e.g. - 10% altered to 0.10
+        percent_from_mean = int(self.ui.pctg_tol_field.text())
 
         if boards and temps and datapath:
             self.print_test_conditions(test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance)
-            test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, multimode, *temps)
+            test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, 
+                               multimode, temperature_tolerance, voltage_tolerance, *temps)
             for analysis_type in self.ui.analysis_buttons:
                 if analysis_type.pressed:
-                    self.run_analysis(analysis_type.name, test, limits, hists_by_tp)
+                    self.run_analysis(analysis_type.name, test, limits, hists_by_tp, percent_from_mean)
             if raw_merge:
                 test.mdf.to_csv(r'!output/'+'raw_data_all_boards.txt', header=test.mdf.columns,
                                 index=True, sep='\t', mode='w')
@@ -282,11 +283,11 @@ class AnalyzeButton(QPushButton):
         if limits:
             limits.print_info()
 
-    def run_analysis(self, analysis_name, test, limits, hists_by_tp):
+    def run_analysis(self, analysis_name, test, limits, hists_by_tp, percent_from_mean):
         if analysis_name == 'Plot':
             plot_modes(test)
         elif analysis_name == 'Histograms':
-            make_mode_histograms(test, system_by_system=hists_by_tp, limits=limits)
+            make_mode_histograms(test, system_by_system=hists_by_tp, limits=limits, percent_from_mean=percent_from_mean)
         elif analysis_name == 'Tables':
             fill_stats(test, limits, write_to_excel=True)
         elif analysis_name == 'Out of Spec':

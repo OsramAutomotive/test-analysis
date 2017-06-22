@@ -26,7 +26,7 @@ def write_mode_temp_header(row_start, wb, ws, width, limits, color_dict, mode, t
         bg_color = color_dict[mode.name]
     else:
         bg_color = 'gray'
-    temperature_string = str(temperature) + u'\N{DEGREE SIGN}' + 'C'
+    temperature_string = str(temperature) + u'\N{DEGREE SIGN}' + 'C' + u'\N{PLUS-MINUS SIGN}'+str(mode.test.temperature_tolerance)
     voltage_string = ''.join([str(voltage), 'V'])
     mode_string = '  '.join(['Mode:', mode.name, temperature_string, voltage_string])
     h_format = wb.add_format({'align':'center', 'border': True, 'bold': True,
@@ -36,7 +36,7 @@ def write_mode_temp_header(row_start, wb, ws, width, limits, color_dict, mode, t
 def write_limits_header(row_start, wb, ws, width, test, mode, temp, voltage, limits):
     ''' Write limits header into the row after row_start '''
     row, col = row_start, 0
-    limits_string = ' '.join(['Limits:  ', 'Vin ', str(voltage)+u'\N{PLUS-MINUS SIGN}'+str(VOLTAGE_TOLERANCE)+'V'])
+    limits_string = ' '.join(['Limits:  ', 'Vin ', str(voltage)+u'\N{PLUS-MINUS SIGN}'+str(test.voltage_tolerance)+'V'])
     if limits and test.run_limit_analysis:
         mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
         if mode.has_led_binning:  ## led binning
@@ -101,7 +101,7 @@ def write_outage_temp_header(row_start, wb, ws, width, limits, color_dict, outag
     else:
         mode_string = 'Mode:  '+outage_board.name+' '+'OFF'
         voltage_string = '(all voltages)'
-    temp_string = str(temp) + u'\N{DEGREE SIGN}' + 'C'
+    temp_string = str(temp) + u'\N{DEGREE SIGN}' + 'C'+ u'\N{PLUS-MINUS SIGN}'+str(outage_board.test.temperature_tolerance)
     title = '  '.join([mode_string, temp_string, voltage_string])
     h_format = wb.add_format({'align':'center', 'border': True, 'bold': True,
                                     'font_color': 'black', 'bg_color': bg_color})

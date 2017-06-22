@@ -117,17 +117,17 @@ def get_limits_for_outage_on(limits, board, voltage):
         raise
 
 ### Dataframe filter functions
-def filter_temp_and_voltage(df, temp, voltage):
+def filter_temp_and_voltage(df, temp, voltage, temperature_tolerance):
     ''' Filter input dataframe (df) for temp voltage condition'''
     dframe = df.loc[(df[VSETPOINT] == voltage) &
-                    (df[AMB_TEMP] > (temp-TEMPERATURE_TOLERANCE)) &
-                    (df[AMB_TEMP] < (temp+TEMPERATURE_TOLERANCE))]
+                    (df[AMB_TEMP] > (temp-temperature_tolerance)) &
+                    (df[AMB_TEMP] < (temp+temperature_tolerance))]
     return dframe
 
-def filter_temperature(df, temp):
+def filter_temperature(df, temp, temperature_tolerance):
     ''' Filter input dataframe (df) for temperature condition'''
-    dframe = df.loc[(df[AMB_TEMP] > (temp-TEMPERATURE_TOLERANCE)) &
-                    (df[AMB_TEMP] < (temp+TEMPERATURE_TOLERANCE))]
+    dframe = df.loc[(df[AMB_TEMP] > (temp-temperature_tolerance)) &
+                    (df[AMB_TEMP] < (temp+temperature_tolerance))]
     return dframe
 
 def filter_board_on_or_off(df, board_on_off_code):
@@ -151,7 +151,7 @@ def get_system_stats_at_mode_temp_voltage(system, mode, temp, voltage):
 def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
     ''' Return basic stats for vsense at mode/temp/voltage condition '''
     decimal_places = 3
-    dframe = filter_temp_and_voltage(mode.df, temp, voltage)
+    dframe = filter_temp_and_voltage(mode.df, temp, voltage, mode.test.temperature_tolerance)
     series = dframe[vsense]
     if not series.empty:
         return round(series.min(), decimal_places), round(series.max(), decimal_places), \
@@ -164,7 +164,7 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
 def get_outage_on_stats_at_temp_voltage(df, board, system, temp, voltage):
     ''' Return basic stats for outage at temp/voltage condition'''
     decimal_places = 3
-    dframe = filter_temp_and_voltage(df, temp, voltage)
+    dframe = filter_temp_and_voltage(df, temp, voltage, board.test.temperature_tolerance)
     series = dframe[system]
     if not series.empty:
         return round(series.min(), decimal_places), round(series.max(), decimal_places), \
@@ -174,7 +174,7 @@ def get_outage_on_stats_at_temp_voltage(df, board, system, temp, voltage):
 
 def get_outage_off_stats_single_sys(df, board, system, temp):
     decimal_places = 3
-    dframe = filter_temperature(df, temp)
+    dframe = filter_temperature(df, temp, board.test.temperature_tolerance)
     series = dframe[system]
     if not series.empty:
         return round(series.min(), decimal_places), round(series.max(), decimal_places), \
