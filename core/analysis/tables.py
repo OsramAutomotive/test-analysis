@@ -26,7 +26,8 @@ def write_mode_temp_header(row_start, wb, ws, width, limits, color_dict, mode, t
         bg_color = color_dict[mode.name]
     else:
         bg_color = 'gray'
-    temperature_string = str(temperature) + u'\N{DEGREE SIGN}' + 'C' + u'\N{PLUS-MINUS SIGN}'+str(mode.test.temperature_tolerance)
+    temperature_string = str(temperature) + u'\N{DEGREE SIGN}' + 'C' + u'\N{PLUS-MINUS SIGN}'+ \
+                         str(mode.test.temperature_tolerance) + u'\N{DEGREE SIGN}' + 'C' 
     voltage_string = ''.join([str(voltage), 'V'])
     mode_string = '  '.join(['Mode:', mode.name, temperature_string, voltage_string])
     h_format = wb.add_format({'align':'center', 'border': True, 'bold': True,
