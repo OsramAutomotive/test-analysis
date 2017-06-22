@@ -86,7 +86,7 @@ class TestAnalysisUI(QWidget):
         self.tolerances_label = QLabel('Tolerances:')
         grid.addWidget(self.tolerances_label, 6, 0, 1, 1)
 
-        self.temp_tol_label = QLabel('Temperature (C)')
+        self.temp_tol_label = QLabel(u'Temperature (\N{DEGREE SIGN}C)')
         self.temp_tol_label.setAlignment(Qt.AlignBottom)
         self.temp_tol_field = QLineEdit('5', self)
         self.temp_tol_field.setFixedWidth(TOL_WIDTH)
