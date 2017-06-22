@@ -10,8 +10,8 @@ from core.limits.limits import *
 
 import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QTimer
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 
 ## constants for user input parameters
@@ -23,8 +23,14 @@ HIST_INFO = 'Plot current histograms at each temp/mode/voltage'
 TABLE_INFO = 'Generate an excel file with basic stats for each DUT at each temp/mode/voltage'
 OUT_OF_SPEC_INFO = 'Generate a file containing only raw data that was out of spec'
 ANALYSIS_TOOLTIP_INFO = [PLOT_INFO, HIST_INFO, TABLE_INFO, OUT_OF_SPEC_INFO]
+DEFAULT_TEMP_TOL = 5
+DEFAULT_VOLTAGE_TOL = 0.5
+DEFAULT_PCTG_TOL = 10
 
 TEXTFIELD_WIDTH = max(len(TEMPERATURES), len(BOARDS))
+SELECT_WIDTH = 120
+CELL_WIDTH = 30
+TOL_WIDTH = 5
 
 class TestAnalysisUI(QWidget):
 
@@ -37,8 +43,8 @@ class TestAnalysisUI(QWidget):
         self.board_buttons = []
         self.analysis_buttons = []
         self.stylesheet = 'styles\style_blue.qss'
-        self.width = 1000
-        self.height = 400
+        self.width = 800
+        self.height = 380
         self.init_ui()
 
     def init_ui(self):
@@ -73,17 +79,51 @@ class TestAnalysisUI(QWidget):
         grid.addWidget(self.limit_analysis_box, 5, 2, 1, 1)
         self.raw_merge_box = QCheckBox('Raw Merge')
         grid.addWidget(self.raw_merge_box, 5, 3, 1, 1)        
-        self.hist_by_tp_box = QCheckBox('Hists by Test Pos')
+        self.hist_by_tp_box = QCheckBox('Hists by TP')
         grid.addWidget(self.hist_by_tp_box, 5, 4, 1, 1)   
 
+        ## tolerances
+        self.tolerances_label = QLabel('Tolerances:')
+        grid.addWidget(self.tolerances_label, 6, 0, 1, 1)
+
+        self.temp_tol_label = QLabel('Temperature (C)')
+        self.temp_tol_label.setAlignment(Qt.AlignBottom)
+        self.temp_tol_field = QLineEdit('5', self)
+        self.temp_tol_field.setFixedWidth(TOL_WIDTH)
+        self.temp_tol_field.setValidator(QDoubleValidator())
+        temp_tol_layout = QVBoxLayout()
+        temp_tol_layout.addWidget(self.temp_tol_label)
+        temp_tol_layout.addWidget(self.temp_tol_field)
+        grid.addLayout(temp_tol_layout, 6, 1, 1, 1)
+
+        self.voltage_tol_label = QLabel('Voltage (V)')
+        self.voltage_tol_label.setAlignment(Qt.AlignBottom)
+        self.voltage_tol_field = QLineEdit('0.5', self)
+        self.voltage_tol_field.setFixedWidth(TOL_WIDTH)
+        self.voltage_tol_field.setValidator(QDoubleValidator())
+        voltage_tol_layout = QVBoxLayout()
+        voltage_tol_layout.addWidget(self.voltage_tol_label)
+        voltage_tol_layout.addWidget(self.voltage_tol_field)
+        grid.addLayout(voltage_tol_layout, 6, 2, 1, 1)
+
+        self.pctg_tol_label = QLabel('Percentage (%)')
+        self.pctg_tol_label.setAlignment(Qt.AlignBottom)
+        self.pctg_tol_field = QLineEdit('10', self)
+        self.pctg_tol_field.setFixedWidth(TOL_WIDTH)
+        self.pctg_tol_field.setValidator(QIntValidator())
+        pctg_tol_layout = QVBoxLayout()
+        pctg_tol_layout.addWidget(self.pctg_tol_label)
+        pctg_tol_layout.addWidget(self.pctg_tol_field)
+        grid.addLayout(pctg_tol_layout, 6, 3, 1, 1)
+
         ## test name
-        grid.addWidget(QLabel('Test Name:'), 6, 0)
+        grid.addWidget(QLabel('Test Name:'), 7, 0)
         self.test_name = QLineEdit('', self)
-        grid.addWidget(self.test_name, 6, 1, 1, TEXTFIELD_WIDTH)
+        grid.addWidget(self.test_name, 7, 1, 1, TEXTFIELD_WIDTH)
 
         ## analyze button
         self.analyze_button = AnalyzeButton('Analyze', self)
-        grid.addWidget(self.analyze_button, 7, 2, 1, 3)
+        grid.addWidget(self.analyze_button, 8, 2, 1, 3)
 
         ## gui window properties
         self.setStyleSheet(open(self.stylesheet, "r").read())
@@ -105,6 +145,7 @@ class TestAnalysisUI(QWidget):
             else:
                 button = button_type(self, text)
             grid.addWidget(button, *position)
+            button.setFixedWidth(CELL_WIDTH)
             button_list.append(button)
             info_index += 1
         return button_list
@@ -116,6 +157,7 @@ class FolderButton(QPushButton):
         super().__init__()
         self.ui = ui
         self.setText(text)
+        self.setFixedWidth(SELECT_WIDTH)
         self.text_box = text_box
         self.name = r''
         self.clicked.connect(self.set_folder)
@@ -133,6 +175,7 @@ class LimitsButton(QPushButton):
         super().__init__()
         self.ui = ui
         self.setText(text)
+        self.setFixedWidth(SELECT_WIDTH)
         self.text_box = text_box
         self.name = ''
         self.clicked.connect(self.set_limits)
