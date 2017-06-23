@@ -20,6 +20,7 @@ def make_mode_histograms(test, system_by_system=True, limits=None, percent_from_
                     histogram_of_mode(test, mode, temp, limits, percent_from_mean)
     print('complete.')
 
+
 def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10):
     for voltage in mode.voltages: ## make plot for mode in each voltage
         num_subplots = len(mode.systems)
@@ -42,7 +43,8 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
         nrows, ncols = make_subplot_layout(num_subplots)
         i = 1
         for system in mode.systems:
-            filtered_df = filter_temp_and_voltage(mode.df[[mode.AMB_TEMP, mode.VSETPOINT, system]], temp, voltage)
+            filtered_df = filter_temp_and_voltage(mode.df[[mode.AMB_TEMP, mode.VSETPOINT, system]], 
+                          temp, voltage, mode.test.temperature_tolerance)
             current_data = pd.to_numeric(filtered_df[system], downcast='float')
             avg = current_data.mean()
             sigma = current_data.std()
@@ -68,6 +70,8 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
             i += 1
     plt.tight_layout()
+    plt.subplots_adjust(top=0.87, bottom=0.05, left=0.07, right=0.97)
+
 
 def histogram_of_mode(test, mode, temp, limits=None, percent_from_mean=10):
     if mode.has_led_binning:
@@ -75,13 +79,12 @@ def histogram_of_mode(test, mode, temp, limits=None, percent_from_mean=10):
             histogram_of_mode_with_binning(test, mode, temp, limits, led_bin, percent_from_mean)
     else:
         histogram_of_mode_no_binning(test, mode, temp, limits, percent_from_mean)
-            
 
+            
 def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin, percent_from_mean):
 
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
-
     main_title = ' '.join([test.name+'\n', mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C', ' LED bin', led_bin])
     fig.canvas.set_window_title(main_title.replace('\n', ' '))
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
@@ -123,10 +126,8 @@ def histogram_of_mode_no_binning(test, mode, temp, limits, percent_from_mean):
 
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
-
     main_title = ' '.join([test.name+'\n', mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C'])
     fig.canvas.set_window_title(main_title.replace('\n', ' '))
-
     fig.suptitle(main_title, fontsize = 14, fontweight='bold')
 
     i = 1
