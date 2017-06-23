@@ -35,8 +35,6 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
             else:
                 LL, UL = mode_limits_dict['LL'], mode_limits_dict['UL']
                 title += '  LL: ' + str(LL) + '  UL: ' + str(UL)
-        else:
-            title = ' '.join([mode.name, str(temp), str(voltage)])
         fig.canvas.set_window_title(title.replace('\n', ' '))
         fig.suptitle(title, fontsize = 14, fontweight='bold')
 
@@ -70,7 +68,7 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
             i += 1
     plt.tight_layout()
-    plt.subplots_adjust(top=0.87, bottom=0.05, left=0.07, right=0.97)
+    plt.subplots_adjust(top=0.87, bottom=0.05, left=0.06, right=0.97)
 
 
 def histogram_of_mode(test, mode, temp, limits=None, percent_from_mean=10):
