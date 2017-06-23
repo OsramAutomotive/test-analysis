@@ -82,7 +82,6 @@ def set_figure_size(fig, save=False):
     print('...complete.\n')
     plt.tight_layout()
     fig.subplots_adjust(top=0.90, bottom=0.11, left=0.06, right=0.90, hspace=0.33)
-    #plt.show('hold')
 
 def set_up_date_time(test, ax):
     ax.plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.vsetpoint], 'k--', 
@@ -115,6 +114,5 @@ def plot_modes(test, limits=None):
 def plot_boards(test, limits=None, pstyle = 'ggplot'):
     ''' Creates a temporal plot of the FC, temperature profile, and board currents '''
     print('Plotting temporal plot...')
-    # module_names_dict, LL, UL = check_for_and_load_limits(limits)  # get module names if limits passed
     fig, axes = set_up_plot_area(test)  # set up figure and axes for plotting
-    # set_up_date_time(test, axes)  # format and plot date time index
+    ### TO DO: write funciton to plot boards

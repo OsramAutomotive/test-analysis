@@ -64,7 +64,8 @@ class Mode(object):
         for temp in self.temps:
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
-                dframe = filter_temp_and_voltage(self.df, temp, voltage)
+                dframe = filter_temp_and_voltage(self.df, temp, voltage, 
+                                    self.test.temperature_tolerance)
                 if not dframe.empty:
                     self.hist_dict[temp][voltage] = dframe
                 else:
@@ -118,12 +119,13 @@ class Mode(object):
             ## voltage analysis
             for vsense in self.voltage_senses:
                 vsense_min, vsense_max, mean = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
-                out_of_spec_bool = check_if_out_of_spec(voltage-VOLTAGE_TOLERANCE, voltage+VOLTAGE_TOLERANCE, vsense_min, vsense_max)
+                out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance, 
+                                                        vsense_min, vsense_max)
                 self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, mean, out_of_spec_bool]
 
             ## current analysis
             for system in self.systems:
-                out_of_spec = None
+                out_of_spec_bool = 'NA'
                 sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
                 if limits:
                     if self.has_led_binning:
@@ -135,11 +137,11 @@ class Mode(object):
                 self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec_bool]
 
     def get_out_of_spec_data(self):
-        ''' Method for retrieving out_of_spec data from test in this mode '''
+        ''' Method for retrieving out_of_spec raw data from test in this mode '''
         for temp in self.temps:
             for voltage in self.voltages:
                 df, out_of_spec_df = pd.DataFrame(), pd.DataFrame()
-                df = filter_temp_and_voltage(self.df, temp, voltage)
+                df = filter_temp_and_voltage(self.df, temp, voltage, self.test.temperature_tolerance)
                 mode_limit_dict = get_limits_at_mode_temp_voltage(self.test.limits, self, temp, voltage)
                 
                 if self.has_led_binning:
