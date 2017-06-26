@@ -76,10 +76,10 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
             if i == 1: ## make single legend describing vertical lines for all subplots
                 handles, labels = ax.get_legend_handles_labels()
-                fig.legend(handles, labels)
+                fig.legend(handles, labels, ncol=3, loc = 'lower center')
             i += 1
     plt.tight_layout()
-    plt.subplots_adjust(top=0.86, bottom=0.05, left=0.06, right=0.97)
+    plt.subplots_adjust(top=0.87, bottom=0.10, left=0.06, right=0.97)
 
 
 def histogram_of_mode(test, mode, temp, limits=None, percent_from_mean=10):
