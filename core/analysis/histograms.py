@@ -26,7 +26,7 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
         num_subplots = len(mode.systems)
         fig = plt.figure()
         bar_color = determine_bar_color(temp)
-        title = ' '.join([test.name+'\n', mode.name, str(temp), str(voltage)])
+        title = ' '.join([test.name+'\n', mode.name, str(temp)+u'\N{DEGREE SIGN}C', str(voltage)+'V'])
         if limits and test.run_limit_analysis: ## if doing limit analysis
             mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
             if mode.has_led_binning:
@@ -37,20 +37,24 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
                 title += '  LL: ' + str(LL) + '  UL: ' + str(UL)
         fig.canvas.set_window_title(title.replace('\n', ' '))
         fig.suptitle(title, fontsize = 14, fontweight='bold')
+        mean_label = 'sample mean'
+        sig_label = u'\N{PLUS-MINUS SIGN}3\N{GREEK SMALL LETTER SIGMA}'
+        percent_label = u'\N{PLUS-MINUS SIGN}'+str(percent_from_mean)+r'% from mean'                    
 
         nrows, ncols = make_subplot_layout(num_subplots)
         i = 1
         for system in mode.systems:
             filtered_df = filter_temp_and_voltage(mode.df[[mode.AMB_TEMP, mode.VSETPOINT, system]], 
-                          temp, voltage, mode.test.temperature_tolerance)
+                                                  temp, voltage, mode.test.temperature_tolerance)
             current_data = pd.to_numeric(filtered_df[system], downcast='float')
             avg = current_data.mean()
             sigma = current_data.std()
             minus_ten = round(avg*(1-(percent_from_mean/100.0)), 3)
             plus_ten = round(avg*(1+(percent_from_mean/100.0)), 3)
             ax = fig.add_subplot(nrows, ncols, i)
-            ax.hist(current_data.dropna(), color=bar_color)  ## drop NaN values
-            ax.axvline(avg, color='dimgray', linestyle='dotted', linewidth=4)
+            ax.hist(current_data.dropna(), color=bar_color, label=None)  ## drop NaN values
+            ax.axvline(avg, color='dimgray', linestyle='dotted', linewidth=2, 
+                            label=mean_label if i == 1 else None)
 
             if limits and test.run_limit_analysis:  ## show current limits
                 if mode.has_led_binning:
@@ -60,15 +64,22 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
                 ax.axvline(LL, color='orangered', linestyle='dashed', linewidth=2)
                 ax.axvline(UL, color='orangered', linestyle='dashed', linewidth=2)
             else:
-                ax.axvline(minus_ten, color='b', linestyle='dashed', linewidth=2)
-                ax.axvline(plus_ten, color='b', linestyle='dashed', linewidth=2)
+                ax.axvline(minus_ten, color='b', linestyle='dashed', linewidth=2, 
+                                      label=percent_label if i == 1 else None)
+                ax.axvline(plus_ten, color='b', linestyle='dashed', linewidth=2, label = None)
+                ax.axvline(avg-3*sigma, color='#892db7', linestyle='dashdot', linewidth=2, 
+                                        label=sig_label if i == 1 else None)
+                ax.axvline(avg+3*sigma, color='#892db7', linestyle='dashdot', linewidth=2, label=None)
             ax.set_title(test.systems[i-1]+'\n'+'(Avg: '+str(round(avg,3))+'A)')
             ax.set_xlabel('Current (A)')
             ax.set_ylabel('Frequency')
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
+            if i == 1: ## make single legend describing vertical lines for all subplots
+                handles, labels = ax.get_legend_handles_labels()
+                fig.legend(handles, labels)
             i += 1
     plt.tight_layout()
-    plt.subplots_adjust(top=0.87, bottom=0.05, left=0.06, right=0.97)
+    plt.subplots_adjust(top=0.86, bottom=0.05, left=0.06, right=0.97)
 
 
 def histogram_of_mode(test, mode, temp, limits=None, percent_from_mean=10):
