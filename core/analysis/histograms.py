@@ -63,16 +63,16 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
                     led_bin = get_system_bin(mode, system)
                     mode_limits_dict = get_limits_for_system_with_binning(limits, mode, temp, voltage, system)
                     LL, UL = mode_limits_dict['LL'], mode_limits_dict['UL']
-                ax.axvline(LL, color='orangered', linestyle='dashed', linewidth=2,
+                ax.axvline(LL, color='orangered', linestyle='dashed', linewidth=1,
                                label=limits_label if i == 1 else None)
-                ax.axvline(UL, color='orangered', linestyle='dashed', linewidth=2)
+                ax.axvline(UL, color='orangered', linestyle='dashed', linewidth=1)
             else:
-                ax.axvline(minus_ten, color='b', linestyle='dashed', linewidth=2,
+                ax.axvline(minus_ten, color='b', linestyle='dashed', linewidth=1,
                                       label=percent_label if i == 1 else None)
-                ax.axvline(plus_ten, color='b', linestyle='dashed', linewidth=2, label = None)
-                ax.axvline(avg-3*sigma, color='#892db7', linestyle='dashdot', linewidth=2,
+                ax.axvline(plus_ten, color='b', linestyle='dashed', linewidth=1, label = None)
+                ax.axvline(avg-3*sigma, color='#892db7', linestyle='dashdot', linewidth=1,
                                         label=sig_label if i == 1 else None)
-                ax.axvline(avg+3*sigma, color='#892db7', linestyle='dashdot', linewidth=2, label=None)
+                ax.axvline(avg+3*sigma, color='#892db7', linestyle='dashdot', linewidth=1, label=None)
             ax.set_title(test.systems[i-1]+'\n'+'(Avg: '+str(round(avg,3))+'A)')
             ax.set_xlabel('Current (A)')
             ax.set_ylabel('Frequency')
@@ -95,7 +95,6 @@ def histogram_of_mode(test, mode, temp, limits=None, percent_from_mean=10):
 
 
 def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin, percent_from_mean):
-
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
     main_title = ' '.join([test.name+'\n', mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C', ' LED bin', led_bin])
@@ -119,12 +118,12 @@ def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin, percent_fr
             mode_limits_dict = get_limit_for_single_led_bin(led_bin, limits, mode, temp, voltage)
             for lim_label, lim_value in sorted(mode_limits_dict.items()):
                 subtitle += '  ' + lim_label + ': ' + str(lim_value)
-                ax.axvline(lim_value, color='orangered', linestyle='dashed', linewidth=2)
+                ax.axvline(lim_value, color='orangered', linestyle='dashed', linewidth=1)
         else:  ## show +- percent from mean
             subtitle += '   Iin' + u'\N{PLUS-MINUS SIGN}'+str(percent_from_mean)+'%: ' + \
                         str(minus_ten) + ' to ' + str(plus_ten)
-            ax.axvline(minus_ten, color='b', linestyle='dashed', linewidth=2)
-            ax.axvline(plus_ten, color='b', linestyle='dashed', linewidth=2)
+            ax.axvline(minus_ten, color='b', linestyle='dashed', linewidth=1)
+            ax.axvline(plus_ten, color='b', linestyle='dashed', linewidth=1)
         ax.set_title(subtitle)
         ax.set_xlabel('Current (A)', fontsize=8)
         ax.set_ylabel('Frequency', fontsize=8)
@@ -136,7 +135,6 @@ def histogram_of_mode_with_binning(test, mode, temp, limits, led_bin, percent_fr
 
 
 def histogram_of_mode_no_binning(test, mode, temp, limits, percent_from_mean):
-
     fig = plt.figure()
     nrows, ncols = len(mode.voltages), 1
     main_title = ' '.join([test.name+'\n', mode.name, str(temp)+u'\N{DEGREE SIGN}'+'C'])
