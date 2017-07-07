@@ -48,10 +48,14 @@ Outputs a set of temporal subplots:
 * Temperature profile
 * Current draw for each mode that is present
 
+Here is an example:
+
 ![Example temporal plot](images/plot.png)
 
 ### 2) Current Histograms
-Histograms can be created to visualize the distribution of currents at different test conditions. If provided, limits are drawn as vertical dashed lines. 
+Histograms can be created to visualize the distribution of currents at different test conditions. If provided, limits are drawn as vertical dashed lines.
+
+Here is an example:
 
 ![Example histogram](images/hist.png)
 
