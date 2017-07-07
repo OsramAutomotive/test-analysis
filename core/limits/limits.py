@@ -81,7 +81,9 @@ class Limits(object):
                                                max_col=self.ws.max_column, max_row=self.mode_row)
         for row in cell_range:
             for cell in row:
-                if cell.column and cell.value and any(module in cell.value for module in self.modules):
+                if not cell.value:
+                    continue
+                elif cell.value and cell.column and any(module in cell.value for module in self.modules):
                     module_mode = cell.value
                     self.module_modes.append(module_mode)
                     #board_mode = self.translate_module_mode_to_board_mode(cell.value)

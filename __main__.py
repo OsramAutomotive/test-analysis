@@ -15,7 +15,7 @@ from PyQt5.QtCore import *
 
 
 ## constants for user input parameters
-TEMPERATURES = ['-40C', '23C', '45C', '60C', '70C', '85C']
+TEMPERATURES = ['-40C', '23C', '45C', '60C', '70C', '85C', '95C']
 BOARDS = ['B1','B2','B3','B4','B5','B6']
 ANALYSIS_TOOLS = ['Plot', 'Histograms', 'Tables', 'Out of Spec']
 PLOT_INFO = 'Create a temporal plot of the selected test'
@@ -43,7 +43,7 @@ class TestAnalysisUI(QWidget):
         self.board_buttons = []
         self.analysis_buttons = []
         self.stylesheet = 'styles\style_blue.qss'
-        self.width = 800
+        self.width = 850
         self.height = 380
         self.init_ui()
 
