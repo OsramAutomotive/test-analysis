@@ -50,7 +50,7 @@ Outputs a set of temporal subplots:
 
 Here's an example: 
 ```
-![Example of temporal plot](https://raw.githubusercontent.com/OsramAutomotive/test-analysis/master/images/example-plot.png)
+![Example of temporal plot](https://github.com/OsramAutomotive/test-analysis/blob/master/images/example-plot.png)
 ```
 
 ### 2) Current Histograms
@@ -58,7 +58,7 @@ Histograms can be created to visualize the distribution of currents at different
 
 Here's an example: 
 ```
-![Example of histogram](https://raw.githubusercontent.com/OsramAutomotive/test-analysis/master/images/example-histogram.png)
+![Example of histogram](https://github.com/OsramAutomotive/test-analysis/blob/master/images/example-histogram.png)
 ```
 
 ### 3) Summary Tables
