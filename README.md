@@ -48,12 +48,12 @@ Outputs a set of temporal subplots:
 * Temperature profile
 * Current draw for each mode that is present
 
-[Example temporal plot](images/example-plot.png)
+![Example temporal plot](images/plot.png)
 
 ### 2) Current Histograms
 Histograms can be created to visualize the distribution of currents at different test conditions. If provided, limits are drawn as vertical dashed lines. 
 
-[Example histogram](images/example-histogram.png)
+![Example histogram](images/hist.png)
 
 ### 3) Summary Tables
 An excel file is created with the basic statistics for the various temperature/mode/voltage conditions for each system. A new tab is created for each test temperature the user wishes to analyze. 
