@@ -189,6 +189,22 @@ def write_outage_off_table(row_start, wb, ws, test, outage_board, temp, limits):
     row_start = write_outage_off_data(row_start+2, wb, ws, test, outage_board, temp, limits)
     return row_start+2
 
+def write_user_inputs_tab(test, wb):
+    ws = wb.add_worksheet('user-inputs')
+    user_inputs = [ ('Test Name: ',  test.name), 
+                    ('Data Folder: ', test.folder), 
+                    ('Limits File: ', test.limits.filepath),
+                    ('Selected Temperatures: ', ' '.join(str(temp) for temp in test.temps)),
+                    ('Selected Boards: ', ' '.join(str(board.id) for board in test.boards)), 
+                    ('Limit Analysis: ', str(test.run_limit_analysis)),
+                    ('Multimode: ', str(test.multimode)),
+                    ('Temp Tolerance: ', str(test.temperature_tolerance)), 
+                    ('Voltage Tolerance: ', str(test.voltage_tolerance)) ]
+    row = 0
+    for user_input in user_inputs:
+        ws.write_row(row, 0, user_input)
+        row += 1
+
 
 #### MAIN WRITE FUNCTION ####
 def fill_stats(test, limits=None, write_to_excel=True):
@@ -207,4 +223,5 @@ def fill_stats(test, limits=None, write_to_excel=True):
             row_start = write_outage_on_table(row_start, wb, ws, test, test.b6, temp, limits)
             row_start = write_outage_off_table(row_start, wb, ws, test, test.b6, temp, limits)
         highlight_workbook(wb, ws)
+    write_user_inputs_tab(test, wb)
     wb.close()
