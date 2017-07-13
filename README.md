@@ -56,6 +56,7 @@ The analysis consists of 3 components:
 1. Temporal Plotting
 2. Current Histograms
 3. Summary Tables with basic statisitcs and comparison to limits 
+4. Out of spec data
 
 ### 1) Temporal Plotting
 Outputs a set of temporal subplots:
@@ -68,14 +69,21 @@ Here is an example:
 ![Example temporal plot](images/plot.png)
 
 ### 2) Current Histograms
-Histograms can be created to visualize the distribution of currents at different test conditions. If provided, limits are drawn as vertical dashed lines.
+Histograms can be created to visualize the distribution of currents at different test conditions. If provided, limits are drawn as vertical dashed lines. These can be run on the test population as a whole or a system by system basis. 
 
-Here is an example:
+Here is an example of a test population histogram:
 
 ![Example histogram](images/hist.png)
 
+Here is an example of a system by system histogram:
+
+![Example histogram](images/sys-by-sys.png)
+
 ### 3) Summary Tables
 An excel file is created with the basic statistics for the various temperature/mode/voltage conditions for each system. A new tab is created for each test temperature the user wishes to analyze. 
+
+### 4) Out of spec data
+A text file containing all the raw out of spec data is created. The file lists the data by condition (temperature/mode/voltage) so the user knows what currents were out of specification. No file is created if there is no out of spec data for the analyzed test data. 
 
 
 ## Running the tests
