@@ -1,10 +1,23 @@
 # DV Station Test Analysis
 
-This program analyzes raw environmental test data for automotive lighting systems. The tests expose lighting systems to various temperature profiles while the systems are powered. Each test system is comprised of many modules (e.g. - Turn, DRL, Park, Outage, etc.) and can be ran in different modes (e.g. - Park+Turn, Turn only, DRL+Park, etc.). These various modes are excited at different voltages throughout testing. The primary function of this project is to analyze the distributions of current for each temperature/mode/voltage condition and compare them to design current limits. 
+This python program analyzes raw environmental test data for automotive lighting systems. The tests expose lighting systems to various temperature profiles while the systems are powered. Each test system is comprised of many modules (e.g. - Turn, DRL, Park, Outage, etc.) and can be ran in different modes (e.g. - Park+Turn, Turn only, DRL+Park, etc.). These various modes are excited at different voltages throughout testing. The primary function of this project is to analyze the distributions of current for each temperature/mode/voltage condition and compare them to design current limits. 
+
+
+## Getting Started
+
+Python (version 3.5 or later) must be installed on your computer in order to use this data analysis program: https://www.python.org/
+
+### Dependencies
+
+Download this repository's code to your local environment. Ensure you have pip installed and from the command line run the following to collect the required python packages:
+
+```
+pip install -r requirements.txt
+```
 
 
 ## The DV Test Station
-These test stations consist of 2 power supplies, 2 DAQ systems, and 6 pc boards. The test systems are wired to the boards and currents are measured across high precision shunt resistors. Each board is used for a single module in the system. For instance, a lighting project may be set up on the boards of a DV Test Station like this: 
+The raw data that this program analyzes is produced by our DV Test Stations. These test stations consist of 2 power supplies, 2 DAQ systems, and 6 pc boards. The test systems are wired to the boards and currents are measured across high precision shunt resistors. Each board is used for a single module in the system. For instance, a lighting project may be set up on the boards of a DV Test Station like this: 
 
 ```
 Board 1 - Low Beam
@@ -44,9 +57,9 @@ The analysis consists of 3 components:
 
 ### 1) Temporal Plotting
 Outputs a set of temporal subplots:
-* Functional cycle
+* Voltage and functional cycle
 * Temperature profile
-* Current draw for each mode that is present
+* Current scans for each mode that is present
 
 Here is an example:
 
@@ -62,36 +75,6 @@ Here is an example:
 ### 3) Summary Tables
 An excel file is created with the basic statistics for the various temperature/mode/voltage conditions for each system. A new tab is created for each test temperature the user wishes to analyze. 
 
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
