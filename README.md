@@ -46,7 +46,9 @@ A Labview program defines the functional cycle of testing (which modules are pow
 ```
 
 ## Current Limits
-For each lighting project current limits are established for the various temperature/mode/voltage conditions. These limits can be used for any particular environmental test. These limits are stored in an excel file and pulled by the program into a simple dictionary. Limits are excellent for comparing the measured currents to an expected/acceptable range. They also help recognize subtle failures. 
+For each lighting project current limits are established for the various temperature/mode/voltage conditions. These limits can be used for any particular environmental test. These limits are stored in an excel file and pulled by the program into a simple dictionary. Limits are excellent for comparing the measured currents to an expected or acceptable range. They also aid in recognizing subtle failures. 
+
+Not all LEDs are created equal. Some LEDs are more efficient than others (lower current will produce same light output) and so LEDs are allocated into different bins. LED binning is accounted for in the limits files so that different current limits can be used for samples of the same module type but different LED bin. 
 
 ## Analysis
 
@@ -89,9 +91,10 @@ Examples...
 
 * [Pandas](http://pandas.pydata.org/) - Data wrangling and processing
 * [Matplotlib](http://matplotlib.org/) - Plotting and histograms
-* [XlsWriter](http://xlsxwriter.readthedocs.io/) - Used to generate analysis tables
+* [XlsWriter](http://xlsxwriter.readthedocs.io/) - Creates analysis tables
+* [Openpyxl](https://openpyxl.readthedocs.io/en/default/) - Pulling current limits from excel files
 
 
 ## Authors
 
-* **Sam Bruno** - *Initial work* - [Osram Automotive](https://github.com/OsramAutomotive)
+* **Sam Bruno** - [Osram Automotive](https://github.com/OsramAutomotive)
