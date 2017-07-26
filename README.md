@@ -52,7 +52,7 @@ Not all LEDs are created equal. Some LEDs are more efficient than others (lower 
 
 ## Analysis
 
-The analysis consists of 3 components:
+The analysis consists of four components:
 1. Temporal Plotting
 2. Current Histograms
 3. Summary Tables with basic statisitcs and comparison to limits 
