@@ -60,9 +60,14 @@ def write_voltage_and_current_data(row_start, wb, ws, test, mode, temp, voltage,
                           [mode.current_stats[temp][voltage][system][0] for system in mode.systems]
     maximums = ['Max:'] + [mode.vsense_stats[temp][voltage][vsense][1] for vsense in mode.voltage_senses] + \
                           [mode.current_stats[temp][voltage][system][1] for system in mode.systems]
-    check_data = ['Check Data:'] + ['Out of Spec' if mode.vsense_stats[temp][voltage][vsense][-1] else 'G' for vsense in mode.voltage_senses]
+    
+    check_data = ['Check Data:'] + ['NA' if mode.vsense_stats[temp][voltage][vsense][-1] == 'NA' else \
+                                   'Out of Spec' if mode.vsense_stats[temp][voltage][vsense][-1] else \
+                                   'G' for vsense in mode.voltage_senses]
     if limits and test.run_limit_analysis:
-        check_data += ['Out of Spec' if mode.current_stats[temp][voltage][system][-1] else 'G' for system in mode.systems]
+        check_data += ['NA' if mode.current_stats[temp][voltage][system][-1] == 'NA' else \
+                       'Out of Spec' if mode.current_stats[temp][voltage][system][-1] else \
+                       'G' for system in mode.systems]
     else:
         check_data += ['NA' for system in mode.systems]
 
@@ -73,8 +78,10 @@ def write_voltage_and_current_data(row_start, wb, ws, test, mode, temp, voltage,
     return row
 
 def highlight_workbook(wb, ws):
-    out_of_spec_format = wb.add_format({'bg_color': 'yellow', 'font_color': 'red'})
-    ws.conditional_format('A1:AZ600', {'type': 'text', 'criteria': 'containing', 'value': 'Out of Spec', 'format': out_of_spec_format})
+    out_of_spec_format = wb.add_format({'bg_color': 'yellow', 'font_color': 'red'}) ## yellow bckgrnd red text 'Out of Spec'
+    na_format = wb.add_format({'bg_color': '#E0E0E0', 'font_color': '#4C4C4C'}) ## light gray 'NA'
+    ws.conditional_format('A1:AZ600', {'type': 'text', 'criteria': 'ends with', 'value': 'Out of Spec', 'format': out_of_spec_format})
+    ws.conditional_format('A1:AZ600', {'type': 'text', 'criteria': 'ends with', 'value': 'NA', 'format': na_format})
 
 def write_single_table(row_start, wb, ws, test, mode, temp, limits):
     width = len(mode.voltage_senses) + len(mode.systems)
@@ -88,7 +95,7 @@ def write_single_table(row_start, wb, ws, test, mode, temp, limits):
     return row_start+2
 
 
-### Outage tables
+### OUTAGE TABLES
 def write_outage_temp_header(row_start, wb, ws, width, limits, color_dict, outage_board, temp, voltage, outage_on_bool):
     ''' Write mode/temp/voltage header into row_start. Rows and columns are zero indexed. '''
     row, col = row_start, 0
@@ -140,7 +147,9 @@ def write_outage_on_data(row_start, wb, ws, test, outage_board, temp, voltage, l
     maximums = ['Max:'] + [outage_board.outage_stats['ON'][temp][voltage][system][1] for system in outage_board.systems]
     check_data = ['Check Data:']
     if limits and test.run_limit_analysis:
-        check_data += ['Out of Spec' if outage_board.outage_stats['ON'][temp][voltage][system][-1] else 'G' for system in outage_board.systems]
+        check_data += ['NA' if outage_board.outage_stats['ON'][temp][voltage][system][-1] == 'NA' else \
+                       'Out of Spec' if outage_board.outage_stats['ON'][temp][voltage][system][-1] else \
+                       'G' for system in outage_board.systems]
     else:
         check_data += ['NA' for system in outage_board.systems]
     for data_line in (header, minimums, maximums, check_data):
@@ -159,7 +168,9 @@ def write_outage_off_data(row_start, wb, ws, test, outage_board, temp, limits):
     maximums = ['Max:'] + [outage_board.outage_stats['OFF'][temp][system][1] for system in outage_board.systems]
     check_data = ['Check Data:']
     if limits and test.run_limit_analysis:
-        check_data += ['Out of Spec' if outage_board.outage_stats['OFF'][temp][system][-1] else 'G' for system in outage_board.systems]
+        check_data += ['NA' if outage_board.outage_stats['OFF'][temp][system][-1] == 'NA' else \
+                       'Out of Spec' if outage_board.outage_stats['OFF'][temp][system][-1] else \
+                       'G' for system in outage_board.systems]
     else:
         check_data += ['NA' for system in outage_board.systems]
     for data_line in (header, minimums, maximums, check_data):
