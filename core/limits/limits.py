@@ -173,8 +173,8 @@ class Limits(object):
             i = 0
             self.lim[outage]['ON'] = {}
             for voltage in self.voltages:
-                on_min = self.ws.cell(row=6+i, column=7).value
-                on_max = self.ws.cell(row=6+i, column=8).value
+                on_min = self.ws.cell(row=8+i, column=7).value
+                on_max = self.ws.cell(row=8+i, column=8).value
                 self.lim[outage]['ON'][voltage] = (on_min, on_max)
                 i+=1
 
