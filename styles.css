@@ -1,0 +1,35 @@
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  text-align: center;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.drl {
+  background-color: #00E5EE;
+}
+
+.turn {
+  background-color: purple;
+}
+
+.park {
+  background-color: darkorange;
+}
+
+.parkturn {
+  background-color: orange;
+}
+
+.drlturn {
+  background-color: #ff96ca;
+}
+
+/*
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+*/

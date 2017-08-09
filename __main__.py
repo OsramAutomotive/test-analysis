@@ -289,7 +289,7 @@ class AnalyzeButton(QPushButton):
         elif analysis_name == 'Histograms':
             make_mode_histograms(test, system_by_system=hists_by_tp, limits=limits, percent_from_mean=percent_from_mean)
         elif analysis_name == 'Tables':
-            fill_stats(test, limits, write_to_excel=True)
+            fill_stats_and_xml(test, limits, write_to_excel=True)
         elif analysis_name == 'Out of Spec':
             for mode in test.modes:
                 if limits:
