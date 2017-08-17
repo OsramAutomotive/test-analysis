@@ -158,6 +158,8 @@ def histogram_of_mode_no_binning(test, mode, temp, limits, percent_from_mean):
 
     i = 1
     for voltage in mode.voltages: # make subplot for each voltage
+        if voltage not in mode.hist_dict[temp]:
+            continue
         dframe = mode.hist_dict[temp][voltage]
         current_data = mode.strip_index_and_melt_to_series(dframe) ## put all system currents in single series
         avg = current_data.mean()

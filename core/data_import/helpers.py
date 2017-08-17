@@ -143,9 +143,9 @@ def get_system_stats_at_mode_temp_voltage(system, mode, temp, voltage):
     if temp in mode.hist_dict:
         if voltage in mode.hist_dict[temp]:
             series = mode.hist_dict[temp][voltage][system]
-        if not series.empty:
-            return round(series.min(), decimal_places), round(series.max(), decimal_places), \
-                   round(series.mean(), decimal_places), round(series.std(), decimal_places)
+            if not series.empty:
+                return round(series.min(), decimal_places), round(series.max(), decimal_places), \
+                       round(series.mean(), decimal_places), round(series.std(), decimal_places)
     return 'NA', 'NA', 'NA', 'NA'
 
 def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
