@@ -57,8 +57,8 @@ def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
 
 def get_limits_without_binning(limits, mode, temp, voltage):
     try:
-        lower_limit = limits.lim[temp][mode.name][voltage][0]
-        upper_limit = limits.lim[temp][mode.name][voltage][1]
+        lower_limit = limits.lim[mode.name][temp][voltage][0]
+        upper_limit = limits.lim[mode.name][temp][voltage][1]
         return {'LL': lower_limit, 'UL': upper_limit}
     except:
         raise
@@ -68,8 +68,8 @@ def get_all_mode_limits_with_binning(limits, mode, temp, voltage):
     for led_bin in mode.led_bins:
         module_header = led_bin + ' ' + mode.name
         try:
-            mode_bin_limits_dict[led_bin+' LL'] = limits.lim[temp][module_header][voltage][0]
-            mode_bin_limits_dict[led_bin+' UL'] = limits.lim[temp][module_header][voltage][1]
+            mode_bin_limits_dict[led_bin+' LL'] = limits.lim[module_header][temp][voltage][0]
+            mode_bin_limits_dict[led_bin+' UL'] = limits.lim[module_header][temp][voltage][1]
         except:
             raise
     return mode_bin_limits_dict
@@ -78,8 +78,8 @@ def get_limit_for_single_led_bin(led_bin, limits, mode, temp, voltage):
     mode_bin_limits_dict = {}
     module_header = led_bin + ' ' + mode.name
     try:
-        mode_bin_limits_dict[led_bin+' LL'] = limits.lim[temp][module_header][voltage][0]
-        mode_bin_limits_dict[led_bin+' UL'] = limits.lim[temp][module_header][voltage][1]
+        mode_bin_limits_dict[led_bin+' LL'] = limits.lim[module_header][temp][voltage][0]
+        mode_bin_limits_dict[led_bin+' UL'] = limits.lim[module_header][temp][voltage][1]
     except:
         raise
     return mode_bin_limits_dict
@@ -88,8 +88,8 @@ def get_limits_for_system_with_binning(limits, mode, temp, voltage, system):
     led_bin = get_system_bin(mode, system)
     module_header = led_bin + ' ' + mode.name
     try:
-        lower_limit = limits.lim[temp][module_header][voltage][0]
-        upper_limit = limits.lim[temp][module_header][voltage][1]
+        lower_limit = limits.lim[module_header][temp][voltage][0]
+        upper_limit = limits.lim[module_header][temp][voltage][1]
         return {'LL': lower_limit, 'UL': upper_limit}
     except:
         raise

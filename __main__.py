@@ -299,7 +299,7 @@ class AnalyzeButton(QPushButton):
 
     def load_limits(self, boards, temps):
         if self.ui.limits_file:
-            return Limits(self.ui.limits_file, 'Sheet1', BOARDS, temps)
+            return Limits(self.ui.limits_file, BOARDS, temps)
         else:
             return None
 

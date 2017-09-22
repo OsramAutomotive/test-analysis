@@ -1,12 +1,17 @@
 table {
   border-collapse: collapse;
   font-family: Calibri, Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 0.6em;
 }
 
-table, th, td {
+table {
   text-align: center;
   border: 1px solid black;
   padding: 5px;
+}
+
+th, td {
+  padding: 1px;
 }
 
 tr:hover {

@@ -1,0 +1,144 @@
+/* Basic HTML Elements*/
+body {
+  font-family: Calibri, Tahoma, Verdana, Segoe, sans-serif;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table td, th {
+  border: 1px solid black;
+}
+
+th {
+  padding: 5px 8px;
+}
+
+td {
+  padding: 5px 20px;
+}
+
+tr:hover {
+  background-color: lightyellow;
+}
+
+
+/* Modes */
+.mode-header {
+  margin: 10px 10px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: lightgray;
+}
+
+.mode-header.DRL {
+  background-color: #00E5EE;
+}
+
+.mode-header.TURN {
+  background-color: mediumpurple;
+}
+
+.mode-header.PARK {
+  background-color: darkorange;
+}
+
+.mode-header.PARKTURN {
+  background-color: orange;
+}
+
+.mode-header.DRLTURN {
+  background-color: #ff96ca;
+}
+
+
+/* Temperatures */
+.color23C {
+  background-color: palegreen;
+}
+
+.color-40C {
+  background-color: deepskyblue;
+}
+
+.color85C {
+  background-color: indianred;
+}
+
+.color45C {
+  background-color: #ffff94;
+}
+
+.color60C {
+  background-color: #ff9022;
+}
+
+.color95C {
+  background-color: #bb5d00;
+}
+
+
+/* Layout Styling */
+.info {
+  display: flex;
+  justify-content: center;
+}
+
+.top-container {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.project-info {
+  background-color: khaki;
+  padding: 25px 40px;
+  border-radius: 15px;
+}
+
+.actions {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mode {
+  margin: 30px 10px;
+}
+
+.mode-tables {
+  display: flex;
+  justify-content: center;
+}
+
+.temp-table {
+  margin-right: 10px;
+}
+
+.board-table {
+  border: 1px solid black;
+}
+
+.board-table tr:nth-child(odd){
+  background-color: #ccc;
+}
+
+
+/* Buttons */
+button.save-button {
+  font-size: 1.2em;
+  margin: 10px;
+}
+
+button.add-button {
+  visibility: hidden;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+tr:hover button.add-button {
+  visibility: visible;
+}
