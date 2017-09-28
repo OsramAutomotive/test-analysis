@@ -82,6 +82,8 @@ Here is an example of a system by system histogram:
 ### 3) Summary Tables
 An excel file is created with the basic statistics for the various temperature/mode/voltage conditions for each system. A new tab is created for each test temperature the user wishes to analyze. 
 
+Example: [a link](http://htmlpreview.github.io/?https://github.com/OsramAutomotive/test-analysis/blob/master/images/tables-in-xml-format.xml)
+
 ### 4) Out of spec data
 A text file containing all the raw out of spec data is created. The file lists the data by condition (temperature/mode/voltage) so the user knows what currents were out of specification. No file is created if there is no out of spec data for the analyzed test data. 
 
