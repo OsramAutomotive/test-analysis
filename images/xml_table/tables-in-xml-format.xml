@@ -1,0 +1,2870 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="data.xsl"?><test header_width="12" name="Example Project - PTC">
+  <temperature temp="-40C">
+    <mode id="DRL" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.967</min>
+            <max>9.141</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.962</min>
+            <max>9.188</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.509</min>
+            <max>0.518</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.511</min>
+            <max>0.523</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.512</min>
+            <max>0.521</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.499</min>
+            <max>0.507</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.509</min>
+            <max>0.518</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.507</min>
+            <max>0.515</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.503</min>
+            <max>0.511</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.506</min>
+            <max>0.514</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.504</min>
+            <max>0.513</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.509</min>
+            <max>0.518</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.511</min>
+            <max>0.521</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.498</min>
+            <max>0.506</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.068</min>
+            <max>14.297</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.068</min>
+            <max>14.3</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.313</min>
+            <max>0.317</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.309</min>
+            <max>0.315</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.311</min>
+            <max>0.316</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.305</min>
+            <max>0.309</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.308</min>
+            <max>0.312</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.309</min>
+            <max>0.314</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.307</min>
+            <max>0.312</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.309</min>
+            <max>0.313</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.306</min>
+            <max>0.31</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.31</min>
+            <max>0.315</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.31</min>
+            <max>0.315</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.305</min>
+            <max>0.309</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.961</min>
+            <max>16.16</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.96</min>
+            <max>16.164</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.276</min>
+            <max>0.28</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.273</min>
+            <max>0.277</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.275</min>
+            <max>0.279</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.269</min>
+            <max>0.272</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.272</min>
+            <max>0.275</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.273</min>
+            <max>0.277</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.272</min>
+            <max>0.275</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.273</min>
+            <max>0.276</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.271</min>
+            <max>0.274</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.274</min>
+            <max>0.278</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.274</min>
+            <max>0.278</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.269</min>
+            <max>0.273</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="PARK" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>9.057</min>
+            <max>9.305</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>9.03</min>
+            <max>9.278</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.188</min>
+            <max>1.227</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.202</min>
+            <max>1.249</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.191</min>
+            <max>1.231</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.183</min>
+            <max>1.221</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.197</min>
+            <max>1.241</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.197</min>
+            <max>1.237</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.194</min>
+            <max>1.234</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.189</min>
+            <max>1.227</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.201</min>
+            <max>1.238</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.192</min>
+            <max>1.23</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.203</min>
+            <max>1.241</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.192</min>
+            <max>1.232</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.153</min>
+            <max>14.288</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.132</min>
+            <max>14.269</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.779</min>
+            <max>0.792</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.78</min>
+            <max>0.792</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.774</min>
+            <max>0.785</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.773</min>
+            <max>0.783</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.777</min>
+            <max>0.79</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.78</min>
+            <max>0.79</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.781</min>
+            <max>0.791</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.775</min>
+            <max>0.786</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.78</min>
+            <max>0.791</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.777</min>
+            <max>0.787</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.782</min>
+            <max>0.793</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.777</min>
+            <max>0.788</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>16.044</min>
+            <max>16.168</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>16.03</min>
+            <max>16.155</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.688</min>
+            <max>0.701</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.687</min>
+            <max>0.696</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.68</min>
+            <max>0.689</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.682</min>
+            <max>0.69</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.684</min>
+            <max>0.693</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.685</min>
+            <max>0.693</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.689</min>
+            <max>0.696</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.682</min>
+            <max>0.69</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.686</min>
+            <max>0.695</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.684</min>
+            <max>0.692</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.688</min>
+            <max>0.696</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.684</min>
+            <max>0.692</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="TURN" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>9.086</min>
+            <max>9.395</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.979</min>
+            <max>9.292</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.536</min>
+            <max>1.599</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.752</min>
+            <max>6.0</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.561</min>
+            <max>1.625</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.718</min>
+            <max>1.796</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.568</min>
+            <max>1.64</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.745</min>
+            <max>1.82</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.535</min>
+            <max>1.602</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.697</min>
+            <max>1.765</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.566</min>
+            <max>1.63</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.721</min>
+            <max>1.794</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.564</min>
+            <max>1.63</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.701</min>
+            <max>1.775</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.159</min>
+            <max>14.345</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.1</min>
+            <max>14.283</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.971</min>
+            <max>0.989</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.084</min>
+            <max>1.103</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.975</min>
+            <max>0.991</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.071</min>
+            <max>1.087</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.979</min>
+            <max>0.996</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.082</min>
+            <max>1.099</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.966</min>
+            <max>0.983</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.059</min>
+            <max>1.076</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.976</min>
+            <max>0.991</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.07</min>
+            <max>1.087</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.978</min>
+            <max>0.994</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.061</min>
+            <max>1.078</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>16.055</min>
+            <max>16.209</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>16.002</min>
+            <max>16.157</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.858</min>
+            <max>0.873</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.954</min>
+            <max>0.967</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.86</min>
+            <max>0.871</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.943</min>
+            <max>0.954</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.862</min>
+            <max>0.874</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.953</min>
+            <max>0.965</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.853</min>
+            <max>0.863</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.933</min>
+            <max>0.945</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.861</min>
+            <max>0.871</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.942</min>
+            <max>0.954</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.863</min>
+            <max>0.873</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.935</min>
+            <max>0.947</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="DRLTURN" width="17">
+      <voltage value="9.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.839</min>
+            <max>8.97</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.743</min>
+            <max>8.899</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.947</min>
+            <max>9.215</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.838</min>
+            <max>9.11</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>2.056</min>
+            <max>2.12</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>2.299</min>
+            <max>2.44</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>2.095</min>
+            <max>2.159</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>2.244</min>
+            <max>2.314</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>2.099</min>
+            <max>2.181</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>2.284</min>
+            <max>2.352</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>2.053</min>
+            <max>2.121</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>2.226</min>
+            <max>2.293</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>2.094</min>
+            <max>2.155</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>2.261</min>
+            <max>2.333</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>2.1</min>
+            <max>2.164</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>2.223</min>
+            <max>2.3</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>13.996</min>
+            <max>14.088</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>13.944</min>
+            <max>14.047</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.086</min>
+            <max>14.251</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.033</min>
+            <max>14.197</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.26</min>
+            <max>1.282</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.376</min>
+            <max>1.397</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.267</min>
+            <max>1.284</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.355</min>
+            <max>1.373</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.267</min>
+            <max>1.286</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.374</min>
+            <max>1.391</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.253</min>
+            <max>1.27</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.349</min>
+            <max>1.366</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.263</min>
+            <max>1.279</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.361</min>
+            <max>1.379</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.27</min>
+            <max>1.286</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.346</min>
+            <max>1.365</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.906</min>
+            <max>15.991</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.867</min>
+            <max>15.954</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.996</min>
+            <max>16.133</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.951</min>
+            <max>16.09</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.109</min>
+            <max>1.127</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.206</min>
+            <max>1.221</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.112</min>
+            <max>1.123</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.189</min>
+            <max>1.201</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.111</min>
+            <max>1.126</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.204</min>
+            <max>1.217</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.101</min>
+            <max>1.113</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.184</min>
+            <max>1.196</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.108</min>
+            <max>1.119</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.194</min>
+            <max>1.206</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.114</min>
+            <max>1.126</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.182</min>
+            <max>1.195</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="PARKTURN" width="17">
+      <voltage value="9.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.685</min>
+            <max>8.945</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.565</min>
+            <max>8.823</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>9.326</min>
+            <max>9.567</max>
+            <check>Out of Spec</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>9.233</min>
+            <max>9.492</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>2.681</min>
+            <max>2.781</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>2.956</min>
+            <max>3.166</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>2.735</min>
+            <max>2.833</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>2.865</min>
+            <max>2.974</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>2.752</min>
+            <max>2.877</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>2.922</min>
+            <max>3.029</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>2.701</min>
+            <max>2.799</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>2.857</min>
+            <max>2.962</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>2.756</min>
+            <max>2.853</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>2.897</min>
+            <max>3.008</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>2.751</min>
+            <max>2.854</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>2.873</min>
+            <max>2.989</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>13.925</min>
+            <max>14.048</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>13.842</min>
+            <max>13.967</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.321</min>
+            <max>14.44</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.284</min>
+            <max>14.402</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.69</min>
+            <max>1.716</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.817</min>
+            <max>1.842</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.696</min>
+            <max>1.715</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.78</min>
+            <max>1.799</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.703</min>
+            <max>1.726</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.807</min>
+            <max>1.825</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.689</min>
+            <max>1.707</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.777</min>
+            <max>1.795</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.703</min>
+            <max>1.721</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.791</min>
+            <max>1.811</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.706</min>
+            <max>1.724</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.785</min>
+            <max>1.807</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.839</min>
+            <max>15.946</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.775</min>
+            <max>15.881</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>16.197</min>
+            <max>16.294</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>16.157</min>
+            <max>16.263</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.49</min>
+            <max>1.515</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.598</min>
+            <max>1.617</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.493</min>
+            <max>1.507</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.568</min>
+            <max>1.582</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.5</min>
+            <max>1.517</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.59</min>
+            <max>1.604</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.49</min>
+            <max>1.504</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.565</min>
+            <max>1.579</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.499</min>
+            <max>1.512</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.577</min>
+            <max>1.59</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.501</min>
+            <max>1.514</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.572</min>
+            <max>1.588</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+  </temperature>
+  <temperature temp="85C">
+    <mode id="DRL" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.932</min>
+            <max>9.219</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.963</min>
+            <max>9.23</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.497</min>
+            <max>0.511</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.497</min>
+            <max>0.542</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.497</min>
+            <max>0.514</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.488</min>
+            <max>0.503</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.496</min>
+            <max>0.519</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.49</min>
+            <max>0.506</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.494</min>
+            <max>0.507</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.496</min>
+            <max>0.51</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.494</min>
+            <max>0.508</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.5</min>
+            <max>0.517</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.497</min>
+            <max>0.517</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.486</min>
+            <max>0.501</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.08</min>
+            <max>14.239</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.093</min>
+            <max>14.237</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.304</min>
+            <max>0.307</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.302</min>
+            <max>0.305</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.302</min>
+            <max>0.306</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.297</min>
+            <max>0.299</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.3</min>
+            <max>0.303</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.3</min>
+            <max>0.303</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.299</min>
+            <max>0.302</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.3</min>
+            <max>0.303</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.3</min>
+            <max>0.303</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.302</min>
+            <max>0.306</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.3</min>
+            <max>0.304</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.298</min>
+            <max>0.302</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.983</min>
+            <max>16.138</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.992</min>
+            <max>16.122</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.268</min>
+            <max>0.271</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.266</min>
+            <max>0.27</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.266</min>
+            <max>0.27</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.262</min>
+            <max>0.264</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.264</min>
+            <max>0.267</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.265</min>
+            <max>0.268</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.264</min>
+            <max>0.266</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.265</min>
+            <max>0.267</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.264</min>
+            <max>0.267</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.267</min>
+            <max>0.27</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.265</min>
+            <max>0.268</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.263</min>
+            <max>0.266</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="PARK" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>9.059</min>
+            <max>9.297</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>9.064</min>
+            <max>9.325</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.136</min>
+            <max>1.216</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.192</min>
+            <max>1.248</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.184</min>
+            <max>1.22</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.174</min>
+            <max>1.21</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.188</min>
+            <max>1.232</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.18</min>
+            <max>1.216</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.19</min>
+            <max>1.226</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.185</min>
+            <max>1.224</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.192</min>
+            <max>1.231</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.162</min>
+            <max>1.223</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.189</min>
+            <max>1.227</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.18</min>
+            <max>1.216</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.155</min>
+            <max>14.289</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.163</min>
+            <max>14.305</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.729</min>
+            <max>0.78</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.768</min>
+            <max>0.78</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.753</min>
+            <max>0.776</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.76</min>
+            <max>0.77</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.765</min>
+            <max>0.777</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.76</min>
+            <max>0.775</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.767</min>
+            <max>0.78</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.765</min>
+            <max>0.776</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.77</min>
+            <max>0.781</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.741</min>
+            <max>0.776</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.767</min>
+            <max>0.777</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.762</min>
+            <max>0.775</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>16.047</min>
+            <max>16.171</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>16.056</min>
+            <max>16.184</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.64</min>
+            <max>0.69</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.672</min>
+            <max>0.683</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.66</min>
+            <max>0.679</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.668</min>
+            <max>0.677</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.671</min>
+            <max>0.681</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.664</min>
+            <max>0.68</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.673</min>
+            <max>0.686</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.673</min>
+            <max>0.681</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.677</min>
+            <max>0.686</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.648</min>
+            <max>0.68</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.674</min>
+            <max>0.682</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.667</min>
+            <max>0.679</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="TURN" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>9.057</min>
+            <max>9.353</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>9.04</min>
+            <max>9.371</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.446</min>
+            <max>1.504</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.493</min>
+            <max>1.723</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.348</min>
+            <max>1.534</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.473</min>
+            <max>1.679</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.457</min>
+            <max>1.529</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.48</min>
+            <max>1.684</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.431</min>
+            <max>1.492</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.611</min>
+            <max>1.678</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.337</min>
+            <max>1.518</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.491</min>
+            <max>1.703</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.33</min>
+            <max>1.387</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.438</min>
+            <max>1.638</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.157</min>
+            <max>14.345</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.14</min>
+            <max>14.33</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.91</min>
+            <max>0.927</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.01</min>
+            <max>1.036</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.921</min>
+            <max>0.936</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.998</min>
+            <max>1.015</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.909</min>
+            <max>0.925</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.006</min>
+            <max>1.023</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.895</min>
+            <max>0.91</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.999</min>
+            <max>1.014</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.913</min>
+            <max>0.927</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.007</min>
+            <max>1.023</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.909</min>
+            <max>0.924</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.983</min>
+            <max>0.998</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>16.048</min>
+            <max>16.219</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>16.035</min>
+            <max>16.205</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>0.803</min>
+            <max>0.818</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.89</min>
+            <max>0.917</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>0.747</min>
+            <max>0.824</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>0.88</min>
+            <max>0.893</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>0.8</min>
+            <max>0.812</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>0.888</min>
+            <max>0.9</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>0.79</min>
+            <max>0.801</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>0.881</min>
+            <max>0.892</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>0.806</min>
+            <max>0.817</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>0.887</min>
+            <max>0.899</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>0.801</min>
+            <max>0.813</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>0.867</min>
+            <max>0.879</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="DRLTURN" width="17">
+      <voltage value="9.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.796</min>
+            <max>8.976</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.779</min>
+            <max>8.962</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.912</min>
+            <max>9.182</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.898</min>
+            <max>9.163</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.966</min>
+            <max>2.027</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>2.187</min>
+            <max>2.334</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>2.007</min>
+            <max>2.066</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>2.144</min>
+            <max>2.211</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.985</min>
+            <max>2.079</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>2.151</min>
+            <max>2.215</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.953</min>
+            <max>2.016</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>2.148</min>
+            <max>2.214</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.988</min>
+            <max>2.046</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>2.187</min>
+            <max>2.262</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.986</min>
+            <max>2.054</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>2.093</min>
+            <max>2.163</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>13.98</min>
+            <max>14.059</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>13.972</min>
+            <max>14.052</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.083</min>
+            <max>14.247</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.079</min>
+            <max>14.241</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.193</min>
+            <max>1.21</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.297</min>
+            <max>1.333</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.207</min>
+            <max>1.218</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.279</min>
+            <max>1.291</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.191</min>
+            <max>1.207</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.291</min>
+            <max>1.304</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.177</min>
+            <max>1.189</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.283</min>
+            <max>1.297</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.196</min>
+            <max>1.207</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.293</min>
+            <max>1.308</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.193</min>
+            <max>1.207</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.264</min>
+            <max>1.278</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.888</min>
+            <max>15.971</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.884</min>
+            <max>15.966</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.989</min>
+            <max>16.132</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.989</min>
+            <max>16.127</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.049</min>
+            <max>1.071</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.138</min>
+            <max>1.163</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.059</min>
+            <max>1.069</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.121</min>
+            <max>1.132</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.046</min>
+            <max>1.058</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.133</min>
+            <max>1.143</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.034</min>
+            <max>1.044</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.126</min>
+            <max>1.135</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.05</min>
+            <max>1.059</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.134</min>
+            <max>1.145</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.047</min>
+            <max>1.057</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.111</min>
+            <max>1.122</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="PARKTURN" width="17">
+      <voltage value="9.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>8.684</min>
+            <max>8.961</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>8.681</min>
+            <max>8.942</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>9.195</min>
+            <max>9.467</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>9.184</min>
+            <max>9.438</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>2.547</min>
+            <max>2.728</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>0.049</min>
+            <max>3.078</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>2.649</min>
+            <max>2.778</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>2.799</min>
+            <max>2.921</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>2.656</min>
+            <max>2.823</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>2.793</min>
+            <max>2.919</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>2.625</min>
+            <max>2.744</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>2.827</min>
+            <max>2.935</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>2.678</min>
+            <max>2.777</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>2.806</min>
+            <max>2.985</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>2.663</min>
+            <max>2.779</max>
+            <check>Out of Spec</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>2.75</min>
+            <max>2.877</max>
+            <check>Out of Spec</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>13.894</min>
+            <max>14.048</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>13.896</min>
+            <max>14.036</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>14.31</min>
+            <max>14.455</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>14.313</min>
+            <max>14.446</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.593</min>
+            <max>1.661</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.743</min>
+            <max>1.798</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.634</min>
+            <max>1.667</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.713</min>
+            <max>1.738</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.632</min>
+            <max>1.664</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.723</min>
+            <max>1.752</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.619</min>
+            <max>1.649</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.728</min>
+            <max>1.749</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.645</min>
+            <max>1.664</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.708</min>
+            <max>1.759</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.637</min>
+            <max>1.659</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.704</min>
+            <max>1.732</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="16.0V" width="17">
+        <vsenses>
+          <vsense>
+            <name>VSense 1</name>
+            <min>15.828</min>
+            <max>15.945</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>15.981</min>
+            <max>16.09</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 1</name>
+            <min>16.195</min>
+            <max>16.301</max>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>VSense 2</name>
+            <min>16.007</min>
+            <max>16.119</max>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>TP1: System 82</name>
+            <min>1.406</min>
+            <max>1.466</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP2: System 83</name>
+            <min>1.557</min>
+            <max>1.599</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP3: System 84</name>
+            <min>1.47</min>
+            <max>1.499</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP4: System 85</name>
+            <min>1.507</min>
+            <max>1.524</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP5: System 86</name>
+            <min>1.438</min>
+            <max>1.458</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP6: System 87</name>
+            <min>1.517</min>
+            <max>1.539</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP7: System 88</name>
+            <min>1.427</min>
+            <max>1.448</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP8: System 89</name>
+            <min>1.554</min>
+            <max>1.569</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP9: System 90</name>
+            <min>1.481</min>
+            <max>1.495</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP10: System 91</name>
+            <min>1.503</min>
+            <max>1.542</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP11: System 92</name>
+            <min>1.441</min>
+            <max>1.455</max>
+            <check>G</check>
+          </system>
+          <system>
+            <name>TP12: System 93</name>
+            <min>1.531</min>
+            <max>1.555</max>
+            <check>G</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+  </temperature>
+</test>
