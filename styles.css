@@ -1,6 +1,13 @@
+body {
+  font-family: Calibri, Tahoma, Verdana, Segoe, sans-serif;
+}
+
+h1 {
+  text-decoration: underline;
+}
+
 table {
   border-collapse: collapse;
-  font-family: Calibri, Tahoma, Verdana, Segoe, sans-serif;
   font-size: 0.6em;
 }
 
@@ -18,28 +25,22 @@ tr:hover {
   background-color: lightyellow;
 }
 
-.drl {
+.DRL {
   background-color: #00E5EE;
 }
 
-.turn {
+.TURN {
   background-color: purple;
 }
 
-.park {
+.PARK {
   background-color: darkorange;
 }
 
-.parkturn {
+.PARKTURN {
   background-color: orange;
 }
 
-.drlturn {
+.DRLTURN {
   background-color: #ff96ca;
 }
-
-/*
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-*/

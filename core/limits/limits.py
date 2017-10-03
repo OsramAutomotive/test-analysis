@@ -72,14 +72,3 @@ class Limits(object):
         pp.pprint(self.board_module_pairs)
         pp.pprint(self.lim)
         print('\n\n')
-
-
-# limitspath = r"C:\Users\bruno\Programming Projects\Test Data Analysis\test files\test.htm"
-# limits = Limits(limitspath, ['B3', 'B4', 'B5', 'B6'], [23, -40, 85])
-# limitspath = r"C:\Users\bruno\Programming Projects\Test Data Analysis\test files\tesladv.htm"
-# limits = Limits(limitspath, ['B2', 'B4', 'B5'], [23, -40, 85])
-
-# pp.pprint(limits.board_module_pairs)
-# print('\n')
-# pp.pprint(limits.lim)
-

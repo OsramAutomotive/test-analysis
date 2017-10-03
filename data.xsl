@@ -10,7 +10,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <body>
       <!-- Main Header -->
-      <h2><div contenteditable="true">Test Tables</div></h2>
+      <h1><div contenteditable="true"><xsl:value-of select="test/@name"/></div></h1>
       
       <!-- Temperature Header -->
       <xsl:for-each select="test/temperature">
@@ -100,7 +100,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           <br></br><br></br>
 
         </xsl:for-each><!-- end mode -->
-        <br></br><br></br><br></br><br></br>
+        <br></br><br></br><br></br>
       </xsl:for-each><!-- end temperature -->
     </body>
   </html>
