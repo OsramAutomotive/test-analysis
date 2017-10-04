@@ -14,6 +14,12 @@ def fill_stats_and_xml(test, limits=None, write_to_excel=True):
     from lxml import etree
     xml_root = etree.Element("test", name=test.name, header_width=str(len(test.systems)))
 
+    temp_analysis = etree.SubElement(xml_root, "profile")
+    temp_minimum = etree.SubElement(temp_analysis, "temp-min")
+    temp_maximum = etree.SubElement(temp_analysis, "temp-max")
+    temp_minimum.text = str(test.mdf[AMB_TEMP].min())
+    temp_maximum.text = str(test.mdf[AMB_TEMP].max())
+
     for temp in test.temps:
         xml_temp = etree.SubElement(xml_root, "temperature", temp=str(temp)+'C')
 

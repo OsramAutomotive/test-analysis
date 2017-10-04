@@ -12,6 +12,19 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <!-- Main Header -->
       <h1><div contenteditable="true"><xsl:value-of select="test/@name"/></div></h1>
       
+      <!-- Profile Analysis -->
+      <table>
+        <th colspan="2">Temperature Analysis (°C)</th>
+        <tr>
+          <td>Min:</td>
+          <td><xsl:value-of select="test/profile/temp-min"/></td>
+        </tr>
+        <tr>
+          <td>Max:</td>
+          <td><xsl:value-of select="test/profile/temp-max"/></td>
+        </tr>
+      </table>
+
       <!-- Temperature Header -->
       <xsl:for-each select="test/temperature">
         <h2><div contenteditable="true"><xsl:value-of select="@temp"/></div></h2>

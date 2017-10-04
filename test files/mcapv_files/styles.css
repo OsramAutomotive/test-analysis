@@ -54,6 +54,10 @@ tr:hover {
   background-color: #ff96ca;
 }
 
+.mode-header.BEAST {
+  background-color: yellow;
+}
+
 
 /* Temperatures */
 .color23C {
