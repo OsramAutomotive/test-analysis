@@ -5,6 +5,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <html>
     <head>
+      <meta http-equiv="refresh" content="15"></meta>
       <link rel="stylesheet" type="text/css" href="styles.css"></link>
     </head>
 
