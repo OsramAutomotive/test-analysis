@@ -15,10 +15,14 @@ def fill_stats_and_xml(test, limits=None, write_to_excel=True):
     xml_root = etree.Element("test", name=test.name, header_width=str(len(test.systems)))
 
     temp_analysis = etree.SubElement(xml_root, "profile")
-    temp_minimum = etree.SubElement(temp_analysis, "temp-min")
-    temp_maximum = etree.SubElement(temp_analysis, "temp-max")
-    temp_minimum.text = str(test.mdf[AMB_TEMP].min())
-    temp_maximum.text = str(test.mdf[AMB_TEMP].max())
+    for tc in test.thermocouples:
+        thermocouple = etree.SubElement(temp_analysis, "thermocouple")
+        name = etree.SubElement(thermocouple, "name")
+        temp_minimum = etree.SubElement(thermocouple, "temp-min")
+        temp_maximum = etree.SubElement(thermocouple, "temp-max")
+        name.text = str(tc)
+        temp_minimum.text = str(round(test.mdf[tc].min(), 2))
+        temp_maximum.text = str(round(test.mdf[tc].max(), 2))
 
     for temp in test.temps:
         xml_temp = etree.SubElement(xml_root, "temperature", temp=str(temp)+'C')
@@ -26,6 +30,8 @@ def fill_stats_and_xml(test, limits=None, write_to_excel=True):
         for mode in test.modes:
             print('\n\n\n*********', mode, '*********')
             mode.get_system_by_system_mode_stats(xml_temp, temp, limits)
+
+    write_user_inputs(xml_root, test)
 
     xml_file = open("tables-in-xml-format.xml", 'w')
     xml_file.write(r'<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="data.xsl"?>')
@@ -36,4 +42,17 @@ def fill_stats_and_xml(test, limits=None, write_to_excel=True):
         xml_file.write(xml_data)
         xml_file.close()
 
-    # write_user_inputs_tab(test, wb)
+def write_user_inputs(xml_root, test):
+    user_inputs = etree.SubElement(xml_root, "user-inputs")
+    test_name = etree.SubElement(user_inputs, "test-name")
+    folder = etree.SubElement(user_inputs, "folder")
+    systems = etree.SubElement(user_inputs, "systems")
+    limits_file = etree.SubElement(user_inputs, "limits-file")
+    temperature_tolerance = etree.SubElement(user_inputs, "temperature-tolerance")
+    voltage_tolerance = etree.SubElement(user_inputs, "voltage-tolerance")
+    test_name.text = test.name
+    folder.text = test.folder
+    systems.text = ', '.join(test.systems)
+    limits_file.text = test.limits.filepath
+    temperature_tolerance.text = str(test.temperature_tolerance)
+    voltage_tolerance.text = str(test.voltage_tolerance)

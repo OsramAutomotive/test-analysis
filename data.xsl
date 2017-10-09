@@ -15,15 +15,18 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       
       <!-- Profile Analysis -->
       <table>
-        <th colspan="2">Temperature Analysis (°C)</th>
-        <tr>
-          <td>Min:</td>
-          <td><xsl:value-of select="test/profile/temp-min"/></td>
+        <tr bgcolor="e3e3e3">
+          <th>Thermocouple</th>
+          <th>Min (°C)</th>
+          <th>Max (°C)</th>
         </tr>
-        <tr>
-          <td>Max:</td>
-          <td><xsl:value-of select="test/profile/temp-max"/></td>
-        </tr>
+        <xsl:for-each select="test/profile/thermocouple">
+          <tr>
+            <td><xsl:value-of select="name"/></td>
+            <td><xsl:value-of select="temp-min"/></td>
+            <td><xsl:value-of select="temp-max"/></td>
+          </tr>
+        </xsl:for-each>
       </table>
 
       <!-- Temperature Header -->
@@ -111,11 +114,25 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
             </xsl:for-each>
           </table>
-          <br></br><br></br>
+          <br/><br/>
 
         </xsl:for-each><!-- end mode -->
-        <br></br><br></br><br></br>
+        <br/><br/><br/>
       </xsl:for-each><!-- end temperature -->
+
+
+      <h2>User Inputs</h2>
+      <ul>
+        <li><strong>Test Name:  </strong><xsl:value-of select="test/user-inputs/test-name"/></li>
+        <li><strong>Data Folder:  </strong><xsl:value-of select="test/user-inputs/folder"/></li>
+        <li><strong>DUTs:  </strong><xsl:value-of select="test/user-inputs/systems"/></li>
+        <li><strong>Limits File:  </strong><xsl:value-of select="test/user-inputs/limits-file"/></li>
+        <li><strong>Temperature Tolerance:  </strong><xsl:value-of select="test/user-inputs/temperature-tolerance"/>°C</li>
+        <li><strong>Voltage Tolerance:  </strong><xsl:value-of select="test/user-inputs/voltage-tolerance"/>V</li>
+      </ul>
+
+      <br/>
+
     </body>
   </html>
 
