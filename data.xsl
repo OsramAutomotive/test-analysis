@@ -5,14 +5,19 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <html>
     <head>
-      <meta http-equiv="refresh" content="15"></meta>
+      <!-- <meta http-equiv="refresh" content="15"></meta> -->
+      <meta http-equiv="pragma" content="no-cache"></meta>
       <link rel="stylesheet" type="text/css" href="styles.css"></link>
+      <!-- <script>setTimeout('window.location.reload();', 5000);</script> -->
     </head>
 
     <body>
       <!-- Main Header -->
       <h1><div contenteditable="true"><xsl:value-of select="test/@name"/></div></h1>
       
+      <!-- Time Analysis -->
+      <h3>Data analysis as of <xsl:value-of select="test/time/timestamp"/></h3>
+
       <!-- Profile Analysis -->
       <table>
         <tr bgcolor="e3e3e3">

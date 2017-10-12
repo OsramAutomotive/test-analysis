@@ -7,12 +7,17 @@ from core.data_import.mode import *
 from core.data_import.board import *
 from core.re_and_global import *
 from lxml import etree
+import webbrowser
 
 
-def fill_stats_and_xml(test, limits=None, write_to_excel=True):
+def create_xml_tables(test, limits=None):
     ''' This function fills the mode objects with stats from test using mode method '''
     from lxml import etree
     xml_root = etree.Element("test", name=test.name, header_width=str(len(test.systems)))
+
+    time_analysis = etree.SubElement(xml_root, "time")
+    last_time_value = etree.SubElement(time_analysis, "timestamp")
+    last_time_value.text = str(test.mdf.tail(1).index[0])
 
     temp_analysis = etree.SubElement(xml_root, "profile")
     for tc in test.thermocouples:
@@ -33,14 +38,17 @@ def fill_stats_and_xml(test, limits=None, write_to_excel=True):
 
     write_user_inputs(xml_root, test)
 
-    xml_file = open("tables-in-xml-format.xml", 'w')
+    xml_file = open(test.name + '.xml', 'w')
     xml_file.write(r'<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="data.xsl"?>')
     xml_file.close()
 
-    with open("tables-in-xml-format.xml", 'a') as xml_file:
-        xml_data = etree.tostring(xml_root, pretty_print=True,encoding='unicode')
+    with open(test.name +'.xml', 'a') as xml_file:
+        xml_data = etree.tostring(xml_root, pretty_print=True, encoding='unicode')
         xml_file.write(xml_data)
         xml_file.close()
+
+    webbrowser.open('file://' + os.path.realpath(test.name) + '.xml', new=0)
+
 
 def write_user_inputs(xml_root, test):
     user_inputs = etree.SubElement(xml_root, "user-inputs")

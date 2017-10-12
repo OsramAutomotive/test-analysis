@@ -3,6 +3,7 @@ QMainWindow {
                                  stop: 0  rgb(217, 231, 247), stop: 0.4 rgb(194, 216, 242),
                                  stop: 0.4 rgb(194, 216, 242), stop: 1.0 rgb(156, 193, 239));
   color:rgb(59, 90, 130);
+  
 }
 
 QWidget{
@@ -312,6 +313,11 @@ QPushButton:pressed {
   padding:3px;
   border-radius: 8px;
 }
+
+QPushButton:disabled {
+  background-color:#D3D3D3;
+}
+
 
 QToolButton {
   border-style:none;

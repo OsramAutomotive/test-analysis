@@ -50,19 +50,15 @@ class Limits(object):
 
     def get_mode_limits(self, mode):
         mode_id = mode.get('id')
-        print('\n', mode_id)
         self.lim[mode_id] = {}
         temp_tables = mode.find_all(class_='temp-table')
         for temp_table in temp_tables:
             temp = temp_table.get('class')[-1].replace('temp', '')
             temp = int(temp.replace('C', ''))
-            print('Temperature: ', temp)
             self.lim[mode_id][temp] = {}
             voltage_rows = temp_table.find_all(lambda tag: tag.get('id')=='voltage')
             for voltage_row in voltage_rows:
                 voltage = round(float(voltage_row.get('class')[0]), 1);
-                print(voltage)
-                print('min value:', voltage_row.find(class_='min').string)
                 minimum = round(float(voltage_row.find(class_='min').string), 3)
                 maximum = round(float(voltage_row.find(class_='max').string), 3)
                 self.lim[mode_id][temp][voltage] = (minimum, maximum)
