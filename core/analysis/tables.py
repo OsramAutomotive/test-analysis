@@ -10,7 +10,7 @@ from lxml import etree
 import webbrowser
 
 
-def create_xml_tables(test, limits=None):
+def create_xml_tables(test, run_limit_analysis=False, limits=None):
     ''' This function fills the mode objects with stats from test using mode method '''
     from lxml import etree
     xml_root = etree.Element("test", name=test.name, header_width=str(len(test.systems)))
@@ -34,7 +34,7 @@ def create_xml_tables(test, limits=None):
 
         for mode in test.modes:
             print('\n\n\n*********', mode, '*********')
-            mode.get_system_by_system_mode_stats(xml_temp, temp, limits)
+            mode.get_system_by_system_mode_stats(xml_temp, temp, run_limit_analysis, limits)
 
     write_user_inputs(xml_root, test)
 
@@ -61,6 +61,6 @@ def write_user_inputs(xml_root, test):
     test_name.text = test.name
     folder.text = test.folder
     systems.text = ', '.join(test.systems)
-    limits_file.text = test.limits.filepath
+    limits_file.text = test.limits.filepath if test.limits else None
     temperature_tolerance.text = str(test.temperature_tolerance)
     voltage_tolerance.text = str(test.voltage_tolerance)

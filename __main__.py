@@ -207,7 +207,7 @@ class TestAnalysisUI(QWidget):
         self.data_folder_textfield.setDisabled(True)
         self.analyze_button.setText('Start Real Time Analysis')
         self.analyze_button.disconnect()
-        self.analyze_button.clicked[bool].connect(self.analyze_real_time)
+        self.analyze_button.clicked[bool].connect(self.thread_analysis)
 
     def _load_limits(self, boards, temps):
         if self.limits_file:
@@ -236,7 +236,7 @@ class TestAnalysisUI(QWidget):
                                multimode, temperature_tolerance, voltage_tolerance, *temps)
             for analysis_type in self.analysis_buttons:
                 if analysis_type.pressed:
-                    self._run_analysis(analysis_type.name, test, limits, hists_by_tp, percent_from_mean)
+                    self._run_analysis(analysis_type.name, test, limits, hists_by_tp, percent_from_mean, run_limit_analysis)
             print('\n\n\n ==> Analysis complete.')
             try:
                 plt.show()
@@ -256,13 +256,13 @@ class TestAnalysisUI(QWidget):
         if limits:
             limits.print_info()
 
-    def _run_analysis(self, analysis_name, test, limits, hists_by_tp, percent_from_mean):
+    def _run_analysis(self, analysis_name, test, limits, hists_by_tp, percent_from_mean, run_limit_analysis):
         if analysis_name == 'Plot':
             plot_modes(test)
         elif analysis_name == 'Histograms':
             make_mode_histograms(test, system_by_system=hists_by_tp, limits=limits, percent_from_mean=percent_from_mean)
         elif analysis_name == 'Tables':
-            create_xml_tables(test, limits)
+            create_xml_tables(test, run_limit_analysis, limits)
         elif analysis_name == 'Out of Spec':
             for mode in test.modes:
                 if limits:
@@ -318,6 +318,30 @@ class TestAnalysisUI(QWidget):
         close_browser('iexplore')
         create_xml_tables(test, limits)
         print('\n\n\n ==> Analysis complete.')
+
+
+    def thread_analysis(self):
+        test, limits = None, None ## clear test objects (from prevoius usage)
+        test_name = self.test_name.text()
+        temps = self.temperatures_textfield.text()
+        boards = [b.name for b in self.board_buttons if b.pressed]
+        datapath = self.data_folder
+        multimode = self.multimode_box.isChecked()
+        hists_by_tp = self.hist_by_tp_box.isChecked()
+        temperature_tolerance = float(self.temp_tol_field.text())
+        voltage_tolerance = float(self.voltage_tol_field.text())
+        percent_from_mean = int(self.pctg_tol_field.text())
+        run_limit_analysis = self.limit_analysis_box.isChecked()
+        
+        if datapath and boards and temps:
+            temps = [int(temperature) for temperature in self.temperatures_textfield.text().split(',')]
+            limits = self._load_limits(boards, temps)
+            self.run_analysis_thread = realTimeThread(self, test_name, temps, boards, datapath, 
+                                    multimode, hists_by_tp, temperature_tolerance, voltage_tolerance, 
+                                    percent_from_mean, run_limit_analysis, limits)
+            self.run_analysis_thread.start()
+        else:
+            print('\nYou must select a data folder, temperatures, and test boards')
 
 
 
@@ -398,6 +422,73 @@ class AnalyzeButton(QPushButton):
     def init_button(self, name):
         self.setText(name)
         self.name = name
+
+
+class realTimeThread(QThread):
+    """ Run analysis """
+    def __init__(self, ui, test_name, temps, boards, datapath, multimode, hists_by_tp, 
+                 temperature_tolerance, voltage_tolerance, percent_from_mean, 
+                 run_limit_analysis, limits):
+        QThread.__init__(self)
+        self.ui = ui
+        self.test_name = test_name
+        self.temps = temps
+        self.boards = boards
+        self.datapath = datapath
+        self.multimode = multimode
+        self.hists_by_tp = hists_by_tp
+        self.temperature_tolerance = temperature_tolerance
+        self.voltage_tolerance = voltage_tolerance
+        self.percent_from_mean = percent_from_mean
+        self.run_limit_analysis = run_limit_analysis
+        self.limits = limits
+
+    def __del__(self):
+        self.wait()
+
+    def _print_test_conditions(self):
+        print('\nTest Name:', self.test_name)
+        print('Data Folder:', self.datapath)
+        print('Temperatures:', self.temps)
+        print('Boards:', self.boards, '\n')
+        print('Temp Tolerance:', self.temperature_tolerance)
+        print('Voltage Tolerance:', self.voltage_tolerance)
+        print('Limits File:', self.limits.filepath)
+        if self.limits:
+            self.limits.print_info()
+
+    def _real_time_loop(self):
+        self.ui.setDisabled(True)
+        print('\n\nAnalysis awaiting notification. Tables will be generated when there is raw data to analyze...\n\n')
+        path_to_watch = os.path.abspath(CONSTANT_REAL_TIME_FOLDER)
+        change_handle = win32file.FindFirstChangeNotification (path_to_watch, 
+                                0, win32con.FILE_NOTIFY_CHANGE_FILE_NAME)
+        try:
+            old_path_contents = dict ([(f, None) for f in os.listdir (path_to_watch)])
+            while 1:
+                result = win32event.WaitForSingleObject (change_handle, 500)
+                if result == win32con.WAIT_OBJECT_0:
+                  time.sleep(5)
+                  new_path_contents = dict ([(f, None) for f in os.listdir (path_to_watch)])
+                  added = [f for f in new_path_contents if not f in old_path_contents]
+                  if added: 
+                    print("Datafile added: ", ", ".join (added))
+                    self._analyze_real_time()
+                  old_path_contents = new_path_contents
+                  win32file.FindNextChangeNotification (change_handle)
+        finally:
+            win32file.FindCloseChangeNotification (change_handle)
+
+    def _analyze_real_time(self):
+        self._print_test_conditions()
+        test = TestStation(self.test_name, self.boards, self.datapath, self.limits, self.run_limit_analysis, 
+                           self.multimode, self.temperature_tolerance, self.voltage_tolerance, *self.temps)
+        close_browser('iexplore')
+        create_xml_tables(test, self.run_limit_analysis, self.limits)
+        print('\n\n\n ==> Analysis complete.')
+
+    def run(self):
+        self._real_time_loop()
 
 
 def open_browser(test_name):

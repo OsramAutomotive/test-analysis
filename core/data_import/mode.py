@@ -109,7 +109,7 @@ class Mode(object):
         hist_dframe = pd.to_numeric(hist_dframe['currents'], downcast='float')
         return hist_dframe
 
-    def get_system_by_system_mode_stats(self, xml_temp, temp, limits=None):
+    def get_system_by_system_mode_stats(self, xml_temp, temp, run_limit_analysis=False, limits=None):
         ''' Get voltage/current statistics and limit analysis for this mode '''
         xml_header_width = str(len(self.voltage_senses)+len(self.systems)+1)
         xml_mode = etree.SubElement(xml_temp, "mode", id=self.name, width=xml_header_width)
@@ -126,7 +126,8 @@ class Mode(object):
             for vsense in self.voltage_senses:
                 xml_vsense = etree.SubElement(xml_vsenses, "vsense")
                 vsense_min, vsense_max, mean = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
-                out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance, 
+                out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance, 
+                                                        voltage+self.test.voltage_tolerance, 
                                                         vsense_min, vsense_max)
                 self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, mean, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_vsense, "name")
@@ -159,7 +160,7 @@ class Mode(object):
                 xml_max = etree.SubElement(xml_system, "max")
                 xml_max.text = str(sys_max)
                 xml_check = etree.SubElement(xml_system, "check")
-                xml_check.text = 'Out of Spec' if out_of_spec_bool else 'G'
+                xml_check.text = 'NA' if (not run_limit_analysis or not limits) else 'Out of Spec' if out_of_spec_bool else 'G'
 
     def get_out_of_spec_data(self):
         ''' Method for retrieving out_of_spec raw data from test in this mode '''
