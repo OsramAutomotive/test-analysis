@@ -84,7 +84,7 @@ class TestAnalysisUI(QWidget):
         grid = QGridLayout()
         self.setLayout(grid)
         grid.setSpacing(10)  # spacing between widgets
-      
+
         ## data folder
         self.data_folder_textfield = QLineEdit(self)
         self.data_folder_textfield.setPlaceholderText('(No Folder Selected)')
@@ -269,55 +269,6 @@ class TestAnalysisUI(QWidget):
                     mode.get_out_of_spec_data()
         else:
             print('Analysis tool not found')
-
-
-    def analyze_real_time(self):
-        test, limits = None, None ## clear test objects (from prevoius usage)
-        test_name = self.test_name.text()
-        temps = self.temperatures_textfield.text()
-        boards = [b.name for b in self.board_buttons if b.pressed]
-        datapath = self.data_folder
-        multimode = self.multimode_box.isChecked()
-        temperature_tolerance = float(self.temp_tol_field.text())
-        voltage_tolerance = float(self.voltage_tol_field.text())
-        percent_from_mean = int(self.pctg_tol_field.text())
-
-        if datapath and boards and temps:
-            self.setDisabled(True)
-            print('\n\nAnalysis awaiting notification. Tables will be generated when there is raw data to analyze...\n\n')
-            path_to_watch = os.path.abspath(CONSTANT_REAL_TIME_FOLDER)
-            change_handle = win32file.FindFirstChangeNotification (path_to_watch, 
-                                    0, win32con.FILE_NOTIFY_CHANGE_FILE_NAME)
-            try:
-                old_path_contents = dict ([(f, None) for f in os.listdir (path_to_watch)])
-                while 1:
-                    result = win32event.WaitForSingleObject (change_handle, 500)
-                    if result == win32con.WAIT_OBJECT_0:
-                      time.sleep(5)
-                      new_path_contents = dict ([(f, None) for f in os.listdir (path_to_watch)])
-                      added = [f for f in new_path_contents if not f in old_path_contents]
-                      if added: 
-                        print("Datafile added: ", ", ".join (added))
-                        self._update_table_analysis(test_name, boards, datapath, multimode, 
-                                  temperature_tolerance, voltage_tolerance, percent_from_mean)
-                      old_path_contents = new_path_contents
-                      win32file.FindNextChangeNotification (change_handle)
-            finally:
-                win32file.FindCloseChangeNotification (change_handle)
-        else:
-            print('\nYou must select a data folder, temperatures, and test boards')   
-
-    def _update_table_analysis(self, test_name, boards, datapath, multimode, 
-                              temperature_tolerance, voltage_tolerance, percent_from_mean):
-        temps = [int(temperature) for temperature in self.temperatures_textfield.text().split(',')]
-        limits = self._load_limits(boards, temps)
-        run_limit_analysis = self.limit_analysis_box.isChecked()
-        self._print_test_conditions(test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance)
-        test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, 
-                           multimode, temperature_tolerance, voltage_tolerance, *temps)
-        close_browser('iexplore')
-        create_xml_tables(test, limits)
-        print('\n\n\n ==> Analysis complete.')
 
 
     def thread_analysis(self):

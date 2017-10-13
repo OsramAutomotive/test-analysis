@@ -39,7 +39,7 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
     write_user_inputs(xml_root, test)
 
     xml_file = open(test.name + '.xml', 'w')
-    xml_file.write(r'<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="data.xsl"?>')
+    xml_file.write(r'<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="templates/data.xsl"?>')
     xml_file.close()
 
     with open(test.name +'.xml', 'a') as xml_file:

@@ -5,10 +5,57 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <html>
     <head>
-      <!-- <meta http-equiv="refresh" content="15"></meta> -->
       <meta http-equiv="pragma" content="no-cache"></meta>
-      <link rel="stylesheet" type="text/css" href="styles.css"></link>
-      <!-- <script>setTimeout('window.location.reload();', 5000);</script> -->
+      <!-- <link rel="stylesheet" type="text/css" href="styles.css"></link> -->
+      <style>
+        body {
+          font-family: Calibri, Tahoma, Verdana, Segoe, sans-serif;
+        }
+
+        h1 {
+          text-decoration: underline;
+        }
+
+        table {
+          border-collapse: collapse;
+          font-size: 0.6em;
+        }
+
+        table {
+          text-align: center;
+          border: 1px solid black;
+          padding: 5px;
+        }
+
+        th, td {
+          padding: 1px;
+        }
+
+        tr:hover {
+          background-color: lightyellow;
+        }
+
+        .DRL {
+          background-color: #00E5EE;
+        }
+
+        .TURN {
+          background-color: purple;
+        }
+
+        .PARK {
+          background-color: darkorange;
+        }
+
+        .PARKTURN {
+          background-color: orange;
+        }
+
+        .DRLTURN {
+          background-color: #ff96ca;
+        }
+      </style>
+      
     </head>
 
     <body>
