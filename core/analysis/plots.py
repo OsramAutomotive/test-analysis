@@ -27,15 +27,15 @@ def format_date_time(test, axes):
 
 def plot_voltage_fc(test, axes):
     board_colors = dict(zip(test.boards, MODULE_COLOR_LIST))
-    vsense = test.voltage_senses[0] ## grab only VSense 1
+    vsense = test.VSENSE1 ## grab only VSense 1 columns
     for board in test.boards:
         if board.outage: # skip Outage board
             continue
         elif '5' in board.id: # Turn current board dashed line
-            test.mdf[vsense+' '+board.id].plot(ax=axes[0], color=board_colors[board], linewidth=2, 
+            test.df[board.id + ' ' + vsense].plot(ax=axes[0], color=board_colors[board], linewidth=2, 
                                                linestyle = ':')
         else: # Non-Turn current board solid lines
-            test.mdf[vsense+' '+board.id].plot(ax=axes[0], color=board_colors[board], linewidth=2)
+            test.df[board.id + ' ' + vsense].plot(ax=axes[0], color=board_colors[board], linewidth=2)
 
 def plot_mode_currents(test, axes, row=2):
     ## start on third row subplot
@@ -43,7 +43,7 @@ def plot_mode_currents(test, axes, row=2):
     system_markers = dict(zip(test.systems, SYSTEM_MARKER_LIST))
     for mode in test.modes:
         for system in test.systems:
-            axes[row].scatter(mode.df.index, mode.df[system+' '+mode.mode_tag],
+            axes[row].scatter(mode.df.index, mode.df[mode.mode_tag + ' ' + system],
                 c = system_colors[system], marker = system_markers[system])
         row +=1
     plt.gcf().autofmt_xdate()
@@ -75,7 +75,7 @@ def set_titles_and_labels(test, fig, axes):
     axes[0].set_ylabel("Voltage (V)")
     axes[0].set_ylim([0,20])
     axes[0].set_title("Voltage and Functional Cycle")
-    axes[1].set_ylabel(u"Temperature (\N{DEGREE SIGN}C)")
+    axes[1].set_ylabel(u"Temp (\N{DEGREE SIGN}C)")
     axes[1].set_title("Temperature Profile") 
 
 def set_figure_size(fig, save=False):
@@ -84,7 +84,7 @@ def set_figure_size(fig, save=False):
     fig.subplots_adjust(top=0.90, bottom=0.11, left=0.06, right=0.85, hspace=0.33)
 
 def set_up_date_time(test, ax):
-    ax.plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.vsetpoint], 'k--', 
+    ax.plot_date(test.df.index.to_pydatetime(), test.df[test.vsetpoint], 'k--', 
                       linewidth=3, zorder=10)
     date_fmt = '%m/%d/%y %H:%M:%S'
     formatter = dates.DateFormatter(date_fmt)
@@ -98,12 +98,12 @@ def plot_modes(test, limits=None):
     ''' Creates a temporal plot of the functional cycle, temperature profile, and test mode currents '''
     print('Plotting temporal plot...')
     fig, axes = set_up_plot_area(test)  # set up figure and axes for plotting
-    axes[0].plot_date(test.mdf.index.to_pydatetime(), test.mdf[test.VSETPOINT], 'k--', 
+    axes[0].plot_date(test.df.index.to_pydatetime(), test.df[test.VSETPOINT], 'k--', 
                       linewidth=3, zorder=10)  # plot voltage setpoint on first subplot
     format_date_time(test, axes)  # format and plot date time index 
 
     plot_voltage_fc(test, axes)  ## subplot 1: voltage and functional cycle
-    test.mdf[test.thermocouples].plot(ax=axes[1])  ## subplot 2: temperatures
+    test.df[test.thermocouples].plot(ax=axes[1])  ## subplot 2: temperatures
     plot_mode_currents(test, axes)  ## subplots 3 to XX (up to 6): mode currents
     
     format_subplot_legends(test, axes) ## format or remove legends

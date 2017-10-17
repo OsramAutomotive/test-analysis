@@ -12,12 +12,11 @@ import webbrowser
 
 def create_xml_tables(test, run_limit_analysis=False, limits=None):
     ''' This function fills the mode objects with stats from test using mode method '''
-    from lxml import etree
+    output_folder = r"!output/"
     xml_root = etree.Element("test", name=test.name, header_width=str(len(test.systems)))
-
     time_analysis = etree.SubElement(xml_root, "time")
     last_time_value = etree.SubElement(time_analysis, "timestamp")
-    last_time_value.text = str(test.mdf.tail(1).index[0])
+    last_time_value.text = str(test.df.tail(1).index[0])
 
     temp_analysis = etree.SubElement(xml_root, "profile")
     for tc in test.thermocouples:
@@ -26,8 +25,8 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
         temp_minimum = etree.SubElement(thermocouple, "temp-min")
         temp_maximum = etree.SubElement(thermocouple, "temp-max")
         name.text = str(tc)
-        temp_minimum.text = str(round(test.mdf[tc].min(), 2))
-        temp_maximum.text = str(round(test.mdf[tc].max(), 2))
+        temp_minimum.text = str(round(test.df[tc].min(), 2))
+        temp_maximum.text = str(round(test.df[tc].max(), 2))
 
     for temp in test.temps:
         xml_temp = etree.SubElement(xml_root, "temperature", temp=str(temp)+'C')
@@ -38,16 +37,16 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
 
     write_user_inputs(xml_root, test)
 
-    xml_file = open(test.name + '.xml', 'w')
+    xml_file = open(output_folder + test.name + '.xml', 'w')
     xml_file.write(r'<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="templates/data.xsl"?>')
     xml_file.close()
 
-    with open(test.name +'.xml', 'a') as xml_file:
+    with open(output_folder + test.name +'.xml', 'a') as xml_file:
         xml_data = etree.tostring(xml_root, pretty_print=True, encoding='unicode')
         xml_file.write(xml_data)
         xml_file.close()
 
-    webbrowser.open('file://' + os.path.realpath(test.name) + '.xml', new=0)
+    webbrowser.open('file://' + os.path.realpath(output_folder + test.name) + '.xml', new=0)
 
 
 def write_user_inputs(xml_root, test):

@@ -232,7 +232,7 @@ class TestAnalysisUI(QWidget):
             limits = self._load_limits(boards, temps)
             run_limit_analysis = self.limit_analysis_box.isChecked()
             self._print_test_conditions(test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance)
-            test = TestStation(test_name, boards, datapath, limits, run_limit_analysis, 
+            test = TestStation(test_name, datapath, limits, run_limit_analysis, 
                                multimode, temperature_tolerance, voltage_tolerance, *temps)
             for analysis_type in self.analysis_buttons:
                 if analysis_type.pressed:
@@ -432,7 +432,7 @@ class realTimeThread(QThread):
 
     def _analyze_real_time(self):
         self._print_test_conditions()
-        test = TestStation(self.test_name, self.boards, self.datapath, self.limits, self.run_limit_analysis, 
+        test = TestStation(self.test_name, self.datapath, self.limits, self.run_limit_analysis, 
                            self.multimode, self.temperature_tolerance, self.voltage_tolerance, *self.temps)
         close_browser('iexplore')
         create_xml_tables(test, self.run_limit_analysis, self.limits)

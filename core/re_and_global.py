@@ -12,7 +12,7 @@ SYSTEM_COLOR_LIST = ['brown', '#9932CC', 'maroon', 'red', 'olive', 'yellow',
                      'magenta', '#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', 
                      '#ffff33', '#a65628', '#f781bf', 'burlywood', 'chartreuse', 'lime']
 SYSTEM_MARKER_LIST = ['H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D', 
-            'H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D']
+                      'H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D']
 
 ### TABLE COLORS ###
 TABLE_COLOR_DICT = { 'LB':'#FF5C5C', 'HB':'#FCFBE3', 'LBHB':'#7647A2', 'DRL':'#ADD8E6', 'PARK':'#FFA500', 
@@ -27,12 +27,13 @@ VSETPOINT = 'VSetpoint'
 ON_OFF = 'Board on/off'
 
 ### REGULAR EXPRESSIONS  ###
+REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_\d{2}_.txt$'
 REGEX_TEMPS = 'TC.*'
-REGEX_SYSTEMS = '^TP[0-9]*:\s\S+'
-REGEX_VOLTAGE_SENSES = '^VSense\s[1-2]'
+REGEX_BOARDS = '(^B[0-9]*)'
+REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s.*)'
+REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(VSense\s[1-2])'
 
-def REGEX_BOARDFILE(board):
-    return '^\d{8}_\d{6}_.*_\d{2}_'+board+'.txt$'
+
 def REGEX_BNUMS(bnum):
     return '^TP[0-9]*:\s\S+.*'+bnum.upper()+'$'
 def REGEX_TEMPS_BNUMS(bnum):

@@ -26,16 +26,18 @@ class TestStation(object):
         boards => list of boards (as board objects) that were used for test
         mode_df_dict => 
         modes => 
-        mdf => 'mother' dataframe that holds all board data (?? plus mode data ??)
+        df => dataframe that holds all board data
     """
 
     AMB_TEMP = 'Amb Temp TC1'
     VSETPOINT = 'VSetpoint'
+    VSENSE1 = 'VSense 1'
 
-    def __init__(self, name, boards, folder, limits=None, run_limit_analysis=False, 
+    def __init__(self, name, folder, limits=None, run_limit_analysis=False, 
                  multimode= False, temperature_tolerance=3, voltage_tolerance=0.5, *temps):
         self.name = name
         self.folder = folder
+        self.files = []
         self.systems = []
         self.limits = limits
         self.run_limit_analysis = run_limit_analysis
@@ -49,14 +51,7 @@ class TestStation(object):
         self.boards = []
         self.board_ids = []
         self.current_board_ids = []
-        self.b1 = 'Not Used'
-        self.b2 = 'Not Used'
-        self.b3 = 'Not Used'
-        self.b4 = 'Not Used'
-        self.b5 = 'Not Used'
-        self.b6 = 'Not Used'
-        self.b7 = 'Not Used' # Tesla needs extra fake Board 7 for analysis
-        self.mdf = pd.DataFrame() # 'mother' dataframe holds all measured data
+        self.df = pd.DataFrame() # 'mother' dataframe holds all measured data
         self.mode_df_dict = {}  # holds mode_df for each data mask
         self.mode_ids = []
         self.modes = []
@@ -64,15 +59,16 @@ class TestStation(object):
         self.outage = False
         self.out_of_spec_df = pd.DataFrame()
 
-        self.__create_boards(boards)
-        self.__set_on_boards()
-        self.__set_board_ids()
-        self.__set_systems()
-        self.__set_voltage_senses()
-        self.__set_thermocouples()
-        self.__scan_for_outage()
-        self.__build_test_station_dataframe()
+        self.__build_dataframe()
+        self.__delete_empty_columns()
+        self.__scan_for_boards()
+        self.__scan_for_systems()
         self.__scan_for_vsetpoints()
+        self.__scan_for_voltage_senses()
+        self.__scan_for_thermocouples()
+        self.__create_boards()
+        self.__set_current_board_ids()
+        self.__scan_for_outage()
         self.__make_df_dict()
         self.__make_modes()
 
@@ -80,62 +76,83 @@ class TestStation(object):
         return '{}: {} {}'.format(self.__class__.__name__,
                                self.board_ids, self.folder)
 
-    def __create_boards(self, boards):
+    def __build_dataframe(self):
+        ''' Builds all files in folder for board into a single dataframe 
+        using the pandas module '''
+        print('FOLDER==>', self.folder)
+        print('Building dataframe...')
+        for filename in os.listdir(self.folder):
+            if bool(re.search(REGEX_RAW_DATAFILE, filename)):
+                try:
+                    if run_from_ipython():  # if running from ipython (jupyter)
+                        next_file_df = pd.read_csv( self.folder+'/'+ filename, 
+                                       parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
+                                       index_col='Date Time', sep='\t', engine='python')
+                    else:  # else running on local machine
+                        next_file_df = pd.read_csv( os.path.abspath(os.path.join(os.sep, self.folder, filename)), 
+                                       parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
+                                       index_col='Date Time', sep='\t', engine='python')
+                except Exception:
+                    print('The following error occurred while attempting to convert the ' \
+                          'data files to pandas dataframes:\n\n')
+                    raise
+                self.files.append(filename)
+                self.df = self.df.append(next_file_df)
+        try:
+            self.df = self.df.replace(['OFF','No Reading'], [0,0])
+            self.df = self.df.astype(float)
+        except TypeError as e:
+            print(e)
+        print('...dataframe complete.')
+
+    def __delete_empty_columns(self):
+        ''' Deletes emtpy columns in dataframe '''
+        for col in self.df.columns.copy():
+            if re.search('^TP[0-9]*:\s$', col):
+                del self.df[col]
+        temps = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
+        for temp_col in temps.copy():  ## delete temperature columns with no readings
+            if self.df[temp_col][0] == 'No Reading':
+                del self.df[temp_col]
+
+    def __scan_for_boards(self):
+        set_of_boards = set()
+        for board in [re.search(REGEX_BOARDS, column).group(0) for column in self.df.columns if re.search(REGEX_BOARDS, column)]:
+            set_of_boards.add(board)
+        self.board_ids = sorted(list(set_of_boards))
+
+    def __scan_for_systems(self):
+        ''' Scans data for all systems and gets rid of blank test positions '''
+        set_of_systems = set()
+        for system in [re.search(REGEX_SYSTEMS, column).groups()[0] for column in self.df.columns if re.search(REGEX_SYSTEMS, column)]:
+            set_of_systems.add(system)
+        self.systems = sorted(list(set_of_systems))
+
+    def __scan_for_voltage_senses(self):
+        ''' Scans for voltage sense columns '''
+        self.voltage_senses = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_VOLTAGE_SENSES, self.df.columns[i])]
+
+    def __scan_for_thermocouples(self):
+        ''' Scans for thermocouple columns '''
+        possible_thermocouples = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
+        ## series where index is thermocouples and column is a True/False value depending on whether all items in column are 0
+        tc_series = self.df[possible_thermocouples].apply(lambda x: np.all(x==0))
+        i = 0
+        for tc_all_zero in tc_series:
+            if not tc_all_zero:
+                self.thermocouples.append(tc_series.index[i]) # append only thermocouples that were used in the test
+            i += 1
+
+    def __create_boards(self):
         ''' Creates board dataframes for each board passed into TestStation init '''
-        boards = str(boards)  ## e.g. - boards: 123456 or 3456, etc
-        for board in boards:
-            if '1' in board:
-                self.b1 = Board(self, board)
-            elif '2' in board:
-                self.b2 = Board(self, board)
-            elif '3' in board:
-                self.b3 = Board(self, board)
-            elif '4' in board:
-                self.b4 = Board(self, board)
-            elif '5' in board:
-                self.b5 = Board(self, board)
-            elif '6' in board:
-                self.b6 = Outage(self, board)
-            elif '7' in board:
-                self.b7 = Board(self, board)
+        for board in self.board_ids:
+            self.boards.append(Board(self, board))
 
-    def __set_on_boards(self):
-        ''' Appends all test boards that were used to boards list '''
-        for board in [self.b1, self.b2, self.b3, self.b4, self.b5, self.b6]:
-            if board != 'Not Used':
-                self.boards.append(board)
-
-    def __set_board_ids(self):
-        for board in self.boards:
-            self.board_ids.append(board.id)
+    def __set_current_board_ids(self):
         self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
 
-    def __set_systems(self):
-        ''' Sets the systems tested to the systems scanned on the first board '''
-        self.systems = self.boards[0].systems
-
-    def __set_voltage_senses(self):
-        ''' Sets the voltage senses used to the voltage senses scanned on the first board '''
-        self.voltage_senses = self.boards[0].voltage_senses
-
-    def __set_thermocouples(self):
-        ''' Sets the thermocouples used to the tcs scanned on the first board '''
-        self.thermocouples = self.boards[0].thermocouples
-
-    def __build_test_station_dataframe(self):
-        ''' Builds a single test station "mother dataframe" (mdf) that includes
-            all of the boards used for the test '''
-        for board in self.boards:
-            if self.mdf.empty:  ## if mdf is empty, assign mdf to first board dataframe 
-                self.mdf = board.df.copy() 
-            else:  ## append board df with board id suffix for matching columns
-                self.mdf = self.mdf.join(board.df[self.on_off+self.voltage_senses+self.systems], 
-                                         rsuffix=' '+board.id)
-        rename_columns(self.mdf, self.boards[0], self.on_off+self.voltage_senses+self.systems) ## rename columns of first df appended
-
     def __scan_for_vsetpoints(self):
-        ## TO DO --> ensure test position was used to prevent analysis of empty vsetpoint data
-        self.voltages = sorted(set(self.mdf[self.VSETPOINT]))
+        self.voltages = sorted(set(self.df[self.VSETPOINT]))
 
     def __scan_for_outage(self):
         if any(board.outage for board in self.boards):
@@ -144,7 +161,6 @@ class TestStation(object):
     def __make_df_dict(self):
         ''' Outputs dictionary of ON time mask modes dataframes. This includes
             all boards in df (even off ones, outage included). '''
-
         if self.multimode: ## (multimode)
             masks = [''.join(seq) for seq in itertools.product('01', repeat=len(self.boards))]  ## list of all combinations on/off   
             ## print('\t=> Possible board combinations: ', masks)
@@ -153,21 +169,22 @@ class TestStation(object):
                     continue
                 mode = mask_to_mode(mask, self.board_ids)
                 float_mask = [float(digit) for digit in mask]  ## float type to compare with df board on/off col
-                data = self.mdf.copy()  ## make copy of 'mother' dataframe
+                data = self.df.copy()  ## make copy of 'mother' dataframe
                 ## for each specific mode (mask), join together all board dfs that are ON in mask
                 i = 0
                 for i in range(len(mask)):
                     board, on_off_state = self.boards[i].id, float_mask[i]
-                    data = data.loc[(self.mdf[ON_OFF+' '+board] == on_off_state)]
+                    data = data.loc[(self.df[board + ' ' + ON_OFF] == on_off_state)]
                     i += 1
                 if not data.empty:
                     self.mode_df_dict[mode] = data  ## save mode data in dictionary with mode key
+
         else: ## (NOT multimode)
             data = pd.DataFrame  ## make copy of 'mother' dataframe
             for board in self.boards:
                 mode = board.id
                 if mode != 'B6': ## skip outage board 
-                    data = self.mdf.loc[(self.mdf[ON_OFF+' '+mode] == 1.0)]
+                    data = self.df.loc[(self.df[mode + ' ' + ON_OFF] == 1.0)]
                     if not data.empty:
                         self.mode_df_dict[mode] = data
 
@@ -183,3 +200,5 @@ class TestStation(object):
         ''' Prints the ON boards used in test station for test '''
         for board in self.boards:
             print(board.id)
+
+

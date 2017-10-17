@@ -30,9 +30,9 @@ class Mode(object):
         self.name = self.board_mode # actual name of mode (e.g. - 'DRLTURN')
         self.temps = temps
         self.voltages = voltages
-        self.board_ids = re.findall('..', board_mode) # split string every 2 chars
+        self.board_ids = re.findall('B[]0-9]*', board_mode) # find boards present in mode
         self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
-        self.systems = [' '.join([sys, self.mode_tag]) for sys in test.systems]
+        self.systems = [' '.join([self.mode_tag, sys]) for sys in test.systems]
         self.hist_dict = {}  # temp -> voltage -> df of currents only at that temp/voltage combo
         self.multimode = False  # placeholder -> scans later to check if multimode or not
         self.df = pd.DataFrame() # dataframe of mode currents (added together if multi-mode)
@@ -76,7 +76,7 @@ class Mode(object):
 
     def __scan_for_voltage_senses(self):
         ''' Scans for voltage sense columns '''
-        self.voltage_senses = [vsense+' '+board for board in self.current_board_ids for vsense in self.test.voltage_senses]
+        self.voltage_senses = [vsense for board in self.current_board_ids for vsense in self.test.voltage_senses if board in vsense]
 
     def __get_mode_name_and_set_binning(self):
         ''' Pull name of mode from limits file (if provided) '''
@@ -92,10 +92,10 @@ class Mode(object):
         ''' Adds multimode current column for each system '''
         if self.multimode:  # if mode is a multimode (multiple current boards ON)
             for sys in self.test.systems: # for each system (without appended board/mode tag label)
-                sys_col_label = sys + ' ' + self.mode_tag 
+                sys_col_label = self.mode_tag + ' ' + sys 
                 dframe[sys_col_label] = 0.0  # create multimode col of float zeroes
                 for b in self.current_board_ids: # add each ON current board
-                    dframe[sys_col_label] = dframe[sys_col_label] + pd.to_numeric(dframe[sys+' '+b], downcast='float')
+                    dframe[sys_col_label] = dframe[sys_col_label] + pd.to_numeric(dframe[b + ' ' + sys], downcast='float')
         return dframe
 
     def strip_index_and_melt_to_series(self, dframe):
