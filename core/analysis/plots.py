@@ -65,7 +65,7 @@ def format_subplot_legends(test, axes):
             try:
                 axes[i].legend_.remove()
             except AttributeError as e:
-                print(e)
+                pass
 
 def set_titles_and_labels(test, fig, axes):
     fig.canvas.set_window_title('temporal plot')
