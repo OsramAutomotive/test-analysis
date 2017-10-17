@@ -102,7 +102,7 @@ class TestStation(object):
             self.df = self.df.replace(['OFF','No Reading'], [0,0])
             self.df = self.df.astype(float)
         except TypeError as e:
-            print(e)
+            pass
         print('...dataframe complete.')
 
     def __delete_empty_columns(self):
