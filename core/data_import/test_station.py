@@ -79,9 +79,9 @@ class TestStation(object):
     def __build_dataframe(self):
         ''' Builds all files in folder for board into a single dataframe 
         using the pandas module '''
-        print('FOLDER==>', self.folder)
         print('Building dataframe...')
-        for filename in os.listdir(self.folder):
+        for filenumber, filename in enumerate(os.listdir(self.folder)):
+            print('\tAppending File', '#'+str(filenumber+1)+': ', filename)
             if bool(re.search(REGEX_RAW_DATAFILE, filename)):
                 try:
                     if run_from_ipython():  # if running from ipython (jupyter)
