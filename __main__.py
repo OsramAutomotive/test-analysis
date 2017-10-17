@@ -404,7 +404,7 @@ class realTimeThread(QThread):
         print('Boards:', self.boards, '\n')
         print('Temp Tolerance:', self.temperature_tolerance)
         print('Voltage Tolerance:', self.voltage_tolerance)
-        print('Limits File:', self.limits.filepath)
+        print('Limits File:', self.limits.filepath if self.limits else None)
         if self.limits:
             self.limits.print_info()
 
