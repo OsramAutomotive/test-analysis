@@ -27,7 +27,7 @@ VSETPOINT = 'VSetpoint'
 ON_OFF = 'Board on/off'
 
 ### REGULAR EXPRESSIONS  ###
-REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_\d{2}.txt$'
+REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B.txt$'
 REGEX_TEMPS = 'TC.*'
 REGEX_BOARDS = '(^B[0-9]*)'
 REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s.*)'
