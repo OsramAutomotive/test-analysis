@@ -20,7 +20,7 @@ class Mode(object):
         hist_dict => temp key, voltage key, then currents df queried with that temp/voltage combo
         df => dataframe of only data when this mode is in operation
     """
-    AMB_TEMP = 'Amb Temp TC1'
+    AMB_TEMP = 'Temp TC1'
     VSETPOINT = 'VSetpoint'
 
     def __init__(self, test, board_mode, df, voltages, *temps):

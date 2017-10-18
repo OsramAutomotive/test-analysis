@@ -11,7 +11,7 @@ class Sample(object):
         df => dataframe of just this system
     """
 
-    AMB_TEMP = 'Amb Temp TC1'
+    AMB_TEMP = 'Temp TC1'
     VSETPOINT = 'VSetpoint'
     
     def __init__(self, system, board):

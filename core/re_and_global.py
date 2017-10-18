@@ -22,16 +22,16 @@ TABLE_COLOR_DICT = { 'LB':'#FF5C5C', 'HB':'#FCFBE3', 'LBHB':'#7647A2', 'DRL':'#A
                      'Outage':'#ffff99', 'OUTAGE':'#ffff99', 'Diagnostic':'#ffff99', 'DIAGNOSTIC': '#ffff99'}
 
 ### DATAFRAME COLUMN CONSTANTS ###
-AMB_TEMP = 'Amb Temp TC1'
+AMB_TEMP = 'Temp TC1'
 VSETPOINT = 'VSetpoint'
 ON_OFF = 'Board on/off'
 
 ### REGULAR EXPRESSIONS  ###
 REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B.txt$'
-REGEX_TEMPS = 'TC.*'
+REGEX_TEMPS = 'Temp TC.*'
 REGEX_BOARDS = '(^B[0-9]*)'
 REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s.*)'
-REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(VSense\s[1-2])'
+REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(Vsense\s.*)'
 
 
 def REGEX_BNUMS(bnum):

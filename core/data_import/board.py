@@ -27,7 +27,7 @@ class Board(object):
         df => dataframe of just this board
     """
 
-    AMB_TEMP = 'Amb Temp TC1'
+    AMB_TEMP = 'Temp TC1'
     VSETPOINT = 'VSetpoint'
 
     def __init__(self, test, board_number):

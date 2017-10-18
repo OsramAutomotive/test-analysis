@@ -30,9 +30,9 @@ class TestStation(object):
         df => dataframe that holds all board data
     """
 
-    AMB_TEMP = 'Amb Temp TC1'
+    AMB_TEMP = 'Temp TC1'
     VSETPOINT = 'VSetpoint'
-    VSENSE1 = 'VSense 1'
+    VSENSE1 = 'Vsense 1st'
 
     def __init__(self, name, folder, limits=None, run_limit_analysis=False, 
                  multimode= False, temperature_tolerance=3, voltage_tolerance=0.5, *temps):
