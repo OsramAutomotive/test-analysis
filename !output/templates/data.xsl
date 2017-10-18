@@ -157,6 +157,9 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                     <xsl:when test="check = 'Out of Spec'">
                       <td bgcolor="yellow" align="center"><xsl:value-of select="check"/></td>
                     </xsl:when>
+                    <xsl:when test="check = 'NA'">
+                      <td bgcolor="gainsboro" align="center"><xsl:value-of select="check"/></td>
+                    </xsl:when>
                     <xsl:otherwise>
                       <td align="center"><xsl:value-of select="check"/></td>
                     </xsl:otherwise>
