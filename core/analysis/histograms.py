@@ -46,8 +46,8 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
         nrows, ncols = make_subplot_layout(num_subplots)
         i = 1
         for system in mode.systems:
-            filtered_df = filter_temp_and_voltage(mode.df[[mode.AMB_TEMP, mode.VSETPOINT, system]],
-                                                  temp, voltage, mode.test.temperature_tolerance)
+            filtered_df = filter_temp_and_voltage(mode.df[[mode.test.ambient, mode.VSETPOINT, system]],
+                                                  mode.test.ambient, temp, voltage, mode.test.temperature_tolerance)
             current_data = pd.to_numeric(filtered_df[system], downcast='float')
             avg = current_data.mean()
             sigma = current_data.std()

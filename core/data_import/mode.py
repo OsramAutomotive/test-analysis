@@ -20,7 +20,6 @@ class Mode(object):
         hist_dict => temp key, voltage key, then currents df queried with that temp/voltage combo
         df => dataframe of only data when this mode is in operation
     """
-    AMB_TEMP = 'Temp TC1'
     VSETPOINT = 'VSetpoint'
 
     def __init__(self, test, board_mode, df, voltages, *temps):
@@ -65,8 +64,8 @@ class Mode(object):
         for temp in self.temps:
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
-                dframe = filter_temp_and_voltage(self.df, temp, voltage, 
-                                    self.test.temperature_tolerance)
+                dframe = filter_temp_and_voltage(self.df, self.test.ambient, temp, 
+                                                 voltage, self.test.temperature_tolerance)
                 if not dframe.empty:
                     self.hist_dict[temp][voltage] = dframe
                 else:
@@ -167,7 +166,7 @@ class Mode(object):
         for temp in self.temps:
             for voltage in self.voltages:
                 df, out_of_spec_df = pd.DataFrame(), pd.DataFrame()
-                df = filter_temp_and_voltage(self.df, temp, voltage, self.test.temperature_tolerance)
+                df = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage, self.test.temperature_tolerance)
                 mode_limit_dict = get_limits_at_mode_temp_voltage(self.test.limits, self, temp, voltage)
                 
                 if self.has_led_binning:

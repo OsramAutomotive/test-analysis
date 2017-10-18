@@ -22,23 +22,22 @@ TABLE_COLOR_DICT = { 'LB':'#FF5C5C', 'HB':'#FCFBE3', 'LBHB':'#7647A2', 'DRL':'#A
                      'Outage':'#ffff99', 'OUTAGE':'#ffff99', 'Diagnostic':'#ffff99', 'DIAGNOSTIC': '#ffff99'}
 
 ### DATAFRAME COLUMN CONSTANTS ###
-AMB_TEMP = 'Temp TC1'
 VSETPOINT = 'VSetpoint'
-ON_OFF = 'Board on/off'
+ON_OFF = 'ON/OFF'
 
 ### REGULAR EXPRESSIONS  ###
 REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B.txt$'
-REGEX_TEMPS = 'Temp TC.*'
+REGEX_TEMPS = 'Temp TC[1-4].*'
 REGEX_BOARDS = '(^B[0-9]*)'
 REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s.*)'
+REGEX_EMPTY_TEST_POSITION = '^B[0-9]*\sTP[0-9]*:\s$'
 REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(Vsense\s.*)'
 
-
-def REGEX_BNUMS(bnum):
-    return '^TP[0-9]*:\s\S+.*'+bnum.upper()+'$'
-def REGEX_TEMPS_BNUMS(bnum):
-    return 'TC.*'+bnum.upper()+'$'
-def REGEX_VSENSE(bnum):
-    return '^VSense\s[1-2]\s'+bnum.upper()+'$'
-def REGEX_VSENSE1(bnum):
-    return '^VSense\s1\s'+bnum.upper()+'$'
+# def REGEX_BNUMS(bnum):
+#     return '^TP[0-9]*:\s\S+.*'+bnum.upper()+'$'
+# def REGEX_TEMPS_BNUMS(bnum):
+#     return 'TC.*'+bnum.upper()+'$'
+# def REGEX_VSENSE(bnum):
+#     return '^VSense\s[1-2]\s'+bnum.upper()+'$'
+# def REGEX_VSENSE1(bnum):
+#     return '^VSense\s1\s'+bnum.upper()+'$'

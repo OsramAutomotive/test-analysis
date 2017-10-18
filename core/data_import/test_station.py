@@ -30,7 +30,6 @@ class TestStation(object):
         df => dataframe that holds all board data
     """
 
-    AMB_TEMP = 'Temp TC1'
     VSETPOINT = 'VSetpoint'
     VSENSE1 = 'Vsense 1st'
 
@@ -60,6 +59,7 @@ class TestStation(object):
         self.outage = False
         self.out_of_spec_df = pd.DataFrame()
         self.error_msg = ''
+        self.ambient = None
 
         self.__build_dataframe()
         if not self.df.empty:
@@ -113,9 +113,9 @@ class TestStation(object):
             self.error_msg = '\nThere are no datafiles in the selected folder.\n'
 
     def __delete_empty_columns(self):
-        ''' Deletes emtpy columns in dataframe '''
+        ''' Deletes emtpy test position and thermocouple columns in dataframe '''
         for col in self.df.columns.copy():
-            if re.search('^TP[0-9]*:\s$', col):
+            if re.search(REGEX_EMPTY_TEST_POSITION, col):
                 del self.df[col]
         temps = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
         for temp_col in temps.copy():  ## delete temperature columns with no readings
@@ -149,6 +149,9 @@ class TestStation(object):
             if not tc_all_zero:
                 self.thermocouples.append(tc_series.index[i]) # append only thermocouples that were used in the test
             i += 1
+        self.thermocouples = sorted(self.thermocouples)
+        if self.thermocouples:
+            self.ambient = self.thermocouples[0]
 
     def __create_boards(self):
         ''' Creates board dataframes for each board passed into TestStation init '''
