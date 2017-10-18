@@ -234,14 +234,17 @@ class TestAnalysisUI(QWidget):
             self._print_test_conditions(test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance)
             test = TestStation(test_name, datapath, limits, run_limit_analysis, 
                                multimode, temperature_tolerance, voltage_tolerance, *temps)
-            for analysis_type in self.analysis_buttons:
-                if analysis_type.pressed:
-                    self._run_analysis(analysis_type.name, test, limits, hists_by_tp, percent_from_mean, run_limit_analysis)
-            print('\n\n\n ==> Analysis complete.')
-            try:
-                plt.show()
-            except:
-                print('There are no plots to show')
+            if not test.df.empty:
+                for analysis_type in self.analysis_buttons:
+                    if analysis_type.pressed:
+                        self._run_analysis(analysis_type.name, test, limits, hists_by_tp, percent_from_mean, run_limit_analysis)
+                print('\n\n\n ==> Analysis complete.')
+                try:
+                    plt.show()
+                except:
+                    print('There are no plots to show')
+            else:
+                print(test.error_msg)
         else:
             print('\nYou must select a data folder, temperatures, and test boards')
 

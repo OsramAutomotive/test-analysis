@@ -18,12 +18,14 @@ def set_up_plot_area(test, pstyle='ggplot'):
     fig.suptitle(title, fontsize = 20, fontweight= 'bold')  ## main title for entire figure
     return fig, axes
 
+
 def format_date_time(test, axes):
     date_fmt = '%m/%d/%y %H:%M:%S'
     formatter = dates.DateFormatter(date_fmt)
     locator = dates.AutoDateLocator()
     axes[0].xaxis.set_major_formatter(formatter)
     axes[0].xaxis.set_major_locator(locator)
+
 
 def plot_voltage_fc(test, axes):
     board_colors = dict(zip(test.boards, MODULE_COLOR_LIST))
@@ -37,6 +39,7 @@ def plot_voltage_fc(test, axes):
         else: # Non-Turn current board solid lines
             test.df[board.id + ' ' + vsense].plot(ax=axes[0], color=board_colors[board], linewidth=2)
 
+
 def plot_mode_currents(test, axes, row=2):
     ## start on third row subplot
     system_colors = dict(zip(test.systems, SYSTEM_COLOR_LIST))
@@ -47,6 +50,7 @@ def plot_mode_currents(test, axes, row=2):
                 c = system_colors[system], marker = system_markers[system])
         row +=1
     plt.gcf().autofmt_xdate()
+
 
 def format_subplot_legends(test, axes):
     voltage_labels = axes[0].get_legend_handles_labels()[1]
@@ -79,7 +83,6 @@ def set_titles_and_labels(test, fig, axes):
     axes[1].set_title("Temperature Profile") 
 
 def set_figure_size(fig, save=False):
-    print('...complete.\n')
     plt.tight_layout()
     fig.subplots_adjust(top=0.90, bottom=0.11, left=0.06, right=0.85, hspace=0.33)
 
@@ -96,7 +99,8 @@ def set_up_date_time(test, ax):
 ### MAIN PLOTTING FUNCTIONS ###
 def plot_modes(test, limits=None):
     ''' Creates a temporal plot of the functional cycle, temperature profile, and test mode currents '''
-    print('Plotting temporal plot...')
+    print('\nPlotting temporal plot...')
+
     fig, axes = set_up_plot_area(test)  # set up figure and axes for plotting
     axes[0].plot_date(test.df.index.to_pydatetime(), test.df[test.VSETPOINT], 'k--', 
                       linewidth=3, zorder=10)  # plot voltage setpoint on first subplot
@@ -109,6 +113,8 @@ def plot_modes(test, limits=None):
     format_subplot_legends(test, axes) ## format or remove legends
     set_titles_and_labels(test, fig, axes) ## give axis labels and titles to subplots
     set_figure_size(fig) ## set fig size
+
+    print('...complete.')
 
 
 def plot_boards(test, limits=None, pstyle = 'ggplot'):

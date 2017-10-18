@@ -9,7 +9,7 @@ from core.data_import.helpers import *
 
 
 def make_mode_histograms(test, system_by_system=True, limits=None, percent_from_mean=10):
-    print('Plotting histograms...\n')
+    print('\nPlotting histograms...')
     for mode in test.modes:
         for temp in mode.temps:
             if system_by_system:
@@ -18,7 +18,7 @@ def make_mode_histograms(test, system_by_system=True, limits=None, percent_from_
             else:
                 if temp in mode.hist_dict:
                     histogram_of_mode(test, mode, temp, limits, percent_from_mean)
-    print('complete.')
+    print('...complete.')
 
 
 def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10):

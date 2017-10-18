@@ -12,6 +12,8 @@ import webbrowser
 
 def create_xml_tables(test, run_limit_analysis=False, limits=None):
     ''' This function fills the mode objects with stats from test using mode method '''
+    print('\nCreating analysis tables...')
+
     output_folder = r"!output/"
     xml_root = etree.Element("test", name=test.name, header_width=str(len(test.systems)))
     time_analysis = etree.SubElement(xml_root, "time")
@@ -32,7 +34,7 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
         xml_temp = etree.SubElement(xml_root, "temperature", temp=str(temp)+'C')
 
         for mode in test.modes:
-            print('\n\n\n*********', mode, '*********')
+            # print('\n\n\n*********', mode, '*********')
             mode.get_system_by_system_mode_stats(xml_temp, temp, run_limit_analysis, limits)
 
     write_user_inputs(xml_root, test)
@@ -46,6 +48,7 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
         xml_file.write(xml_data)
         xml_file.close()
 
+    print('...complete.')
     webbrowser.open('file://' + os.path.realpath(output_folder + test.name) + '.xml', new=0)
 
 

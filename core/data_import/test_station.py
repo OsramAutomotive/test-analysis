@@ -7,6 +7,7 @@ it is extremely useful format for conducting this type of large data size analys
 
 import itertools
 import pandas as pd
+import sys
 
 from .. re_and_global import *
 from core.data_import.helpers import *
@@ -58,19 +59,21 @@ class TestStation(object):
         self.multimode = multimode
         self.outage = False
         self.out_of_spec_df = pd.DataFrame()
+        self.error_msg = ''
 
         self.__build_dataframe()
-        self.__delete_empty_columns()
-        self.__scan_for_boards()
-        self.__scan_for_systems()
-        self.__scan_for_vsetpoints()
-        self.__scan_for_voltage_senses()
-        self.__scan_for_thermocouples()
-        self.__create_boards()
-        self.__set_current_board_ids()
-        self.__scan_for_outage()
-        self.__make_df_dict()
-        self.__make_modes()
+        if not self.df.empty:
+            self.__delete_empty_columns()
+            self.__scan_for_boards()
+            self.__scan_for_systems()
+            self.__scan_for_vsetpoints()
+            self.__scan_for_voltage_senses()
+            self.__scan_for_thermocouples()
+            self.__create_boards()
+            self.__set_current_board_ids()
+            self.__scan_for_outage()
+            self.__make_df_dict()
+            self.__make_modes()
 
     def __repr__(self):
         return '{}: {} {}'.format(self.__class__.__name__,
@@ -79,31 +82,35 @@ class TestStation(object):
     def __build_dataframe(self):
         ''' Builds all files in folder for board into a single dataframe 
         using the pandas module '''
-        print('Building dataframe...')
-        for filenumber, filename in enumerate(os.listdir(self.folder)):
-            print('\tAppending File', '#'+str(filenumber+1)+': ', filename)
-            if bool(re.search(REGEX_RAW_DATAFILE, filename)):
-                try:
-                    if run_from_ipython():  # if running from ipython (jupyter)
-                        next_file_df = pd.read_csv( self.folder+'/'+ filename, 
-                                       parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
-                                       index_col='Date Time', sep='\t', engine='python')
-                    else:  # else running on local machine
-                        next_file_df = pd.read_csv( os.path.abspath(os.path.join(os.sep, self.folder, filename)), 
-                                       parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
-                                       index_col='Date Time', sep='\t', engine='python')
-                except Exception:
-                    print('The following error occurred while attempting to convert the ' \
-                          'data files to pandas dataframes:\n\n')
-                    raise
-                self.files.append(filename)
-                self.df = self.df.append(next_file_df)
-        try:
-            self.df = self.df.replace(['OFF','No Reading'], [0,0])
-            self.df = self.df.astype(float)
-        except TypeError as e:
-            pass
-        print('...dataframe complete.')
+        print('Scanning folder for datafiles...')
+        if os.listdir(self.folder): ## if folder not empty
+            for filenumber, filename in enumerate(os.listdir(self.folder)):
+                if bool(re.search(REGEX_RAW_DATAFILE, filename)):
+                    print('\tAppending File', '#'+str(filenumber+1)+': ', filename)
+                    try:
+                        if run_from_ipython():  # if running from ipython (jupyter)
+                            next_file_df = pd.read_csv( self.folder+'/'+ filename, 
+                                           parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
+                                           index_col='Date Time', sep='\t', engine='python')
+                        else:  # else running on local machine
+                            next_file_df = pd.read_csv( os.path.abspath(os.path.join(os.sep, self.folder, filename)), 
+                                           parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
+                                           index_col='Date Time', sep='\t', engine='python')
+                    except Exception:
+                        print('The following error occurred while attempting to convert the ' \
+                              'data files to pandas dataframes:\n\n')
+                        raise
+                    self.files.append(filename)
+                    self.df = self.df.append(next_file_df)
+            try:
+                self.df = self.df.replace(['OFF','No Reading'], [0,0])
+                self.df = self.df.astype(float)
+            except TypeError as e:
+                pass
+            if self.df.empty:
+                self.error_msg= '\nNo files in the selected folder match the Labview raw datafile convention.\n'
+        else:
+            self.error_msg = '\nThere are no datafiles in the selected folder.\n'
 
     def __delete_empty_columns(self):
         ''' Deletes emtpy columns in dataframe '''
