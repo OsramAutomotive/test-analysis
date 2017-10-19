@@ -45,6 +45,15 @@ def copy_and_remove_b6_from(a_list):
         pass  # do nothing
     return b_list
 
+def get_system_test_position_int(system):
+    test_position = system.split(' ')[0]
+    test_position = re.sub('[^0-9]','', test_position)
+    try:
+        test_position = int(test_position)
+    except:
+        pass
+    return test_position
+
 
 ### Limits helpers
 def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):

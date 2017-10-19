@@ -133,7 +133,7 @@ class TestStation(object):
         set_of_systems = set()
         for system in [re.search(REGEX_SYSTEMS, column).groups()[0] for column in self.df.columns if re.search(REGEX_SYSTEMS, column)]:
             set_of_systems.add(system)
-        self.systems = sorted(list(set_of_systems))
+        self.systems = sorted(list(set_of_systems), key=lambda sys: get_system_test_position_int(sys))
 
     def __scan_for_voltage_senses(self):
         ''' Scans for voltage sense columns '''
