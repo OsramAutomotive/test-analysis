@@ -65,6 +65,9 @@ class Limits(object):
 
 
     def print_info(self):
+        print('\n*** Limits Details ***')
+        print('\nBoard-Module Pairs:')
         pp.pprint(self.board_module_pairs)
+        print('\nCurrent Limits:')
         pp.pprint(self.lim)
-        print('\n\n')
+        print('\n')

@@ -252,7 +252,7 @@ class TestAnalysisUI(QWidget):
         print('\nTest Name:', test_name)
         print('Data Folder:', self.data_folder)
         print('Temperatures:', temps)
-        print('Boards:', boards, '\n')
+        print('Boards:', boards)
         print('Temp Tolerance:', temperature_tolerance)
         print('Voltage Tolerance:', voltage_tolerance)
         print('Limits File:', self.limits_file)
