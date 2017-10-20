@@ -8,7 +8,7 @@ class Limits(object):
         self.boards = boards  # e.g. - 'B1' or 'B4'
         self.temps = temps  # integers, e.g. - 85 or -40 or 23
 
-        self.lim = {} # holds current limits
+        self.lim = {} # holds current limits {MODE->TEMP->VOLTAGE->(min current, max current)}
         self.soup = ''
         self.modules = []  # e.g. - 'PARK' or 'TURN'
         self.module_modes = []  # e.g. - 'DRLTURN' or 'PARK'

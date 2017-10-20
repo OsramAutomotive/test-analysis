@@ -112,11 +112,17 @@ class Mode(object):
         ''' Get voltage/current statistics and limit analysis for this mode '''
         xml_header_width = str(len(self.voltage_senses)+len(self.systems)+1)
         xml_mode = etree.SubElement(xml_temp, "mode", id=self.name, width=xml_header_width)
-
         self.current_stats[temp] = {}
         self.vsense_stats[temp] = {}
+        
         for voltage in self.voltages:
             xml_voltage = etree.SubElement(xml_mode, "voltage", value=str(voltage)+'V', width=xml_header_width)
+            if run_limit_analysis and limits:
+                xml_limits = etree.SubElement(xml_voltage, "limits", width=xml_header_width)
+                min_current = limits.lim[self.name][temp][voltage][0]
+                max_current = limits.lim[self.name][temp][voltage][1]
+                xml_limits.text = 'Limits:  ' + str(min_current)+'A to '+str(max_current)+'A' 
+
             self.current_stats[temp][voltage] = {}
             self.vsense_stats[temp][voltage] = {}
 

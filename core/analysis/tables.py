@@ -32,9 +32,7 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
 
     for temp in test.temps:
         xml_temp = etree.SubElement(xml_root, "temperature", temp=str(temp)+'C')
-
         for mode in test.modes:
-            # print('\n\n\n*********', mode, '*********')
             mode.get_system_by_system_mode_stats(xml_temp, temp, run_limit_analysis, limits)
 
     write_user_inputs(xml_root, test)
@@ -58,11 +56,14 @@ def write_user_inputs(xml_root, test):
     folder = etree.SubElement(user_inputs, "folder")
     systems = etree.SubElement(user_inputs, "systems")
     limits_file = etree.SubElement(user_inputs, "limits-file")
+    temperatures_analyzed = etree.SubElement(user_inputs, "temperatures-analyzed")
     temperature_tolerance = etree.SubElement(user_inputs, "temperature-tolerance")
     voltage_tolerance = etree.SubElement(user_inputs, "voltage-tolerance")
+    
     test_name.text = test.name
     folder.text = test.folder
     systems.text = ', '.join(test.systems)
     limits_file.text = test.limits.filepath if test.limits else None
+    temperatures_analyzed.text = ', '.join([str(temp) for temp in test.temps])
     temperature_tolerance.text = str(test.temperature_tolerance)
     voltage_tolerance.text = str(test.voltage_tolerance)

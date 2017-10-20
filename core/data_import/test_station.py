@@ -208,7 +208,6 @@ class TestStation(object):
             self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
 
     def print_board_information(self):
-        ''' Prints the ON boards used in test station for test '''
         print('\nBoards:', self.boards)
         print('Board combos present: ', self.mode_ids, '\n')
 

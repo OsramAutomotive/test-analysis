@@ -106,6 +106,18 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                 </th>
               </tr>
 
+              <!-- Limits Header -->
+              <xsl:choose>
+                <xsl:when test="limits">
+                  <tr bgcolor="#d3d3d3">
+                    <th>
+                      <xsl:attribute name="colspan"><xsl:value-of select="@width"/></xsl:attribute>
+                      <div contenteditable="true"><xsl:value-of select="limits"/></div>
+                    </th>
+                  </tr>
+                 </xsl:when>
+              </xsl:choose>
+
               <!-- Names -->
               <tr bgcolor="#d3d3d3">
                 <th><div contenteditable="true">Name:</div></th>
@@ -182,6 +194,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         <li><strong>Data Folder:  </strong><xsl:value-of select="test/user-inputs/folder"/></li>
         <li><strong>DUTs:  </strong><xsl:value-of select="test/user-inputs/systems"/></li>
         <li><strong>Limits File:  </strong><xsl:value-of select="test/user-inputs/limits-file"/></li>
+        <li><strong>Temperatures Analyzed:  </strong><xsl:value-of select="test/user-inputs/temperatures-analyzed"/></li>
         <li><strong>Temperature Tolerance:  </strong><xsl:value-of select="test/user-inputs/temperature-tolerance"/>°C</li>
         <li><strong>Voltage Tolerance:  </strong><xsl:value-of select="test/user-inputs/voltage-tolerance"/>V</li>
       </ul>
