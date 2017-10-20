@@ -33,11 +33,14 @@ class TestStation(object):
     VSETPOINT = 'VSetpoint'
     VSENSE1 = 'Vsense 1st'
 
-    def __init__(self, name, folder, limits=None, run_limit_analysis=False, 
+    def __init__(self, name, folder, boards, limits=None, run_limit_analysis=False, 
                  multimode= False, temperature_tolerance=3, voltage_tolerance=0.5, *temps):
         self.name = name
         self.folder = folder
         self.files = []
+        self.boards = []
+        self.board_ids = boards if (type(boards) == list) else []
+        self.current_board_ids = []
         self.systems = []
         self.limits = limits
         self.run_limit_analysis = run_limit_analysis
@@ -48,9 +51,6 @@ class TestStation(object):
         self.voltage_senses = []
         self.thermocouples = []
         self.on_off = [ON_OFF]
-        self.boards = []
-        self.board_ids = []
-        self.current_board_ids = []
         self.df = pd.DataFrame() # 'mother' dataframe holds all measured data
         self.mode_df_dict = {}  # holds mode_df for each data mask
         self.mode_ids = []
@@ -123,10 +123,12 @@ class TestStation(object):
                 del self.df[temp_col]
 
     def __scan_for_boards(self):
-        set_of_boards = set()
-        for board in [re.search(REGEX_BOARDS, column).group(0) for column in self.df.columns if re.search(REGEX_BOARDS, column)]:
-            set_of_boards.add(board)
-        self.board_ids = sorted(list(set_of_boards))
+        ''' TO DO --> Add logic that alerts user if entered boards in normal mode are not present in data '''
+        if not self.board_ids: ## if board ids list is empty then autosense what boards are present (REAL TIME MODE)
+            set_of_boards = set()
+            for board in [re.search(REGEX_BOARDS, column).group(0) for column in self.df.columns if re.search(REGEX_BOARDS, column)]:
+                set_of_boards.add(board)
+            self.board_ids = sorted(list(set_of_boards))
 
     def __scan_for_systems(self):
         ''' Scans data for all systems and gets rid of blank test positions '''
@@ -200,15 +202,14 @@ class TestStation(object):
 
         self.mode_ids = list(self.mode_df_dict.keys())  ## assign mode ids
         self.mode_ids = sorted(sorted(self.mode_ids), key=lambda x: len(x))  ## order by length first, then board number
-        print('\n=> Board combos present: ', self.mode_ids, '\n')
 
     def __make_modes(self):
         for mode_id in self.mode_ids:
             self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
 
-    def print_board_numbers(self):
+    def print_board_information(self):
         ''' Prints the ON boards used in test station for test '''
-        for board in self.boards:
-            print(board.id)
+        print('\nBoards:', self.boards)
+        print('Board combos present: ', self.mode_ids, '\n')
 
 

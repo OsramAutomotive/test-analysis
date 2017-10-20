@@ -23,7 +23,6 @@ import win32con
 
 ## constants for user input parameters
 CONSTANT_REAL_TIME_FOLDER = r"C:\Users\bruno\Programming Projects\Test Data Analysis\real time"
-BOARDS = ['B1','B2','B3','B4','B5','B6']
 ANALYSIS_TOOLS = ['Plot', 'Histograms', 'Tables', 'Out of Spec']
 PLOT_INFO = 'Create a temporal plot of the selected test'
 HIST_INFO = 'Plot current histograms at each temp/mode/voltage'
@@ -34,7 +33,8 @@ DEFAULT_TEMP_TOL = 5
 DEFAULT_VOLTAGE_TOL = 0.5
 DEFAULT_PCTG_TOL = 10
 
-TEXTFIELD_WIDTH = len(BOARDS)
+## GUI dimensions
+TEXTFIELD_WIDTH = 4
 SELECT_WIDTH = 120
 CELL_WIDTH = 50
 TOL_WIDTH = 5
@@ -56,7 +56,7 @@ class TestMainWindow(QMainWindow):
         fileMenu.addAction(switchAct)
 
         ## gui window properties
-        self.width = 850
+        self.width = 550
         self.height = 390
         self.setStyleSheet(open(self.stylesheet, "r").read())
         self.setWindowTitle('Automotive Testing Data Analysis')
@@ -102,12 +102,16 @@ class TestAnalysisUI(QWidget):
         ## temperatures
         self.temperatures_label = QLabel('Temperatures:')
         self.temperatures_textfield = QLineEdit(self)
-        self.temperatures_textfield.setPlaceholderText("Enter temperatures separated by commas, e.g. -40, 23, 85")
+        self.temperatures_textfield.setPlaceholderText('Enter temperatures separated by commas, e.g. "-40, 23, 85"')
         grid.addWidget(self.temperatures_label, 2, 0)
         grid.addWidget(self.temperatures_textfield, 2, 1, 1, TEXTFIELD_WIDTH)
 
         ## boards
-        self.board_buttons = self.populate_buttons(grid, 3, 'Boards:', DataButton, BOARDS)
+        self.boards_label = QLabel('Boards:')
+        self.boards_textfield = QLineEdit(self)
+        self.boards_textfield.setPlaceholderText('Enter boards numbers separated by commas, e.g. "3, 4, 5, 6")')
+        grid.addWidget(self.boards_label, 3, 0)
+        grid.addWidget(self.boards_textfield, 3, 1, 1, TEXTFIELD_WIDTH)
 
         ## analysis buttons
         self.analysis_buttons = self.populate_buttons(grid, 4, 'Analysis:', ToolTipButton, 
@@ -164,7 +168,7 @@ class TestAnalysisUI(QWidget):
 
         ## analyze button
         self.analyze_button = AnalyzeButton('Analyze', self)
-        grid.addWidget(self.analyze_button, 8, 2, 1, 3)
+        grid.addWidget(self.analyze_button, 8, 1, 1, 3)
         self.analyze_button.clicked[bool].connect(self.analyze)
 
     def populate_buttons(self, grid, row, label, button_type, text_list, info=None):
@@ -205,6 +209,8 @@ class TestAnalysisUI(QWidget):
         self.data_folder = CONSTANT_REAL_TIME_FOLDER
         self.data_folder_button.setDisabled(True)
         self.data_folder_textfield.setDisabled(True)
+        self.boards_textfield.setDisabled(True)
+        self.boards_label.setText("(Boards sensed)")
         self.analyze_button.setText('Start Real Time Analysis')
         self.analyze_button.disconnect()
         self.analyze_button.clicked[bool].connect(self.thread_analysis)
@@ -219,7 +225,7 @@ class TestAnalysisUI(QWidget):
         test, limits = None, None ## clear test objects (from prevoius usage)
         test_name = self.test_name.text()
         temps = self.temperatures_textfield.text()
-        boards = [b.name for b in self.board_buttons if b.pressed]
+        boards = self.boards_textfield.text()
         datapath = self.data_folder
         multimode = self.multimode_box.isChecked()
         hists_by_tp = self.hist_by_tp_box.isChecked()
@@ -229,11 +235,13 @@ class TestAnalysisUI(QWidget):
 
         if datapath and boards and temps:
             temps = [int(temperature) for temperature in self.temperatures_textfield.text().split(',')]
+            boards = ['B'+re.sub("[^0-9]", "", number) for number in self.boards_textfield.text().split(',')]
             limits = self._load_limits(boards, temps)
             run_limit_analysis = self.limit_analysis_box.isChecked()
             self._print_test_conditions(test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance)
-            test = TestStation(test_name, datapath, limits, run_limit_analysis, 
+            test = TestStation(test_name, datapath, boards, limits, run_limit_analysis, 
                                multimode, temperature_tolerance, voltage_tolerance, *temps)
+            test.print_board_information()
             if not test.df.empty:
                 for analysis_type in self.analysis_buttons:
                     if analysis_type.pressed:
@@ -273,12 +281,11 @@ class TestAnalysisUI(QWidget):
         else:
             print('Analysis tool not found')
 
-
     def thread_analysis(self):
         test, limits = None, None ## clear test objects (from prevoius usage)
         test_name = self.test_name.text()
         temps = self.temperatures_textfield.text()
-        boards = [b.name for b in self.board_buttons if b.pressed]
+        boards = True
         datapath = self.data_folder
         multimode = self.multimode_box.isChecked()
         hists_by_tp = self.hist_by_tp_box.isChecked()
@@ -296,7 +303,6 @@ class TestAnalysisUI(QWidget):
             self.run_analysis_thread.start()
         else:
             print('\nYou must select a data folder, temperatures, and test boards')
-
 
 
 class FolderButton(QPushButton):
@@ -404,7 +410,7 @@ class realTimeThread(QThread):
         print('\nTest Name:', self.test_name)
         print('Data Folder:', self.datapath)
         print('Temperatures:', self.temps)
-        print('Boards:', self.boards, '\n')
+        # print('Boards:', self.boards)
         print('Temp Tolerance:', self.temperature_tolerance)
         print('Voltage Tolerance:', self.voltage_tolerance)
         print('Limits File:', self.limits.filepath if self.limits else None)
@@ -435,7 +441,7 @@ class realTimeThread(QThread):
 
     def _analyze_real_time(self):
         self._print_test_conditions()
-        test = TestStation(self.test_name, self.datapath, self.limits, self.run_limit_analysis, 
+        test = TestStation(self.test_name, self.datapath, self.boards, self.limits, self.run_limit_analysis, 
                            self.multimode, self.temperature_tolerance, self.voltage_tolerance, *self.temps)
         close_browser('iexplore')
         create_xml_tables(test, self.run_limit_analysis, self.limits)
