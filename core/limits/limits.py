@@ -11,7 +11,6 @@ class Limits(object):
         self.lim = {} # holds current limits {MODE->TEMP->VOLTAGE->(min current, max current)}
         self.soup = ''
         self.modules = []  # e.g. - 'PARK' or 'TURN'
-        self.module_modes = []  # e.g. - 'DRLTURN' or 'PARK'
         self.board_module_pairs = {}  # keys: boards; values: modules
         self.outage_link_board = ''
         self.outage_present = False
@@ -39,16 +38,18 @@ class Limits(object):
             if led_bins:
                 self.binning = True
                 self.led_binning_dict[board] = led_bins.split(' ')
-            if has_outage:
+            if has_outage == 'YES':
                 self.outage_link_board = board
                 self.outage_present = True
 
     def get_limits(self):
         modes = self.soup.find_all(class_='mode')
         for mode in modes:
-            self.get_mode_limits(mode)
+            self._get_mode_limits(mode)
+        if 'OUTAGE' in self.modules:
+            self._get_outage_limits()
 
-    def get_mode_limits(self, mode):
+    def _get_mode_limits(self, mode):
         mode_id = mode.get('id')
         self.lim[mode_id] = {}
         temp_tables = mode.find_all(class_='temp-table')
@@ -63,6 +64,18 @@ class Limits(object):
                 maximum = round(float(voltage_row.find(class_='max').string), 3)
                 self.lim[mode_id][temp][voltage] = (minimum, maximum)
 
+    def _get_outage_limits(self):
+        outage_tables = self.soup.find_all(class_='outage-table')
+        self.lim['OUTAGE'] = {}
+        for outage_table in outage_tables:
+            outage_state = outage_table.get('state')
+            self.lim['OUTAGE'][outage_state] = {}
+            voltage_rows = outage_table.find_all(lambda tag: tag.get('id')=='voltage')
+            for voltage_row in voltage_rows:
+                voltage = round(float(voltage_row.get('class')[0]), 1);
+                minimum = round(float(voltage_row.find(class_='min').string), 3)
+                maximum = round(float(voltage_row.find(class_='max').string), 3)
+                self.lim['OUTAGE'][outage_state][voltage] = (minimum, maximum)
 
     def print_info(self):
         print('\n*** Limits Details ***')
@@ -71,3 +84,9 @@ class Limits(object):
         print('\nCurrent Limits:')
         pp.pprint(self.lim)
         print('\n')
+
+
+# filepath = r"C:\Users\bruno\Desktop\mca-with-outage.htm"
+# boards = ['B3', 'B4', 'B5', 'B6']
+# temps = [23]
+# limits = Limits(filepath, boards, temps)

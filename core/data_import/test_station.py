@@ -71,7 +71,6 @@ class TestStation(object):
             self.__scan_for_thermocouples()
             self.__create_boards()
             self.__set_current_board_ids()
-            self.__scan_for_outage()
             self.__make_df_dict()
             self.__make_modes()
 
@@ -158,17 +157,17 @@ class TestStation(object):
     def __create_boards(self):
         ''' Creates board dataframes for each board passed into TestStation init '''
         for board in self.board_ids:
-            self.boards.append(Board(self, board))
+            if board == 'B6': ## outage board
+                self.outage = Outage(self, board)
+                self.boards.append(self.outage)
+            else:  ## current board
+                self.boards.append(Board(self, board))
 
     def __set_current_board_ids(self):
         self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
 
     def __scan_for_vsetpoints(self):
         self.voltages = sorted(set(self.df[self.VSETPOINT]))
-
-    def __scan_for_outage(self):
-        if any(board.outage for board in self.boards):
-            self.outage = True
 
     def __make_df_dict(self):
         ''' Outputs dictionary of ON time mask modes dataframes. This includes
@@ -210,5 +209,3 @@ class TestStation(object):
     def print_board_information(self):
         print('\nBoards:', self.boards)
         print('Board combos present: ', self.mode_ids, '\n')
-
-

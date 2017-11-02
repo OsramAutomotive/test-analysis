@@ -109,11 +109,11 @@ def get_system_bin(mode, system):
         if led_bin in mode.led_bins:
             return led_bin
 
-def get_limits_for_outage_off(limits, board):
+def get_limits_for_outage_off(limits, board, voltage):
     try:
-        lower_limit = limits.lim[board.name]['OFF'][0]
-        upper_limit = limits.lim[board.name]['OFF'][1]
-        return {'LL': lower_limit, 'UL': upper_limit}
+        lower_limit = limits.lim[board.name]['OFF'][voltage][0]
+        upper_limit = limits.lim[board.name]['OFF'][voltage][1]
+        return lower_limit, upper_limit
     except:
         raise
 
@@ -121,9 +121,10 @@ def get_limits_for_outage_on(limits, board, voltage):
     try:
         lower_limit = limits.lim[board.name]['ON'][voltage][0]
         upper_limit = limits.lim[board.name]['ON'][voltage][1]
-        return {'LL': lower_limit, 'UL': upper_limit}
+        return lower_limit, upper_limit
     except:
         raise
+
 
 ### Dataframe filter functions
 def filter_temp_and_voltage(df, ambient, temp, voltage, temperature_tolerance):
@@ -139,9 +140,9 @@ def filter_temperature(df, ambient, temp, temperature_tolerance):
                     (df[ambient] < (temp+temperature_tolerance))]
     return dframe
 
-def filter_board_on_or_off(df, board_on_off_code):
+def filter_board_on_or_off(df, board_id, board_on_off_code):
     ''' board_on_off_code: 0 is off, 1 is on, 2 is flashing '''
-    dframe = df.loc[(df[ON_OFF] == board_on_off_code)]
+    dframe = df.loc[(df[board_id + ' ' + ON_OFF] == board_on_off_code)]
     return dframe
 
 
@@ -191,6 +192,7 @@ def get_outage_off_stats_single_sys(df, board, system, temp):
     else:
         return 'NA', 'NA', 'NA'
 
+
 ### Out of spec helpers
 def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
     ''' Return True/False if system min/max is out of spec '''
@@ -205,7 +207,7 @@ def write_out_of_spec_to_file(df, mode, temp, voltage):
         f.write('\t'.join(['\n\n\n\n\n' + str(temp) + u'\N{DEGREE SIGN}C',
                 mode.name, str(voltage) + 'V', '\n']))
     df.to_csv('!output//out_of_spec.txt', header=df.columns,
-                              index=True, sep='\t', mode='a')
+              index=True, sep='\t', mode='a')
 
 
 ## Dictionary cleaner

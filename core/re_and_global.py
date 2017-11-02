@@ -33,11 +33,11 @@ REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s.*)'
 REGEX_EMPTY_TEST_POSITION = '^B[0-9]*\sTP[0-9]*:\s$'
 REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(Vsense\s.*)'
 
-# def REGEX_BNUMS(bnum):
-#     return '^TP[0-9]*:\s\S+.*'+bnum.upper()+'$'
-# def REGEX_TEMPS_BNUMS(bnum):
-#     return 'TC.*'+bnum.upper()+'$'
-# def REGEX_VSENSE(bnum):
-#     return '^VSense\s[1-2]\s'+bnum.upper()+'$'
-# def REGEX_VSENSE1(bnum):
-#     return '^VSense\s1\s'+bnum.upper()+'$'
+def REGEX_SPECIFIC_BOARD_SYSTEMS(board_id):
+    return '^' + re.escape(board_id) + '*\sTP[0-9]*:\s.*'
+
+def REGEX_SPECIFIC_BOARD_VSENSES(board_id):
+    return '^' + re.escape(board_id) + '*\sVsense\s.*'
+
+def REGEX_SPECIFIC_BOARD_ON_OFF(board_id):
+    return '^' + re.escape(board_id) + '*\sON/OFF$'

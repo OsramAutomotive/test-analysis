@@ -34,7 +34,8 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
         xml_temp = etree.SubElement(xml_root, "temperature", temp=str(temp)+'C')
         for mode in test.modes:
             mode.get_system_by_system_mode_stats(xml_temp, temp, run_limit_analysis, limits)
-
+        if test.outage:
+            test.outage.get_system_by_system_outage_stats(xml_temp, temp, run_limit_analysis, limits)
     write_user_inputs(xml_root, test)
 
     xml_file = open(output_folder + test.name + '.xml', 'w')

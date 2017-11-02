@@ -54,9 +54,13 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         .DRLTURN {
           background-color: #ff96ca;
         }
+
+        .OUTAGE {
+          background-color: #ffff99;
+        }
       </style>
-      
     </head>
+
 
     <body>
       <!-- Main Header -->
@@ -83,6 +87,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
       <!-- Temperature Header -->
       <xsl:for-each select="test/temperature">
+        <br/><hr/>
         <h2><div contenteditable="true"><xsl:value-of select="@temp"/></div></h2>
     
         <xsl:for-each select="mode">
@@ -179,15 +184,114 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                 </xsl:for-each>
               </tr>
 
-            </xsl:for-each>
+            </xsl:for-each><!-- end voltage -->
           </table>
           <br/><br/>
 
         </xsl:for-each><!-- end mode -->
+
+
+        <!-- OUTAGE TABLES -->
+        <xsl:for-each select="outages/outage">
+          <table border="1">
+            <!-- Outage Header -->
+            <tr>
+              <th class="OUTAGE">
+                <xsl:attribute name="colspan"><xsl:value-of select="@width"/></xsl:attribute>
+                <div contenteditable="true"><xsl:value-of select="@id"/></div>
+              </th>
+            </tr>
+            <xsl:for-each select="voltage">
+
+              <!-- Outage Voltage Header -->
+              <tr bgcolor="#d3d3d3">
+                <th>
+                  <xsl:attribute name="colspan"><xsl:value-of select="@width"/></xsl:attribute>
+                  <div contenteditable="true"><xsl:value-of select="@value"/></div>
+                </th>
+              </tr>
+
+              <!-- Outage Limits Header -->
+              <xsl:choose>
+                <xsl:when test="limits">
+                  <tr bgcolor="#d3d3d3">
+                    <th>
+                      <xsl:attribute name="colspan"><xsl:value-of select="@width"/></xsl:attribute>
+                      <div contenteditable="true"><xsl:value-of select="limits"/></div>
+                    </th>
+                  </tr>
+                 </xsl:when>
+              </xsl:choose>
+
+              <!-- Outage System Names -->
+              <tr bgcolor="#d3d3d3">
+                <th><div contenteditable="true">Name:</div></th>
+                <xsl:for-each select="systems/system">
+                  <td align="center"><div contenteditable="true"><xsl:value-of select="name"/></div></td>
+                </xsl:for-each>
+              </tr>
+
+              <!-- Outage Minimums -->
+              <tr>
+                <th><div contenteditable="true">Min:</div></th>
+                <xsl:for-each select="vsenses/vsense">
+                  <td align="center"><xsl:value-of select="min"/></td>
+                </xsl:for-each>
+                <xsl:for-each select="systems/system">
+                  <td align="center"><xsl:value-of select="min"/></td>
+                </xsl:for-each>
+              </tr>
+
+              <!-- Outage Maximums -->
+              <tr>
+                <th><div contenteditable="true">Max:</div></th>
+                <xsl:for-each select="vsenses/vsense">
+                  <td align="center"><xsl:value-of select="max"/></td>
+                </xsl:for-each>
+                <xsl:for-each select="systems/system">
+                  <td align="center"><xsl:value-of select="max"/></td>
+                </xsl:for-each>
+              </tr>
+
+              <!-- Outage Check Data -->
+              <tr>
+                <th><div contenteditable="true">Check Data:</div></th>
+                <xsl:for-each select="vsenses/vsense">
+                  <xsl:choose>
+                    <xsl:when test="check = 'Out of Spec'">
+                      <td bgcolor="yellow" align="center"><xsl:value-of select="check"/></td>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <td align="center"><xsl:value-of select="check"/></td>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:for-each>
+                <xsl:for-each select="systems/system">
+                  <xsl:choose>
+                    <xsl:when test="check = 'Out of Spec'">
+                      <td bgcolor="yellow" align="center"><xsl:value-of select="check"/></td>
+                    </xsl:when>
+                    <xsl:when test="check = 'NA'">
+                      <td bgcolor="gainsboro" align="center"><xsl:value-of select="check"/></td>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <td align="center"><xsl:value-of select="check"/></td>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:for-each>
+              </tr>
+
+            </xsl:for-each>
+          </table><!-- end outage table -->
+          <br/><br/>
+        </xsl:for-each><!-- end of outages -->
+
         <br/><br/><br/>
       </xsl:for-each><!-- end temperature -->
 
 
+      <!-- USER INPUTS -->
+      <hr/>
       <h2>User Inputs</h2>
       <ul>
         <li><strong>Test Name:  </strong><xsl:value-of select="test/user-inputs/test-name"/></li>

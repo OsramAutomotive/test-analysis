@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import os
 import re
+from lxml import etree
 
 from core.data_import.sample import *
 from core.re_and_global import *
@@ -35,17 +36,11 @@ class Board(object):
         self.id = ''
         self.name = None  # e.g. - 'DRL'
         self.folder = test.folder
-        self.files = []
-        self.df = pd.DataFrame()
         self.systems = []
-        self.voltage_senses = []
-        self.thermocouples = []
         self.outage = False
-        self.samples = []
         
         self.__set_id(board_number)
         self.__get_board_name()
-
 
     def __repr__(self):
         return '{}: {} {}'.format(self.__class__.__name__,
@@ -76,7 +71,7 @@ class Outage(Board):
         test => belongs to a test station object that describes the test
         folder => directory folder of data that was analyzed
         id => e.g. - 'B3'
-        name => e.g. - 'DRL'
+        name => e.g. - 'Outage' or 'Diagnostic'
         board => board object (includes board id)
         system => list of used test positions and system numbers (used for df query)
         df => dataframe of just this board
@@ -86,37 +81,40 @@ class Outage(Board):
         Board.__init__(self, test, board_number)
         self.outage = True
         self.outage_stats = {'ON':{}, 'OFF': {}}
+        self.systems = [column for column in self.test.df.columns if re.search(REGEX_SPECIFIC_BOARD_SYSTEMS(self.id), column)]
+        self.board_on_off = [column for column in self.test.df.columns if re.search(REGEX_SPECIFIC_BOARD_ON_OFF(self.id), column)]
+        self.xml_header_width = str(len(self.systems)+1)
 
-    def get_system_by_system_outage_stats(self, temp, limits=None):
-        if self.outage:
-            df_on = filter_board_on_or_off(self.df, 1)
-            df_off = filter_board_on_or_off(self.df, 0)
-            self.get_outage_off_stats(df_off, temp, limits)
-            self.get_outage_on_stats(df_on, temp, limits)
+    def get_system_by_system_outage_stats(self, xml_temp, temp, run_limit_analysis, limits):        
+        xml_outages = etree.SubElement(xml_temp, "outages", id=self.name, width=self.xml_header_width)
+        
+        df = self.test.df[ [self.test.VSETPOINT] + self.test.thermocouples + self.board_on_off + self.systems ]
+        df_on = filter_board_on_or_off(df, self.id, 1)
+        df_off = filter_board_on_or_off(df, self.id, 0)
+        self.get_outage_stats_in_state(df_off, xml_outages, temp, run_limit_analysis, limits, outage_state='OFF')
+        self.get_outage_stats_in_state(df_on, xml_outages, temp, run_limit_analysis, limits, outage_state='ON')
 
-    def get_outage_off_stats(self, df_off, temp, limits=None):
-        ''' OFF analysis (not voltage based) '''
-        self.outage_stats['OFF'][temp] = {}
-        for sys in self.systems:
-            out_of_spec_bool = 'NA'
-            outage_min, outage_max, mean = get_outage_off_stats_single_sys(df_off, self, sys, temp)
-            if limits:
-                lim_dict = get_limits_for_outage_off(limits, self)
-                lower_limit, upper_limit = lim_dict['LL'], lim_dict['UL']
-                out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
-            self.outage_stats['OFF'][temp][sys] = [outage_min, outage_max, mean, out_of_spec_bool]
-
-    def get_outage_on_stats(self, df_on, temp, limits=None):
-        ''' ON analysis (voltage based) '''
-        self.outage_stats['ON'][temp] = {}
+    def get_outage_stats_in_state(self, df, xml_outages, temp, run_limit_analysis, limits, outage_state):
+        ''' OFF analysis '''
+        xml_outage = etree.SubElement(xml_outages, "outage", id=self.name+' '+outage_state, width=self.xml_header_width)
+        self.outage_stats[outage_state][temp] = {}
         for voltage in self.test.voltages:
-            self.outage_stats['ON'][temp][voltage] = {}
-            for sys in self.systems:
+            xml_voltage = etree.SubElement(xml_outage, "voltage", value=str(voltage)+'V', width=self.xml_header_width)
+            xml_systems = etree.SubElement(xml_voltage, "systems")
+            self.outage_stats[outage_state][temp][voltage] = {}
+            for system in self.systems:
+                xml_system = etree.SubElement(xml_systems, "system")
                 out_of_spec_bool = 'NA'
-                outage_min, outage_max, mean = get_outage_on_stats_at_temp_voltage(df_on, self, sys, temp, voltage)
-                if limits:
-                    lim_dict = get_limits_for_outage_on(limits, self, voltage)
-                    lower_limit, upper_limit = lim_dict['LL'], lim_dict['UL']
+                outage_min, outage_max, mean = get_outage_on_stats_at_temp_voltage(df, self, system, temp, voltage)
+                if run_limit_analysis and limits:
+                    lower_limit, upper_limit = get_limits_for_outage_off(limits, self, voltage)
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
-                self.outage_stats['ON'][temp][voltage][sys] = [outage_min, outage_max, mean, out_of_spec_bool]
-
+                self.outage_stats[outage_state][temp][voltage][system] = [outage_min, outage_max, mean, out_of_spec_bool]
+                xml_name = etree.SubElement(xml_system, "name")
+                xml_name.text = str(system).rsplit(' ', 1)[0]
+                xml_min = etree.SubElement(xml_system, "min")
+                xml_min.text = str(outage_min)
+                xml_max = etree.SubElement(xml_system, "max")
+                xml_max.text = str(outage_max)
+                xml_check = etree.SubElement(xml_system, "check")
+                xml_check.text = 'NA' if (not run_limit_analysis or not limits) else 'Out of Spec' if out_of_spec_bool else 'G'
