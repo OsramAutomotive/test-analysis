@@ -41,6 +41,7 @@ class Board(object):
         
         self.__set_id(board_number)
         self.__get_board_name()
+        self.__get_board_systems()
 
     def __repr__(self):
         return '{}: {} {}'.format(self.__class__.__name__,
@@ -61,6 +62,12 @@ class Board(object):
             self.name = self.test.limits.board_module_pairs[self.id]
         except:
             print('Could not load board name for', self.id)
+
+    def __get_board_systems(self):
+        set_of_systems = set()
+        for system in [re.search(REGEX_SPECIFIC_BOARD_SYSTEMS(self.id), column).group(0) for column in self.test.df.columns if re.search(REGEX_SPECIFIC_BOARD_SYSTEMS(self.id), column)]:
+            set_of_systems.add(system)
+        self.systems = sorted(list(set_of_systems), key=lambda sys: get_system_test_position_int(sys, index=1))
 
 
 class Outage(Board):
@@ -111,7 +118,7 @@ class Outage(Board):
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
                 self.outage_stats[outage_state][temp][voltage][system] = [outage_min, outage_max, mean, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
-                xml_name.text = str(system).rsplit(' ', 1)[0]
+                xml_name.text = str(system).split(' ', 1)[1]
                 xml_min = etree.SubElement(xml_system, "min")
                 xml_min.text = str(outage_min)
                 xml_max = etree.SubElement(xml_system, "max")

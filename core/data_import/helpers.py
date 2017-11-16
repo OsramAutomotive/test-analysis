@@ -45,8 +45,8 @@ def copy_and_remove_b6_from(a_list):
         pass  # do nothing
     return b_list
 
-def get_system_test_position_int(system):
-    test_position = system.split(' ')[0]
+def get_system_test_position_int(system, index=0):
+    test_position = system.split(' ')[index]
     test_position = re.sub('[^0-9]','', test_position)
     try:
         test_position = int(test_position)

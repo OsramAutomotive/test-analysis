@@ -1,6 +1,6 @@
-
 from bs4 import BeautifulSoup
 import pprint as pp
+
 
 class Limits(object):
     def __init__(self, filepath, boards, temps):

@@ -85,11 +85,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         </xsl:for-each>
       </table>
 
-      <!-- Temperature Header -->
+      <!-- TEMPERATURE -->
       <xsl:for-each select="test/temperature">
         <br/><hr/>
         <h2><div contenteditable="true"><xsl:value-of select="@temp"/></div></h2>
     
+        <!-- MODE -->
         <xsl:for-each select="mode">
 
           <table border="1">
@@ -191,7 +192,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         </xsl:for-each><!-- end mode -->
 
 
-        <!-- OUTAGE TABLES -->
+        <!-- OUTAGE -->
         <xsl:for-each select="outages/outage">
           <table border="1">
             <!-- Outage Header -->

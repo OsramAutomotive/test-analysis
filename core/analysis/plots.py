@@ -4,6 +4,7 @@
     voltages and currents using matplotlib. '''
 
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as dates
 from matplotlib import style
@@ -42,12 +43,14 @@ def plot_voltage_fc(test, axes):
 
 def plot_mode_currents(test, axes, row=2):
     ## start on third row subplot
-    system_colors = dict(zip(test.systems, SYSTEM_COLOR_LIST))
-    system_markers = dict(zip(test.systems, SYSTEM_MARKER_LIST))
     for mode in test.modes:
-        for system in test.systems:
-            axes[row].scatter(mode.df.index, mode.df[mode.mode_tag + ' ' + system],
-                c = system_colors[system], marker = system_markers[system])
+        cmap = plt.get_cmap('jet')
+        colors = cmap(np.linspace(0, 1.0, len(mode.systems)))
+        for system, color in zip(mode.systems, colors):
+            axes[row].scatter(mode.df.index, mode.df[system], 
+                              c=color, alpha=0.7)
+        axes[row].legend(fontsize=7, loc='center left', bbox_to_anchor=(1.0, 0.5),
+                       ncol=2, labels = [sys.split(' ', 1)[1] for sys in mode.systems])
         row +=1
     plt.gcf().autofmt_xdate()
 
@@ -61,15 +64,15 @@ def format_subplot_legends(test, axes):
         if i == 1:  # temperature profile
             axes[i].legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
                            labels = test.thermocouples)
-        elif i == 2: # where to place currents legend based on number of modes being plotted
-            vert = {1:0.5, 2:-0.25 , 3:-1.0 , 4:-1.75 , 5:-2.5 , 6:-3.25, 7: -4.0, 8: -4.75}
-            axes[i].legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, vert[len(test.modes)]),
-                           labels = test.systems)
-        else:
-            try:
-                axes[i].legend_.remove()
-            except AttributeError as e:
-                pass
+        # elif i == 2: # where to place currents legend based on number of modes being plotted
+        #     vert = {1:0.5, 2:-0.25 , 3:-1.0 , 4:-1.75 , 5:-2.5 , 6:-3.25, 7: -4.0, 8: -4.75}
+        #     axes[i].legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, vert[len(test.modes)]),
+        #                    labels = test.systems)
+        # else:
+        #     try:
+        #         axes[i].legend_.remove()
+        #     except AttributeError as e:
+        #         pass
 
 def set_titles_and_labels(test, fig, axes):
     fig.canvas.set_window_title('temporal plot')
@@ -82,9 +85,11 @@ def set_titles_and_labels(test, fig, axes):
     axes[1].set_ylabel(u"Temp (\N{DEGREE SIGN}C)")
     axes[1].set_title("Temperature Profile") 
 
+
 def set_figure_size(fig, save=False):
     plt.tight_layout()
-    fig.subplots_adjust(top=0.90, bottom=0.11, left=0.06, right=0.85, hspace=0.33)
+    fig.subplots_adjust(top=0.900, bottom=0.075, left=0.070, right=0.760, hspace=0.330)
+
 
 def set_up_date_time(test, ax):
     ax.plot_date(test.df.index.to_pydatetime(), test.df[test.vsetpoint], 'k--', 

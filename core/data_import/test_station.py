@@ -112,7 +112,7 @@ class TestStation(object):
             self.error_msg = '\nThere are no datafiles in the selected folder.\n'
 
     def __delete_empty_columns(self):
-        ''' Deletes emtpy test position and thermocouple columns in dataframe '''
+        ''' Deletes empty test position and thermocouple columns in dataframe '''
         for col in self.df.columns.copy():
             if re.search(REGEX_EMPTY_TEST_POSITION, col):
                 del self.df[col]

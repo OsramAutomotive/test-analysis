@@ -31,7 +31,10 @@ class Mode(object):
         self.voltages = voltages
         self.board_ids = re.findall('B[]0-9]*', board_mode) # find boards present in mode
         self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
-        self.systems = [' '.join([self.mode_tag, sys]) for sys in test.systems]
+        self.boards = [board for board in self.test.boards if board.id in self.current_board_ids]
+        # self.systems = [' '.join([self.mode_tag, sys]) for sys in test.systems] # (all boards same sys nums)
+        self.systems = []
+
         self.hist_dict = {}  # temp -> voltage -> df of currents only at that temp/voltage combo
         self.multimode = False  # placeholder -> scans later to check if multimode or not
         self.df = pd.DataFrame() # dataframe of mode currents (added together if multi-mode)
@@ -43,10 +46,12 @@ class Mode(object):
         self.led_bins = []
 
         self.__scan_for_multimode()
+        self.__set_systems()
         self.__make_hist_dict()
         self.__populate_hist_dict(df)
         self.__scan_for_voltage_senses()
         self.__get_mode_name_and_set_binning()
+
 
     def __repr__(self):
         return '{}: {} ({})'.format(self.__class__.__name__,
@@ -56,11 +61,19 @@ class Mode(object):
         if len(self.current_board_ids) > 1:
             self.multimode = True     
 
+    def __set_systems(self):
+        ## create systems laber if MM else use only board's systems
+        if self.multimode:
+            self.systems = [ self.mode_tag + ' ' + self.boards[0].systems[i].split(' ')[1] 
+                             + ' MM' + str(i+1) for i in range(0, len(self.boards[0].systems)) ]
+        else:
+            self.systems = self.boards[0].systems
+
     def __make_hist_dict(self):
         for temp in self.temps:
             self.hist_dict[temp] = dict.fromkeys(self.voltages)
 
-    def __populate_hist_dict(self, df):    
+    def __populate_hist_dict(self, df):
         for temp in self.temps:
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
@@ -90,11 +103,15 @@ class Mode(object):
     def create_multimode_cols(self, dframe):
         ''' Adds multimode current column for each system '''
         if self.multimode:  # if mode is a multimode (multiple current boards ON)
-            for sys in self.test.systems: # for each system (without appended board/mode tag label)
-                sys_col_label = self.mode_tag + ' ' + sys 
-                dframe[sys_col_label] = 0.0  # create multimode col of float zeroes
-                for b in self.current_board_ids: # add each ON current board
-                    dframe[sys_col_label] = dframe[sys_col_label] + pd.to_numeric(dframe[b + ' ' + sys], downcast='float')
+            # for sys in self.test.systems: # for each system (without appended board/mode tag label)
+            #     sys_col_label = self.mode_tag + ' ' + sys 
+            #     dframe[sys_col_label] = 0.0  # create multimode col of float zeroes
+            #     for b in self.current_board_ids: # add each ON current board
+            #         dframe[sys_col_label] = dframe[sys_col_label] + pd.to_numeric(dframe[b + ' ' + sys], downcast='float')
+            for i, sys in enumerate(self.systems):
+                dframe[sys] = 0.0  # create multimode col of float zeroes
+                for board in self.boards: # add each ON current board
+                    dframe[sys] = dframe[sys] + pd.to_numeric(dframe[board.systems[i]], downcast='float')
         return dframe
 
     def strip_index_and_melt_to_series(self, dframe):
@@ -159,7 +176,7 @@ class Mode(object):
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
                 self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
-                xml_name.text = str(system).rsplit(' ', 1)[0]
+                xml_name.text = str(system)
                 xml_min = etree.SubElement(xml_system, "min")
                 xml_min.text = str(sys_min)
                 xml_max = etree.SubElement(xml_system, "max")

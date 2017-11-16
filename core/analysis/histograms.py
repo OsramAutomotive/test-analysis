@@ -73,7 +73,7 @@ def histogram_of_each_system(test, mode, temp, limits=None, percent_from_mean=10
                 ax.axvline(avg-3*sigma, color='#892db7', linestyle='dashdot', linewidth=1,
                                         label=sig_label if i == 1 else None)
                 ax.axvline(avg+3*sigma, color='#892db7', linestyle='dashdot', linewidth=1, label=None)
-            ax.set_title(test.systems[i-1]+'\n'+'(Avg: '+str(round(avg,3))+'A)')
+            ax.set_title(system+'\n'+'(Avg: '+str(round(avg,3))+'A)')
             ax.set_xlabel('Current (A)')
             ax.set_ylabel('Frequency')
             ax.get_xaxis().get_major_formatter().set_useOffset(False)
