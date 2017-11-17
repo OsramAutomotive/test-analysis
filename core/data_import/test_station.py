@@ -63,12 +63,12 @@ class TestStation(object):
 
         self.__build_dataframe()
         if not self.df.empty:
-            self.__delete_empty_columns()
             self.__scan_for_boards()
             self.__scan_for_systems()
             self.__scan_for_vsetpoints()
             self.__scan_for_voltage_senses()
             self.__scan_for_thermocouples()
+            self.__set_ambient_thermocouple()
             self.__create_boards()
             self.__set_current_board_ids()
             self.__make_df_dict()
@@ -101,8 +101,9 @@ class TestStation(object):
                         raise
                     self.files.append(filename)
                     self.df = self.df.append(next_file_df)
+            self.delete_empty_columns()
             try:
-                self.df = self.df.replace(['OFF','No Reading'], [0,0])
+                self.df = self.df.replace(['OFF'], [0])
                 self.df = self.df.astype(float)
             except TypeError as e:
                 pass
@@ -111,7 +112,7 @@ class TestStation(object):
         else:
             self.error_msg = '\nThere are no datafiles in the selected folder.\n'
 
-    def __delete_empty_columns(self):
+    def delete_empty_columns(self):
         ''' Deletes empty test position and thermocouple columns in dataframe '''
         for col in self.df.columns.copy():
             if re.search(REGEX_EMPTY_TEST_POSITION, col):
@@ -143,14 +144,12 @@ class TestStation(object):
     def __scan_for_thermocouples(self):
         ''' Scans for thermocouple columns '''
         possible_thermocouples = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
-        ## series where index is thermocouples and column is a True/False value depending on whether all items in column are 0
-        tc_series = self.df[possible_thermocouples].apply(lambda x: np.all(x==0))
-        i = 0
-        for tc_all_zero in tc_series:
-            if not tc_all_zero:
-                self.thermocouples.append(tc_series.index[i]) # append only thermocouples that were used in the test
-            i += 1
-        self.thermocouples = sorted(self.thermocouples)
+        for tc in possible_thermocouples:
+            tc_series = self.df[tc]
+            if not (tc_series > 150).any() and not (tc_series < -150).any():
+                self.thermocouples.append(tc) # append only thermocouples that were used in the test without errors
+
+    def __set_ambient_thermocouple(self):
         if self.thermocouples:
             self.ambient = self.thermocouples[0]
 
