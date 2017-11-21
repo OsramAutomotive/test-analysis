@@ -23,9 +23,10 @@ def set_up_plot_area(test, pstyle='ggplot'):
 def plot_voltage_functional_cycle(test, ax):
     ax.plot_date(test.df.index.to_pydatetime(), test.df[test.VSETPOINT], 'k--', 
                  linewidth=3, zorder=10)  # plot voltage setpoint on first subplot
+    ax.set_title("Voltage and Functional Cycle")
     ax.set_ylabel("Voltage (V)")
     ax.set_ylim([0,20])
-    ax.set_title("Voltage and Functional Cycle")
+    ax.yaxis.set_major_locator(ticker.MaxNLocator(4))
     board_colors = dict(zip(test.boards, MODULE_COLOR_LIST))
     for board in test.boards:
         if board.outage: # skip Outage board
@@ -61,7 +62,7 @@ def plot_mode_currents(test, axes, row=2):
                        ncol=2, labels = [sys.split(' ', 1)[1] for sys in mode.systems])
         row +=1
 
-def set_figure_size_and_name(fig, save=False):
+def set_figure_size_and_name(fig):
     plt.tight_layout()
     fig.subplots_adjust(top=0.900, bottom=0.075, left=0.070, right=0.760, hspace=0.330)
     fig.canvas.set_window_title('temporal plot')
@@ -72,6 +73,7 @@ def print_status_decorator(function):
         function(*args)
         print('...complete.')
     return wrapper
+
 
 ### MAIN PLOTTING FUNCTION ###
 @print_status_decorator
