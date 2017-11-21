@@ -64,8 +64,13 @@ class Mode(object):
     def __set_systems(self):
         ## create systems laber if MM else use only board's systems
         if self.multimode:
-            self.systems = [ self.mode_tag + ' ' + self.boards[0].systems[i].split(' ')[1] 
-                             + ' MM' + str(i+1) for i in range(0, len(self.boards[0].systems)) ]
+            ## same system/SN labels
+            if self.boards[0].systems[0].split(' ', 1)[1] == self.boards[1].systems[0].split(' ', 1)[1]:
+                self.systems = [ self.mode_tag + ' ' + self.boards[0].systems[i].split(' ', 1)[1] 
+                                 for i in range(0, len(self.boards[0].systems)) ]
+            else: ## unique system/SN labels
+                self.systems = [ self.mode_tag + ' ' + self.boards[0].systems[i].split(' ')[1] 
+                                 + ' MM' + str(i+1) for i in range(0, len(self.boards[0].systems)) ]
         else:
             self.systems = self.boards[0].systems
 

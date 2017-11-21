@@ -203,7 +203,21 @@ class TestStation(object):
 
     def __make_modes(self):
         for mode_id in self.mode_ids:
-            self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
+            board_ids = self.get_current_boards_from_mode_id(mode_id)
+            if len(board_ids) == 1:
+                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
+            elif len(board_ids) == 2 and self.boards_have_same_sytem_labels(*board_ids):
+                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
+
+    def get_current_boards_from_mode_id(self, mode_id):
+        board_ids = re.findall('B[0-9]*', mode_id)
+        return list(set(board_ids) & set(self.current_board_ids))
+
+    def boards_have_same_sytem_labels(self, board_id_1, board_id_2):
+        board_dict = { board.id: board for board in self.boards }
+        board_1 = board_dict[board_id_1]
+        board_2 = board_dict[board_id_2]
+        return board_1.systems[0].split(' ', 1)[1] == board_2.systems[0].split(' ', 1)[1]
 
     def print_board_information(self):
         print('\nBoards:', self.boards)
