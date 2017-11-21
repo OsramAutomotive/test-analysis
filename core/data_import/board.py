@@ -61,6 +61,7 @@ class Board(object):
         try:
             self.name = self.test.limits.board_module_pairs[self.id]
         except:
+            self.name = self.id
             print('Could not load board name for', self.id)
 
     def __get_board_systems(self):
