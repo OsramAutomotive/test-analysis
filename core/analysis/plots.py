@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as dates
+import matplotlib.ticker as ticker
 from matplotlib import style
 from core.data_import.helpers import *
 from .. re_and_global import *
@@ -40,8 +41,8 @@ def plot_voltage_functional_cycle(test, ax):
 
 def plot_temperature_cycle(test, ax):
     test.df[test.thermocouples].plot(ax=ax)
+    ax.set_title("Temperature Profile")
     ax.set_ylabel(u"Temp (\N{DEGREE SIGN}C)")
-    ax.set_title("Temperature Profile") 
     ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
               labels = test.thermocouples)
 
@@ -55,10 +56,10 @@ def plot_mode_currents(test, axes, row=2):
         for system, color in zip(mode.systems, colors):
             axes[row].scatter(mode.df.index, mode.df[system], 
                               c=color, alpha=0.7)
+        axes[row].yaxis.set_major_locator(ticker.MaxNLocator(5))
         axes[row].legend(fontsize=7, loc='center left', bbox_to_anchor=(1.0, 0.5),
                        ncol=2, labels = [sys.split(' ', 1)[1] for sys in mode.systems])
         row +=1
-    plt.gcf().autofmt_xdate()
 
 def set_figure_size_and_name(fig, save=False):
     plt.tight_layout()
@@ -81,5 +82,3 @@ def plot_modes(test, limits=None):
     plot_temperature_cycle(test, ax=axes[1])  ## subplot 2: temperatures
     plot_mode_currents(test, axes)  ## subplots 3 and up: mode currents
     set_figure_size_and_name(fig) ## set fig size and name
-
-    
