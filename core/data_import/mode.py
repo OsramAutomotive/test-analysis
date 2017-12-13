@@ -32,7 +32,6 @@ class Mode(object):
         self.board_ids = re.findall('B[]0-9]*', board_mode) # find boards present in mode
         self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
         self.boards = [board for board in self.test.boards if board.id in self.current_board_ids]
-        # self.systems = [' '.join([self.mode_tag, sys]) for sys in test.systems] # (all boards same sys nums)
         self.systems = []
 
         self.hist_dict = {}  # temp -> voltage -> df of currents only at that temp/voltage combo
@@ -152,17 +151,19 @@ class Mode(object):
             xml_vsenses = etree.SubElement(xml_voltage, "vsenses")
             for vsense in self.voltage_senses:
                 xml_vsense = etree.SubElement(xml_vsenses, "vsense")
-                vsense_min, vsense_max, mean = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
+                vsense_min, vsense_max, vsense_mean = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
                 out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance, 
                                                         voltage+self.test.voltage_tolerance, 
                                                         vsense_min, vsense_max)
-                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, mean, out_of_spec_bool]
+                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, vsense_mean, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_vsense, "name")
                 xml_name.text = str(vsense).rsplit(' ', 1)[0]
                 xml_min = etree.SubElement(xml_vsense, "min")
                 xml_min.text = str(vsense_min)
                 xml_max = etree.SubElement(xml_vsense, "max")
                 xml_max.text = str(vsense_max)
+                xml_mean = etree.SubElement(xml_vsense, "mean")
+                xml_mean.text = str(vsense_mean)
                 xml_check = etree.SubElement(xml_vsense, "check")
                 xml_check.text = 'Out of Spec' if out_of_spec_bool else 'G'
 
@@ -171,7 +172,8 @@ class Mode(object):
             for system in self.systems:
                 xml_system = etree.SubElement(xml_systems, "system")
                 out_of_spec_bool = 'NA'
-                sys_min, sys_max, mean, std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
+                out_of_spec_count = 'NA'
+                sys_min, sys_max, sys_mean, sys_std = get_system_stats_at_mode_temp_voltage(system, self, temp, voltage)
                 if limits:
                     if self.has_led_binning:
                         mode_limit_dict = get_limits_for_system_with_binning(limits, self, temp, voltage, system)
@@ -179,15 +181,24 @@ class Mode(object):
                         mode_limit_dict = get_limits_at_mode_temp_voltage(limits, self, temp, voltage)
                     lower_limit, upper_limit = mode_limit_dict['LL'], mode_limit_dict['UL']
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
-                self.current_stats[temp][voltage][system] = [sys_min, sys_max, mean, std, out_of_spec_bool]
+                    out_of_spec_count, percent_out = count_num_out_of_spec(self.hist_dict[temp][voltage][system], lower_limit, upper_limit)
+                self.current_stats[temp][voltage][system] = [sys_min, sys_max, sys_mean, sys_std, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
                 xml_name.text = str(system)
                 xml_min = etree.SubElement(xml_system, "min")
                 xml_min.text = str(sys_min)
                 xml_max = etree.SubElement(xml_system, "max")
                 xml_max.text = str(sys_max)
+                xml_mean = etree.SubElement(xml_system, "mean")
+                xml_mean.text = str(sys_mean)
+                xml_std = etree.SubElement(xml_system, "std")
+                xml_std.text = str(sys_std)
                 xml_check = etree.SubElement(xml_system, "check")
                 xml_check.text = 'NA' if (not run_limit_analysis or not limits) else 'Out of Spec' if out_of_spec_bool else 'G'
+                xml_count = etree.SubElement(xml_system, "count")
+                xml_count.text = str(out_of_spec_count)
+                xml_percent_out = etree.SubElement(xml_system, "percent-out")
+                xml_percent_out.text = str(percent_out)
 
     def get_out_of_spec_data(self):
         ''' Method for retrieving out_of_spec raw data from test in this mode '''
