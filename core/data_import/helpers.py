@@ -202,9 +202,10 @@ def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
         return sys_min
 
 def count_num_out_of_spec(series, lower_limit, upper_limit):
+    total_count = series.count()
     count_out_of_spec = series[ (series < lower_limit) | (series > upper_limit) ].count()
-    percent_out = str(round(count_out_of_spec/series.count(), 4) * 100) + '%'
-    return count_out_of_spec, percent_out
+    percent_out = str(round(count_out_of_spec/total_count, 4) * 100) + '%'
+    return total_count, count_out_of_spec, percent_out
 
 def write_out_of_spec_to_file(df, mode, temp, voltage):
     ''' Append out of spec mode/temp/voltage condition to out of spec file '''

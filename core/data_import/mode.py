@@ -156,7 +156,7 @@ class Mode(object):
                                                         voltage+self.test.voltage_tolerance, 
                                                         vsense_min, vsense_max)
                 vsense_series = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage, self.test.temperature_tolerance)[vsense]
-                out_of_spec_count, percent_out = count_num_out_of_spec(vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
+                total_count, out_of_spec_count, percent_out = count_num_out_of_spec(vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
                 self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, vsense_mean, vsense_std, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_vsense, "name")
                 xml_name.text = str(vsense).rsplit(' ', 1)[0]
@@ -169,6 +169,8 @@ class Mode(object):
                 xml_mean = etree.SubElement(xml_vsense, "std")
                 xml_mean.text = str(vsense_std)
                 xml_count = etree.SubElement(xml_vsense, "count")
+                xml_count.text = str(total_count)
+                xml_count = etree.SubElement(xml_vsense, "count-out")
                 xml_count.text = str(out_of_spec_count)
                 xml_percent_out = etree.SubElement(xml_vsense, "percent-out")
                 xml_percent_out.text = str(percent_out)
@@ -189,7 +191,7 @@ class Mode(object):
                         mode_limit_dict = get_limits_at_mode_temp_voltage(limits, self, temp, voltage)
                     lower_limit, upper_limit = mode_limit_dict['LL'], mode_limit_dict['UL']
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max)
-                    out_of_spec_count, percent_out = count_num_out_of_spec(self.hist_dict[temp][voltage][system], lower_limit, upper_limit)
+                    total_count, out_of_spec_count, percent_out = count_num_out_of_spec(self.hist_dict[temp][voltage][system], lower_limit, upper_limit)
                 self.current_stats[temp][voltage][system] = [sys_min, sys_max, sys_mean, sys_std, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
                 xml_name.text = str(system)
@@ -202,6 +204,8 @@ class Mode(object):
                 xml_std = etree.SubElement(xml_system, "std")
                 xml_std.text = str(sys_std)
                 xml_count = etree.SubElement(xml_system, "count")
+                xml_count.text = str(total_count)
+                xml_count = etree.SubElement(xml_system, "count-out")
                 xml_count.text = str(out_of_spec_count)
                 xml_percent_out = etree.SubElement(xml_system, "percent-out")
                 xml_percent_out.text = str(percent_out)

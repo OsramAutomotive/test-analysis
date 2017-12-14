@@ -121,7 +121,7 @@ class Outage(Board):
                         lower_limit, upper_limit = get_limits_for_outage_off(limits, self, voltage)   
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
                     series = filter_temp_and_voltage(df, self.test.ambient, temp, voltage, self.test.temperature_tolerance)[system]
-                    out_of_spec_count, percent_out = count_num_out_of_spec(series, lower_limit, upper_limit)
+                    total_count, out_of_spec_count, percent_out = count_num_out_of_spec(series, lower_limit, upper_limit)
                 self.outage_stats[outage_state][temp][voltage][system] = [outage_min, outage_max, outage_mean, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
                 xml_name.text = str(system).split(' ', 1)[1]
@@ -134,6 +134,8 @@ class Outage(Board):
                 xml_std = etree.SubElement(xml_system, "std")
                 xml_std.text = str(outage_std)
                 xml_count = etree.SubElement(xml_system, "count")
+                xml_count.text = str(total_count)
+                xml_count = etree.SubElement(xml_system, "count-out")
                 xml_count.text = str(out_of_spec_count)
                 xml_percent_out = etree.SubElement(xml_system, "percent-out")
                 xml_percent_out.text = str(percent_out)
