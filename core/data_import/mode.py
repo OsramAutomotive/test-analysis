@@ -151,11 +151,13 @@ class Mode(object):
             xml_vsenses = etree.SubElement(xml_voltage, "vsenses")
             for vsense in self.voltage_senses:
                 xml_vsense = etree.SubElement(xml_vsenses, "vsense")
-                vsense_min, vsense_max, vsense_mean = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
+                vsense_min, vsense_max, vsense_mean, vsense_std = get_vsense_stats_at_mode_temp_voltage(vsense, self, temp, voltage)
                 out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance, 
                                                         voltage+self.test.voltage_tolerance, 
                                                         vsense_min, vsense_max)
-                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, vsense_mean, out_of_spec_bool]
+                vsense_series = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage, self.test.temperature_tolerance)[vsense]
+                out_of_spec_count, percent_out = count_num_out_of_spec(vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
+                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, vsense_mean, vsense_std, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_vsense, "name")
                 xml_name.text = str(vsense).rsplit(' ', 1)[0]
                 xml_min = etree.SubElement(xml_vsense, "min")
@@ -164,6 +166,12 @@ class Mode(object):
                 xml_max.text = str(vsense_max)
                 xml_mean = etree.SubElement(xml_vsense, "mean")
                 xml_mean.text = str(vsense_mean)
+                xml_mean = etree.SubElement(xml_vsense, "std")
+                xml_mean.text = str(vsense_std)
+                xml_count = etree.SubElement(xml_vsense, "count")
+                xml_count.text = str(out_of_spec_count)
+                xml_percent_out = etree.SubElement(xml_vsense, "percent-out")
+                xml_percent_out.text = str(percent_out)
                 xml_check = etree.SubElement(xml_vsense, "check")
                 xml_check.text = 'Out of Spec' if out_of_spec_bool else 'G'
 
@@ -193,12 +201,12 @@ class Mode(object):
                 xml_mean.text = str(sys_mean)
                 xml_std = etree.SubElement(xml_system, "std")
                 xml_std.text = str(sys_std)
-                xml_check = etree.SubElement(xml_system, "check")
-                xml_check.text = 'NA' if (not run_limit_analysis or not limits) else 'Out of Spec' if out_of_spec_bool else 'G'
                 xml_count = etree.SubElement(xml_system, "count")
                 xml_count.text = str(out_of_spec_count)
                 xml_percent_out = etree.SubElement(xml_system, "percent-out")
                 xml_percent_out.text = str(percent_out)
+                xml_check = etree.SubElement(xml_system, "check")
+                xml_check.text = 'NA' if (not run_limit_analysis or not limits) else 'Out of Spec' if out_of_spec_bool else 'G'
 
     def get_out_of_spec_data(self):
         ''' Method for retrieving out_of_spec raw data from test in this mode '''

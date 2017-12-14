@@ -165,7 +165,7 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
     series = dframe[vsense]
     if not series.empty:
         return round(series.min(), decimal_places), round(series.max(), decimal_places), \
-               round(series.mean(), decimal_places)
+               round(series.mean(), decimal_places), round(series.std(), decimal_places)
     else:
         return 'NA', 'NA', 'NA'
 

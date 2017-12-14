@@ -115,7 +115,10 @@ class Outage(Board):
                 out_of_spec_bool = 'NA'
                 outage_min, outage_max, mean = get_outage_on_stats_at_temp_voltage(df, self, system, temp, voltage)
                 if run_limit_analysis and limits:
-                    lower_limit, upper_limit = get_limits_for_outage_off(limits, self, voltage)
+                    if outage_state == 'ON':
+                        lower_limit, upper_limit = get_limits_for_outage_on(limits, self, voltage)
+                    else:
+                        lower_limit, upper_limit = get_limits_for_outage_off(limits, self, voltage)   
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
                 self.outage_stats[outage_state][temp][voltage][system] = [outage_min, outage_max, mean, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
