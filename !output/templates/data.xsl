@@ -291,9 +291,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
               <!-- Outage Minimums -->
               <tr>
                 <th><div contenteditable="true">Min:</div></th>
-                <xsl:for-each select="vsenses/vsense">
-                  <td align="center"><xsl:value-of select="min"/></td>
-                </xsl:for-each>
                 <xsl:for-each select="systems/system">
                   <td align="center"><xsl:value-of select="min"/></td>
                 </xsl:for-each>
@@ -302,27 +299,38 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
               <!-- Outage Maximums -->
               <tr>
                 <th><div contenteditable="true">Max:</div></th>
-                <xsl:for-each select="vsenses/vsense">
-                  <td align="center"><xsl:value-of select="max"/></td>
-                </xsl:for-each>
                 <xsl:for-each select="systems/system">
                   <td align="center"><xsl:value-of select="max"/></td>
                 </xsl:for-each>
               </tr>
 
+              <!-- Outage Averages -->
+              <tr class="hide">
+                <th><div contenteditable="true">Avg:</div></th>
+                <xsl:for-each select="systems/system">
+                  <td align="center"><xsl:value-of select="mean"/></td>
+                </xsl:for-each>
+              </tr> 
+
+              <!-- Outage Count Out of Spec -->
+              <tr class="hide">
+                <th><div contenteditable="true">Count Out:</div></th>
+                <xsl:for-each select="systems/system">
+                  <td align="center"><xsl:value-of select="count"/></td>
+                </xsl:for-each>
+              </tr>
+
+              <!-- Outage Percent Out -->
+              <tr class="hide">
+                <th><div contenteditable="true">Percent Out:</div></th>
+                <xsl:for-each select="systems/system">
+                  <td align="center"><xsl:value-of select="percent-out"/></td>
+                </xsl:for-each>
+              </tr> 
+
               <!-- Outage Check Data -->
               <tr>
                 <th><div contenteditable="true">Check Data:</div></th>
-                <xsl:for-each select="vsenses/vsense">
-                  <xsl:choose>
-                    <xsl:when test="check = 'Out of Spec'">
-                      <td bgcolor="yellow" align="center"><xsl:value-of select="check"/></td>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <td align="center"><xsl:value-of select="check"/></td>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:for-each>
                 <xsl:for-each select="systems/system">
                   <xsl:choose>
                     <xsl:when test="check = 'Out of Spec'">

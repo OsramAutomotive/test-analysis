@@ -113,19 +113,27 @@ class Outage(Board):
             for system in self.systems:
                 xml_system = etree.SubElement(xml_systems, "system")
                 out_of_spec_bool = 'NA'
-                outage_min, outage_max, mean = get_outage_on_stats_at_temp_voltage(df, self, system, temp, voltage)
+                outage_min, outage_max, outage_mean = get_outage_on_stats_at_temp_voltage(df, self, system, temp, voltage)
                 if run_limit_analysis and limits:
                     if outage_state == 'ON':
                         lower_limit, upper_limit = get_limits_for_outage_on(limits, self, voltage)
                     else:
                         lower_limit, upper_limit = get_limits_for_outage_off(limits, self, voltage)   
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, outage_min, outage_max)
-                self.outage_stats[outage_state][temp][voltage][system] = [outage_min, outage_max, mean, out_of_spec_bool]
+                    series = filter_temp_and_voltage(df, self.test.ambient, temp, voltage, self.test.temperature_tolerance)[system]
+                    out_of_spec_count, percent_out = count_num_out_of_spec(series, lower_limit, upper_limit)
+                self.outage_stats[outage_state][temp][voltage][system] = [outage_min, outage_max, outage_mean, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
                 xml_name.text = str(system).split(' ', 1)[1]
                 xml_min = etree.SubElement(xml_system, "min")
                 xml_min.text = str(outage_min)
                 xml_max = etree.SubElement(xml_system, "max")
                 xml_max.text = str(outage_max)
+                xml_mean = etree.SubElement(xml_system, "mean")
+                xml_mean.text = str(outage_mean)
+                xml_count = etree.SubElement(xml_system, "count")
+                xml_count.text = str(out_of_spec_count)
+                xml_percent_out = etree.SubElement(xml_system, "percent-out")
+                xml_percent_out.text = str(percent_out)
                 xml_check = etree.SubElement(xml_system, "check")
                 xml_check.text = 'NA' if (not run_limit_analysis or not limits) else 'Out of Spec' if out_of_spec_bool else 'G'

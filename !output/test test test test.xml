@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="templates/data.xsl"?><test header_width="12" name="test test test">
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="templates/data.xsl"?><test header_width="12" name="test test test test">
   <time>
     <timestamp>2017-02-11 18:52:00</timestamp>
   </time>
@@ -2368,72 +2368,108 @@
               <name>TP1: System 82</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>-0.004</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>-0.003</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -2444,72 +2480,108 @@
               <name>TP1: System 82</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>-0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>-0.002</min>
               <max>0.001</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -2520,72 +2592,108 @@
               <name>TP1: System 82</name>
               <min>-0.001</min>
               <max>0.001</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>-0.002</min>
               <max>0.001</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -2598,72 +2706,108 @@
               <name>TP1: System 82</name>
               <min>9.314</min>
               <max>10.053</max>
+              <mean>9.694</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>9.211</min>
               <max>10.009</max>
+              <mean>9.606</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>9.272</min>
               <max>10.033</max>
+              <mean>9.657</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>9.291</min>
               <max>10.036</max>
+              <mean>9.648</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>9.287</min>
               <max>10.028</max>
+              <mean>9.649</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>9.248</min>
               <max>10.023</max>
+              <mean>9.626</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>9.308</min>
               <max>10.045</max>
+              <mean>9.687</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>9.294</min>
               <max>10.038</max>
+              <mean>9.659</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>9.265</min>
               <max>10.019</max>
+              <mean>9.643</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>9.277</min>
               <max>10.026</max>
+              <mean>9.637</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>9.292</min>
               <max>10.029</max>
+              <mean>9.65</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>9.26</min>
               <max>10.038</max>
+              <mean>9.649</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -2674,72 +2818,108 @@
               <name>TP1: System 82</name>
               <min>14.3</min>
               <max>14.729</max>
+              <mean>14.509</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>14.244</min>
               <max>14.727</max>
+              <mean>14.47</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>14.274</min>
               <max>14.729</max>
+              <mean>14.493</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>14.276</min>
               <max>14.729</max>
+              <mean>14.488</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>14.27</min>
               <max>14.728</max>
+              <mean>14.49</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>14.256</min>
               <max>14.729</max>
+              <mean>14.477</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>14.293</min>
               <max>14.731</max>
+              <mean>14.506</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>14.276</min>
               <max>14.729</max>
+              <mean>14.492</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>14.269</min>
               <max>14.729</max>
+              <mean>14.487</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>14.266</min>
               <max>14.729</max>
+              <mean>14.484</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>14.273</min>
               <max>14.729</max>
+              <mean>14.49</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>14.274</min>
               <max>14.73</max>
+              <mean>14.488</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -2750,72 +2930,108 @@
               <name>TP1: System 82</name>
               <min>16.177</min>
               <max>16.55</max>
+              <mean>16.36</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>16.126</min>
               <max>16.549</max>
+              <mean>16.325</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>16.162</min>
               <max>16.549</max>
+              <mean>16.346</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>16.157</min>
               <max>16.549</max>
+              <mean>16.342</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>16.159</min>
               <max>16.549</max>
+              <mean>16.343</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>16.141</min>
               <max>16.549</max>
+              <mean>16.332</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>16.17</min>
               <max>16.549</max>
+              <mean>16.358</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>16.16</min>
               <max>16.55</max>
+              <mean>16.346</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>16.153</min>
               <max>16.548</max>
+              <mean>16.34</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>16.148</min>
               <max>16.551</max>
+              <mean>16.339</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>16.154</min>
               <max>16.549</max>
+              <mean>16.343</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>16.15</min>
               <max>16.549</max>
+              <mean>16.341</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -5167,72 +5383,108 @@
               <name>TP1: System 82</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>-0.004</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>-0.002</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>-0.003</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>-0.004</min>
               <max>0.004</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>-0.003</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -5243,72 +5495,108 @@
               <name>TP1: System 82</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>-0.001</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>-0.002</min>
               <max>0.003</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -5319,72 +5607,108 @@
               <name>TP1: System 82</name>
               <min>-0.001</min>
               <max>0.001</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>-0.002</min>
               <max>0.001</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>-0.002</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>-0.001</min>
               <max>0.001</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>-0.001</min>
               <max>0.001</max>
+              <mean>-0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>-0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>-0.001</min>
               <max>0.002</max>
+              <mean>-0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>-0.002</min>
               <max>0.001</max>
+              <mean>-0.0</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -5397,72 +5721,108 @@
               <name>TP1: System 82</name>
               <min>9.309</min>
               <max>9.987</max>
+              <mean>9.641</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>0.0</min>
               <max>9.928</max>
+              <mean>9.088</mean>
+              <count>27</count>
+              <percent-out>4.87%</percent-out>
               <check>Out of Spec</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>9.292</min>
               <max>9.965</max>
+              <mean>9.626</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>9.253</min>
               <max>9.945</max>
+              <mean>9.592</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>9.285</min>
               <max>9.959</max>
+              <mean>9.612</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>9.282</min>
               <max>9.966</max>
+              <mean>9.613</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>9.297</min>
               <max>9.97</max>
+              <mean>9.623</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>9.261</min>
               <max>9.944</max>
+              <mean>9.589</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>9.302</min>
               <max>9.958</max>
+              <mean>9.622</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>9.239</min>
               <max>9.921</max>
+              <mean>9.57</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>9.282</min>
               <max>9.957</max>
+              <mean>9.622</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>9.293</min>
               <max>9.982</max>
+              <mean>9.634</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -5473,72 +5833,108 @@
               <name>TP1: System 82</name>
               <min>14.311</min>
               <max>14.774</max>
+              <mean>14.538</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>14.244</min>
               <max>14.756</max>
+              <mean>14.497</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>14.297</min>
               <max>14.767</max>
+              <mean>14.527</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>14.27</min>
               <max>14.761</max>
+              <mean>14.509</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>14.295</min>
               <max>14.764</max>
+              <mean>14.525</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>14.279</min>
               <max>14.77</max>
+              <mean>14.519</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>14.303</min>
               <max>14.769</max>
+              <mean>14.53</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>14.274</min>
               <max>14.762</max>
+              <mean>14.512</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>14.293</min>
               <max>14.765</max>
+              <mean>14.525</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>14.258</min>
               <max>14.753</max>
+              <mean>14.497</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>14.292</min>
               <max>14.763</max>
+              <mean>14.524</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>14.291</min>
               <max>14.772</max>
+              <mean>14.53</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -5549,72 +5945,108 @@
               <name>TP1: System 82</name>
               <min>16.18</min>
               <max>16.584</max>
+              <mean>16.366</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP2: System 83</name>
               <min>16.13</min>
               <max>16.357</max>
+              <mean>16.261</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP3: System 84</name>
               <min>16.173</min>
               <max>16.38</max>
+              <mean>16.294</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP4: System 85</name>
               <min>16.15</min>
               <max>16.576</max>
+              <mean>16.344</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP5: System 86</name>
               <min>16.165</min>
               <max>16.577</max>
+              <mean>16.356</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP6: System 87</name>
               <min>16.16</min>
               <max>16.58</max>
+              <mean>16.351</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP7: System 88</name>
               <min>16.17</min>
               <max>16.579</max>
+              <mean>16.36</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP8: System 89</name>
               <min>16.153</min>
               <max>16.373</max>
+              <mean>16.277</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP9: System 90</name>
               <min>16.172</min>
               <max>16.378</max>
+              <mean>16.29</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP10: System 91</name>
               <min>16.138</min>
               <max>16.571</max>
+              <mean>16.334</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP11: System 92</name>
               <min>16.168</min>
               <max>16.58</max>
+              <mean>16.355</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
             <system>
               <name>TP12: System 93</name>
               <min>16.17</min>
               <max>16.387</max>
+              <mean>16.294</mean>
+              <count>0</count>
+              <percent-out>0.0%</percent-out>
               <check>G</check>
             </system>
           </systems>
@@ -5623,7 +6055,7 @@
     </outages>
   </temperature>
   <user-inputs>
-    <test-name>test test test</test-name>
+    <test-name>test test test test</test-name>
     <folder>C:/Users/bruno/Programming Projects/Test Data Analysis/test files/new-style-MCA-PTC</folder>
     <systems>TP1: System 82, TP2: System 83, TP3: System 84, TP4: System 85, TP5: System 86, TP6: System 87, TP7: System 88, TP8: System 89, TP9: System 90, TP10: System 91, TP11: System 92, TP12: System 93</systems>
     <limits-file>C:/Users/bruno/Programming Projects/Test Data Analysis/test files/mca-outage-true.htm</limits-file>
