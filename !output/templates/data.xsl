@@ -69,12 +69,22 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           var hideButton = document.getElementById('toggle-hide');
           hideButton.style.display = 'none';
         }
+
+        function deleteAll() {
+          console.log('hideAll')
+          var hideRows = document.querySelectorAll('.hide');
+          for (var i = 0; i &lt; hideRows.length; ++i) {
+              hideRows[i].parentNode.removeChild(hideRows[i]);
+          }
+          var hideButton = document.getElementById('toggle-hide');
+          hideButton.style.display = 'none';
+        }
       </script>
     </head>
 
 
     <body>
-      <button id="toggle-hide" onclick="hideAll()">Hide Stats</button>
+      <button id="toggle-hide" onclick="deleteAll()">Hide Stats</button>
       <!-- Main Header -->
       <h1><div contenteditable="true"><xsl:value-of select="test/@name"/></div></h1>
       
