@@ -312,6 +312,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                 </xsl:for-each>
               </tr> 
 
+              <!-- Outage Standard Deviations -->
+              <tr class="hide">
+                <th><div contenteditable="true">St dev:</div></th>
+                <xsl:for-each select="systems/system">
+                  <td align="center"><xsl:value-of select="std"/></td>
+                </xsl:for-each>
+              </tr> 
+
               <!-- Outage Count Out of Spec -->
               <tr class="hide">
                 <th><div contenteditable="true">Count Out:</div></th>

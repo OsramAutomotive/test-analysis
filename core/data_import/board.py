@@ -113,7 +113,7 @@ class Outage(Board):
             for system in self.systems:
                 xml_system = etree.SubElement(xml_systems, "system")
                 out_of_spec_bool = 'NA'
-                outage_min, outage_max, outage_mean = get_outage_on_stats_at_temp_voltage(df, self, system, temp, voltage)
+                outage_min, outage_max, outage_mean, outage_std = get_outage_stats_at_temp_voltage(df, self, system, temp, voltage)
                 if run_limit_analysis and limits:
                     if outage_state == 'ON':
                         lower_limit, upper_limit = get_limits_for_outage_on(limits, self, voltage)
@@ -131,6 +131,8 @@ class Outage(Board):
                 xml_max.text = str(outage_max)
                 xml_mean = etree.SubElement(xml_system, "mean")
                 xml_mean.text = str(outage_mean)
+                xml_std = etree.SubElement(xml_system, "std")
+                xml_std.text = str(outage_std)
                 xml_count = etree.SubElement(xml_system, "count")
                 xml_count.text = str(out_of_spec_count)
                 xml_percent_out = etree.SubElement(xml_system, "percent-out")

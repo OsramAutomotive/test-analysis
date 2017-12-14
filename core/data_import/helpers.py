@@ -171,14 +171,14 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
 
 
 ### Outage analysis helpers
-def get_outage_on_stats_at_temp_voltage(df, board, system, temp, voltage):
+def get_outage_stats_at_temp_voltage(df, board, system, temp, voltage):
     ''' Return basic stats for outage at temp/voltage condition'''
     decimal_places = 3
     dframe = filter_temp_and_voltage(df, board.test.ambient, temp, voltage, board.test.temperature_tolerance)
     series = dframe[system]
     if not series.empty:
         return round(series.min(), decimal_places), round(series.max(), decimal_places), \
-               round(series.mean(), decimal_places)
+               round(series.mean(), decimal_places), round(series.std(), decimal_places)
     else:
         return 'NA', 'NA', 'NA'
 
@@ -188,7 +188,7 @@ def get_outage_off_stats_single_sys(df, board, system, temp):
     series = dframe[system]
     if not series.empty:
         return round(series.min(), decimal_places), round(series.max(), decimal_places), \
-               round(series.mean(), decimal_places)
+               round(series.mean(), decimal_places), round(series.std(), decimal_places)
     else:
         return 'NA', 'NA', 'NA'
 
