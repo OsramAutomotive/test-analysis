@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 """
-This module ...
-"""
+This module contains the Board class and Outage class. These classes
+model the test station boards. """
 
 import re
 from lxml import etree
@@ -22,7 +22,7 @@ from core.limits_import.limits import get_limits_for_outage_on, \
 
 class Board(object):
     """
-    Holds information and test data collected on a test station board.
+    Holds information and test data collected on a C&M test station board.
 
     Attributes:
         test => belongs to a test station object that describes the test

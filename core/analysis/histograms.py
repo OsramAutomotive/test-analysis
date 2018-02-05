@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-''' This module contains functions that create current histograms using matplotlib. '''
+''' This module contains functions that create current histograms using
+matplotlib. '''
 
 import pandas as pd
 import matplotlib.pyplot as plt

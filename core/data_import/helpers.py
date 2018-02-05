@@ -19,7 +19,8 @@ def rename_columns(mdf, board, columns):
         mdf (dataframe): The dataframe with renamed column labels
     """
     for column_label in columns:
-        mdf.rename(columns={column_label: column_label+' '+board.id}, inplace=True)
+        mdf.rename(columns={column_label: column_label+' '+board.id}, 
+                   inplace=True)
     return mdf
 
 def rotate_mask(mask, n):
@@ -154,7 +155,7 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
                round(series.max(), decimal_places),  \
                round(series.mean(), decimal_places), \
                round(series.std(), decimal_places)
-    return 'NA', 'NA', 'NA'
+    return 'NA', 'NA', 'NA', 'NA'
 
 
 ### Outage analysis helpers
@@ -169,10 +170,10 @@ def get_outage_stats_at_temp_voltage(df, board, system, temp, voltage):
                round(series.max(), decimal_places),  \
                round(series.mean(), decimal_places), \
                round(series.std(), decimal_places)
-    return 'NA', 'NA', 'NA'
+    return 'NA', 'NA', 'NA', 'NA'
 
 def get_outage_off_stats_single_sys(df, board, system, temp):
-    """ Need docstring """
+    """ Return outage stats for input system at input temp """
     decimal_places = 3
     dframe = filter_temperature(df, board.test.ambient, temp, \
                                 board.test.temperature_tolerance)
@@ -182,7 +183,7 @@ def get_outage_off_stats_single_sys(df, board, system, temp):
                round(series.max(), decimal_places),  \
                round(series.mean(), decimal_places), \
                round(series.std(), decimal_places)
-    return 'NA', 'NA', 'NA'
+    return 'NA', 'NA', 'NA', 'NA'
 
 
 ### Out of spec helpers

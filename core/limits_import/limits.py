@@ -40,12 +40,12 @@ class Limits(object):
         self.get_limits()
 
     def set_soup(self):
-        """ Need docstring """
+        """ Set BeautifulSoup instance to parse limits file """
         with open(self.filepath) as filepath:
             self.soup = BeautifulSoup(filepath, 'lxml')
 
     def get_board_info(self):
-        """ Need docstring """
+        """ Retrieve board information from limits file """
         board_rows = self.soup.find_all(class_='board')
         for board_row in board_rows:
             data = board_row.find_all('td')
@@ -63,7 +63,7 @@ class Limits(object):
                 self.outage_present = True
 
     def get_limits(self):
-        """ Need docstring """
+        """ Get limits for each mode present """
         modes = self.soup.find_all(class_='mode')
         for mode in modes:
             self._get_mode_limits(mode)

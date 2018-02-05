@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
 """
-Module information...
+This module contains the Mode class which models a mode excited in a lighting
+project. For eaxample, "DRL" or "Park" or "Park+Turn" could be modes.
 """
 
 
@@ -74,7 +75,7 @@ class Mode(object):
             self.multimode = True
 
     def __set_systems(self):
-        """ Create systems laber if MM else use only board's systems """
+        """ Create systems label if MM else use only board's systems """
         if self.multimode:
             ## same system/SN labels
             if self.boards[0].systems[0].split(' ', 1)[1] == self.boards[1].systems[0].split(' ', 1)[1]:
@@ -87,12 +88,13 @@ class Mode(object):
             self.systems = self.boards[0].systems
 
     def __make_hist_dict(self):
-        """ Need docstring """
+        """ Create voltage keys for each temp in histogram dictionary """
         for temp in self.temps:
             self.hist_dict[temp] = dict.fromkeys(self.voltages)
 
     def __populate_hist_dict(self, df):
-        """ Need docstring """
+        """ Fills histogram dictionary, which holds a series for each
+            system's currents at each temperature/voltage condition """
         for temp in self.temps:
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
@@ -133,13 +135,13 @@ class Mode(object):
         return dframe
 
     def strip_index_and_melt_to_series(self, dframe):
-        """ Need docstring """
+        """ Collect system currents into single pool for histogram analysis """
         hist_dframe = pd.melt(dframe, value_vars=self.systems, value_name='currents')
         hist_dframe = pd.to_numeric(hist_dframe['currents'], downcast='float')
         return hist_dframe
 
     def strip_index_and_melt_to_series_for_binning(self, dframe, led_bin):
-        """ Need docstring """
+        """ Collect like led bin sys currents into slingle pool for histogram analysis """
         systems = [system for system in self.systems if led_bin in system]
         hist_dframe = pd.melt(dframe, value_vars=systems, value_name='currents')
         hist_dframe = pd.to_numeric(hist_dframe['currents'], downcast='float')
