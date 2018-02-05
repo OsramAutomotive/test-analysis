@@ -67,7 +67,7 @@ def set_figure_size_and_name(fig):
     fig.subplots_adjust(top=0.900, bottom=0.075, left=0.070, right=0.760, hspace=0.330)
     fig.canvas.set_window_title('temporal plot')
 
-def print_status_decorator(function):
+def print_status(function):
     def wrapper(*args):
         print('\nPlotting temporal plot...')
         function(*args)
@@ -76,7 +76,7 @@ def print_status_decorator(function):
 
 
 ### MAIN PLOTTING FUNCTION ###
-@print_status_decorator
+@print_status
 def plot_modes(test, limits=None):
     ''' Creates a temporal plot of the functional cycle, temperature profile, and test mode currents '''
     fig, axes = set_up_plot_area(test)  # set up figure and axes for plotting 

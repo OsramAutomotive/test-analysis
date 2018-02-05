@@ -3,11 +3,14 @@
 ''' This module uses lxml to create xml tables with conditional formatting
 for out of spec currents/voltages and color modes as well. '''
 
+
+import os
+from lxml import etree
+import webbrowser
+
 from core.data_import.mode import *
 from core.data_import.board import *
 from core.re_and_global import *
-from lxml import etree
-import webbrowser
 
 
 def create_xml_tables(test, run_limit_analysis=False, limits=None):

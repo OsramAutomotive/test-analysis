@@ -1,0 +1,4 @@
+{
+  "core/limits/test_limits.py::test_valid_standard_limits[expected_board_module_pairs0-expected_lim_dict0]": true,
+  "core/limits_import/test_limits.py::test_valid_standard_limits[expected_board_module_pairs0-expected_lim_dict0]": true
+}

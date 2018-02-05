@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from core.data_import.test_station import *
+from core.data_import.dv_station import *
 from core.analysis.plots import *
 from core.analysis.histograms import *
 from core.analysis.tables import *
-from core.limits.limits import *
+from core.limits_import.limits import *
 
 import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import *
@@ -18,7 +18,6 @@ import time
 import win32file
 import win32event
 import win32con
-#import subprocess
 
 
 ## constants for user input parameters
@@ -217,7 +216,7 @@ class TestAnalysisUI(QWidget):
 
     def _load_limits(self, boards, temps):
         if self.limits_file:
-            return Limits(self.limits_file, boards, temps)
+            return Limits(self.limits_file)
         else:
             return None
 

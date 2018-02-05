@@ -1,45 +1,60 @@
 #!/usr/bin/python3
 
-''' This module contains functions that help build dataframes (data type created using "pandas")
-from the selected test data text files. These dataframes  are passed on to other modules for analysis
-(statistics, tables, plotting, histograms, etc.). The "dataframe" data type is lightweight and efficient;
-it is extremely useful format for conducting this type of large data size analysis. '''
+""" This module contains functions that help build dataframes (data type created using "pandas")
+from the selected test data text files. These dataframes  are passed on to other modules for
+analysis (statistics, tables, plotting, histograms, etc.). The "dataframe" data type is
+lightweight and efficient; it is extremely useful format for conducting this type of large
+data size analysis. """
 
+import os
+import re
 import itertools
 import pandas as pd
-import sys
 
-from .. re_and_global import *
-from core.data_import.helpers import *
-from core.data_import.board import *
-from core.data_import.mode import *
+from core.data_import.helpers import run_from_ipython, \
+                                     get_system_test_position_int, \
+                                     copy_and_remove_b6_from, \
+                                     mask_to_mode
+from core.data_import.board import Board, Outage
+from core.data_import.mode import Mode
+from .. re_and_global import REGEX_RAW_DATAFILE, \
+                             REGEX_EMPTY_TEST_POSITION, \
+                             REGEX_TEMPS, \
+                             REGEX_BOARDS, \
+                             REGEX_SYSTEMS, \
+                             REGEX_VOLTAGE_SENSES, \
+                             ON_OFF
 
 pd.options.mode.chained_assignment = None  # default='warn'
 
+
+## parsing function for datetime index on dataframes
+DATE_PARSER = lambda x: pd.datetime.strptime(x, '%m/%d/%Y %I:%M:%S %p')
 
 class TestStation(object):
     """
     Holds information and test data collected on a test station board.
 
-    Example highlights::
+    Attributes:
         folder => directory folder containing raw csv file data that was analyzed
         systems => list of used test positions and system numbers (also used for df query)
         boards => list of boards (as board objects) that were used for test
-        mode_df_dict => 
-        modes => 
+        mode_df_dict =>
+        modes =>
         df => dataframe that holds all board data
+    Essential Methods:
     """
 
     VSETPOINT = 'VSetpoint'
     VSENSE1 = 'Vsense 1st'
 
-    def __init__(self, name, folder, boards, limits=None, run_limit_analysis=False, 
-                 multimode= False, temperature_tolerance=3, voltage_tolerance=0.5, *temps):
+    def __init__(self, name, folder, boards, limits=None, run_limit_analysis=False,
+                 multimode=False, temperature_tolerance=3, voltage_tolerance=0.5, *temps):
         self.name = name
         self.folder = folder
         self.files = []
         self.boards = []
-        self.board_ids = boards if (type(boards) == list) else []
+        self.board_ids = boards if isinstance(boards, list) else []
         self.current_board_ids = []
         self.systems = []
         self.limits = limits
@@ -76,11 +91,11 @@ class TestStation(object):
 
     def __repr__(self):
         return '{}: {} {}'.format(self.__class__.__name__,
-                               self.board_ids, self.folder)
+                                  self.board_ids, self.folder)
 
     def __build_dataframe(self):
-        ''' Builds all files in folder for board into a single dataframe 
-        using the pandas module '''
+        """ Builds all files in folder for board into a single dataframe
+        using the pandas module """
         print('Scanning folder for datafiles...')
         if os.listdir(self.folder): ## if folder not empty
             for filenumber, filename in enumerate(os.listdir(self.folder)):
@@ -88,13 +103,16 @@ class TestStation(object):
                     print('\tAppending File', '#'+str(filenumber+1)+': ', filename)
                     try:
                         if run_from_ipython():  # if running from ipython (jupyter)
-                            next_file_df = pd.read_csv( self.folder+'/'+ filename, 
-                                           parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
-                                           index_col='Date Time', sep='\t', engine='python')
+                            next_file_df = pd.read_csv(self.folder+'/'+ filename,
+                                                       parse_dates={'Date Time': [0, 1]},
+                                                       date_parser=DATE_PARSER,
+                                                       index_col='Date Time', sep='\t',
+                                                       engine='python')
                         else:  # else running on local machine
-                            next_file_df = pd.read_csv( os.path.abspath(os.path.join(os.sep, self.folder, filename)), 
-                                           parse_dates={'Date Time': [0,1]}, date_parser=date_parser, 
-                                           index_col='Date Time', sep='\t', engine='python')
+                            next_file_df = pd.read_csv( 
+                                               os.path.abspath(os.path.join(os.sep, self.folder, filename)),
+                                               parse_dates={'Date Time': [0, 1]}, date_parser=DATE_PARSER,
+                                               index_col='Date Time', sep='\t', engine='python')
                     except Exception:
                         print('The following error occurred while attempting to convert the ' \
                               'data files to pandas dataframes:\n\n')
@@ -108,53 +126,65 @@ class TestStation(object):
             except TypeError as e:
                 pass
             if self.df.empty:
-                self.error_msg= '\nNo files in the selected folder match the Labview raw datafile convention.\n'
+                self.error_msg = '\nNo files in the selected folder match ' + \
+                                'the Labview raw datafile convention.\n'
         else:
             self.error_msg = '\nThere are no datafiles in the selected folder.\n'
 
     def delete_empty_columns(self):
-        ''' Deletes empty test position and thermocouple columns in dataframe '''
+        """ Deletes empty test position and thermocouple columns in dataframe """
         for col in self.df.columns.copy():
             if re.search(REGEX_EMPTY_TEST_POSITION, col):
                 del self.df[col]
-        temps = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
+        temps = list(filter(lambda col_name: re.search(REGEX_TEMPS, col_name), self.df.columns))
         for temp_col in temps.copy():  ## delete temperature columns with no readings
             if self.df[temp_col][0] == 'No Reading':
                 del self.df[temp_col]
 
     def __scan_for_boards(self):
-        ''' TO DO --> Add logic that alerts user if entered boards in normal mode are not present in data '''
-        if not self.board_ids: ## if board ids list is empty then autosense what boards are present (REAL TIME MODE)
+        """ Scan for boards present in dataframe """
+        # TO DO ==> Add logic that alerts user if entered boards in normal mode are not present
+        if not self.board_ids: ## autosense what boards are present (Real Time Mode only)
             set_of_boards = set()
-            for board in [re.search(REGEX_BOARDS, column).group(0) for column in self.df.columns if re.search(REGEX_BOARDS, column)]:
-                set_of_boards.add(board)
+            for col_name in self.df.columns:
+                if re.search(REGEX_BOARDS, col_name):
+                    set_of_boards.add(re.search(REGEX_BOARDS, col_name).group())
             self.board_ids = sorted(list(set_of_boards))
 
     def __scan_for_systems(self):
-        ''' Scans data for all systems and gets rid of blank test positions '''
+        """ Scans data for all systems and gets rid of blank test positions """
         set_of_systems = set()
-        for system in [re.search(REGEX_SYSTEMS, column).groups()[0] for column in self.df.columns if re.search(REGEX_SYSTEMS, column)]:
-            set_of_systems.add(system)
-        self.systems = sorted(list(set_of_systems), key=lambda sys: get_system_test_position_int(sys))
+        for col_name in self.df.columns:
+            if re.search(REGEX_SYSTEMS, col_name):
+                system_name = re.search(REGEX_SYSTEMS, col_name).groups()[0]
+                set_of_systems.add(system_name)
+        self.systems = sorted(list(set_of_systems),
+                              key=lambda sys: get_system_test_position_int(sys))
 
     def __scan_for_voltage_senses(self):
-        ''' Scans for voltage sense columns '''
-        self.voltage_senses = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_VOLTAGE_SENSES, self.df.columns[i])]
+        """ Scans for voltage sense columns """
+        for col_name in self.df.columns:
+            if re.search(REGEX_VOLTAGE_SENSES, col_name):
+                self.voltage_senses.append(col_name)
 
     def __scan_for_thermocouples(self):
-        ''' Scans for thermocouple columns '''
-        possible_thermocouples = [self.df.columns[i] for i in range(len(self.df.columns)) if re.search(REGEX_TEMPS, self.df.columns[i])]
+        """ Scans for thermocouple columns and removes those that have misreadings """
+        possible_thermocouples = []
+        for col_name in self.df.columns:
+            if re.search(REGEX_TEMPS, col_name):
+                possible_thermocouples.append(col_name)
         for tc in possible_thermocouples:
             tc_series = self.df[tc]
             if not (tc_series > 150).any() and not (tc_series < -150).any():
-                self.thermocouples.append(tc) # append only thermocouples that were used in the test without errors
+                self.thermocouples.append(tc) # only thermocouples without test errors
 
     def __set_ambient_thermocouple(self):
+        """ Set ambient temperature to the first thermocouple in list of scanned thermocouples """
         if self.thermocouples:
             self.ambient = self.thermocouples[0]
 
     def __create_boards(self):
-        ''' Creates board dataframes for each board passed into TestStation init '''
+        """ Creates board dataframes for each board passed into TestStation init """
         for board in self.board_ids:
             if board == 'B6': ## outage board
                 self.outage = Outage(self, board)
@@ -169,18 +199,20 @@ class TestStation(object):
         self.voltages = sorted(set(self.df[self.VSETPOINT]))
 
     def __make_df_dict(self):
-        ''' Outputs dictionary of ON time mask modes dataframes. This includes
-            all boards in df (even off ones, outage included). '''
-        if self.multimode: ## (multimode)
-            masks = [''.join(seq) for seq in itertools.product('01', repeat=len(self.boards))]  ## list of all combinations on/off   
-            ## print('\t=> Possible board combinations: ', masks)
+        """ Outputs dictionary of ON time mask modes dataframes. This includes
+            all boards in df (even off ones, outage included). """
+        # TODO ==> refactor this
+        if self.multimode:
+            # list of all combinations on/off
+            masks = [''.join(seq) for seq in itertools.product('01', repeat=len(self.boards))]
             for mask in masks:  ## retrieve only excited modes
                 if '1' not in mask:
                     continue
                 mode = mask_to_mode(mask, self.board_ids)
-                float_mask = [float(digit) for digit in mask]  ## float type to compare with df board on/off col
+                # float type to compare with df board on/off col
+                float_mask = [float(digit) for digit in mask]
                 data = self.df.copy()  ## make copy of 'mother' dataframe
-                ## for each specific mode (mask), join together all board dfs that are ON in mask
+                # for each specific mode (mask), join together all board dfs that are ON in mask
                 i = 0
                 for i in range(len(mask)):
                     board, on_off_state = self.boards[i].id, float_mask[i]
@@ -193,28 +225,39 @@ class TestStation(object):
             data = pd.DataFrame  ## make copy of 'mother' dataframe
             for board in self.boards:
                 mode = board.id
-                if mode != 'B6': ## skip outage board 
+                if mode != 'B6': ## skip outage board
                     data = self.df.loc[(self.df[mode + ' ' + ON_OFF] == 1.0)]
                     if not data.empty:
                         self.mode_df_dict[mode] = data
 
         self.mode_ids = list(self.mode_df_dict.keys())  ## assign mode ids
-        self.mode_ids = sorted(sorted(self.mode_ids), key=lambda x: len(x))  ## order by length first, then board number
+        # sort by length first, then board number
+        self.mode_ids = sorted(sorted(self.mode_ids), key=lambda x: len(x))
 
     def __make_modes(self):
+        """ Create Mode instances for each mode present in data and appends to 'modes' attribute """
         for mode_id in self.mode_ids:
             board_ids = self.get_current_boards_from_mode_id(mode_id)
             if len(board_ids) == 1:
-                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
+                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id],
+                                       self.voltages, *self.temps))
             elif len(board_ids) == 2 and self.boards_have_same_sytem_labels(*board_ids):
-                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id], self.voltages, *self.temps))
+                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id],
+                                       self.voltages, *self.temps))
 
     def get_current_boards_from_mode_id(self, mode_id):
+        """ Gets current board ids for input mode
+        Args:
+            mode_id (): Input mode (e.g. - )
+        Returns:
+            list of board ids (list): Current board ids that are on in input mode
+        """
         board_ids = re.findall('B[0-9]*', mode_id)
         return list(set(board_ids) & set(self.current_board_ids))
 
     def boards_have_same_sytem_labels(self, board_id_1, board_id_2):
-        board_dict = { board.id: board for board in self.boards }
+        """ Need docstring """
+        board_dict = {board.id: board for board in self.boards}
         board_1 = board_dict[board_id_1]
         board_2 = board_dict[board_id_2]
         return board_1.systems[0].split(' ', 1)[1] == board_2.systems[0].split(' ', 1)[1]
