@@ -171,7 +171,7 @@ def test_check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max,
 
 @pytest.fixture
 def current_series():
-    """ Returns """
+    """ Returns generic current series """
     series = pd.Series([0.45, 0.46, 0.47, 0.48, 0.49, 0.50, 0.51, 0.52, 0.53, 0.54, 0.55])
     return series
 

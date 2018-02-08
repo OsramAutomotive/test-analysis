@@ -3,9 +3,22 @@ This test module contains tests on the Limits class
 and its associated methods. 
 """
 
+
 import pytest
 from core.limits_import.limits import *
 
+
+class MockMode(object):
+    """ Mock up mode class for test setup """
+    def __init__(self, name, binning_boolean):
+        self.name = name
+        self.has_led_binning = binning_boolean
+
+@pytest.fixture
+def mock_up_mode(name, binning_boolean=False):
+    """ Mock up mode instance to use for testing """
+    mode = MockMode(name, binning_boolean)
+    return mode
 
 @pytest.fixture
 def p552_mca_limits():
@@ -78,3 +91,45 @@ def test_valid_p552_mca_limits(p552_mca_limits):
                                            16.0: (14.7, 20.0)}}}
     assert p552_mca_limits.board_module_pairs == expected_board_module_pairs
     assert p552_mca_limits.lim == expected_lim_dict
+
+
+@pytest.mark.parametrize("limits, mode, temp, voltage, expected", [
+  (p552_mca_limits(), mock_up_mode('DRL'), 23, 9.0, {'LL': 1.093, 'UL': 1.335}),
+  (p552_mca_limits(), mock_up_mode('DRL'), -40, 14.1, {'LL': 0.702, 'UL': 0.858}),
+  (p552_mca_limits(), mock_up_mode('DRL'), 85, 16.0, {'LL': 0.610, 'UL': 0.745}),
+
+  (p552_mca_limits(), mock_up_mode('PARK'), 23, 9.0, {'LL': 0.445, 'UL': 0.544}),
+  (p552_mca_limits(), mock_up_mode('PARK'), -40, 14.1, {'LL': 0.280, 'UL': 0.342}),
+  (p552_mca_limits(), mock_up_mode('PARK'), 85, 16.0, {'LL': 0.239, 'UL': 0.292}),
+
+  (p552_mca_limits(), mock_up_mode('PARKTURN'), 23, 9.0, {'LL': 1.905, 'UL': 2.329}),
+  (p552_mca_limits(), mock_up_mode('PARKTURN'), -40, 14.1, {'LL': 1.190, 'UL': 1.454}),
+  (p552_mca_limits(), mock_up_mode('PARKTURN'), 85, 16.0, {'LL': 0.981, 'UL': 1.200}),
+])
+def test_get_limits_at_mode_temp_voltage(limits, mode, temp, voltage, expected):
+    """ Test correct current limits for input mode/temp/voltage condition 
+        are retrieved (no LED binning) """
+    mode_limits_dict = get_limits_at_mode_temp_voltage(limits, mode, temp, voltage)
+    assert mode_limits_dict == expected
+
+
+@pytest.mark.parametrize("limits, mode, voltage, expected", [
+  (p552_mca_limits(), mock_up_mode('OUTAGE'), 9.0, (-0.3, 0.3)),
+  (p552_mca_limits(), mock_up_mode('OUTAGE'), 14.1, (-0.3, 0.3)),
+  (p552_mca_limits(), mock_up_mode('OUTAGE'), 16.0, (-0.3, 0.3)),
+])
+def test_get_limits_for_outage_off(limits, mode, voltage, expected):
+    """ Test correct limits for Outage OFF are retrieved """
+    lower_limit, upper_limit = get_limits_for_outage_off(limits, mode, voltage)
+    assert (lower_limit, upper_limit) == expected
+
+
+@pytest.mark.parametrize("limits, mode, voltage, expected", [
+  (p552_mca_limits(), mock_up_mode('OUTAGE'), 9.0, (7.7, 20)),
+  (p552_mca_limits(), mock_up_mode('OUTAGE'), 14.1, (12.8, 20)),
+  (p552_mca_limits(), mock_up_mode('OUTAGE'), 16.0, (14.7, 20)),
+])
+def test_get_limits_for_outage_on(limits, mode, voltage, expected):
+    """ Test correct limits for Outage ON are retrieved """
+    lower_limit, upper_limit = get_limits_for_outage_on(limits, mode, voltage)
+    assert (lower_limit, upper_limit) == expected

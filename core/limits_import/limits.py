@@ -123,13 +123,16 @@ def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
                                  (e.g. - {'LL': 1.369, 'UL': 1.673})
     """
     if mode.has_led_binning:
-        mode_limits_dict = get_all_mode_limits_with_binning(limits, mode, temp, voltage)
+        mode_limits_dict = get_all_mode_limits_with_binning(
+                               limits, mode, temp, voltage)
     else:
-        mode_limits_dict = get_limits_without_binning(limits, mode, temp, voltage)
+        mode_limits_dict = get_limits_without_binning(
+                               limits, mode, temp, voltage)
     return mode_limits_dict
 
 def get_limits_without_binning(limits, mode, temp, voltage):
-    """ Need docstring """
+    """ Returns: dict of current LL and UL for input mode/temp/voltage 
+        condition (no LED binning) """
     try:
         lower_limit = limits.lim[mode.name][temp][voltage][0]
         upper_limit = limits.lim[mode.name][temp][voltage][1]
@@ -180,7 +183,7 @@ def get_system_bin(mode, system):
     return None
 
 def get_limits_for_outage_off(limits, board, voltage):
-    """ Need docstring """
+    """ Returns: tuple of LL and UL for Outage when OFF """
     try:
         lower_limit = limits.lim[board.name]['OFF'][voltage][0]
         upper_limit = limits.lim[board.name]['OFF'][voltage][1]
@@ -189,7 +192,7 @@ def get_limits_for_outage_off(limits, board, voltage):
         raise
 
 def get_limits_for_outage_on(limits, board, voltage):
-    """ Need docstring """
+    """ Returns: tuple of LL and UL for Outage when ON """
     try:
         lower_limit = limits.lim[board.name]['ON'][voltage][0]
         upper_limit = limits.lim[board.name]['ON'][voltage][1]
