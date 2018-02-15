@@ -48,13 +48,13 @@ REGEX_TEMPS = '^Temp.*'
 REGEX_BOARDS = '(^B[0-9]*)'
 REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s.*)'
 REGEX_EMPTY_TEST_POSITION = '^B[0-9]*\sTP[0-9]*:\s$'
-REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(Vsense\s.*)'
+REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(VSense.*)'
 
 def REGEX_SPECIFIC_BOARD_SYSTEMS(board_id):
     return '^' + re.escape(board_id) + '*\sTP[0-9]*:\s.*'
 
 def REGEX_SPECIFIC_BOARD_VSENSES(board_id):
-    return '^' + re.escape(board_id) + '*\sVsense\s.*'
+    return '^' + re.escape(board_id) + '*\sVSense.*'
 
 def REGEX_SPECIFIC_BOARD_ON_OFF(board_id):
     return '^' + re.escape(board_id) + '*\sON/OFF$'

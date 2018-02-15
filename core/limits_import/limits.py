@@ -131,7 +131,7 @@ def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
     return mode_limits_dict
 
 def get_limits_without_binning(limits, mode, temp, voltage):
-    """ Returns: dict of current LL and UL for input mode/temp/voltage 
+    """ Returns: dict of current LL and UL for input mode/temp/voltage
         condition (no LED binning) """
     try:
         lower_limit = limits.lim[mode.name][temp][voltage][0]

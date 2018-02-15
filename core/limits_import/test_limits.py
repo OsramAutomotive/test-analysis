@@ -1,6 +1,6 @@
 """
 This test module contains tests on the Limits class
-and its associated methods. 
+and its associated methods and functions.
 """
 
 

@@ -21,7 +21,7 @@ import win32con
 
 
 ## constants for user input parameters
-CONSTANT_REAL_TIME_FOLDER = r"C:\Users\bruno\Programming Projects\Test Data Analysis\real time"
+CONSTANT_REAL_TIME_FOLDER = r"C:\Test Analysis Data"
 ANALYSIS_TOOLS = ['Plot', 'Histograms', 'Tables', 'Out of Spec']
 PLOT_INFO = 'Create a temporal plot of the selected test'
 HIST_INFO = 'Plot current histograms at each temp/mode/voltage'
@@ -464,7 +464,6 @@ def close_browser(browser):
 
 
 if __name__ == '__main__':
-    
     app = QApplication(sys.argv)
     gui = TestMainWindow()
     gui.show()

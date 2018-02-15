@@ -91,21 +91,18 @@ class Board(object):
 
 class Outage(Board):
     """
-    Holds information and test data collected on an outage test station board.
+    Inherits from Board class. Holds information and test data collected
+    on an Outage test station board.
 
     Attributes:
+        outage (boolean): True
+        outage_stats (dict): stores min/max values at different voltages
+                             for Outage ON and OFF conditions
+        systems (list): list of Outage systems
 
     Essential Methods:
+        get_system_by_system_outage_stats:
 
-
-    Example highlights::
-        test => belongs to a test station object that describes the test
-        folder => directory folder of data that was analyzed
-        id => e.g. - 'B3'
-        name => e.g. - 'Outage' or 'Diagnostic'
-        board => board object (includes board id)
-        system => list of used test positions and system numbers (used for df query)
-        df => dataframe of just this board
     """
 
     def __init__(self, test, board_number):

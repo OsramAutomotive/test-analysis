@@ -180,7 +180,7 @@ class Mode(object):
                     vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
                 self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, vsense_mean, vsense_std, out_of_spec_bool]
                 xml_name = etree.SubElement(xml_vsense, "name")
-                xml_name.text = str(vsense).rsplit(' ', 1)[0]
+                xml_name.text = str(vsense)
                 xml_min = etree.SubElement(xml_vsense, "min")
                 xml_min.text = str(vsense_min)
                 xml_max = etree.SubElement(xml_vsense, "max")
