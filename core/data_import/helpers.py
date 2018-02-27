@@ -194,7 +194,16 @@ def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
     return sys_min
 
 def count_num_out_of_spec(series, lower_limit, upper_limit):
-    """ Need docstring """
+    """ Finds the out of spec data in input series
+    Args:
+        series (Series object): Data to be analyzed (e.g. - Sys 10 current)
+        lower_limit (float): lower limit for data comparison
+        upper_limit (float): upper limit for data comparison
+    Returns:
+        total count (int): total number of scans in series
+        count_out_of_spec (int): number of scans outside of limits
+        percent_out (string): percentage of scans outside of limits
+    """
     total_count = series.count()
     count_out_of_spec = series[(series < lower_limit) | (series > upper_limit)].count()
     percent_out = str(round(count_out_of_spec/total_count, 4) * 100) + '%'

@@ -71,6 +71,7 @@ class Mode(object):
                                     self.name, self.board_mode)
 
     def __scan_for_multimode(self):
+        """ Check if mode is multimode (current sharing with multiple modules) """
         if len(self.current_board_ids) > 1:
             self.multimode = True
 

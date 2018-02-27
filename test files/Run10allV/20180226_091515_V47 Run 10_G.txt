@@ -1,0 +1,401 @@
+Station Serial	10
+Product Name	P552 PT Testla SAE Tesla ECE
+Product Revision	NA
+TestName	Validation V47 Run 10
+SN1	P552 PT
+SN2	Tesla ECE
+SN3	Tesla SAE
+SN4	Tesla Fog
+SN5	L2-1
+SN6	L2-2
+SN7	L2-3
+SN8	L2-4
+SN9	L2-5
+SN10	L2-6
+
+Validation Program, Revision 1.0.0.47
+
+
+02/26/2018 09:20:20 AM	Test Duration Reached – End of Test	Test Duration: 	0   00:05:05
+Total Test Time per UUT
+P552 PT	0   00:05:05
+Tesla ECE	0   00:05:05
+Tesla SAE	0   00:05:05
+Tesla Fog	0   00:05:05
+L2-1	0   00:05:05
+L2-2	0   00:05:05
+L2-3	0   00:05:05
+L2-4	0   00:05:05
+L2-5	0   00:05:05
+L2-6	0   00:05:05
+
+Total NS/ES counts per UUT
+P552 PT	0
+Tesla ECE	0
+Tesla SAE	0
+Tesla Fog	0
+L2-1	0
+L2-2	0
+L2-3	0
+L2-4	0
+L2-5	0
+L2-6	0
+
+20180226_091515	20180226_091515_Validation V47 Run 10_B.txt
+
+
+
+C:\Main Application\5- Main Application-1.0.0.47\Main Application\Config\UUT\OSIUUTConf_V47_A.xmlOP	TP	SERIAL	B1	B2	B3	B4	B5	B6	B7
+0	1	P552 PT	X				X		
+0	1	Tesla ECE		X	X				
+0	2	Tesla SAE				X			
+0	1	Tesla Fog						X	
+1	0	L2-1							X
+2	0	L2-2							X
+3	0	L2-3							X
+4	0	L2-4							X
+5	0	L2-5							X
+6	0	L2-6							X
+
+
+C:\Main Application\5- Main Application-1.0.0.47\Main Application\Config\Station\OSIStationConf_V47_A.cfg
+
+[Global]
+StationSerialNumber = "10"
+
+[DataLoggers0]
+Id = 0
+Address = "192.168.0.14"
+DriverClassPath = "Datalogger"
+Name = "DL1"
+
+[DataLoggers1]
+Id = 1
+Address = "192.168.0.15"
+DriverClassPath = "Datalogger"
+Name = "DL2"
+
+[DataLoggers2]
+Id = 2
+Address = "192.168.0.16"
+DriverClassPath = "Datalogger"
+Name = "DL3"
+
+[PowerSupply0]
+Id = 0
+FeedbackAddress1 = "1101"
+FeedbackAddress2 = "1201"
+FeedbackAddress3 = "1301"
+ControlAddress = "cDAQ1Mod1/ao0"
+VoltageRange = 20.000000
+DriverClassPath = "PowerSupply"
+Name = "PS1"
+ConpensationType = "None"
+CorrectionTolerance = 2.000000
+StepHeight = 50.000000
+OVPProtection = 2.000000
+
+[PowerSupply1]
+Id = 1
+FeedbackAddress1 = "2101"
+FeedbackAddress2 = "2201"
+FeedbackAddress3 = ""
+ControlAddress = "cDAQ1Mod1/ao1"
+VoltageRange = 20.000000
+DriverClassPath = "PowerSupply"
+Name = "PS2"
+ConpensationType = "None"
+CorrectionTolerance = 2.000000
+StepHeight = 50.000000
+OVPProtection = 2.000000
+
+[PowerSupply2]
+Id = 2
+FeedbackAddress1 = ""
+FeedbackAddress2 = ""
+FeedbackAddress3 = ""
+ControlAddress = "cDAQ1Mod1/ao2"
+VoltageRange = 33.000000
+DriverClassPath = "PowerSupply"
+Name = "PS3"
+ConpensationType = "None"
+CorrectionTolerance = 2.000000
+StepHeight = 50.000000
+OVPProtection = 2.000000
+
+[Thermocouple0]
+Id = 0
+Type = "T"
+Address = "1315"
+Position = "TC1"
+Name = "Amb"
+Enable = TRUE
+
+[Thermocouple1]
+Id = 1
+Type = "K"
+Address = "1316"
+Position = "TC2"
+Name = "P552 P/T"
+Enable = TRUE
+
+[Thermocouple2]
+Id = 2
+Type = "K"
+Address = "1215"
+Position = "TC3"
+Name = "Fog LED"
+Enable = TRUE
+
+[Thermocouple3]
+Id = 3
+Type = "K"
+Address = "1216"
+Position = "TC4"
+Name = "L2-5"
+Enable = TRUE
+
+[UUTs]
+UUTConfigFilePath = "/C/Main Application/5- Main Application-1.0.0.47/Main Application/Config/UUT/OSIUUTConf_V47_A.xml"
+
+[Board0]
+VSenseAIChannel0 = "1101"
+VSenseEnable0 = TRUE
+VSenseId0 = 0
+Type = "CM"
+GrouprDO = "cDAQ1Mod2/port0/line30"
+Name = "B1"
+PositionRange = "1 V"
+Position0AIChannel = "1102"
+Position0ControlDO = "cDAQ1Mod2/port0/line0"
+Position0Enable = TRUE
+Position0Shunt = 1.000000
+Position0Name = "TP1"
+
+[Board1]
+VSenseAIChannel0 = "1201"
+VSenseEnable0 = TRUE
+VSenseId0 = 0
+Type = "CM"
+GrouprDO = "cDAQ1Mod5/port0/line1"
+Name = "B2"
+PositionRange = "1 V"
+Position0AIChannel = "1202"
+Position0ControlDO = "cDAQ1Mod2/port0/line12"
+Position0Enable = TRUE
+Position0Shunt = 0.100000
+Position0Name = "TP1"
+
+[Board2]
+VSenseAIChannel0 = "1301"
+VSenseEnable0 = TRUE
+VSenseId0 = 0
+Type = "CM"
+GrouprDO = "cDAQ1Mod5/port0/line5"
+Name = "B3"
+PositionRange = "1 V"
+Position0AIChannel = "1302"
+Position0ControlDO = "cDAQ1Mod3/port0/line0"
+Position0Enable = TRUE
+Position0Shunt = 0.100000
+Position0Name = "TP1"
+
+[Board3]
+VSenseAIChannel0 = "2101"
+VSenseEnable0 = TRUE
+VSenseId0 = 0
+Type = "CM"
+GrouprDO = "cDAQ1Mod5/port0/line7"
+Name = "B4"
+PositionRange = "1 V"
+Position0AIChannel = "2102"
+Position0ControlDO = "cDAQ1Mod3/port0/line12"
+Position0Enable = TRUE
+Position0Shunt = 0.010000
+Position0Name = "TP1"
+Position1AIChannel = "2103"
+Position1ControlDO = "cDAQ1Mod3/port0/line13"
+Position1Enable = TRUE
+Position1Shunt = 0.010000
+Position1Name = "TP2"
+
+[Board4]
+VSenseAIChannel0 = "2201"
+VSenseEnable0 = TRUE
+VSenseId0 = 0
+Type = "CM"
+GrouprDO = "cDAQ1Mod5/port0/line3"
+Name = "B5"
+PositionRange = "1 V"
+Position0AIChannel = "2202"
+Position0ControlDO = "cDAQ1Mod4/port0/line0"
+Position0Enable = TRUE
+Position0Shunt = 0.010000
+Position0Name = "TP1"
+
+[Board5]
+VSenseAIChannel0 = "2301"
+VSenseEnable0 = TRUE
+VSenseId0 = 0
+Type = "CM"
+GrouprDO = "cDAQ1Mod4/port0/line31"
+Name = "B6"
+PositionRange = "1 V"
+Position0AIChannel = "2302"
+Position0ControlDO = "cDAQ1Mod4/port0/line12"
+Position0Enable = TRUE
+Position0Shunt = 0.010000
+Position0Name = "TP1"
+
+[Board6]
+Type = "Outage"
+GrouprDO = ""
+Name = "B7"
+PositionRange = "1 V"
+Position0AIChannel = "3101"
+Position0ControlDO = ""
+Position0Enable = TRUE
+Position0Shunt = 1.000000
+Position0Name = "TP1"
+Position1AIChannel = "3102"
+Position1ControlDO = ""
+Position1Enable = TRUE
+Position1Shunt = 1.000000
+Position1Name = "TP2"
+Position2AIChannel = "3103"
+Position2ControlDO = ""
+Position2Enable = TRUE
+Position2Shunt = 1.000000
+Position2Name = "TP3"
+Position3AIChannel = "3104"
+Position3ControlDO = ""
+Position3Enable = TRUE
+Position3Shunt = 1.000000
+Position3Name = "TP4"
+Position4AIChannel = "3105"
+Position4ControlDO = ""
+Position4Enable = TRUE
+Position4Shunt = 1.000000
+Position4Name = "TP5"
+Position5AIChannel = "3106"
+Position5ControlDO = ""
+Position5Enable = TRUE
+Position5Shunt = 1.000000
+Position5Name = "TP6"
+
+C:\Main Application\5- Main Application-1.0.0.47\Main Application\Config\Test\OSITestConf_V47_C.cfg
+
+[TestConfig]
+Duration = "00:05:05"
+FileSize = 500
+ScanFrequency = 1.000000
+TestName = "Validation V47 Run 10"
+LogFrequency = 1.000000
+ProductName = "P552 PT Testla SAE Tesla ECE"
+ProductRevision = "NA"
+MaxTemp = "50;50;50;50"
+LogFrequencyIdle = 3.000000
+ScanFrequencyIdle = 3.000000
+VoltTolerance = 0.100000
+TestSetup = 3
+DelayFunctionalCycle = 4
+DelayVoltageCycle = 4
+
+[FunctionalCycle0]
+Time = "00:00:10"
+NextCase = 2
+Id = 1
+BoardsEnable = "1;0;0;0;0;0;1"
+
+[FunctionalCycle1]
+Time = "00:00:10"
+NextCase = 3
+Id = 2
+BoardsEnable = "0;1;0;0;0;0;1"
+
+[FunctionalCycle2]
+Time = "00:00:10"
+NextCase = 4
+Id = 3
+BoardsEnable = "0;0;1;0;0;0;1"
+
+[FunctionalCycle3]
+Time = "00:00:10"
+NextCase = 5
+Id = 4
+BoardsEnable = "0;0;0;1;1;1;1"
+
+[FunctionalCycle4]
+Time = "00:00:10"
+NextCase = 1
+Id = 5
+BoardsEnable = "1;0;1;1;2;1;2"
+
+[VoltageCycle0]
+Case = 1
+Count = 1
+NextCase = 2
+Voltage = 9.000000
+VDROP0 = 0.200000
+VDROP1 = 0.200000
+
+[VoltageCycle1]
+Case = 2
+Count = 1
+NextCase = 3
+Voltage = 14.000000
+VDROP0 = 0.200000
+VDROP1 = 0.200000
+
+[VoltageCycle2]
+Case = 3
+Count = 1
+NextCase = 1
+Voltage = 16.000000
+VDROP0 = 0.200000
+VDROP1 = 0.200000
+
+[PWM0]
+DutyCycle = 50.000000
+Frequency = 1.330000
+BoardID = 1
+Address = "cDAQ1Mod5/ctr2"
+Id = 0
+PulseTerminal = "/cDAQ1Mod5/PFI1"
+
+[PWM1]
+DutyCycle = 50.000000
+Frequency = 1.330000
+BoardID = 2
+Address = "cDAQ1Mod5/ctr3"
+Id = 1
+PulseTerminal = "/cDAQ1Mod5/PFI5"
+
+[PWM2]
+DutyCycle = 50.000000
+Frequency = 1.330000
+BoardID = 3
+Address = "cDAQ1Mod5/ctr1"
+Id = 2
+PulseTerminal = "/cDAQ1Mod5/PFI7"
+
+[PWM3]
+DutyCycle = 50.000000
+Frequency = 1.330000
+BoardID = 4
+Address = "cDAQ1Mod5/ctr0"
+Id = 3
+PulseTerminal = "/cDAQ1Mod5/PFI3"
+
+[CheckFuse]
+MinValue = "0.005;0.005;0.005;0.005;0.005;0.005"
+Retries = 1
+
+[Modes]
+Board0 = "Park"
+Board1 = "Fog"
+Board2 = "Tesla ECE Turn"
+Board3 = "Tesla SAE StopTurn"
+Board4 = "P552 Turn"
+Board5 = "Tesla Fog"
+Board6 = "L2"

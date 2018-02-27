@@ -27,18 +27,14 @@ def plot_voltage_functional_cycle(test, ax):
     ax.set_ylabel("Voltage (V)")
     ax.set_ylim([0,20])
     ax.yaxis.set_major_locator(ticker.MaxNLocator(4))
-    board_colors = dict(zip(test.boards, MODULE_COLOR_LIST))
-    for board in test.boards:
-        if board.outage: # skip Outage board
-            continue
-        elif '5' in board.id: # Turn current board dashed line
-            test.df[board.id + ' ' + test.VSENSE1].plot(ax=ax, color=board_colors[board], linewidth=2, 
-                                               linestyle = ':')
-        else: # Non-Turn current board solid lines
-            test.df[board.id + ' ' + test.VSENSE1].plot(ax=ax, color=board_colors[board], linewidth=2)
-    vsense_labels = ['VSetpoint'] + [ board.name + ' VSense' for board in test.boards ]
+    # board_colors = dict(zip(test.boards, MODULE_COLOR_LIST))
+    for vsense in test.voltage_senses:
+        test.df[vsense].plot(ax=ax, linewidth=2)
+    # vsense_labels = ['VSetpoint'] + [ board.name + ' VSense' for board in test.boards ]
+    # ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
+    #           ncol=1, labels = vsense_labels)
     ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
-              ncol=1, labels = vsense_labels)
+              ncol=1)
 
 def plot_temperature_cycle(test, ax):
     test.df[test.thermocouples].plot(ax=ax)

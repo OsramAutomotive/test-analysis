@@ -29,7 +29,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 
 ## parsing function for datetime index on dataframes
-DATE_PARSER = lambda x: pd.datetime.strptime(x, '%m/%d/%Y %I:%M:%S %p')
+DATE_PARSER = lambda x: pd.datetime.strptime(x, '%Y/%m/%d %H:%M:%S.%f')
 
 class TestStation(object):
     """
@@ -45,8 +45,8 @@ class TestStation(object):
     Essential Methods:
     """
 
-    VSETPOINT = 'VSetpoint'
-    VSENSE1 = 'Vsense 1st'
+    VSETPOINT = 'Vsetpoint'
+    VSENSE1 = 'VSense1'
 
     def __init__(self, name, folder, boards, limits=None, run_limit_analysis=False,
                  multimode=False, temperature_tolerance=3, voltage_tolerance=0.5, *temps):
@@ -97,7 +97,7 @@ class TestStation(object):
         """ Builds all files in folder for board into a single dataframe
         using the pandas module """
         print('Scanning folder for datafiles...')
-        if os.listdir(self.folder): ## if folder not empty
+        if os.listdir(self.folder): # if folder not empty
             for filenumber, filename in enumerate(os.listdir(self.folder)):
                 if bool(re.search(REGEX_RAW_DATAFILE, filename)):
                     print('\tAppending File', '#'+str(filenumber+1)+': ', filename)
@@ -137,14 +137,14 @@ class TestStation(object):
             if re.search(REGEX_EMPTY_TEST_POSITION, col):
                 del self.df[col]
         temps = list(filter(lambda col_name: re.search(REGEX_TEMPS, col_name), self.df.columns))
-        for temp_col in temps.copy():  ## delete temperature columns with no readings
+        for temp_col in temps.copy():  # delete temperature columns with no readings
             if self.df[temp_col][0] == 'No Reading':
                 del self.df[temp_col]
 
     def __scan_for_boards(self):
         """ Scan for boards present in dataframe """
         # TO DO ==> Add logic that alerts user if entered boards in normal mode are not present
-        if not self.board_ids: ## autosense what boards are present (Real Time Mode only)
+        if not self.board_ids:  # autosense what boards are present (Real Time Mode only)
             set_of_boards = set()
             for col_name in self.df.columns:
                 if re.search(REGEX_BOARDS, col_name):
@@ -186,11 +186,8 @@ class TestStation(object):
     def __create_boards(self):
         """ Creates board dataframes for each board passed into TestStation init """
         for board in self.board_ids:
-            if board == 'B6': ## outage board
-                self.outage = Outage(self, board)
-                self.boards.append(self.outage)
-            else:  ## current board
-                self.boards.append(Board(self, board))
+            # TODO --> logic for voltage/outage board vs. current board
+            self.boards.append(Board(self, board))
 
     def __set_current_board_ids(self):
         self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
@@ -205,13 +202,13 @@ class TestStation(object):
         if self.multimode:
             # list of all combinations on/off
             masks = [''.join(seq) for seq in itertools.product('01', repeat=len(self.boards))]
-            for mask in masks:  ## retrieve only excited modes
+            for mask in masks:  # retrieve only excited modes
                 if '1' not in mask:
                     continue
                 mode = mask_to_mode(mask, self.board_ids)
                 # float type to compare with df board on/off col
                 float_mask = [float(digit) for digit in mask]
-                data = self.df.copy()  ## make copy of 'mother' dataframe
+                data = self.df.copy()  # make copy of 'mother' dataframe
                 # for each specific mode (mask), join together all board dfs that are ON in mask
                 i = 0
                 for i in range(len(mask)):
@@ -219,18 +216,18 @@ class TestStation(object):
                     data = data.loc[(self.df[board + ' ' + ON_OFF] == on_off_state)]
                     i += 1
                 if not data.empty:
-                    self.mode_df_dict[mode] = data  ## save mode data in dictionary with mode key
+                    self.mode_df_dict[mode] = data  # save mode data in dictionary with mode key
 
-        else: ## (NOT multimode)
-            data = pd.DataFrame  ## make copy of 'mother' dataframe
+        else: # (NOT multimode)
+            data = pd.DataFrame  # make copy of 'mother' dataframe
             for board in self.boards:
                 mode = board.id
-                if mode != 'B6': ## skip outage board
+                if mode != 'B6': # skip outage board
                     data = self.df.loc[(self.df[mode + ' ' + ON_OFF] == 1.0)]
                     if not data.empty:
                         self.mode_df_dict[mode] = data
 
-        self.mode_ids = list(self.mode_df_dict.keys())  ## assign mode ids
+        self.mode_ids = list(self.mode_df_dict.keys())  # assign mode ids
         # sort by length first, then board number
         self.mode_ids = sorted(sorted(self.mode_ids), key=lambda x: len(x))
 

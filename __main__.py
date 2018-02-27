@@ -20,7 +20,7 @@ import win32event
 import win32con
 
 
-## constants for user input parameters
+# constants for user input parameters
 CONSTANT_REAL_TIME_FOLDER = r"C:\Test Analysis Data"
 ANALYSIS_TOOLS = ['Plot', 'Histograms', 'Tables', 'Out of Spec']
 PLOT_INFO = 'Create a temporal plot of the selected test'
@@ -32,7 +32,7 @@ DEFAULT_TEMP_TOL = 5
 DEFAULT_VOLTAGE_TOL = 0.5
 DEFAULT_PCTG_TOL = 10
 
-## GUI dimensions
+# GUI dimensions
 TEXTFIELD_WIDTH = 4
 SELECT_WIDTH = 120
 CELL_WIDTH = 50
@@ -79,44 +79,44 @@ class TestAnalysisUI(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        ## use grid layout for GUI
+        # use grid layout for GUI
         grid = QGridLayout()
         self.setLayout(grid)
         grid.setSpacing(10)  # spacing between widgets
 
-        ## data folder
+        # data folder
         self.data_folder_textfield = QLineEdit(self)
         self.data_folder_textfield.setPlaceholderText('(No Folder Selected)')
         self.data_folder_button = FolderButton('Select Data Folder', self.data_folder_textfield, self)
         grid.addWidget(self.data_folder_button, 0, 0)
         grid.addWidget(self.data_folder_textfield, 0, 1, 1, TEXTFIELD_WIDTH)
 
-        ## limits
+        # limits
         self.limits_textfield = QLineEdit(self)
         self.limits_textfield.setPlaceholderText('(Leave blank if no limits)')
         self.limits_button = LimitsButton('Select Limits File', self.limits_textfield, self)
         grid.addWidget(self.limits_button, 1, 0)
         grid.addWidget(self.limits_textfield, 1, 1, 1, TEXTFIELD_WIDTH)
 
-        ## temperatures
+        # temperatures
         self.temperatures_label = QLabel('Temperatures:')
         self.temperatures_textfield = QLineEdit(self)
         self.temperatures_textfield.setPlaceholderText('Enter temperatures separated by commas, e.g. "-40, 23, 85"')
         grid.addWidget(self.temperatures_label, 2, 0)
         grid.addWidget(self.temperatures_textfield, 2, 1, 1, TEXTFIELD_WIDTH)
 
-        ## boards
+        # boards
         self.boards_label = QLabel('Boards:')
         self.boards_textfield = QLineEdit(self)
         self.boards_textfield.setPlaceholderText('Enter boards numbers separated by commas, e.g. "3, 4, 5, 6")')
         grid.addWidget(self.boards_label, 3, 0)
         grid.addWidget(self.boards_textfield, 3, 1, 1, TEXTFIELD_WIDTH)
 
-        ## analysis buttons
+        # analysis buttons
         self.analysis_buttons = self.populate_buttons(grid, 4, 'Analysis:', ToolTipButton, 
                                                       ANALYSIS_TOOLS, info=ANALYSIS_TOOLTIP_INFO)
 
-        ## analysis conditions
+        # analysis conditions
         self.conditions_label = QLabel('Conditions:')
         grid.addWidget(self.conditions_label, 5, 0, 1, 1)
         self.multimode_box = QCheckBox('Multimode')
@@ -126,7 +126,7 @@ class TestAnalysisUI(QWidget):
         self.hist_by_tp_box = QCheckBox('Hists by TP')
         grid.addWidget(self.hist_by_tp_box, 5, 3, 1, 1)   
 
-        ## tolerances
+        # tolerances
         self.tolerances_label = QLabel('Tolerances:')
         grid.addWidget(self.tolerances_label, 6, 0, 1, 1)
 
@@ -160,18 +160,18 @@ class TestAnalysisUI(QWidget):
         pctg_tol_layout.addWidget(self.pctg_tol_field)
         grid.addLayout(pctg_tol_layout, 6, 3, 1, 1)
 
-        ## test name
+        # test name
         grid.addWidget(QLabel('Test Name:'), 7, 0)
         self.test_name = QLineEdit('', self)
         grid.addWidget(self.test_name, 7, 1, 1, TEXTFIELD_WIDTH)
 
-        ## analyze button
+        # analyze button
         self.analyze_button = AnalyzeButton('Analyze', self)
         grid.addWidget(self.analyze_button, 8, 1, 1, 3)
         self.analyze_button.clicked[bool].connect(self.analyze)
 
     def populate_buttons(self, grid, row, label, button_type, text_list, info=None):
-        ''' Populates button list onto GUI '''
+        """ Populates button list onto GUI """
         grid.addWidget(QLabel(label), row, 0)
         button_list = []
         positions = [(row, j+1) for j in range(len(text_list))]
@@ -221,7 +221,7 @@ class TestAnalysisUI(QWidget):
             return None
 
     def analyze(self):
-        test, limits = None, None ## clear test objects (from prevoius usage)
+        test, limits = None, None # clear test objects (from prevoius usage)
         test_name = self.test_name.text()
         temps = self.temperatures_textfield.text()
         boards = self.boards_textfield.text()
@@ -281,7 +281,7 @@ class TestAnalysisUI(QWidget):
             print('Analysis tool not found')
 
     def thread_analysis(self):
-        test, limits = None, None ## clear test objects (from prevoius usage)
+        test, limits = None, None # clear test objects (from prevoius usage)
         test_name = self.test_name.text()
         temps = self.temperatures_textfield.text()
         boards = True
@@ -451,7 +451,6 @@ class realTimeThread(QThread):
 
 
 def open_browser(test_name):
-    # browser_executable = '"C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"'
     browser_executable = '"C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe"'
     url_path = '"' + 'file://' + os.path.abspath(test_name) + '.xml' + '"'
     tables_in_browser = subprocess.Popen("{0} {1}".format(browser_executable, url_path), shell=False)

@@ -5,7 +5,7 @@ by some of the other modules. """
 
 import re
 
-### PLOT COLORS ###
+# Plot colors
 MODULE_COLOR_LIST = ['#00A0A6', '#FFA500', '#DA70D6', '#E5E500',
                      '#FDFD96', '#B22222', '#061715']
 
@@ -27,7 +27,7 @@ SYSTEM_MARKER_LIST = ['H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D',
                       'H', ',', 'o','v', '^', '8', 's', '*', '>', '+', 'x', 'D']
 
 
-### TABLE COLORS ###
+# Table colors
 TABLE_COLOR_DICT = {'LB':'#FF5C5C', 'HB':'#FCFBE3', 'LBHB':'#7647A2',
                     'DRL':'#ADD8E6', 'PARK':'#FFA500', 'TURN':'#DA70D6',
                     'DRLTURN':'#40E0D0', 'PARKTURN':'#FF8C00',
@@ -38,20 +38,23 @@ TABLE_COLOR_DICT = {'LB':'#FF5C5C', 'HB':'#FCFBE3', 'LBHB':'#7647A2',
                     'OUTAGE':'#ffff99', 'Diagnostic':'#ffff99',
                     'DIAGNOSTIC': '#ffff99'}
 
-### DATAFRAME COLUMN CONSTANTS ###
-VSETPOINT = 'VSetpoint'
+
+# Dataframe column constants
+VSETPOINT = 'Vsetpoint'
 ON_OFF = 'ON/OFF'
 
-### REGULAR EXPRESSIONS ###
-REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B_[0-9]*.txt$'
+
+# Regular expressions
+REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B.*.txt$'
+# REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B_[0-9]*.txt$'
 REGEX_TEMPS = '^Temp.*'
 REGEX_BOARDS = '(^B[0-9]*)'
-REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s.*)'
+REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s(?!NO_UUT).*)'
 REGEX_EMPTY_TEST_POSITION = '^B[0-9]*\sTP[0-9]*:\s$'
 REGEX_VOLTAGE_SENSES = '^B[0-9]*\s(VSense.*)'
 
 def REGEX_SPECIFIC_BOARD_SYSTEMS(board_id):
-    return '^' + re.escape(board_id) + '*\sTP[0-9]*:\s.*'
+    return '^' + re.escape(board_id) + '*\sTP[0-9]*:\s(?!NO_UUT).*'
 
 def REGEX_SPECIFIC_BOARD_VSENSES(board_id):
     return '^' + re.escape(board_id) + '*\sVSense.*'

@@ -20,8 +20,9 @@ def create_xml_tables(test, run_limit_analysis=False, limits=None):
     output_folder = r"!output/"
     xml_root = etree.Element("test", name=test.name, header_width=str(len(test.systems)))
     time_analysis = etree.SubElement(xml_root, "time")
+    last_time = test.df.tail(1).index[0].to_pydatetime()
     last_time_value = etree.SubElement(time_analysis, "timestamp")
-    last_time_value.text = str(test.df.tail(1).index[0])
+    last_time_value.text = last_time.strftime('%m/%d/%Y at %I:%M:%S %p')
 
     temp_analysis = etree.SubElement(xml_root, "profile")
     for tc in test.thermocouples:
