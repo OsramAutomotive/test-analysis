@@ -40,12 +40,14 @@ class Mode(object):
     def __init__(self, test, board_mode, df, voltages, *temps):
         self.test = test
         self.board_mode = board_mode
-        self.mode_tag = board_mode.replace('B6', '') # outage removed
+        # self.mode_tag = board_mode.replace('B6', '') # outage removed
+        self.mode_tag = board_mode
         self.name = self.board_mode # actual name of mode (e.g. - 'DRLTURN')
         self.temps = temps
         self.voltages = voltages
         self.board_ids = re.findall('B[]0-9]*', board_mode) # find boards present in mode
-        self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
+        # self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
+        self.current_board_ids = list(self.board_ids)
         self.boards = [board for board in self.test.boards if board.id in self.current_board_ids]
         self.systems = []
 

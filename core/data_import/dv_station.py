@@ -127,7 +127,7 @@ class TestStation(object):
                 pass
             if self.df.empty:
                 self.error_msg = '\nNo files in the selected folder match ' + \
-                                'the Labview raw datafile convention.\n'
+                                 'the Labview raw datafile convention.\n'
         else:
             self.error_msg = '\nThere are no datafiles in the selected folder.\n'
 
@@ -185,12 +185,14 @@ class TestStation(object):
 
     def __create_boards(self):
         """ Creates board dataframes for each board passed into TestStation init """
+        print('\nRetrieving board module names: ')
         for board in self.board_ids:
-            # TODO --> logic for voltage/outage board vs. current board
+            # TODO -> logic for voltage/outage board vs. current board
             self.boards.append(Board(self, board))
 
     def __set_current_board_ids(self):
-        self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
+        # TODO -> remove outage/voltage boards (not just B6)
+        self.current_board_ids = list(self.board_ids)
 
     def __scan_for_vsetpoints(self):
         self.voltages = sorted(set(self.df[self.VSETPOINT]))
@@ -222,7 +224,7 @@ class TestStation(object):
             data = pd.DataFrame  # make copy of 'mother' dataframe
             for board in self.boards:
                 mode = board.id
-                if mode != 'B6': # skip outage board
+                if mode != 'TEMP OUTAGE STRING': # TODO -> skip voltage/outage boards
                     data = self.df.loc[(self.df[mode + ' ' + ON_OFF] == 1.0)]
                     if not data.empty:
                         self.mode_df_dict[mode] = data
@@ -232,13 +234,13 @@ class TestStation(object):
         self.mode_ids = sorted(sorted(self.mode_ids), key=lambda x: len(x))
 
     def __make_modes(self):
-        """ Create Mode instances for each mode present in data and appends to 'modes' attribute """
+        """ Create Mode instances for each mode present in data and append to 'modes' attribute """
         for mode_id in self.mode_ids:
             board_ids = self.get_current_boards_from_mode_id(mode_id)
             if len(board_ids) == 1:
                 self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id],
                                        self.voltages, *self.temps))
-            elif len(board_ids) == 2 and self.boards_have_same_sytem_labels(*board_ids):
+            elif len(board_ids) == 2 and self.boards_have_same_system_labels(*board_ids):
                 self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id],
                                        self.voltages, *self.temps))
 
@@ -247,12 +249,12 @@ class TestStation(object):
         Args:
             mode_id (): Input mode (e.g. - )
         Returns:
-            list of board ids (list): Current board ids that are on in input mode
+            list of board ids (list): Current board ids that are ON in input mode
         """
         board_ids = re.findall('B[0-9]*', mode_id)
         return list(set(board_ids) & set(self.current_board_ids))
 
-    def boards_have_same_sytem_labels(self, board_id_1, board_id_2):
+    def boards_have_same_system_labels(self, board_id_1, board_id_2):
         """ Need docstring """
         board_dict = {board.id: board for board in self.boards}
         board_1 = board_dict[board_id_1]
