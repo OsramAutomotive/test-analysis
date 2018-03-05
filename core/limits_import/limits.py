@@ -13,7 +13,7 @@ class Limits(object):
         lim (dict): Holds current limits in form:
                     {Mode->Temp->Voltage->(min current, max current)}
         boards (list of strings): Boards that are present in data
-        modules (list): Modules that are present in data 
+        modules (list of strings): Modules that are present in data 
                         e.g. - 'PARK' or 'TURN' etc.
         board_module_pairs (dict): keys: boards, values: modules
         temps (list of integers): Temperatures to load limits for
@@ -30,7 +30,7 @@ class Limits(object):
         self.soup = ''
         self.modules = []
         self.board_module_pairs = {}
-        self.outage_link_board = ''
+        self.outage_board = ''
         self.outage_present = False
         self.binning = False
         self.led_binning_dict = {}
@@ -52,14 +52,14 @@ class Limits(object):
             board = data[0].string
             module = data[1].string
             led_bins = data[2].string
-            has_outage = data[3].string
+            is_outage = data[3].string
             self.board_module_pairs[board] = module
             self.modules.append(module)
             if led_bins:
                 self.binning = True
                 self.led_binning_dict[board] = led_bins.split(' ')
-            if has_outage == 'YES':
-                self.outage_link_board = board
+            if is_outage == 'YES':
+                self.outage_board = board
                 self.outage_present = True
 
     def get_limits(self):

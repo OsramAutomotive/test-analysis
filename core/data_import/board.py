@@ -42,7 +42,7 @@ class Board(object):
 
     def __init__(self, test, board_number):
         self.test = test
-        self.id = ''
+        self.id = '' # e.g. - 'B3'
         self.name = None  # e.g. - 'DRL'
         self.folder = test.folder
         self.systems = []

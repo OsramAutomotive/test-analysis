@@ -156,7 +156,7 @@ class Mode(object):
         xml_mode = etree.SubElement(xml_temp, "mode", id=self.name, width=xml_header_width)
         self.current_stats[temp] = {}
         self.vsense_stats[temp] = {}
-        
+
         for voltage in self.voltages:
             xml_voltage = etree.SubElement(xml_mode, "voltage", value=str(voltage)+'V', width=xml_header_width)
             if run_limit_analysis and limits:

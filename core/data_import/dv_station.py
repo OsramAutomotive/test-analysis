@@ -179,20 +179,28 @@ class TestStation(object):
                 self.thermocouples.append(tc) # only thermocouples without test errors
 
     def __set_ambient_thermocouple(self):
-        """ Set ambient temperature to the first thermocouple in list of scanned thermocouples """
+        """ Set ambient thermocouple to first thermocouple """
         if self.thermocouples:
-            self.ambient = self.thermocouples[0]
+            for tc in self.thermocouples:
+                if "tc1" in tc.lower():
+                    self.ambient = tc
+                    break
+            if self.ambient is None:
+                self.ambient = self.thermocouples[0]
+                print('\n"TC1" not found in any thermocouple names. By default, using first tc as ambient.\n')
 
     def __create_boards(self):
         """ Creates board dataframes for each board passed into TestStation init """
         print('\nRetrieving board module names: ')
         for board in self.board_ids:
-            # TODO -> logic for voltage/outage board vs. current board
-            self.boards.append(Board(self, board))
+            if self.limits and (board == self.limits.outage_board):
+                self.boards.append(Outage(self, board))
+            else:
+                self.boards.append(Board(self, board))
 
     def __set_current_board_ids(self):
-        # TODO -> remove outage/voltage boards (not just B6)
-        self.current_board_ids = list(self.board_ids)
+        """ Set list of present current boards (no voltage/outage boards) """
+        self.current_board_ids = sorted([board.id for board in self.boards if not board.outage])
 
     def __scan_for_vsetpoints(self):
         self.voltages = sorted(set(self.df[self.VSETPOINT]))
