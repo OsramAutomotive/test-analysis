@@ -45,8 +45,7 @@ ON_OFF = 'ON/OFF'
 
 
 # Regular expressions
-REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B.*.txt$'
-# REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B_[0-9]*.txt$'
+REGEX_RAW_DATAFILE = '^\d{8}_\d{6}_.*_B.*\.txt$'
 REGEX_TEMPS = '^Temp.*'
 REGEX_BOARDS = '(^B[0-9]*)'
 REGEX_SYSTEMS = '^B[0-9]*\s(TP[0-9]*:\s(?!NO_UUT).*)'
