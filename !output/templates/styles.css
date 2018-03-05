@@ -25,6 +25,18 @@ tr:hover {
   background-color: lightyellow;
 }
 
+.LB {
+  background-color: #FF5C5C;
+}
+
+.HB {
+  background-color: #FCFBE3;
+}
+
+.LBHB {
+  background-color: #7647A2;
+}
+
 .DRL {
   background-color: #00E5EE;
 }
