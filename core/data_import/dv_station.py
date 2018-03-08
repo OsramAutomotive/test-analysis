@@ -98,7 +98,9 @@ class TestStation(object):
         using the pandas module """
         print('Scanning folder for datafiles...')
         if os.listdir(self.folder): # if folder not empty
-            for filenumber, filename in enumerate(os.listdir(self.folder)):
+            datafiles = os.listdir(self.folder)
+            datafiles.sort(key=lambda fn: os.path.getmtime(os.path.join(self.folder, fn)))
+            for filenumber, filename in enumerate(datafiles):
                 if bool(re.search(REGEX_RAW_DATAFILE, filename)):
                     print('\tAppending File', '#'+str(filenumber+1)+': ', filename)
                     try:
@@ -130,6 +132,7 @@ class TestStation(object):
                                  'the Labview raw datafile convention.\n'
         else:
             self.error_msg = '\nThere are no datafiles in the selected folder.\n'
+
 
     def delete_empty_columns(self):
         """ Deletes empty test position and thermocouple columns in dataframe """
@@ -208,7 +211,7 @@ class TestStation(object):
     def __make_df_dict(self):
         """ Outputs dictionary of ON time mask modes dataframes. This includes
             all boards in df (even off ones, outage included). """
-        # TODO ==> refactor this
+        # TODO ==> refactor
         if self.multimode:
             # list of all combinations on/off
             masks = [''.join(seq) for seq in itertools.product('01', repeat=len(self.boards))]

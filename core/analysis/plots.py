@@ -30,11 +30,11 @@ def plot_voltage_functional_cycle(test, ax):
     # board_colors = dict(zip(test.boards, MODULE_COLOR_LIST))
     for vsense in test.voltage_senses:
         test.df[vsense].plot(ax=ax, linewidth=2)
-    # vsense_labels = ['VSetpoint'] + [ board.name + ' VSense' for board in test.boards ]
+    # vsense_labels = ['Vsetpoint'] + [ board.name + ' VSense' for board in test.boards ]
     # ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
     #           ncol=1, labels = vsense_labels)
     ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
-              ncol=1)
+              ncol=2)
 
 def plot_temperature_cycle(test, ax):
     test.df[test.thermocouples].plot(ax=ax)
