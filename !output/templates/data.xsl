@@ -58,6 +58,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         .OUTAGE {
           background-color: #ffff99;
         }
+        
+        .LB {
+          background-color: red;
+        }
+
+        .HB {
+          background-color: #FAEBD7;
+        }
       </style>
       <script>
         function hideAll() {
