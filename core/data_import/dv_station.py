@@ -266,7 +266,7 @@ class TestStation(object):
         return list(set(board_ids) & set(self.current_board_ids))
 
     def boards_have_same_system_labels(self, board_id_1, board_id_2):
-        """ Need docstring """
+        """ Return True/False if boards have the same system label """
         board_dict = {board.id: board for board in self.boards}
         board_1 = board_dict[board_id_1]
         board_2 = board_dict[board_id_2]
