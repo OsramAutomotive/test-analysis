@@ -23,7 +23,7 @@ def mock_up_mode(name, binning_boolean=False):
 @pytest.fixture
 def p552_mca_limits():
     """ Returns Limits instance for P552 MCA """
-    filepath = r"C:\Users\bruno\Programming Projects\Test Data Analysis" \
+    filepath = r"C:\Users\bruno\programming-projects\Test Data Analysis" \
                r"\test files\limits files\mca-outage-true.htm"
     p552_limits = Limits(filepath)
     return p552_limits

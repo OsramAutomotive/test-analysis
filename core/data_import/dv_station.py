@@ -235,7 +235,7 @@ class TestStation(object):
             data = pd.DataFrame  # make copy of 'mother' dataframe
             for board in self.boards:
                 mode = board.id
-                if mode != 'TEMP OUTAGE STRING': # TODO -> skip voltage/outage boards
+                if mode != 'TEMPORARY OUTAGE STRING': # TODO -> skip voltage/outage boards
                     data = self.df.loc[(self.df[mode + ' ' + ON_OFF] == 1.0)]
                     if not data.empty:
                         self.mode_df_dict[mode] = data

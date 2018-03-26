@@ -151,7 +151,7 @@ table tr.board-change td {
 
 
 /* Buttons */
-a.save-button {
+button.save-button {
   font-size: 1.2em;
   margin: 10px;
 }

@@ -10,32 +10,32 @@ from core.data_import.helpers import *
 @pytest.fixture
 def temp_dataframe():
     """ Returns dataframe with temperature, voltage, and one sys current """
-    dframe = pd.DataFrame([{'Amb': 72.1, 'VSetpoint': 9.0, 'Sys 1': 1.56},
-                           {'Amb': 73.4, 'VSetpoint': 9.0, 'Sys 1': 1.54},
-                           {'Amb': 74.2, 'VSetpoint': 14.1, 'Sys 1': 1.55},
-                           {'Amb': 75.5, 'VSetpoint': 14.1, 'Sys 1': 1.57},
-                           {'Amb': 77.7, 'VSetpoint': 14.1, 'Sys 1': 1.53},
-                           {'Amb': 79.8, 'VSetpoint': 14.1, 'Sys 1': 1.55},
-                           {'Amb': 80.1, 'VSetpoint': 14.1, 'Sys 1': 1.54},
-                           {'Amb': 81.6, 'VSetpoint': 14.1, 'Sys 1': 1.52},
-                           {'Amb': 82.3, 'VSetpoint': 16.0, 'Sys 1': 1.57},
-                           {'Amb': 83.5, 'VSetpoint': 16.0, 'Sys 1': 1.50}])
+    dframe = pd.DataFrame([{'Amb': 72.1, 'Vsetpoint': 9.0, 'Sys 1': 1.56},
+                           {'Amb': 73.4, 'Vsetpoint': 9.0, 'Sys 1': 1.54},
+                           {'Amb': 74.2, 'Vsetpoint': 14.1, 'Sys 1': 1.55},
+                           {'Amb': 75.5, 'Vsetpoint': 14.1, 'Sys 1': 1.57},
+                           {'Amb': 77.7, 'Vsetpoint': 14.1, 'Sys 1': 1.53},
+                           {'Amb': 79.8, 'Vsetpoint': 14.1, 'Sys 1': 1.55},
+                           {'Amb': 80.1, 'Vsetpoint': 14.1, 'Sys 1': 1.54},
+                           {'Amb': 81.6, 'Vsetpoint': 14.1, 'Sys 1': 1.52},
+                           {'Amb': 82.3, 'Vsetpoint': 16.0, 'Sys 1': 1.57},
+                           {'Amb': 83.5, 'Vsetpoint': 16.0, 'Sys 1': 1.50}])
     return dframe
 
 
 @pytest.fixture
 def on_off_dataframe():
     """ Returns dataframe with on/off, temp, and sys current """
-    dframe = pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 2, 'VSetpoint': 9.0, 'Sys 1': 1.13},
-                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 9.0, 'Sys 1': 1.43},
-                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 9.0, 'Sys 1': 1.56},
-                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 14.1, 'Sys 1': 1.76},
-                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 0, 'VSetpoint': 14.1, 'Sys 1': 0.01},
-                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'VSetpoint': 14.1, 'Sys 1': -0.02},
-                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'VSetpoint': 16.0, 'Sys 1': 0.07},
-                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'VSetpoint': 16.0, 'Sys 1': 2.72},
-                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'VSetpoint': 16.0, 'Sys 1': 2.66},
-                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 2, 'VSetpoint': 16.0, 'Sys 1': 2.11}])
+    dframe = pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 2, 'Vsetpoint': 9.0, 'Sys 1': 1.13},
+                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 9.0, 'Sys 1': 1.43},
+                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 9.0, 'Sys 1': 1.56},
+                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 14.1, 'Sys 1': 1.76},
+                           {'B4 ON/OFF': 0, 'B5 ON/OFF': 0, 'Vsetpoint': 14.1, 'Sys 1': 0.01},
+                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'Vsetpoint': 14.1, 'Sys 1': -0.02},
+                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'Vsetpoint': 16.0, 'Sys 1': 0.07},
+                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'Vsetpoint': 16.0, 'Sys 1': 2.72},
+                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'Vsetpoint': 16.0, 'Sys 1': 2.66},
+                           {'B4 ON/OFF': 1, 'B5 ON/OFF': 2, 'Vsetpoint': 16.0, 'Sys 1': 2.11}])
     return dframe
 
 
@@ -85,16 +85,16 @@ def test_get_system_test_position_int(system, expected_test_position_int):
 
 @pytest.mark.parametrize("temp, voltage, temp_tol," \
                          "expected_filtered_df", [
-    (85.0, 14.1, 5.0, pd.DataFrame([{'Amb': 80.1, 'VSetpoint': 14.1, 'Sys 1': 1.54},
-                                    {'Amb': 81.6, 'VSetpoint': 14.1, 'Sys 1': 1.52}],
+    (85.0, 14.1, 5.0, pd.DataFrame([{'Amb': 80.1, 'Vsetpoint': 14.1, 'Sys 1': 1.54},
+                                    {'Amb': 81.6, 'Vsetpoint': 14.1, 'Sys 1': 1.52}],
                                     index = [6, 7])),
-    (70.0, 9.0, 5.0, pd.DataFrame([{'Amb': 72.1, 'VSetpoint': 9.0, 'Sys 1': 1.56},
-                                   {'Amb': 73.4, 'VSetpoint': 9.0, 'Sys 1': 1.54}],
+    (70.0, 9.0, 5.0, pd.DataFrame([{'Amb': 72.1, 'Vsetpoint': 9.0, 'Sys 1': 1.56},
+                                   {'Amb': 73.4, 'Vsetpoint': 9.0, 'Sys 1': 1.54}],
                                    index = [0, 1])),
-    (80.0, 16.0, 3.0, pd.DataFrame([{'Amb': 82.3, 'VSetpoint': 16.0, 'Sys 1': 1.57}],
+    (80.0, 16.0, 3.0, pd.DataFrame([{'Amb': 82.3, 'Vsetpoint': 16.0, 'Sys 1': 1.57}],
                                     index = [8])),
-    (75.0, 14.1, 2.0, pd.DataFrame([{'Amb': 74.2, 'VSetpoint': 14.1, 'Sys 1': 1.55},
-                                    {'Amb': 75.5, 'VSetpoint': 14.1, 'Sys 1': 1.57}],
+    (75.0, 14.1, 2.0, pd.DataFrame([{'Amb': 74.2, 'Vsetpoint': 14.1, 'Sys 1': 1.55},
+                                    {'Amb': 75.5, 'Vsetpoint': 14.1, 'Sys 1': 1.57}],
                                     index = [2, 3]))
 ])
 def test_filter_temp_and_voltage(temp, voltage, temp_tol,
@@ -105,11 +105,11 @@ def test_filter_temp_and_voltage(temp, voltage, temp_tol,
 
 
 @pytest.mark.parametrize("temp, temp_tol, expected_filtered_df", [
-    (73.0, 2.0, pd.DataFrame([{'Amb': 72.1, 'VSetpoint': 9.0, 'Sys 1': 1.56},
-                              {'Amb': 73.4, 'VSetpoint': 9.0, 'Sys 1': 1.54},
-                              {'Amb': 74.2, 'VSetpoint': 14.1, 'Sys 1': 1.55}])),
-    (80.0, 0.5, pd.DataFrame([{'Amb': 79.8, 'VSetpoint': 14.1, 'Sys 1': 1.55},
-                              {'Amb': 80.1, 'VSetpoint': 14.1, 'Sys 1': 1.54}],
+    (73.0, 2.0, pd.DataFrame([{'Amb': 72.1, 'Vsetpoint': 9.0, 'Sys 1': 1.56},
+                              {'Amb': 73.4, 'Vsetpoint': 9.0, 'Sys 1': 1.54},
+                              {'Amb': 74.2, 'Vsetpoint': 14.1, 'Sys 1': 1.55}])),
+    (80.0, 0.5, pd.DataFrame([{'Amb': 79.8, 'Vsetpoint': 14.1, 'Sys 1': 1.55},
+                              {'Amb': 80.1, 'Vsetpoint': 14.1, 'Sys 1': 1.54}],
                               index = [5,6])),
 ])
 def test_filter_temperature(temp, temp_tol, expected_filtered_df):
@@ -119,30 +119,30 @@ def test_filter_temperature(temp, temp_tol, expected_filtered_df):
 
 
 @pytest.mark.parametrize("board_id, board_on_off_code, expected_filtered_df", [
-    ('B4', 0, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 2, 'VSetpoint': 9.0, 'Sys 1': 1.13},
-                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 9.0, 'Sys 1': 1.43},
-                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 9.0, 'Sys 1': 1.56},
-                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 14.1, 'Sys 1': 1.76},
-                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 0, 'VSetpoint': 14.1, 'Sys 1': 0.01}],
+    ('B4', 0, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 2, 'Vsetpoint': 9.0, 'Sys 1': 1.13},
+                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 9.0, 'Sys 1': 1.43},
+                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 9.0, 'Sys 1': 1.56},
+                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 14.1, 'Sys 1': 1.76},
+                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 0, 'Vsetpoint': 14.1, 'Sys 1': 0.01}],
                             index = [0, 1, 2, 3, 4])),
-    ('B4', 1, pd.DataFrame([{'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'VSetpoint': 14.1, 'Sys 1': -0.02},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'VSetpoint': 16.0, 'Sys 1': 0.07},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'VSetpoint': 16.0, 'Sys 1': 2.72},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'VSetpoint': 16.0, 'Sys 1': 2.66},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 2, 'VSetpoint': 16.0, 'Sys 1': 2.11}],
+    ('B4', 1, pd.DataFrame([{'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'Vsetpoint': 14.1, 'Sys 1': -0.02},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'Vsetpoint': 16.0, 'Sys 1': 0.07},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'Vsetpoint': 16.0, 'Sys 1': 2.72},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'Vsetpoint': 16.0, 'Sys 1': 2.66},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 2, 'Vsetpoint': 16.0, 'Sys 1': 2.11}],
                             index = [5, 6, 7, 8, 9])),
-    ('B5', 0, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 0, 'VSetpoint': 14.1, 'Sys 1': 0.01},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'VSetpoint': 14.1, 'Sys 1': -0.02},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'VSetpoint': 16.0, 'Sys 1': 0.07}],
+    ('B5', 0, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 0, 'Vsetpoint': 14.1, 'Sys 1': 0.01},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'Vsetpoint': 14.1, 'Sys 1': -0.02},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 0, 'Vsetpoint': 16.0, 'Sys 1': 0.07}],
                             index = [4, 5, 6])),
-    ('B5', 1, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 9.0, 'Sys 1': 1.43},
-                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 9.0, 'Sys 1': 1.56},
-                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'VSetpoint': 14.1, 'Sys 1': 1.76},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'VSetpoint': 16.0, 'Sys 1': 2.72},
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'VSetpoint': 16.0, 'Sys 1': 2.66}],
+    ('B5', 1, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 9.0, 'Sys 1': 1.43},
+                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 9.0, 'Sys 1': 1.56},
+                            {'B4 ON/OFF': 0, 'B5 ON/OFF': 1, 'Vsetpoint': 14.1, 'Sys 1': 1.76},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'Vsetpoint': 16.0, 'Sys 1': 2.72},
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 1, 'Vsetpoint': 16.0, 'Sys 1': 2.66}],
                             index = [1, 2, 3, 7, 8])),
-    ('B5', 2, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 2, 'VSetpoint': 9.0, 'Sys 1': 1.13}, 
-                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 2, 'VSetpoint': 16.0, 'Sys 1': 2.11}],
+    ('B5', 2, pd.DataFrame([{'B4 ON/OFF': 0, 'B5 ON/OFF': 2, 'Vsetpoint': 9.0, 'Sys 1': 1.13}, 
+                            {'B4 ON/OFF': 1, 'B5 ON/OFF': 2, 'Vsetpoint': 16.0, 'Sys 1': 2.11}],
                             index = [0, 9])),
 ])
 def test_filter_board_on_or_off(board_id, board_on_off_code, expected_filtered_df):

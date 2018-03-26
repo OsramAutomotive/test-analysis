@@ -254,7 +254,8 @@ class Mode(object):
                 mode_limit_dict = get_limits_at_mode_temp_voltage(self.test.limits, 
                                                                   self, temp, voltage)
                 if self.has_led_binning:
-                    pass ### TO DO: Make this work for LED binning
+                    ## TODO: Make this work for LED binning
+                    raise NotImplementedError
                 else:
                     lower_limit, upper_limit = mode_limit_dict['LL'] , mode_limit_dict['UL']
                     ## select all rows where any system has out of spec currents
