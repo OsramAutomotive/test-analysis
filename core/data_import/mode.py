@@ -233,8 +233,10 @@ class Mode(object):
                 xml_mean.text = str(sys_mean)
                 xml_std = etree.SubElement(xml_system, "std")
                 xml_std.text = str(sys_std)
+                xml_count = etree.SubElement(xml_system, "count")
+                xml_count.text = str(self.hist_dict[temp][voltage][system].count())
                 if limits and run_limit_analysis:
-                    xml_count = etree.SubElement(xml_system, "count")
+                    # xml_count = etree.SubElement(xml_system, "count")
                     xml_count.text = str(total_count)
                     xml_count = etree.SubElement(xml_system, "count-out")
                     xml_count.text = str(out_of_spec_count)
