@@ -10,10 +10,12 @@ added_files = [
          ]
 
 a = Analysis(['__main__.py'],
-             pathex=['venv\\Lib\\site-packages\\PyQt5\\Qt\\bin', 'C:\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin'],
+             pathex=['venv\\Lib\\site-packages\\PyQt5\\Qt\\bin',
+                     'C:\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin',
+                     'fakefolder\\not\\real'],
              binaries=[],
              datas=added_files,
-             hiddenimports=[],
+             hiddenimports=['pandas._libs.tslibs.timedeltas'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
