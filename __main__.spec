@@ -10,7 +10,7 @@ added_files = [
          ]
 
 a = Analysis(['__main__.py'],
-             pathex=['C:\\Users\\bruno\\programming-projects\\Test Data Analysis', 'C:\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin'],
+             pathex=['venv\\Lib\\site-packages\\PyQt5\\Qt\\bin', 'C:\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin'],
              binaries=[],
              datas=added_files,
              hiddenimports=[],
