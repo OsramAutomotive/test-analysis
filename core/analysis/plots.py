@@ -14,10 +14,9 @@ from .. re_and_global import *
 
 
 def set_up_plot_area(test, pstyle='ggplot'):
-    title = test.name
-    style.use(pstyle)  ## set formatting style to use for matplotlib
-    fig, axes = plt.subplots(nrows=len(test.modes)+2, ncols=1, sharex=True)  ## create plot space with app num of subplots
-    fig.suptitle(title, fontsize = 20, fontweight= 'bold')  ## main title for entire figure
+    style.use(pstyle)  # set formatting style to use for matplotlib
+    fig, axes = plt.subplots(nrows=len(test.modes)+2, ncols=1, sharex=True)
+    fig.suptitle(test.name, fontsize = 20, fontweight= 'bold')  # main title
     return fig, axes
 
 def plot_voltage_functional_cycle(test, ax):
@@ -27,24 +26,23 @@ def plot_voltage_functional_cycle(test, ax):
     ax.set_ylabel("Voltage (V)")
     ax.set_ylim([0,20])
     ax.yaxis.set_major_locator(ticker.MaxNLocator(4))
-    # board_colors = dict(zip(test.boards, MODULE_COLOR_LIST))
     for vsense in test.voltage_senses:
         test.df[vsense].plot(ax=ax, linewidth=2)
-    # vsense_labels = ['Vsetpoint'] + [ board.name + ' VSense' for board in test.boards ]
-    # ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
-    #           ncol=1, labels = vsense_labels)
     ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
               ncol=2)
 
 def plot_temperature_cycle(test, ax):
-    test.df[test.thermocouples].plot(ax=ax)
+    cmap = plt.get_cmap('viridis')
+    colors = cmap(np.linspace(0, 1.0, len(test.thermocouples)))    
+    for thermocouple, color in zip(test.thermocouples, colors):
+        test.df[thermocouple].plot(ax=ax, linewidth=2, c=color)
     ax.set_title("Temperature Profile")
     ax.set_ylabel(u"Temp (\N{DEGREE SIGN}C)")
     ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
               labels = test.thermocouples)
 
 def plot_mode_currents(test, axes, row=2):
-    ## start on third row subplot
+    # start on third row subplot
     for mode in test.modes:
         axes[row].set_title(mode.name)
         axes[row].set_ylabel("Current (A)")
@@ -71,7 +69,7 @@ def print_status(function):
     return wrapper
 
 
-### MAIN PLOTTING FUNCTION ###
+# MAIN PLOTTING FUNCTION 
 @print_status
 def plot_modes(test, limits=None):
     ''' Creates a temporal plot of the functional cycle, temperature profile, and test mode currents '''
