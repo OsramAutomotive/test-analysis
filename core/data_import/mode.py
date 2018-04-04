@@ -239,10 +239,9 @@ class Mode(object):
                     xml_count.text = str(self.hist_dict[temp][voltage][system].count())
 
                 if limits and run_limit_analysis:
-                    # xml_count = etree.SubElement(xml_system, "count")
                     xml_count.text = str(total_count)
-                    xml_count = etree.SubElement(xml_system, "count-out")
-                    xml_count.text = str(out_of_spec_count)
+                    xml_count_out = etree.SubElement(xml_system, "count-out")
+                    xml_count_out.text = str(out_of_spec_count)
                     xml_percent_out = etree.SubElement(xml_system, "percent-out")
                     xml_percent_out.text = str(percent_out)
                 xml_check = etree.SubElement(xml_system, "check")
