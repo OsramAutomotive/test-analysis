@@ -10,7 +10,7 @@ added_files = [
          ]
 
 a = Analysis(['__main__.py'],
-             pathex=['venv\\Lib\\site-packages\\PyQt5\\Qt\\bin', 'C:\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin']
+             pathex=['venv\\Lib\\site-packages\\PyQt5\\Qt\\bin', 'C:\\Python35\\Lib\\site-packages\\PyQt5\\Qt\\bin'],
              binaries=[],
              datas=added_files,
              hiddenimports=['pandas._libs.tslibs.timedeltas'],
