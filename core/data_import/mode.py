@@ -234,7 +234,10 @@ class Mode(object):
                 xml_std = etree.SubElement(xml_system, "std")
                 xml_std.text = str(sys_std)
                 xml_count = etree.SubElement(xml_system, "count")
-                xml_count.text = str(self.hist_dict[temp][voltage][system].count())
+                xml_count.text = "0"
+                if voltage in self.hist_dict[temp]:
+                    xml_count.text = str(self.hist_dict[temp][voltage][system].count())
+
                 if limits and run_limit_analysis:
                     # xml_count = etree.SubElement(xml_system, "count")
                     xml_count.text = str(total_count)
