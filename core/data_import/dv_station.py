@@ -197,7 +197,8 @@ class TestStation(object):
         print('\nRetrieving board module names: ')
         for board in self.board_ids:
             if self.limits and (board == self.limits.outage_board):
-                self.boards.append(Outage(self, board))
+                self.outage = Outage(self, board)
+                self.boards.append(self.outage)
             else:
                 self.boards.append(Board(self, board))
 
