@@ -219,8 +219,7 @@ class Mode(object):
                     lower_limit, upper_limit = mode_limit_dict['LL'], mode_limit_dict['UL']
                     out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, 
                                                             sys_min, sys_max)
-                    total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
-                        self.hist_dict[temp][voltage][system], lower_limit, upper_limit)
+                    
                 self.current_stats[temp][voltage][system] = [sys_min, sys_max, sys_mean, sys_std,
                                                              out_of_spec_bool]
                 xml_name = etree.SubElement(xml_system, "name")
@@ -237,13 +236,16 @@ class Mode(object):
                 xml_count.text = "0"
                 if voltage in self.hist_dict[temp]:
                     xml_count.text = str(self.hist_dict[temp][voltage][system].count())
-
-                if limits and run_limit_analysis:
-                    xml_count.text = str(total_count)
-                    xml_count_out = etree.SubElement(xml_system, "count-out")
-                    xml_count_out.text = str(out_of_spec_count)
-                    xml_percent_out = etree.SubElement(xml_system, "percent-out")
-                    xml_percent_out.text = str(percent_out)
+                    if limits and run_limit_analysis:
+                        total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
+                                                                        self.hist_dict[temp][voltage][system], 
+                                                                        lower_limit, 
+                                                                        upper_limit)
+                        xml_count.text = str(total_count)
+                        xml_count_out = etree.SubElement(xml_system, "count-out")
+                        xml_count_out.text = str(out_of_spec_count)
+                        xml_percent_out = etree.SubElement(xml_system, "percent-out")
+                        xml_percent_out.text = str(percent_out)
                 xml_check = etree.SubElement(xml_system, "check")
                 xml_check.text = 'NA' if (not run_limit_analysis or not limits) \
                                  else 'Out of Spec' if out_of_spec_bool else 'G'
