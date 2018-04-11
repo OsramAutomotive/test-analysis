@@ -1,0 +1,424 @@
+
+<!-- saved from url=(0050)file:///C:/Users/bruno/Desktop/limits_template.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./p552_mca_files/prompt.js.download"></script><script src="./p552_mca_files/runScript.js.download"></script><style>
+      /* Basic HTML Elements*/
+      body {
+        font-family: Calibri, Tahoma, Verdana, Segoe, sans-serif;
+        text-align: center;
+      }
+
+      table {
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      table td, th {
+        border: 1px solid black;
+      }
+
+      th {
+        padding: 5px 8px;
+      }
+
+      td {
+        padding: 5px 20px;
+      }
+
+      tr:hover {
+        background-color: lightyellow;
+      }
+
+
+      /* Modes */
+      .mode-header {
+        margin: 10px 10px;
+        width: 100%;
+        border-radius: 5px;
+        background-color: lightgray;
+      }
+
+      .mode-header.DRL {
+        background-color: #00E5EE;
+      }
+
+      .mode-header.TURN {
+        background-color: mediumpurple;
+      }
+
+      .mode-header.PARK {
+        background-color: darkorange;
+      }
+
+      .mode-header.PARKTURN {
+        background-color: orange;
+      }
+
+      .mode-header.DRLTURN {
+        background-color: #ff96ca;
+      }
+
+      .outage-header {
+        margin: 10px 10px;
+        width: 100%;
+        border-radius: 5px;
+        background-color: #ffff66;
+      }
+
+      /* Temperatures */
+      .color23C {
+        background-color: palegreen;
+      }
+
+      .color-40C {
+        background-color: deepskyblue;
+      }
+
+      .color85C {
+        background-color: indianred;
+      }
+
+      .color45C {
+        background-color: #ffff94;
+      }
+
+      .color60C {
+        background-color: #ff9022;
+      }
+
+      .color95C {
+        background-color: #bb5d00;
+      }
+
+
+      /* Layout Styling */
+      .info {
+        display: flex;
+        justify-content: center;
+      }
+
+      .top-container {
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+
+      .project-info {
+        background-color: khaki;
+        padding: 25px 40px;
+        border-radius: 15px;
+      }
+
+      .actions {
+        /*border: solid;*/
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .mode {
+        margin: 30px 10px;
+      }
+
+      .mode-tables {
+        display: flex;
+        justify-content: center;
+      }
+
+      .temp-table {
+        margin-right: 10px;
+      }
+
+      .outage-tables {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+      }
+
+      .outage-table {
+        margin-right: 10px;
+      }
+
+      .off-header {
+        background-color: black;
+        color: white;
+      }
+
+      .board-table tr:nth-child(odd) {
+        background-color: #ccc;
+      }
+
+      table tr.board-change td {
+        border: none;
+        border-width: 0;
+        background-color: white;
+      }
+
+
+      /* Buttons */
+      button.save-button {
+        font-size: 1.2em;
+        margin: 10px;
+      }
+
+      button.add-button {
+        visibility: hidden;
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+
+      tr:hover button.add-button {
+        visibility: visible;
+      }
+      </style><script>
+      // Save changes (update classNames, ids, attributes, etc.)
+      const saveChanges = () => {
+        document.querySelectorAll('.mode').forEach(mode => {
+          let header = mode.childNodes[0];
+          header.className = 'mode-header ' + header.innerHTML;
+          mode.id = header.innerHTML;
+        });
+
+        document.querySelectorAll('#voltage').forEach(row => {
+          let header = row.childNodes[0];
+          row.className = header.innerHTML;
+          header.className = header.innerHTML;
+        });
+
+        document.querySelectorAll('.temp-table').forEach(table => {
+          let header = table.getElementsByClassName('temp-table-header')[0];
+          header.className = 'temp-table-header ' + 'color' + header.innerHTML;
+          table.className = 'temp-table ' + 'temp' + header.innerHTML;
+        });
+
+        window.alert("Settings updated. You still need to save (ctrl+s) the file. Save as webpage complete.");
+      };
+
+
+      // Voltage
+      const addVoltage = () => {
+        let voltageValue = prompt("Enter the value of the voltage:", "13.5");
+        let firstTable = document.querySelectorAll('.temp-table')[0];
+        let rowIndex = compareVoltage(voltageValue, firstTable);
+        const voltagesPresent = [...firstTable.querySelectorAll('#voltage')].map(v => parseFloat(v.className));
+        const error = handleAddVoltage(voltageValue, voltagesPresent, rowIndex);
+        error && alert(error);
+      };
+
+      const handleAddVoltage = (voltageValue, voltagesPresent, rowIndex) => {
+        if (!voltageValue) {
+          return;
+        } else if (isNaN(parseFloat(voltageValue))) {
+          return '"' + voltageValue + '"' + " is not a valid voltage entry.";
+        } else if (voltagesPresent.includes(parseFloat(voltageValue))) {
+          return '"' + voltageValue + '"' + " is already present.";
+        }
+        document.querySelectorAll('.temp-table, .outage-table').forEach(table => {
+          let row = table.insertRow(rowIndex);
+          row.id = "voltage";
+          let voltage = document.createElement('th');
+          row.appendChild(voltage);
+          let minimum = row.insertCell(1);
+          let maximum = row.insertCell(2);
+          minimum.className = "min";
+          maximum.className = "max";
+          voltage.innerHTML = voltageValue;
+          minimum.contentEditable = "true";
+          maximum.contentEditable = "true";
+        });
+        saveChanges();
+      };
+
+      const compareVoltage = (value, table) => {
+        for (i = 2; i < table.rows.length; i++) {
+          if (parseFloat(value) < parseFloat(table.rows[i].className)) {
+            return i;
+          }
+        }
+        return i;
+      };
+
+      const removeVoltage = () => {
+        let voltage = prompt("Enter voltage to remove:", "13.5");
+        if (voltage) {
+          document.querySelectorAll('#voltage').forEach(tr => {
+            (tr.className == voltage) && tr.parentNode.removeChild(tr);
+          });
+          saveChanges();
+        }
+      };
+
+
+      // Temperature
+      const addTemp = () => {
+        let temperature = prompt("Enter the temperature:", "95C");
+        let tempTables = document.querySelectorAll('.mode-tables')[0].querySelectorAll('.temp-table');
+        const regex = /[^0-9-.]/g;
+        const temperaturesPresent = [...tempTables].map(t => parseFloat(t.getAttribute('temperature').replace(regex, '')));
+        const error = handleAddTemp(temperature, temperaturesPresent);
+        error && alert(error);
+      };
+
+      const handleAddTemp = (temperature, temperaturesPresent) => {
+        if (!temperature) {
+          return;
+        } else if (isNaN(parseFloat(temperature))) {
+          return '"' + temperature + '"' + ' is not a valid temperature entry.';
+        } else if (temperaturesPresent.includes(parseFloat(temperature))) {
+          return '"' + temperature + '"' + ' is already present.';
+        }
+        let tablesDivs = document.querySelectorAll('.mode-tables');
+        tablesDivs.forEach(tablesDiv => {
+          let tables = tablesDiv.children;
+          let newTable = tables[0].cloneNode(true);
+          newTable.setAttribute('temperature', temperature);
+          newTable.className = 'temp-table ' + 'temp' + temperature;
+          let header = newTable.getElementsByClassName('temp-table-header')[0];
+          header.innerHTML = temperature;
+          header.className = 'temp-table-header ' + 'color' + temperature;
+          tablesDiv.appendChild(newTable);
+          tables = tablesDiv.children;
+          sortTempTables(tablesDiv, tables);
+        });
+        saveChanges();
+      };
+
+      const sortTempTables = (tablesDiv, tables) => {
+        // sorted by temperature ascending
+        let tablesArray = Array.prototype.slice.call(tables, 0);
+        tablesArray.sort((a, b) => {
+          return parseFloat(a.getAttribute('temperature')) - parseFloat(b.getAttribute('temperature'));
+        });
+        tablesDiv.innerHTML = "";
+        tablesArray.forEach(table => tablesDiv.appendChild(table));
+      };
+
+      const removeTemp = () => {
+        let temperature = prompt("Enter the temperature to remove:", "95C");
+        if (temperature) {
+          let tablesToRemove = document.querySelectorAll('.temp-table.temp'+temperature);
+          tablesToRemove.forEach(table => {
+            table.parentNode.removeChild(table);
+          });
+          saveChanges();
+        }
+      };
+
+
+      // Mode
+      const addMode = () => {
+        let modeName = prompt("Enter the name of the mode:", "MODE");
+        let color = prompt("Enter a color for the mode (name, hex, or rgb format):", "lightgray");
+        let modes = document.querySelectorAll('.mode');
+        let modeNamesPresent = [...modes].map(mode => mode.id.toLowerCase());
+        console.log(modeName, modeNamesPresent);
+        const error = handleAddMode(modeName, modeNamesPresent);
+        error && alert(error);
+        !error && addStyleString(modeName, color);
+      };
+
+      const handleAddMode = (modeName, modeNamesPresent) => {
+        if (!modeName) {
+          return;
+        } else if (modeName.replace(/\s/g, '') == '') { 
+          return '"' + modeName + '"' + ' is not a valid entry for a mode.';
+        } else if (modeNamesPresent.includes(modeName.toLowerCase())) {
+          return '"' + modeName + '"' + ' is already present.';
+        } 
+        let modesDiv = document.getElementById('modes');
+        let newMode = modesDiv.lastChild.cloneNode(true);
+        modesDiv.appendChild(newMode);
+        newMode.children[0].innerHTML = modeName;
+        saveChanges();
+        window.scrollTo(0,document.body.scrollHeight);
+      };
+
+      const removeMode = () => {
+        let modeName = prompt("Enter the mode to remove:", "LBHB");
+        if (modeName) {
+          let mode = document.getElementById(modeName);
+          mode.scrollIntoView();
+          mode.parentNode.removeChild(mode);
+          saveChanges();
+        }
+      };
+
+      const addStyleString = (modeName, color) => {
+          var node = document.createElement('style');
+          node.innerHTML = ".mode-header." + modeName + " { background-color: " + color + " }";
+          document.body.appendChild(node);
+      }      
+
+      // Outage
+      const addOutage = () => {
+        const outageExists = document.getElementById('OUTAGE');
+
+        if (!outageExists) {
+          let limitsDiv = document.getElementsByClassName("limits")[0];
+          let outageDiv = document.createElement('div');
+          let outageHeader = document.createElement('h2');
+          let outageTablesDiv = document.createElement('div');
+
+          outageDiv.setAttribute("id", "OUTAGE");
+          outageHeader.setAttribute("class", "outage-header");
+          outageHeader.innerHTML = "OUTAGE";
+          outageTablesDiv.setAttribute("class", "outage-tables");
+
+          limitsDiv.appendChild(outageDiv);
+          outageDiv.appendChild(outageHeader);
+          outageDiv.appendChild(outageTablesDiv);
+          outageTablesDiv.appendChild(createOutageTable(outageTablesDiv, 'OFF'));
+          outageTablesDiv.appendChild(createOutageTable(outageTablesDiv, 'ON'));
+          outageTablesDiv.scrollIntoView();
+        }
+        else {
+          alert("OUTAGE is already present in this limits file.");
+        }
+      };
+
+      const removeOutage = () => {
+        const e = confirm("Are you sure you want to remove Outage from the file?");
+        if (e) {
+          let outage = document.getElementById('OUTAGE');
+          outage.scrollIntoView();
+          outage.parentNode.removeChild(outage);
+          saveChanges();
+        }
+      };
+
+      const createOutageTable = (parent, state) => {
+        let outageTable = document.getElementsByClassName('temp-table')[0].cloneNode(true);
+        outageTable.setAttribute("class", "outage-table");
+        outageTable.removeAttribute("temperature");
+        outageTable.setAttribute("state", state);
+        let firstRowHeader = outageTable.rows[0].getElementsByTagName('th')[0];
+        firstRowHeader.className = state.toLowerCase()+'-'+'header';
+        firstRowHeader.innerHTML = state;
+        return outageTable;
+      };
+
+      // Board
+      const addBoard = () => {
+        let boardTable = document.getElementById('board-table');
+        let newBoardNumber = getNewBoardNumber(boardTable.rows[boardTable.rows.length-2]);
+        let newRow = boardTable.insertRow(boardTable.rows.length-1);
+        newRow.className = "board";
+        newRow.id = 'B' + newBoardNumber;
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+        let cell3 = newRow.insertCell(2);
+        let cell4 = newRow.insertCell(3);
+        cell1.innerHTML = 'B' + newBoardNumber;
+        cell2.contentEditable = "true";
+        cell3.contentEditable = "true";
+        cell4.contentEditable = "true";
+      };
+
+      const getNewBoardNumber = (lastBoard) => {
+        return parseInt(lastBoard.id.slice(1, lastBoard.id.length)) + 1;
+      };
+
+      const removeBoard = () => {
+        let boardTable = document.getElementById('board-table');
+        let lastBoard = boardTable.rows[boardTable.rows.length-2];
+        (boardTable.rows.length > 5) && lastBoard.parentNode.removeChild(lastBoard);
+      };
+      </script></head><body><div><button id="save" class="save-button" onclick="saveChanges()">Update</button></div><div id="content"><h1><u>TEST STATION LIMITS</u></h1><div class="info"><div class="top-container project-info"><h2 contenteditable="true">Product: <br></h2><h2 contenteditable="true">Phase: <br></h2><h2 contenteditable="true">Revision: <br></h2></div><div class="top-container board-info"><table class="board-table" id="board-table"><tbody><tr><th>Board</th><th>Module</th><th>LED Bins</th><th>Outage</th></tr><tr class="board" id="B1"><td>B1</td><td contenteditable="true">LB</td><td contenteditable="true"><br></td><td contenteditable="true"><br></td></tr><tr class="board" id="B2"><td>B2</td><td contenteditable="true">HB</td><td contenteditable="true"><br></td><td contenteditable="true"><br></td></tr><tr class="board" id="B3"><td>B3</td><td contenteditable="true">DRL</td><td contenteditable="true"><br></td><td contenteditable="true"><br></td></tr><tr class="board" id="B4"><td>B4</td><td contenteditable="true">PARK</td><td contenteditable="true"><br></td><td contenteditable="true"><br></td></tr><tr class="board" id="B5"><td>B5</td><td contenteditable="true">TURN</td><td contenteditable="true"><br></td><td contenteditable="true"><br></td></tr><tr class="board" id="B6"><td>B6</td><td contenteditable="true">OUTAGE</td><td contenteditable="true"><br></td><td contenteditable="true">YES</td></tr><tr class="board-change"><td colspan="2"><button onclick="addBoard()">(+) Add Board</button></td><td colspan="2"><button onclick="removeBoard()">(-) Remove Board</button></td></tr></tbody></table></div></div><div class="limits"><div class="actions"><h3>Actions:</h3><div><button onclick="addMode()">(+) Add Mode</button><button onclick="removeMode()">(-) Remove Mode</button></div><div><button onclick="addOutage()">(+) Add Outage</button><button onclick="removeOutage()">(-) Remove Outage</button></div><div><button onclick="addTemp()">(+) Add Temp</button><button onclick="removeTemp()">(-) Remove Temp</button></div><div><button onclick="addVoltage()">(+) Add Voltage</button><button onclick="removeVoltage()">(-) Remove Voltage</button></div></div><div id="modes"><div class="mode" id="DRL"><h2 class="mode-header DRL" contenteditable="true" id="undefined">DRL</h2><div class="mode-tables"><table class="temp-table temp23C" temperature="23C"><tbody><tr><th colspan="3" class="temp-table-header color23C">23C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.33</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.25</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.96</td><td class="max" contenteditable="true">2.09</td></tr></tbody></table><table class="temp-table temp-40C" temperature="-40C"><tbody><tr><th colspan="3" class="temp-table-header color-40C">-40C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.30</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.02</td><td class="max" contenteditable="true">2.23</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.93</td><td class="max" contenteditable="true">2.04</td></tr></tbody></table><table class="temp-table temp85C" temperature="85C"><tbody><tr><th colspan="3" class="temp-table-header color85C">85C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.13</td><td class="max" contenteditable="true">2.39</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.29</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.99</td><td class="max" contenteditable="true">2.15</td></tr></tbody></table></div></div><div class="mode" id="PARK"><h2 class="mode-header PARK" contenteditable="true" id="undefined">PARK</h2><div class="mode-tables"><table class="temp-table temp23C" temperature="23C"><tbody><tr><th colspan="3" class="temp-table-header color23C">23C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.33</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.25</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.96</td><td class="max" contenteditable="true">2.09</td></tr></tbody></table><table class="temp-table temp-40C" temperature="-40C"><tbody><tr><th colspan="3" class="temp-table-header color-40C">-40C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.30</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.02</td><td class="max" contenteditable="true">2.23</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.93</td><td class="max" contenteditable="true">2.04</td></tr></tbody></table><table class="temp-table temp85C" temperature="85C"><tbody><tr><th colspan="3" class="temp-table-header color85C">85C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.13</td><td class="max" contenteditable="true">2.39</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.29</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.99</td><td class="max" contenteditable="true">2.15</td></tr></tbody></table></div></div><div class="mode" id="TURN"><h2 class="mode-header TURN" contenteditable="true" id="undefined">TURN</h2><div class="mode-tables"><table class="temp-table temp23C" temperature="23C"><tbody><tr><th colspan="3" class="temp-table-header color23C">23C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.33</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.20</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.96</td><td class="max" contenteditable="true">2.09</td></tr></tbody></table><table class="temp-table temp-40C" temperature="-40C"><tbody><tr><th colspan="3" class="temp-table-header color-40C">-40C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.30</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.02</td><td class="max" contenteditable="true">2.23</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.93</td><td class="max" contenteditable="true">2.04</td></tr></tbody></table><table class="temp-table temp85C" temperature="85C"><tbody><tr><th colspan="3" class="temp-table-header color85C">85C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.13</td><td class="max" contenteditable="true">2.39</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.29</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.99</td><td class="max" contenteditable="true">2.15</td></tr></tbody></table></div></div><div class="mode" id="PARKTURN"><h2 class="mode-header PARKTURN" contenteditable="true" id="undefined">PARKTURN</h2><div class="mode-tables"><table class="temp-table temp23C" temperature="23C"><tbody><tr><th colspan="3" class="temp-table-header color23C">23C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.33</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.25</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.96</td><td class="max" contenteditable="true">2.09</td></tr></tbody></table><table class="temp-table temp-40C" temperature="-40C"><tbody><tr><th colspan="3" class="temp-table-header color-40C">-40C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.30</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.02</td><td class="max" contenteditable="true">2.23</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.93</td><td class="max" contenteditable="true">2.04</td></tr></tbody></table><table class="temp-table temp85C" temperature="85C"><tbody><tr><th colspan="3" class="temp-table-header color85C">85C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.13</td><td class="max" contenteditable="true">2.39</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.29</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.99</td><td class="max" contenteditable="true">2.15</td></tr></tbody></table></div></div><div class="mode" id="DRLTURN"><h2 class="mode-header DRLTURN" contenteditable="true" id="undefined">DRLTURN</h2><div class="mode-tables"><table class="temp-table temp23C" temperature="23C"><tbody><tr><th colspan="3" class="temp-table-header color23C">23C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.33</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.25</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.96</td><td class="max" contenteditable="true">2.09</td></tr></tbody></table><table class="temp-table temp-40C" temperature="-40C"><tbody><tr><th colspan="3" class="temp-table-header color-40C">-40C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.05</td><td class="max" contenteditable="true">2.30</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.02</td><td class="max" contenteditable="true">2.23</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.93</td><td class="max" contenteditable="true">2.04</td></tr></tbody></table><table class="temp-table temp85C" temperature="85C"><tbody><tr><th colspan="3" class="temp-table-header color85C">85C</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">1.13</td><td class="max" contenteditable="true">2.39</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">1.11</td><td class="max" contenteditable="true">2.29</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">0.99</td><td class="max" contenteditable="true">2.15</td></tr></tbody></table></div></div></div><div id="OUTAGE"><h2 class="outage-header">OUTAGE</h2><div class="outage-tables"><table class="outage-table" state="OFF"><tbody><tr><th colspan="3" class="off-header">OFF</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">-0.3</td><td class="max" contenteditable="true">0.3<br></td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">-0.3</td><td class="max" contenteditable="true">0.3</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">-0.3</td><td class="max" contenteditable="true">0.3</td></tr></tbody></table><table class="outage-table" state="ON"><tbody><tr><th colspan="3" class="on-header">ON</th></tr><tr bgcolor="#d3d3d3"><th>Voltage</th><th>Min</th><th>Max</th></tr><tr class="9" id="voltage"><th class="9">9</th><td class="min" contenteditable="true">7.7</td><td class="max" contenteditable="true">20</td></tr><tr class="14.1" id="voltage"><th class="14.1">14.1</th><td class="min" contenteditable="true">12.8</td><td class="max" contenteditable="true">20</td></tr><tr class="16" id="voltage"><th class="16">16</th><td class="min" contenteditable="true">14.7</td><td class="max" contenteditable="true">20</td></tr></tbody></table></div></div></div></div><style>.mode-header.DRL { background-color: turqouise }</style><style>.mode-header.PARK { background-color: orange }</style><style>.mode-header.TURN { background-color: fuschia }</style><style>.mode-header.PARKTURN { background-color: null }</style><style>.mode-header.PARKTURN { background-color: #ffc04d }</style><style>.mode-header.DRLTURN { background-color: pink }</style></body></html>
