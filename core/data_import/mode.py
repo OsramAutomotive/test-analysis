@@ -40,17 +40,13 @@ class Mode(object):
     def __init__(self, test, board_mode, df, voltages, *temps):
         self.test = test
         self.board_mode = board_mode
-        # self.mode_tag = board_mode.replace('B6', '') # outage removed
         self.mode_tag = board_mode
         self.name = self.board_mode # actual name of mode (e.g. - 'DRLTURN')
         self.temps = temps
         self.voltages = voltages
-        self.board_ids = re.findall('B[]0-9]*', board_mode) # find boards present in mode
-        # self.current_board_ids = copy_and_remove_b6_from(self.board_ids)
-        self.current_board_ids = list(self.board_ids)
+        self.current_board_ids = re.findall('B[]0-9]*', board_mode) # find boards present in mode
         self.boards = [board for board in self.test.boards if board.id in self.current_board_ids]
         self.systems = []
-
         self.hist_dict = {}  # temp -> voltage -> df of currents only at that temp/voltage combo
         self.multimode = False  # placeholder -> scans later to check if multimode or not
         self.df = pd.DataFrame() # dataframe of mode currents (added together if multi-mode)
@@ -245,6 +241,10 @@ class Mode(object):
         xml_percent_out = etree.SubElement(xml_system, "percent-out")
         xml_percent_out.text = str(percent_out)
         return out_of_spec_bool
+
+    def run_multimode_ratio_analysis(self):
+        # TODO --> calculate ratio of each module in multimode
+        raise NotImplementedError
 
     def get_out_of_spec_data(self):
         """ Retrieves out_of_spec raw data from test in this mode """

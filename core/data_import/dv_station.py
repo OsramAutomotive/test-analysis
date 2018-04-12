@@ -249,17 +249,18 @@ class TestStation(object):
         """ Create Mode instances for each mode present in data and append to 'modes' attribute """
         for mode_id in self.mode_ids:
             board_ids = self.get_current_boards_from_mode_id(mode_id)
+            mode_id_no_outage = ''.join(board_ids)
             if len(board_ids) == 1:
-                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id],
+                self.modes.append(Mode(self, mode_id_no_outage, self.mode_df_dict[mode_id],
                                        self.voltages, *self.temps))
             elif len(board_ids) == 2 and self.boards_have_same_system_labels(*board_ids):
-                self.modes.append(Mode(self, mode_id, self.mode_df_dict[mode_id],
+                self.modes.append(Mode(self, mode_id_no_outage, self.mode_df_dict[mode_id],
                                        self.voltages, *self.temps))
 
     def get_current_boards_from_mode_id(self, mode_id):
         """ Gets current board ids for input mode
         Args:
-            mode_id (): Input mode (e.g. - )
+            mode_id (string): Input mode (e.g. - 'B1B2')
         Returns:
             list of board ids (list): Current board ids that are ON in input mode
         """

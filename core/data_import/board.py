@@ -102,7 +102,6 @@ class Outage(Board):
         get_system_by_system_outage_stats:
 
     """
-
     def __init__(self, test, board_number):
         Board.__init__(self, test, board_number)
         self.outage = True
