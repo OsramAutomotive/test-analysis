@@ -55,8 +55,6 @@ class Mode(object):
         self.multimode = False  # placeholder -> scans later to check if multimode or not
         self.df = pd.DataFrame() # dataframe of mode currents (added together if multi-mode)
         self.voltage_senses = [] # holds voltage sense positions for boards on in mode
-        self.vsense_stats = {} # basic stats of vsenses
-        self.current_stats = {} # basic stats of currents
         self.out_of_spec = pd.DataFrame()
         self.has_led_binning = False
         self.led_bins = []
@@ -80,11 +78,11 @@ class Mode(object):
     def __set_systems(self):
         """ Create systems label if MM else use only board's systems """
         if self.multimode:
-            ## same system/SN labels
+            # same system/SN labels
             if self.boards[0].systems[0].split(' ', 1)[1] == self.boards[1].systems[0].split(' ', 1)[1]:
                 self.systems = [self.mode_tag + ' ' + self.boards[0].systems[i].split(' ', 1)[1]
                                 for i in range(0, len(self.boards[0].systems))]
-            else: ## unique system/SN labels
+            else: # unique system/SN labels
                 self.systems = [self.mode_tag + ' ' + self.boards[0].systems[i].split(' ')[1]
                                 + ' MM' + str(i+1) for i in range(0, len(self.boards[0].systems))]
         else:
@@ -154,9 +152,6 @@ class Mode(object):
         """ Get voltage/current statistics and limit analysis for this mode """
         xml_header_width = str(len(self.voltage_senses)+len(self.systems)+1)
         xml_mode = etree.SubElement(xml_temp, "mode", id=self.name, width=xml_header_width)
-        self.current_stats[temp] = {}
-        self.vsense_stats[temp] = {}
-
         for voltage in self.voltages:
             xml_voltage = etree.SubElement(xml_mode, "voltage", value=str(voltage)+'V', width=xml_header_width)
             if run_limit_analysis and limits:
@@ -164,91 +159,92 @@ class Mode(object):
                 min_current = limits.lim[self.name][temp][voltage][0]
                 max_current = limits.lim[self.name][temp][voltage][1]
                 xml_limits.text = 'Limits:  ' + str(min_current)+'A to '+str(max_current)+'A'
-
-            self.current_stats[temp][voltage] = {}
-            self.vsense_stats[temp][voltage] = {}
-
-            ## vsense analysis
+            # vsense analysis
             xml_vsenses = etree.SubElement(xml_voltage, "vsenses")
             for vsense in self.voltage_senses:
-                xml_vsense = etree.SubElement(xml_vsenses, "vsense")
-                vsense_min, vsense_max, vsense_mean, vsense_std = get_vsense_stats_at_mode_temp_voltage(
-                    vsense, self, temp, voltage)
-                out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance,
-                                                        voltage+self.test.voltage_tolerance,
-                                                        vsense_min, vsense_max)
-                vsense_series = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage,
-                                                        self.test.temperature_tolerance)[vsense]
-                total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
-                    vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
-                self.vsense_stats[temp][voltage][vsense] = [vsense_min, vsense_max, vsense_mean, vsense_std, out_of_spec_bool]
-                xml_name = etree.SubElement(xml_vsense, "name")
-                xml_name.text = str(vsense)
-                xml_min = etree.SubElement(xml_vsense, "min")
-                xml_min.text = str(vsense_min)
-                xml_max = etree.SubElement(xml_vsense, "max")
-                xml_max.text = str(vsense_max)
-                xml_mean = etree.SubElement(xml_vsense, "mean")
-                xml_mean.text = str(vsense_mean)
-                xml_mean = etree.SubElement(xml_vsense, "std")
-                xml_mean.text = str(vsense_std)
-                xml_count = etree.SubElement(xml_vsense, "count")
-                xml_count.text = str(total_count)
-                xml_count = etree.SubElement(xml_vsense, "count-out")
-                xml_count.text = str(out_of_spec_count)
-                xml_percent_out = etree.SubElement(xml_vsense, "percent-out")
-                xml_percent_out.text = str(percent_out)
-                xml_check = etree.SubElement(xml_vsense, "check")
-                xml_check.text = 'Out of Spec' if out_of_spec_bool else 'G'
-
-            ## current analysis
+                self.run_vsense_analysis(temp, voltage, vsense, xml_vsenses)
+            # current analysis
             xml_systems = etree.SubElement(xml_voltage, "systems")
             for system in self.systems:
-                xml_system = etree.SubElement(xml_systems, "system")
-                out_of_spec_bool = 'NA'
-                out_of_spec_count = 'NA'
-                sys_min, sys_max, sys_mean, sys_std = get_system_stats_at_mode_temp_voltage(
-                    system, self, temp, voltage)
-                if limits and run_limit_analysis:
-                    if self.has_led_binning:
-                        mode_limit_dict = get_limits_for_system_with_binning(
-                            limits, self, temp, voltage, system)
-                    else:
-                        mode_limit_dict = get_limits_at_mode_temp_voltage(
-                            limits, self, temp, voltage)
-                    lower_limit, upper_limit = mode_limit_dict['LL'], mode_limit_dict['UL']
-                    out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, 
-                                                            sys_min, sys_max)
-                    
-                self.current_stats[temp][voltage][system] = [sys_min, sys_max, sys_mean, sys_std,
-                                                             out_of_spec_bool]
-                xml_name = etree.SubElement(xml_system, "name")
-                xml_name.text = str(system)
-                xml_min = etree.SubElement(xml_system, "min")
-                xml_min.text = str(sys_min)
-                xml_max = etree.SubElement(xml_system, "max")
-                xml_max.text = str(sys_max)
-                xml_mean = etree.SubElement(xml_system, "mean")
-                xml_mean.text = str(sys_mean)
-                xml_std = etree.SubElement(xml_system, "std")
-                xml_std.text = str(sys_std)
-                xml_count = etree.SubElement(xml_system, "count")
-                xml_count.text = "0"
-                if voltage in self.hist_dict[temp]:
-                    xml_count.text = str(self.hist_dict[temp][voltage][system].count())
-                    if limits and run_limit_analysis:
-                        total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
-                                                                        self.hist_dict[temp][voltage][system], 
-                                                                        lower_limit, 
-                                                                        upper_limit)
-                        xml_count.text = str(total_count)
-                        xml_count_out = etree.SubElement(xml_system, "count-out")
-                        xml_count_out.text = str(out_of_spec_count)
-                        xml_percent_out = etree.SubElement(xml_system, "percent-out")
-                        xml_percent_out.text = str(percent_out)
-                xml_check = etree.SubElement(xml_system, "check")
-                xml_check.text = 'NA' if (not run_limit_analysis or not limits) \
-                                 else 'Out of Spec' if out_of_spec_bool else 'G'
+                self.run_current_analysis(temp, voltage, system, xml_systems, limits, run_limit_analysis)
+
+    def run_vsense_analysis(self, temp, voltage, vsense, xml_vsenses):
+        xml_vsense = etree.SubElement(xml_vsenses, "vsense")
+        vsense_min, vsense_max, vsense_mean, vsense_std = get_vsense_stats_at_mode_temp_voltage(
+                                                                    vsense, self, temp, voltage)
+        out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance,
+                                                voltage+self.test.voltage_tolerance,
+                                                vsense_min, vsense_max)
+        vsense_series = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage,
+                                                self.test.temperature_tolerance)[vsense]
+        total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
+             vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
+        xml_name = etree.SubElement(xml_vsense, "name")
+        xml_name.text = str(vsense)
+        xml_min = etree.SubElement(xml_vsense, "min")
+        xml_min.text = str(vsense_min)
+        xml_max = etree.SubElement(xml_vsense, "max")
+        xml_max.text = str(vsense_max)
+        xml_mean = etree.SubElement(xml_vsense, "mean")
+        xml_mean.text = str(vsense_mean)
+        xml_mean = etree.SubElement(xml_vsense, "std")
+        xml_mean.text = str(vsense_std)
+        xml_count = etree.SubElement(xml_vsense, "count")
+        xml_count.text = str(total_count)
+        xml_count = etree.SubElement(xml_vsense, "count-out")
+        xml_count.text = str(out_of_spec_count)
+        xml_percent_out = etree.SubElement(xml_vsense, "percent-out")
+        xml_percent_out.text = str(percent_out)
+        xml_check = etree.SubElement(xml_vsense, "check")
+        xml_check.text = 'Out of Spec' if out_of_spec_bool else 'G'
+
+    def run_current_analysis(self, temp, voltage, system, xml_systems, limits, run_limit_analysis):
+        xml_system = etree.SubElement(xml_systems, "system")
+        out_of_spec_bool = 'NA'
+        out_of_spec_count = 'NA'
+        sys_min, sys_max, sys_mean, sys_std = get_system_stats_at_mode_temp_voltage(
+            system, self, temp, voltage)
+        xml_name = etree.SubElement(xml_system, "name")
+        xml_name.text = str(system)
+        xml_min = etree.SubElement(xml_system, "min")
+        xml_min.text = str(sys_min)
+        xml_max = etree.SubElement(xml_system, "max")
+        xml_max.text = str(sys_max)
+        xml_mean = etree.SubElement(xml_system, "mean")
+        xml_mean.text = str(sys_mean)
+        xml_std = etree.SubElement(xml_system, "std")
+        xml_std.text = str(sys_std)
+        xml_count = etree.SubElement(xml_system, "count")
+        xml_count.text = "0"
+        
+        if voltage in self.hist_dict[temp]:
+            xml_count.text = str(self.hist_dict[temp][voltage][system].count())
+            if limits and run_limit_analysis:
+                out_of_spec_bool= self.run_current_limit_analysis(temp, voltage, system, xml_system, 
+                                                                  limits, sys_min, sys_max)
+        xml_check = etree.SubElement(xml_system, "check")
+        xml_check.text = 'NA' if (not run_limit_analysis or not limits) \
+                         else 'Out of Spec' if out_of_spec_bool else 'G'
+
+    def run_current_limit_analysis(self, temp, voltage, system, xml_system, limits, sys_min, sys_max):
+        if self.has_led_binning:
+            mode_limit_dict = get_limits_for_system_with_binning(
+                                  limits, self, temp, voltage, system)
+        else:
+            mode_limit_dict = get_limits_at_mode_temp_voltage(
+                                  limits, self, temp, voltage)
+        lower_limit, upper_limit = mode_limit_dict['LL'], mode_limit_dict['UL']
+        out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, 
+                                                sys_min, sys_max)
+        total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
+                                                        self.hist_dict[temp][voltage][system], 
+                                                        lower_limit, 
+                                                        upper_limit)
+        xml_count_out = etree.SubElement(xml_system, "count-out")
+        xml_count_out.text = str(out_of_spec_count)
+        xml_percent_out = etree.SubElement(xml_system, "percent-out")
+        xml_percent_out.text = str(percent_out)
+        return out_of_spec_bool
 
     def get_out_of_spec_data(self):
         """ Retrieves out_of_spec raw data from test in this mode """
