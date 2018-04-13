@@ -238,8 +238,12 @@ class TestAnalysisUI(QWidget):
             limits = self._load_limits(boards, temps)
             run_limit_analysis = self.limit_analysis_box.isChecked()
             self._print_test_conditions(test_name, temps, boards, limits, temperature_tolerance, voltage_tolerance)
-            test = TestStation(test_name, datapath, boards, limits, run_limit_analysis, 
-                               multimode, temperature_tolerance, voltage_tolerance, *temps)
+            try:
+                test = TestStation(test_name, datapath, boards, limits, run_limit_analysis, 
+                                   multimode, temperature_tolerance, voltage_tolerance, *temps)
+            except Exception as e:
+                print(e)
+                sys.exit()
             test.print_board_information()
             if not test.df.empty:
                 for analysis_type in self.analysis_buttons:

@@ -17,6 +17,7 @@ from core.data_import.helpers import run_from_ipython, \
                                      mask_to_mode
 from core.data_import.board import Board, Outage
 from core.data_import.mode import Mode
+from core.exceptions.board_not_found import BoardNotFoundError
 from .. re_and_global import REGEX_RAW_DATAFILE, \
                              REGEX_EMPTY_TEST_POSITION, \
                              REGEX_TEMPS, \
@@ -146,16 +147,23 @@ class TestStation(object):
 
     def __scan_for_boards(self):
         """ Scan for boards present in dataframe """
-        # TO DO ==> Add logic that alerts user if entered boards in normal mode are not present
-        if not self.board_ids:  # autosense what boards are present (Real Time Mode only)
-            set_of_boards = set()
-            for col_name in self.df.columns:
-                if re.search(REGEX_BOARDS, col_name):
-                    set_of_boards.add(re.search(REGEX_BOARDS, col_name).group())
-            self.board_ids = sorted(list(set_of_boards))
+        set_of_boards = set()
+        for col_name in self.df.columns:
+            if re.search(REGEX_BOARDS, col_name):
+                set_of_boards.add(re.search(REGEX_BOARDS, col_name).group())
+        present_board_ids = sorted(list(set_of_boards))
+        # Real Time mode (autosense what boards are present)
+        if not self.board_ids:
+            self.board_ids = present_board_ids
+        # Normal mode (boards to analyze are chosen by user)
+        else:
+            for board_id in self.board_ids:
+                if board_id not in present_board_ids:
+                    raise BoardNotFoundError("BoardNotFoundError: " + '"'+board_id+'"' + \
+                       " was not found in the raw data. Are you sure it is ON for this test?")
 
     def __scan_for_systems(self):
-        """ Scans data for all systems and gets rid of blank test positions """
+        """ Scans data for all systems and removes blank test positions """
         set_of_systems = set()
         for col_name in self.df.columns:
             if re.search(REGEX_SYSTEMS, col_name):
