@@ -157,7 +157,6 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
                round(series.std(), decimal_places)
     return 'NA', 'NA', 'NA', 'NA'
 
-
 ### Outage analysis helpers
 def get_outage_stats_at_temp_voltage(df, board, system, temp, voltage):
     """ Return basic stats for outage at temp/voltage condition """

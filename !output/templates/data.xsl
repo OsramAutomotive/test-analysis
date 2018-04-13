@@ -241,8 +241,48 @@
                 <xsl:for-each select="systems/system">
                   <td align="center"><xsl:value-of select="percent-out"/></td>
                 </xsl:for-each>
-              </tr>              
+              </tr>
 
+              <!-- Multimode Ratios -->
+              <xsl:if test="systems/system/board_min1">
+                <tr class="hide">
+                  <th><div contenteditable="true"><xsl:value-of select="systems/system/board_min1/@id"/> Min:</div></th>
+                  <xsl:for-each select="vsenses/vsense">
+                    <td align="center"></td>
+                  </xsl:for-each>
+                  <xsl:for-each select="systems/system">
+                    <td align="center"><xsl:value-of select="board_min1"/></td>
+                  </xsl:for-each>
+                </tr>
+                <tr class="hide">
+                  <th><div contenteditable="true"><xsl:value-of select="systems/system/board_min2/@id"/> Min:</div></th>
+                  <xsl:for-each select="vsenses/vsense">
+                    <td align="center"></td>
+                  </xsl:for-each>
+                  <xsl:for-each select="systems/system">
+                    <td align="center"><xsl:value-of select="board_min2"/></td>
+                  </xsl:for-each>
+                </tr>
+                <tr class="hide">
+                  <th><div contenteditable="true"><xsl:value-of select="systems/system/board_max1/@id"/> Max:</div></th>
+                  <xsl:for-each select="vsenses/vsense">
+                    <td align="center"></td>
+                  </xsl:for-each>
+                  <xsl:for-each select="systems/system">
+                    <td align="center"><xsl:value-of select="board_max1"/></td>
+                  </xsl:for-each>
+                </tr>
+                <tr class="hide">
+                  <th><div contenteditable="true"><xsl:value-of select="systems/system/board_max2/@id"/> Max:</div></th>
+                  <xsl:for-each select="vsenses/vsense">
+                    <td align="center"></td>
+                  </xsl:for-each>
+                  <xsl:for-each select="systems/system">
+                    <td align="center"><xsl:value-of select="board_max2"/></td>
+                  </xsl:for-each>
+                </tr>
+              </xsl:if>
+                            
               <!-- Check Data -->
               <tr>
                 <th><div contenteditable="true">Check Data:</div></th>

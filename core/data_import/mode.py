@@ -39,9 +39,8 @@ class Mode(object):
 
     def __init__(self, test, board_mode, df, voltages, *temps):
         self.test = test
-        self.board_mode = board_mode
-        self.mode_tag = board_mode
-        self.name = self.board_mode # actual name of mode (e.g. - 'DRLTURN')
+        self.board_mode = board_mode # board id(s) (e.g. - 'B3B4')
+        self.name = self.board_mode # name of mode (e.g. - 'DRLTURN'), to be pulled from limits
         self.temps = temps
         self.voltages = voltages
         self.current_board_ids = re.findall('B[]0-9]*', board_mode) # find boards present in mode
@@ -72,14 +71,14 @@ class Mode(object):
             self.multimode = True
 
     def __set_systems(self):
-        """ Create systems label if MM else use only board's systems """
+        """ Create systems label if multimode else use only board's systems """
         if self.multimode:
             # same system/SN labels
             if self.boards[0].systems[0].split(' ', 1)[1] == self.boards[1].systems[0].split(' ', 1)[1]:
-                self.systems = [self.mode_tag + ' ' + self.boards[0].systems[i].split(' ', 1)[1]
+                self.systems = [self.board_mode + ' ' + self.boards[0].systems[i].split(' ', 1)[1]
                                 for i in range(0, len(self.boards[0].systems))]
             else: # unique system/SN labels
-                self.systems = [self.mode_tag + ' ' + self.boards[0].systems[i].split(' ')[1]
+                self.systems = [self.board_mode + ' ' + self.boards[0].systems[i].split(' ')[1]
                                 + ' MM' + str(i+1) for i in range(0, len(self.boards[0].systems))]
         else:
             self.systems = self.boards[0].systems
@@ -114,7 +113,6 @@ class Mode(object):
     def __get_mode_name_and_set_binning(self):
         """ Pull name of mode from limits file (if provided) """
         if self.test.limits:
-            self.name = self.mode_tag
             for board in self.current_board_ids:
                 self.name = self.name.replace(board,
                                               self.test.limits.board_module_pairs[board])
@@ -212,12 +210,13 @@ class Mode(object):
         xml_std.text = str(sys_std)
         xml_count = etree.SubElement(xml_system, "count")
         xml_count.text = "0"
-        
         if voltage in self.hist_dict[temp]:
             xml_count.text = str(self.hist_dict[temp][voltage][system].count())
             if limits and run_limit_analysis:
                 out_of_spec_bool= self.run_current_limit_analysis(temp, voltage, system, xml_system, 
                                                                   limits, sys_min, sys_max)
+            if self.multimode:
+                self.run_multimode_ratio_analysis(temp, voltage, system, xml_system)
         xml_check = etree.SubElement(xml_system, "check")
         xml_check.text = 'NA' if (not run_limit_analysis or not limits) \
                          else 'Out of Spec' if out_of_spec_bool else 'G'
@@ -233,18 +232,28 @@ class Mode(object):
         out_of_spec_bool = check_if_out_of_spec(lower_limit, upper_limit, 
                                                 sys_min, sys_max)
         total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
-                                                        self.hist_dict[temp][voltage][system], 
-                                                        lower_limit, 
-                                                        upper_limit)
+                    self.hist_dict[temp][voltage][system], lower_limit, upper_limit)
         xml_count_out = etree.SubElement(xml_system, "count-out")
         xml_count_out.text = str(out_of_spec_count)
         xml_percent_out = etree.SubElement(xml_system, "percent-out")
         xml_percent_out.text = str(percent_out)
         return out_of_spec_bool
 
-    def run_multimode_ratio_analysis(self):
-        # TODO --> calculate ratio of each module in multimode
-        raise NotImplementedError
+    def run_multimode_ratio_analysis(self, temp, voltage, system, xml_system):
+        dframe = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage, 
+                                         self.test.temperature_tolerance)
+        for i, board_id in enumerate(self.current_board_ids):
+            field = system.replace(self.board_mode, board_id)
+            series = dframe[field]
+            # retrieve board name from limits
+            try:
+                board_name = self.test.limits.board_module_pairs[board_id]
+            except:
+                board_name = board_id
+            xml_board_min = etree.SubElement(xml_system, "board_min"+str(i+1), id=board_name)
+            xml_board_max = etree.SubElement(xml_system, "board_max"+str(i+1), id=board_name)
+            xml_board_min.text = str(series.min())
+            xml_board_max.text = str(series.max())
 
     def get_out_of_spec_data(self):
         """ Retrieves out_of_spec raw data from test in this mode """

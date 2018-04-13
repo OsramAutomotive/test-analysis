@@ -249,7 +249,7 @@ class TestStation(object):
         """ Create Mode instances for each mode present in data and append to 'modes' attribute """
         for mode_id in self.mode_ids:
             board_ids = self.get_current_boards_from_mode_id(mode_id)
-            mode_id_no_outage = ''.join(board_ids)
+            mode_id_no_outage = ''.join(sorted(board_ids))
             if len(board_ids) == 1:
                 self.modes.append(Mode(self, mode_id_no_outage, self.mode_df_dict[mode_id],
                                        self.voltages, *self.temps))
