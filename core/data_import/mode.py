@@ -210,7 +210,7 @@ class Mode(object):
         xml_std.text = str(sys_std)
         xml_count = etree.SubElement(xml_system, "count")
         xml_count.text = "0"
-        if voltage in self.hist_dict[temp]:
+        if (temp in self.hist_dict) and (voltage in self.hist_dict[temp]):
             xml_count.text = str(self.hist_dict[temp][voltage][system].count())
             if limits and run_limit_analysis:
                 out_of_spec_bool= self.run_current_limit_analysis(temp, voltage, system, xml_system, 
