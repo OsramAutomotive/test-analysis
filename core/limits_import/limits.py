@@ -24,7 +24,6 @@ class Limits(object):
         print_info: Prints board module pairs and the current limits
     """
     def __init__(self, filepath):
-        # TODO --> reduce number of attributes to 5
         self.filepath = filepath
         self.lim = {}
         self.soup = ''
@@ -64,7 +63,7 @@ class Limits(object):
                 self.outage_present = True
 
     def get_limits(self):
-        """ Get limits for each mode present """
+        """ Set limits for each mode present and outage (if present) """
         modes = self.soup.find_all(class_='mode')
         for mode in modes:
             self._get_mode_limits(mode)
@@ -72,7 +71,10 @@ class Limits(object):
             self._get_outage_limits()
 
     def _get_mode_limits(self, mode):
-        """ Need docstring """
+        """ Set limits for input mode 
+        Args:
+            mode (str): mode for which to set limits
+        """
         mode_id = mode.get('id')
         self.lim[mode_id] = {}
         temp_tables = mode.find_all(class_='temp-table')
@@ -88,7 +90,7 @@ class Limits(object):
                 self.lim[mode_id][temp][voltage] = (minimum, maximum)
 
     def _get_outage_limits(self):
-        """ Need docstring """
+        """ Set limits for outage """
         outage_tables = self.soup.find_all(class_='outage-table')
         self.lim['OUTAGE'] = {}
         for outage_table in outage_tables:
@@ -102,7 +104,7 @@ class Limits(object):
                 self.lim['OUTAGE'][outage_state][voltage] = (minimum, maximum)
 
     def print_info(self):
-        """ Need docstring """
+        """ Print information on limits that were retrieved from file """
         print('\n*** Limits Details ***')
         print('\nBoard-Module Pairs:')
         pp.pprint(self.board_module_pairs)
@@ -111,7 +113,7 @@ class Limits(object):
         print('\n')
 
 
-### Limits helper functions
+# Limits helper functions
 def get_limits_at_mode_temp_voltage(limits, mode, temp, voltage):
     """ Attempt to pull mode/temp/voltage condition current limits from Limits object
     Args:
@@ -142,7 +144,16 @@ def get_limits_without_binning(limits, mode, temp, voltage):
         raise
 
 def get_all_mode_limits_with_binning(limits, mode, temp, voltage):
-    """ Need docstring """
+    """ Gets mode limits with binning 
+    Args: 
+        limits (Limit instance): limits to use for retrieval
+        mode (Mode instance): limit mode
+        temp (int): limit temperature
+        voltage (float): limit voltage
+    Returns:
+        mode_bin_limits_dict (dict): e.g. - {'KY LL': 1.346, 'KY UL': 1.934
+                                             '8J LL': 0.655, '8J UL': 0.815}
+    """
     mode_bin_limits_dict = {}
     for led_bin in mode.led_bins:
         module_header = led_bin + ' ' + mode.name
@@ -154,7 +165,16 @@ def get_all_mode_limits_with_binning(limits, mode, temp, voltage):
     return mode_bin_limits_dict
 
 def get_limit_for_single_led_bin(led_bin, limits, mode, temp, voltage):
-    """ Need docstring """
+    """ Get mode limits for single LED bin 
+    Args: 
+        led_bin (str): LED bin limit (e.g.- "KY")
+        limits (Limit instance): limits to use for retrieval
+        mode (Mode instance): limit mode
+        temp (int): limit temperature
+        voltage (float): limit voltage
+    Returns:
+        mode_bin_limits_dict (dict): e.g. - {'KY LL': 1.346, 'KY UL': 1.934}
+    """
     mode_bin_limits_dict = {}
     module_header = led_bin + ' ' + mode.name
     try:
@@ -165,7 +185,16 @@ def get_limit_for_single_led_bin(led_bin, limits, mode, temp, voltage):
     return mode_bin_limits_dict
 
 def get_limits_for_system_with_binning(limits, mode, temp, voltage, system):
-    """ Need docstring """
+    """ Get mode limits for single system with binning
+    Args: 
+        limits (Limit instance): limits to use for retrieval
+        mode (Mode instance): limit mode
+        temp (int): limit temperature
+        voltage (float): limit voltage
+        system (str): system name (e.g. - 'System 71')
+    Returns:
+        LL UL dict: e.g. - {'LL': 1.346, 'UL': 1.934}
+    """
     led_bin = get_system_bin(mode, system)
     module_header = led_bin + ' ' + mode.name
     try:
@@ -176,7 +205,13 @@ def get_limits_for_system_with_binning(limits, mode, temp, voltage, system):
         raise
 
 def get_system_bin(mode, system):
-    """ Need docstring """
+    """ Splits system name searching for led_bin info
+    Args: 
+        mode (Mode instance): limit mode
+        system (str): system name (e.g. - '8J System 71')
+    Returns:
+        led_bin (str): system LED bin (e.g. - '8J') or None
+    """
     possible_bins = system.split(' ')
     for led_bin in possible_bins:
         if led_bin in mode.led_bins:

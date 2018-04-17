@@ -13,7 +13,7 @@ class BoardNotFoundError(Error):
 
     Attributes:
         board_id (str): board that was not found in data (e.g. - "B3")
-        message (str): error message to display to user
+        message (str): error message displayed to user
     """
     def __init__(self, message):
         self.message = message
@@ -23,7 +23,16 @@ class TemperatureNotFoundError(Error):
 
     Attributes:
         temperature (int): temperature not present in data (e.g. - "85")
-        message (str): error message to display to user
+        message (str): error message displayed to user
+    """
+    def __init__(self, message):
+        self.message = message
+
+class LimitNotFoundError(Error):
+    """Raised when a non-existent limit is attempted to be accessed.
+    
+    Attributes:
+        message (str): error message displayed to user
     """
     def __init__(self, message):
         self.message = message

@@ -17,7 +17,7 @@ from core.data_import.helpers import run_from_ipython, \
                                      mask_to_mode
 from core.data_import.board import Board, Outage
 from core.data_import.mode import Mode
-from core.exceptions.board_not_found import BoardNotFoundError
+from core.exceptions.custom_exceptions import BoardNotFoundError
 from .. re_and_global import REGEX_RAW_DATAFILE, \
                              REGEX_EMPTY_TEST_POSITION, \
                              REGEX_TEMPS, \
