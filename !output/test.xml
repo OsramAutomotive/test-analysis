@@ -1,0 +1,6167 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="templates/data.xsl"?><test header_width="36" name="test">
+  <time>
+    <timestamp>04/14/2018 at 11:17:43 PM</timestamp>
+  </time>
+  <profile>
+    <thermocouple>
+      <name>Temp tc3: LBHB LDM</name>
+      <temp-min>-27.57</temp-min>
+      <temp-max>95.84</temp-max>
+    </thermocouple>
+    <thermocouple>
+      <name>Temp tc1: chamber</name>
+      <temp-min>-29.54</temp-min>
+      <temp-max>95.01</temp-max>
+    </thermocouple>
+    <thermocouple>
+      <name>Temp tc2: product 1</name>
+      <temp-min>23.13</temp-min>
+      <temp-max>27.11</temp-max>
+    </thermocouple>
+    <thermocouple>
+      <name>Temp tc4: product 3</name>
+      <temp-min>22.49</temp-min>
+      <temp-max>26.15</temp-max>
+    </thermocouple>
+    <thermocouple>
+      <name>Temp tc5: Ktype</name>
+      <temp-min>22.83</temp-min>
+      <temp-max>27.87</temp-max>
+    </thermocouple>
+    <thermocouple>
+      <name>Temp tc6: Ttype</name>
+      <temp-min>23.35</temp-min>
+      <temp-max>30.26</temp-max>
+    </thermocouple>
+    <thermocouple>
+      <name>Temp tc7: Jtype</name>
+      <temp-min>22.99</temp-min>
+      <temp-max>28.51</temp-max>
+    </thermocouple>
+  </profile>
+  <temperature temp="-30C">
+    <mode id="B1" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B1 VSense1</name>
+            <min>8.705</min>
+            <max>9.382</max>
+            <mean>8.997</mean>
+            <std>0.078</std>
+            <count>1081</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B1 VSense2</name>
+            <min>8.715</min>
+            <max>9.177</max>
+            <mean>8.936</mean>
+            <std>0.056</std>
+            <count>1081</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B1 TP1: S1 a</name>
+            <min>1.433</min>
+            <max>1.698</max>
+            <mean>1.514</mean>
+            <std>0.043</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP2: s2</name>
+            <min>1.645</min>
+            <max>2.054</max>
+            <mean>1.707</mean>
+            <std>0.079</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP3: s3</name>
+            <min>1.635</min>
+            <max>2.001</max>
+            <mean>1.693</mean>
+            <std>0.069</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP4: s4</name>
+            <min>1.608</min>
+            <max>1.99</max>
+            <mean>1.69</mean>
+            <std>0.074</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP5: s5</name>
+            <min>1.884</min>
+            <max>2.033</max>
+            <mean>1.945</mean>
+            <std>0.022</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP6: s6</name>
+            <min>1.783</min>
+            <max>1.98</max>
+            <mean>1.886</mean>
+            <std>0.033</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP7: s7</name>
+            <min>1.836</min>
+            <max>2.075</max>
+            <mean>1.938</mean>
+            <std>0.038</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP8: s8</name>
+            <min>1.815</min>
+            <max>2.011</max>
+            <mean>1.871</mean>
+            <std>0.031</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP9: s9</name>
+            <min>1.666</min>
+            <max>2.064</max>
+            <mean>1.725</mean>
+            <std>0.079</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP10: s10</name>
+            <min>1.688</min>
+            <max>2.022</max>
+            <mean>1.763</mean>
+            <std>0.058</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP11: s11</name>
+            <min>1.889</min>
+            <max>2.022</max>
+            <mean>1.943</mean>
+            <std>0.031</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP12: s12</name>
+            <min>1.714</min>
+            <max>1.995</max>
+            <mean>1.775</mean>
+            <std>0.047</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B1 VSense1</name>
+            <min>13.253</min>
+            <max>13.735</max>
+            <mean>13.5</mean>
+            <std>0.054</std>
+            <count>1081</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B1 VSense2</name>
+            <min>13.312</min>
+            <max>13.616</max>
+            <mean>13.453</mean>
+            <std>0.042</std>
+            <count>1081</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B1 TP1: S1 a</name>
+            <min>1.024</min>
+            <max>1.221</max>
+            <mean>1.049</mean>
+            <std>0.037</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP2: s2</name>
+            <min>1.168</min>
+            <max>1.449</max>
+            <mean>1.196</mean>
+            <std>0.056</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP3: s3</name>
+            <min>1.146</min>
+            <max>1.428</max>
+            <mean>1.17</mean>
+            <std>0.057</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP4: s4</name>
+            <min>1.152</min>
+            <max>1.412</max>
+            <mean>1.178</mean>
+            <std>0.052</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP5: s5</name>
+            <min>1.306</min>
+            <max>1.444</max>
+            <mean>1.331</mean>
+            <std>0.023</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP6: s6</name>
+            <min>1.274</min>
+            <max>1.412</max>
+            <mean>1.297</mean>
+            <std>0.024</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP7: s7</name>
+            <min>1.306</min>
+            <max>1.475</max>
+            <mean>1.333</mean>
+            <std>0.031</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP8: s8</name>
+            <min>1.263</min>
+            <max>1.438</max>
+            <mean>1.287</mean>
+            <std>0.033</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP9: s9</name>
+            <min>1.178</min>
+            <max>1.459</max>
+            <mean>1.204</mean>
+            <std>0.057</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP10: s10</name>
+            <min>1.194</min>
+            <max>1.438</max>
+            <mean>1.219</mean>
+            <std>0.048</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP11: s11</name>
+            <min>1.321</min>
+            <max>1.433</max>
+            <mean>1.345</mean>
+            <std>0.018</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP12: s12</name>
+            <min>1.231</min>
+            <max>1.417</max>
+            <mean>1.255</mean>
+            <std>0.034</std>
+            <count>1081</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B1 VSense1</name>
+            <min>13.872</min>
+            <max>14.306</max>
+            <mean>14.105</mean>
+            <std>0.051</std>
+            <count>2161</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B1 VSense2</name>
+            <min>13.905</min>
+            <max>14.219</max>
+            <mean>14.062</mean>
+            <std>0.041</std>
+            <count>2161</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B1 TP1: S1 a</name>
+            <min>0.976</min>
+            <max>1.162</max>
+            <mean>1.008</mean>
+            <std>0.034</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP2: s2</name>
+            <min>1.114</min>
+            <max>1.38</max>
+            <mean>1.142</mean>
+            <std>0.053</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP3: s3</name>
+            <min>1.093</min>
+            <max>1.359</max>
+            <mean>1.118</mean>
+            <std>0.054</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP4: s4</name>
+            <min>1.093</min>
+            <max>1.337</max>
+            <mean>1.13</mean>
+            <std>0.048</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP5: s5</name>
+            <min>1.247</min>
+            <max>1.375</max>
+            <mean>1.272</mean>
+            <std>0.021</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP6: s6</name>
+            <min>1.215</min>
+            <max>1.343</max>
+            <mean>1.238</mean>
+            <std>0.023</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP7: s7</name>
+            <min>1.247</min>
+            <max>1.412</max>
+            <mean>1.271</mean>
+            <std>0.03</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP8: s8</name>
+            <min>1.205</min>
+            <max>1.369</max>
+            <mean>1.229</mean>
+            <std>0.031</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP9: s9</name>
+            <min>1.12</min>
+            <max>1.39</max>
+            <mean>1.149</mean>
+            <std>0.054</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP10: s10</name>
+            <min>1.141</min>
+            <max>1.369</max>
+            <mean>1.165</mean>
+            <std>0.045</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP11: s11</name>
+            <min>1.263</min>
+            <max>1.364</max>
+            <mean>1.283</mean>
+            <std>0.017</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP12: s12</name>
+            <min>1.173</min>
+            <max>1.337</max>
+            <mean>1.196</mean>
+            <std>0.031</std>
+            <count>2161</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B2" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B2 VSense1</name>
+            <min>8.626</min>
+            <max>9.34</max>
+            <mean>9.006</mean>
+            <std>0.071</std>
+            <count>1079</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B2 VSense2</name>
+            <min>8.735</min>
+            <max>9.212</max>
+            <mean>8.955</mean>
+            <std>0.059</std>
+            <count>1079</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B2 TP1: S1 a</name>
+            <min>1.401</min>
+            <max>1.619</max>
+            <mean>1.588</mean>
+            <std>0.037</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP2: s2</name>
+            <min>1.523</min>
+            <max>1.911</max>
+            <mean>1.849</mean>
+            <std>0.061</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP3: s3</name>
+            <min>1.47</min>
+            <max>1.852</max>
+            <mean>1.818</mean>
+            <std>0.063</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP4: s4</name>
+            <min>1.539</min>
+            <max>1.911</max>
+            <mean>1.837</mean>
+            <std>0.067</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP5: s5</name>
+            <min>1.842</min>
+            <max>2.043</max>
+            <mean>2.005</mean>
+            <std>0.036</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP6: s6</name>
+            <min>1.842</min>
+            <max>2.027</max>
+            <mean>1.987</mean>
+            <std>0.04</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP7: s7</name>
+            <min>1.831</min>
+            <max>2.086</max>
+            <mean>2.04</mean>
+            <std>0.043</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP8: s8</name>
+            <min>1.857</min>
+            <max>2.112</max>
+            <mean>2.074</mean>
+            <std>0.042</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP9: s9</name>
+            <min>1.465</min>
+            <max>1.847</max>
+            <mean>1.789</mean>
+            <std>0.068</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP10: s10</name>
+            <min>1.528</min>
+            <max>1.852</max>
+            <mean>1.825</mean>
+            <std>0.055</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP11: s11</name>
+            <min>1.831</min>
+            <max>1.995</max>
+            <mean>1.946</mean>
+            <std>0.034</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP12: s12</name>
+            <min>1.831</min>
+            <max>2.038</max>
+            <mean>2.003</mean>
+            <std>0.036</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B2 VSense1</name>
+            <min>13.312</min>
+            <max>13.745</max>
+            <mean>13.506</mean>
+            <std>0.052</std>
+            <count>1079</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B2 VSense2</name>
+            <min>13.332</min>
+            <max>13.629</max>
+            <mean>13.465</mean>
+            <std>0.041</std>
+            <count>1079</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B2 TP1: S1 a</name>
+            <min>0.998</min>
+            <max>1.136</max>
+            <mean>1.116</mean>
+            <std>0.022</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP2: s2</name>
+            <min>1.083</min>
+            <max>1.316</max>
+            <mean>1.29</mean>
+            <std>0.037</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP3: s3</name>
+            <min>1.045</min>
+            <max>1.279</max>
+            <mean>1.255</mean>
+            <std>0.038</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP4: s4</name>
+            <min>1.093</min>
+            <max>1.306</max>
+            <mean>1.28</mean>
+            <std>0.034</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP5: s5</name>
+            <min>1.3</min>
+            <max>1.39</max>
+            <mean>1.37</mean>
+            <std>0.014</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP6: s6</name>
+            <min>1.29</min>
+            <max>1.39</max>
+            <mean>1.367</mean>
+            <std>0.014</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP7: s7</name>
+            <min>1.295</min>
+            <max>1.422</max>
+            <mean>1.4</mean>
+            <std>0.019</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP8: s8</name>
+            <min>1.311</min>
+            <max>1.444</max>
+            <mean>1.424</mean>
+            <std>0.021</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP9: s9</name>
+            <min>1.04</min>
+            <max>1.274</max>
+            <mean>1.247</mean>
+            <std>0.038</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP10: s10</name>
+            <min>1.077</min>
+            <max>1.279</max>
+            <mean>1.255</mean>
+            <std>0.031</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP11: s11</name>
+            <min>1.295</min>
+            <max>1.359</max>
+            <mean>1.34</mean>
+            <std>0.009</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP12: s12</name>
+            <min>1.284</min>
+            <max>1.433</max>
+            <mean>1.406</mean>
+            <std>0.023</std>
+            <count>1079</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B2 VSense1</name>
+            <min>13.851</min>
+            <max>14.348</max>
+            <mean>14.109</mean>
+            <std>0.047</std>
+            <count>2158</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B2 VSense2</name>
+            <min>13.939</min>
+            <max>14.226</max>
+            <mean>14.073</mean>
+            <std>0.037</std>
+            <count>2158</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B2 TP1: S1 a</name>
+            <min>0.955</min>
+            <max>1.088</max>
+            <mean>1.061</mean>
+            <std>0.021</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP2: s2</name>
+            <min>1.035</min>
+            <max>1.252</max>
+            <mean>1.231</mean>
+            <std>0.035</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP3: s3</name>
+            <min>0.998</min>
+            <max>1.221</max>
+            <mean>1.198</mean>
+            <std>0.036</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP4: s4</name>
+            <min>1.04</min>
+            <max>1.242</max>
+            <mean>1.217</mean>
+            <std>0.032</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP5: s5</name>
+            <min>1.237</min>
+            <max>1.321</max>
+            <mean>1.305</mean>
+            <std>0.013</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP6: s6</name>
+            <min>1.231</min>
+            <max>1.327</max>
+            <mean>1.305</mean>
+            <std>0.014</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP7: s7</name>
+            <min>1.231</min>
+            <max>1.359</max>
+            <mean>1.337</mean>
+            <std>0.019</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP8: s8</name>
+            <min>1.252</min>
+            <max>1.38</max>
+            <mean>1.358</mean>
+            <std>0.02</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP9: s9</name>
+            <min>0.987</min>
+            <max>1.215</max>
+            <mean>1.191</mean>
+            <std>0.037</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP10: s10</name>
+            <min>1.03</min>
+            <max>1.221</max>
+            <mean>1.197</mean>
+            <std>0.029</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP11: s11</name>
+            <min>1.231</min>
+            <max>1.3</max>
+            <mean>1.28</mean>
+            <std>0.009</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP12: s12</name>
+            <min>1.221</min>
+            <max>1.359</max>
+            <mean>1.336</mean>
+            <std>0.021</std>
+            <count>2158</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B3" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B3 VSense1</name>
+            <min>8.568</min>
+            <max>9.52</max>
+            <mean>9.014</mean>
+            <std>0.23</std>
+            <count>55</count>
+            <count-out>1</count-out>
+            <percent-out>1.82%</percent-out>
+            <check>Out of Spec</check>
+          </vsense>
+          <vsense>
+            <name>B3 VSense2</name>
+            <min>8.621</min>
+            <max>9.136</max>
+            <mean>8.92</mean>
+            <std>0.141</std>
+            <count>55</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B3 TP1: S1 a</name>
+            <min>0.973</min>
+            <max>1.142</max>
+            <mean>1.079</mean>
+            <std>0.058</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP2: s2</name>
+            <min>1.094</min>
+            <max>1.366</max>
+            <mean>1.249</mean>
+            <std>0.114</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP3: s3</name>
+            <min>1.088</min>
+            <max>1.336</max>
+            <mean>1.234</mean>
+            <std>0.107</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP4: s4</name>
+            <min>1.103</min>
+            <max>1.34</max>
+            <mean>1.243</mean>
+            <std>0.084</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP5: s5</name>
+            <min>1.245</min>
+            <max>1.353</max>
+            <mean>1.316</mean>
+            <std>0.03</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP6: s6</name>
+            <min>1.206</min>
+            <max>1.322</max>
+            <mean>1.282</mean>
+            <std>0.034</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP7: s7</name>
+            <min>1.258</min>
+            <max>1.387</max>
+            <mean>1.333</mean>
+            <std>0.049</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP8: s8</name>
+            <min>1.217</min>
+            <max>1.328</max>
+            <mean>1.285</mean>
+            <std>0.036</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP9: s9</name>
+            <min>1.117</min>
+            <max>1.37</max>
+            <mean>1.272</mean>
+            <std>0.1</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP10: s10</name>
+            <min>1.107</min>
+            <max>1.345</max>
+            <mean>1.253</mean>
+            <std>0.094</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP11: s11</name>
+            <min>1.256</min>
+            <max>1.344</max>
+            <mean>1.315</mean>
+            <std>0.022</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP12: s12</name>
+            <min>1.175</min>
+            <max>1.342</max>
+            <mean>1.266</mean>
+            <std>0.063</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B3 VSense1</name>
+            <min>13.1</min>
+            <max>13.735</max>
+            <mean>13.454</mean>
+            <std>0.134</std>
+            <count>55</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B3 VSense2</name>
+            <min>13.218</min>
+            <max>13.569</max>
+            <mean>13.434</mean>
+            <std>0.101</std>
+            <count>55</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B3 TP1: S1 a</name>
+            <min>0.707</min>
+            <max>0.823</max>
+            <mean>0.77</mean>
+            <std>0.048</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP2: s2</name>
+            <min>0.779</min>
+            <max>0.979</max>
+            <mean>0.891</mean>
+            <std>0.087</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP3: s3</name>
+            <min>0.773</min>
+            <max>0.967</max>
+            <mean>0.88</mean>
+            <std>0.084</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP4: s4</name>
+            <min>0.792</min>
+            <max>0.949</max>
+            <mean>0.878</mean>
+            <std>0.067</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP5: s5</name>
+            <min>0.893</min>
+            <max>0.973</max>
+            <mean>0.933</mean>
+            <std>0.028</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP6: s6</name>
+            <min>0.869</min>
+            <max>0.957</max>
+            <mean>0.913</mean>
+            <std>0.033</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP7: s7</name>
+            <min>0.885</min>
+            <max>1.001</max>
+            <mean>0.945</mean>
+            <std>0.046</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP8: s8</name>
+            <min>0.871</min>
+            <max>0.968</max>
+            <mean>0.921</mean>
+            <std>0.037</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP9: s9</name>
+            <min>0.805</min>
+            <max>0.988</max>
+            <mean>0.906</mean>
+            <std>0.079</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP10: s10</name>
+            <min>0.803</min>
+            <max>0.971</max>
+            <mean>0.896</mean>
+            <std>0.072</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP11: s11</name>
+            <min>0.898</min>
+            <max>0.968</max>
+            <mean>0.932</mean>
+            <std>0.023</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP12: s12</name>
+            <min>0.85</min>
+            <max>0.953</max>
+            <mean>0.903</mean>
+            <std>0.038</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B3 VSense1</name>
+            <min>13.761</min>
+            <max>14.427</max>
+            <mean>14.097</mean>
+            <std>0.158</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B3 VSense2</name>
+            <min>13.86</min>
+            <max>14.196</max>
+            <mean>14.052</mean>
+            <std>0.093</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B3 TP1: S1 a</name>
+            <min>0.671</min>
+            <max>0.783</max>
+            <mean>0.737</mean>
+            <std>0.045</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP2: s2</name>
+            <min>0.742</min>
+            <max>0.931</max>
+            <mean>0.851</mean>
+            <std>0.084</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP3: s3</name>
+            <min>0.736</min>
+            <max>0.919</max>
+            <mean>0.84</mean>
+            <std>0.081</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP4: s4</name>
+            <min>0.755</min>
+            <max>0.903</max>
+            <mean>0.84</mean>
+            <std>0.063</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP5: s5</name>
+            <min>0.85</min>
+            <max>0.926</max>
+            <mean>0.891</mean>
+            <std>0.027</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP6: s6</name>
+            <min>0.822</min>
+            <max>0.911</max>
+            <mean>0.871</mean>
+            <std>0.033</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP7: s7</name>
+            <min>0.838</min>
+            <max>0.953</max>
+            <mean>0.902</mean>
+            <std>0.046</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP8: s8</name>
+            <min>0.828</min>
+            <max>0.922</max>
+            <mean>0.879</mean>
+            <std>0.037</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP9: s9</name>
+            <min>0.765</min>
+            <max>0.939</max>
+            <mean>0.865</mean>
+            <std>0.077</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP10: s10</name>
+            <min>0.765</min>
+            <max>0.924</max>
+            <mean>0.856</mean>
+            <std>0.069</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP11: s11</name>
+            <min>0.855</min>
+            <max>0.921</max>
+            <mean>0.889</mean>
+            <std>0.024</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP12: s12</name>
+            <min>0.808</min>
+            <max>0.901</max>
+            <mean>0.859</mean>
+            <std>0.037</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B4" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B4 VSense1</name>
+            <min>8.483</min>
+            <max>9.339</max>
+            <mean>8.993</mean>
+            <std>0.146</std>
+            <count>1103</count>
+            <count-out>1</count-out>
+            <percent-out>0.09%</percent-out>
+            <check>Out of Spec</check>
+          </vsense>
+          <vsense>
+            <name>B4 VSense2</name>
+            <min>8.401</min>
+            <max>9.345</max>
+            <mean>8.98</mean>
+            <std>0.128</std>
+            <count>1103</count>
+            <count-out>7</count-out>
+            <percent-out>0.63%</percent-out>
+            <check>Out of Spec</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B4 TP1: S1 a</name>
+            <min>0.295</min>
+            <max>0.324</max>
+            <mean>0.314</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP2: s2</name>
+            <min>0.294</min>
+            <max>0.326</max>
+            <mean>0.315</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP3: s3</name>
+            <min>0.288</min>
+            <max>0.319</max>
+            <mean>0.309</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP4: s4</name>
+            <min>0.289</min>
+            <max>0.321</max>
+            <mean>0.31</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP5: s5</name>
+            <min>0.302</min>
+            <max>0.329</max>
+            <mean>0.318</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP6: s6</name>
+            <min>0.299</min>
+            <max>0.324</max>
+            <mean>0.314</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP7: s7</name>
+            <min>0.298</min>
+            <max>0.324</max>
+            <mean>0.314</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP8: s8</name>
+            <min>0.282</min>
+            <max>0.32</max>
+            <mean>0.307</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP9: s9</name>
+            <min>0.286</min>
+            <max>0.321</max>
+            <mean>0.31</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP10: s10</name>
+            <min>0.297</min>
+            <max>0.328</max>
+            <mean>0.317</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP11: s11</name>
+            <min>0.28</min>
+            <max>0.322</max>
+            <mean>0.307</mean>
+            <std>0.006</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP12: s12</name>
+            <min>0.291</min>
+            <max>0.321</max>
+            <mean>0.313</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B4 VSense1</name>
+            <min>13.178</min>
+            <max>13.692</max>
+            <mean>13.513</mean>
+            <std>0.073</std>
+            <count>1103</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B4 VSense2</name>
+            <min>13.167</min>
+            <max>13.7</max>
+            <mean>13.505</mean>
+            <std>0.078</std>
+            <count>1103</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B4 TP1: S1 a</name>
+            <min>0.195</min>
+            <max>0.215</max>
+            <mean>0.21</mean>
+            <std>0.003</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP2: s2</name>
+            <min>0.191</min>
+            <max>0.216</max>
+            <mean>0.21</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP3: s3</name>
+            <min>0.189</min>
+            <max>0.211</max>
+            <mean>0.206</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP4: s4</name>
+            <min>0.189</min>
+            <max>0.213</max>
+            <mean>0.207</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP5: s5</name>
+            <min>0.195</min>
+            <max>0.216</max>
+            <mean>0.211</mean>
+            <std>0.003</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP6: s6</name>
+            <min>0.195</min>
+            <max>0.213</max>
+            <mean>0.209</mean>
+            <std>0.003</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP7: s7</name>
+            <min>0.194</min>
+            <max>0.214</max>
+            <mean>0.209</mean>
+            <std>0.003</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP8: s8</name>
+            <min>0.183</min>
+            <max>0.213</max>
+            <mean>0.204</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP9: s9</name>
+            <min>0.187</min>
+            <max>0.214</max>
+            <mean>0.207</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP10: s10</name>
+            <min>0.194</min>
+            <max>0.217</max>
+            <mean>0.211</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP11: s11</name>
+            <min>0.182</min>
+            <max>0.214</max>
+            <mean>0.204</mean>
+            <std>0.005</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP12: s12</name>
+            <min>0.187</min>
+            <max>0.212</max>
+            <mean>0.206</mean>
+            <std>0.004</std>
+            <count>1103</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B4 VSense1</name>
+            <min>13.782</min>
+            <max>14.28</max>
+            <mean>14.114</mean>
+            <std>0.071</std>
+            <count>2205</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B4 VSense2</name>
+            <min>13.784</min>
+            <max>14.293</max>
+            <mean>14.109</mean>
+            <std>0.075</std>
+            <count>2205</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B4 TP1: S1 a</name>
+            <min>0.186</min>
+            <max>0.206</max>
+            <mean>0.201</mean>
+            <std>0.003</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP2: s2</name>
+            <min>0.183</min>
+            <max>0.208</max>
+            <mean>0.201</mean>
+            <std>0.004</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP3: s3</name>
+            <min>0.18</min>
+            <max>0.203</max>
+            <mean>0.198</mean>
+            <std>0.003</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP4: s4</name>
+            <min>0.181</min>
+            <max>0.205</max>
+            <mean>0.199</mean>
+            <std>0.004</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP5: s5</name>
+            <min>0.186</min>
+            <max>0.207</max>
+            <mean>0.202</mean>
+            <std>0.003</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP6: s6</name>
+            <min>0.187</min>
+            <max>0.205</max>
+            <mean>0.201</mean>
+            <std>0.003</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP7: s7</name>
+            <min>0.186</min>
+            <max>0.206</max>
+            <mean>0.201</mean>
+            <std>0.003</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP8: s8</name>
+            <min>0.175</min>
+            <max>0.205</max>
+            <mean>0.196</mean>
+            <std>0.004</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP9: s9</name>
+            <min>0.179</min>
+            <max>0.206</max>
+            <mean>0.199</mean>
+            <std>0.004</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP10: s10</name>
+            <min>0.186</min>
+            <max>0.208</max>
+            <mean>0.203</mean>
+            <std>0.003</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP11: s11</name>
+            <min>0.174</min>
+            <max>0.206</max>
+            <mean>0.196</mean>
+            <std>0.004</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP12: s12</name>
+            <min>0.178</min>
+            <max>0.204</max>
+            <mean>0.198</mean>
+            <std>0.004</std>
+            <count>2205</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B5" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B5 VSense1</name>
+            <min>8.964</min>
+            <max>9.042</max>
+            <mean>9.0</mean>
+            <std>0.02</std>
+            <count>55</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B5 VSense2</name>
+            <min>8.928</min>
+            <max>8.987</max>
+            <mean>8.97</mean>
+            <std>0.018</std>
+            <count>55</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B5 TP1: S1 a</name>
+            <min>1.323</min>
+            <max>1.67</max>
+            <mean>1.527</mean>
+            <std>0.162</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP2: s2</name>
+            <min>1.383</min>
+            <max>1.748</max>
+            <mean>1.596</mean>
+            <std>0.169</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP3: s3</name>
+            <min>1.359</min>
+            <max>1.715</max>
+            <mean>1.567</mean>
+            <std>0.165</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP4: s4</name>
+            <min>1.351</min>
+            <max>1.704</max>
+            <mean>1.558</mean>
+            <std>0.165</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP5: s5</name>
+            <min>1.362</min>
+            <max>1.734</max>
+            <mean>1.58</mean>
+            <std>0.174</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP6: s6</name>
+            <min>1.353</min>
+            <max>1.723</max>
+            <mean>1.57</mean>
+            <std>0.172</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP7: s7</name>
+            <min>1.34</min>
+            <max>1.704</max>
+            <mean>1.554</mean>
+            <std>0.17</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP8: s8</name>
+            <min>1.36</min>
+            <max>1.706</max>
+            <mean>1.563</mean>
+            <std>0.161</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP9: s9</name>
+            <min>1.334</min>
+            <max>1.683</max>
+            <mean>1.539</mean>
+            <std>0.163</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP10: s10</name>
+            <min>1.37</min>
+            <max>1.734</max>
+            <mean>1.583</mean>
+            <std>0.17</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP11: s11</name>
+            <min>1.349</min>
+            <max>1.691</max>
+            <mean>1.55</mean>
+            <std>0.16</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP12: s12</name>
+            <min>1.346</min>
+            <max>1.681</max>
+            <mean>1.544</mean>
+            <std>0.158</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B5 VSense1</name>
+            <min>13.429</min>
+            <max>13.496</max>
+            <mean>13.467</mean>
+            <std>0.02</std>
+            <count>55</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B5 VSense2</name>
+            <min>13.422</min>
+            <max>13.47</max>
+            <mean>13.451</mean>
+            <std>0.02</std>
+            <count>55</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B5 TP1: S1 a</name>
+            <min>0.849</min>
+            <max>1.061</max>
+            <mean>0.974</mean>
+            <std>0.101</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP2: s2</name>
+            <min>0.887</min>
+            <max>1.099</max>
+            <mean>1.011</mean>
+            <std>0.101</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP3: s3</name>
+            <min>0.872</min>
+            <max>1.079</max>
+            <mean>0.994</mean>
+            <std>0.099</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP4: s4</name>
+            <min>0.869</min>
+            <max>1.077</max>
+            <mean>0.991</mean>
+            <std>0.099</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP5: s5</name>
+            <min>0.873</min>
+            <max>1.087</max>
+            <mean>1.0</mean>
+            <std>0.102</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP6: s6</name>
+            <min>0.869</min>
+            <max>1.085</max>
+            <mean>0.996</mean>
+            <std>0.103</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP7: s7</name>
+            <min>0.862</min>
+            <max>1.075</max>
+            <mean>0.987</mean>
+            <std>0.102</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP8: s8</name>
+            <min>0.876</min>
+            <max>1.079</max>
+            <mean>0.995</mean>
+            <std>0.096</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP9: s9</name>
+            <min>0.859</min>
+            <max>1.064</max>
+            <mean>0.981</mean>
+            <std>0.098</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP10: s10</name>
+            <min>0.879</min>
+            <max>1.093</max>
+            <mean>1.005</mean>
+            <std>0.101</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP11: s11</name>
+            <min>0.871</min>
+            <max>1.072</max>
+            <mean>0.989</mean>
+            <std>0.096</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP12: s12</name>
+            <min>0.864</min>
+            <max>1.066</max>
+            <mean>0.983</mean>
+            <std>0.096</std>
+            <count>55</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B5 VSense1</name>
+            <min>14.022</min>
+            <max>14.134</max>
+            <mean>14.083</mean>
+            <std>0.031</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B5 VSense2</name>
+            <min>14.021</min>
+            <max>14.119</max>
+            <mean>14.07</mean>
+            <std>0.034</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B5 TP1: S1 a</name>
+            <min>0.81</min>
+            <max>1.015</max>
+            <mean>0.93</mean>
+            <std>0.095</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP2: s2</name>
+            <min>0.846</min>
+            <max>1.051</max>
+            <mean>0.966</mean>
+            <std>0.095</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP3: s3</name>
+            <min>0.831</min>
+            <max>1.033</max>
+            <mean>0.949</mean>
+            <std>0.093</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP4: s4</name>
+            <min>0.83</min>
+            <max>1.03</max>
+            <mean>0.947</mean>
+            <std>0.093</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP5: s5</name>
+            <min>0.833</min>
+            <max>1.041</max>
+            <mean>0.954</mean>
+            <std>0.096</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP6: s6</name>
+            <min>0.829</min>
+            <max>1.038</max>
+            <mean>0.951</mean>
+            <std>0.097</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP7: s7</name>
+            <min>0.822</min>
+            <max>1.028</max>
+            <mean>0.943</mean>
+            <std>0.096</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP8: s8</name>
+            <min>0.836</min>
+            <max>1.032</max>
+            <mean>0.951</mean>
+            <std>0.091</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP9: s9</name>
+            <min>0.82</min>
+            <max>1.018</max>
+            <mean>0.937</mean>
+            <std>0.093</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP10: s10</name>
+            <min>0.838</min>
+            <max>1.046</max>
+            <mean>0.959</mean>
+            <std>0.096</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP11: s11</name>
+            <min>0.832</min>
+            <max>1.026</max>
+            <mean>0.945</mean>
+            <std>0.09</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP12: s12</name>
+            <min>0.825</min>
+            <max>1.021</max>
+            <mean>0.939</mean>
+            <std>0.09</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B6" width="25">
+      <voltage value="9.0V" width="25">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B6 TP1: S1 a</name>
+            <min>-0.011</min>
+            <max>9.378</max>
+            <mean>4.536</mean>
+            <std>4.612</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP2: s2</name>
+            <min>-0.017</min>
+            <max>9.367</max>
+            <mean>4.479</mean>
+            <std>4.605</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP3: s3</name>
+            <min>-0.011</min>
+            <max>9.378</max>
+            <mean>4.504</mean>
+            <std>4.612</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP4: s4</name>
+            <min>-0.011</min>
+            <max>9.4</max>
+            <mean>4.545</mean>
+            <std>4.611</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP5: s5</name>
+            <min>-0.011</min>
+            <max>9.384</max>
+            <mean>4.537</mean>
+            <std>4.596</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP6: s6</name>
+            <min>-0.011</min>
+            <max>9.4</max>
+            <mean>4.549</mean>
+            <std>4.606</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP7: s7</name>
+            <min>-0.011</min>
+            <max>9.406</max>
+            <mean>4.637</mean>
+            <std>4.605</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP8: s8</name>
+            <min>-0.017</min>
+            <max>9.412</max>
+            <mean>4.735</mean>
+            <std>4.61</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP9: s9</name>
+            <min>-0.034</min>
+            <max>9.417</max>
+            <mean>4.721</mean>
+            <std>4.611</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP10: s10</name>
+            <min>-0.017</min>
+            <max>9.412</max>
+            <mean>4.752</mean>
+            <std>4.603</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP11: s11</name>
+            <min>-0.011</min>
+            <max>9.428</max>
+            <mean>4.754</mean>
+            <std>4.606</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP12: s12</name>
+            <min>-0.017</min>
+            <max>9.4</max>
+            <mean>4.722</mean>
+            <std>4.599</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP13: L2-1</name>
+            <min>-0.043</min>
+            <max>0.141</max>
+            <mean>0.052</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP14: L2-2</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP15: L2-3</name>
+            <min>-0.087</min>
+            <max>0.092</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP16: L2-4</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP17: L2-5</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.0</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP18: L2-6</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.049</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP19: L2-7</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.0</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP20: L2-8</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP21: L2-9</name>
+            <min>-0.092</min>
+            <max>0.092</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP22: L2-10</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.0</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP23: L2-11</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP24: L2-12</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="25">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B6 TP1: S1 a</name>
+            <min>-0.017</min>
+            <max>13.748</max>
+            <mean>6.668</mean>
+            <std>6.826</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP2: s2</name>
+            <min>-0.011</min>
+            <max>13.748</max>
+            <mean>6.702</mean>
+            <std>6.826</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP3: s3</name>
+            <min>-0.017</min>
+            <max>13.759</max>
+            <mean>6.713</mean>
+            <std>6.827</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP4: s4</name>
+            <min>-0.017</min>
+            <max>13.748</max>
+            <mean>6.735</mean>
+            <std>6.83</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP5: s5</name>
+            <min>-0.062</min>
+            <max>13.731</max>
+            <mean>6.788</mean>
+            <std>6.817</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP6: s6</name>
+            <min>-0.011</min>
+            <max>13.743</max>
+            <mean>6.791</mean>
+            <std>6.821</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP7: s7</name>
+            <min>-0.073</min>
+            <max>13.759</max>
+            <mean>6.798</mean>
+            <std>6.821</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP8: s8</name>
+            <min>-0.022</min>
+            <max>13.759</max>
+            <mean>6.805</mean>
+            <std>6.826</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP9: s9</name>
+            <min>-0.011</min>
+            <max>13.771</max>
+            <mean>6.797</mean>
+            <std>6.823</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP10: s10</name>
+            <min>-0.039</min>
+            <max>13.748</max>
+            <mean>6.848</mean>
+            <std>6.817</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP11: s11</name>
+            <min>-0.011</min>
+            <max>13.771</max>
+            <mean>6.888</mean>
+            <std>6.825</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP12: s12</name>
+            <min>-0.011</min>
+            <max>13.759</max>
+            <mean>6.904</mean>
+            <std>6.825</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP13: L2-1</name>
+            <min>-0.038</min>
+            <max>0.146</max>
+            <mean>0.054</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP14: L2-2</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP15: L2-3</name>
+            <min>-0.087</min>
+            <max>0.092</max>
+            <mean>0.0</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP16: L2-4</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP17: L2-5</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.003</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP18: L2-6</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>0.001</mean>
+            <std>0.049</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP19: L2-7</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.003</mean>
+            <std>0.049</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP20: L2-8</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>0.001</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP21: L2-9</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.0</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP22: L2-10</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.003</mean>
+            <std>0.051</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP23: L2-11</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>0.002</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP24: L2-12</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>1168</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="25">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B6 TP1: S1 a</name>
+            <min>-0.017</min>
+            <max>14.38</max>
+            <mean>6.791</mean>
+            <std>7.12</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP2: s2</name>
+            <min>-0.011</min>
+            <max>14.38</max>
+            <mean>6.789</mean>
+            <std>7.113</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP3: s3</name>
+            <min>-0.078</min>
+            <max>14.386</max>
+            <mean>6.835</mean>
+            <std>7.121</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP4: s4</name>
+            <min>-0.011</min>
+            <max>14.392</max>
+            <mean>6.866</mean>
+            <std>7.123</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP5: s5</name>
+            <min>-0.011</min>
+            <max>14.364</max>
+            <mean>6.85</mean>
+            <std>7.109</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP6: s6</name>
+            <min>-0.017</min>
+            <max>14.386</max>
+            <mean>6.88</mean>
+            <std>7.115</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP7: s7</name>
+            <min>-0.084</min>
+            <max>14.375</max>
+            <mean>6.923</mean>
+            <std>7.118</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP8: s8</name>
+            <min>-0.017</min>
+            <max>14.397</max>
+            <mean>6.977</mean>
+            <std>7.121</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP9: s9</name>
+            <min>-0.011</min>
+            <max>14.386</max>
+            <mean>7.033</mean>
+            <std>7.123</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP10: s10</name>
+            <min>-0.14</min>
+            <max>14.386</max>
+            <mean>7.052</mean>
+            <std>7.121</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP11: s11</name>
+            <min>-0.123</min>
+            <max>14.392</max>
+            <mean>7.129</mean>
+            <std>7.123</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP12: s12</name>
+            <min>-0.101</min>
+            <max>14.375</max>
+            <mean>7.139</mean>
+            <std>7.117</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP13: L2-1</name>
+            <min>-0.038</min>
+            <max>0.146</max>
+            <mean>0.056</mean>
+            <std>0.051</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP14: L2-2</name>
+            <min>-0.087</min>
+            <max>0.092</max>
+            <mean>-0.004</mean>
+            <std>0.049</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP15: L2-3</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>0.001</mean>
+            <std>0.05</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP16: L2-4</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP17: L2-5</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.005</mean>
+            <std>0.05</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP18: L2-6</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>0.003</mean>
+            <std>0.049</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP19: L2-7</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.049</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP20: L2-8</name>
+            <min>-0.087</min>
+            <max>0.081</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP21: L2-9</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>0.001</mean>
+            <std>0.05</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP22: L2-10</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.005</mean>
+            <std>0.05</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP23: L2-11</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>0.001</mean>
+            <std>0.049</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP24: L2-12</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>2335</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B7" width="13">
+      <voltage value="9.0V" width="13">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B7 TP1: L2-1</name>
+            <min>0.321</min>
+            <max>0.347</max>
+            <mean>0.341</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP2: L2-2</name>
+            <min>0.329</min>
+            <max>0.36</max>
+            <mean>0.342</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP3: L2-3</name>
+            <min>0.324</min>
+            <max>0.361</max>
+            <mean>0.34</mean>
+            <std>0.002</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP4: L2-4</name>
+            <min>0.318</min>
+            <max>0.345</max>
+            <mean>0.339</mean>
+            <std>0.002</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP5: L2-5</name>
+            <min>0.32</min>
+            <max>0.346</max>
+            <mean>0.339</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP6: L2-6</name>
+            <min>0.326</min>
+            <max>0.346</max>
+            <mean>0.342</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP7: L2-7</name>
+            <min>0.324</min>
+            <max>0.349</max>
+            <mean>0.343</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP8: L2-8</name>
+            <min>0.337</min>
+            <max>0.348</max>
+            <mean>0.341</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP9: L2-9</name>
+            <min>0.332</min>
+            <max>0.347</max>
+            <mean>0.343</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP10: L2-10</name>
+            <min>0.324</min>
+            <max>0.353</max>
+            <mean>0.342</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP11: L2-11</name>
+            <min>0.324</min>
+            <max>0.361</max>
+            <mean>0.341</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP12: L2-12</name>
+            <min>0.337</min>
+            <max>0.351</max>
+            <mean>0.341</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="13">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B7 TP1: L2-1</name>
+            <min>0.225</min>
+            <max>0.234</max>
+            <mean>0.231</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP2: L2-2</name>
+            <min>0.222</min>
+            <max>0.25</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP3: L2-3</name>
+            <min>0.221</min>
+            <max>0.235</max>
+            <mean>0.231</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP4: L2-4</name>
+            <min>0.218</min>
+            <max>0.238</max>
+            <mean>0.231</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP5: L2-5</name>
+            <min>0.224</min>
+            <max>0.248</max>
+            <mean>0.23</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP6: L2-6</name>
+            <min>0.219</min>
+            <max>0.236</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP7: L2-7</name>
+            <min>0.228</min>
+            <max>0.239</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP8: L2-8</name>
+            <min>0.219</min>
+            <max>0.237</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP9: L2-9</name>
+            <min>0.226</min>
+            <max>0.251</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP10: L2-10</name>
+            <min>0.224</min>
+            <max>0.24</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP11: L2-11</name>
+            <min>0.227</min>
+            <max>0.253</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP12: L2-12</name>
+            <min>0.221</min>
+            <max>0.235</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1300</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="13">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B7 TP1: L2-1</name>
+            <min>0.211</min>
+            <max>0.227</max>
+            <mean>0.222</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP2: L2-2</name>
+            <min>0.215</min>
+            <max>0.241</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP3: L2-3</name>
+            <min>0.212</min>
+            <max>0.239</max>
+            <mean>0.221</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP4: L2-4</name>
+            <min>0.211</min>
+            <max>0.239</max>
+            <mean>0.221</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP5: L2-5</name>
+            <min>0.213</min>
+            <max>0.23</max>
+            <mean>0.221</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP6: L2-6</name>
+            <min>0.212</min>
+            <max>0.238</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP7: L2-7</name>
+            <min>0.214</min>
+            <max>0.235</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP8: L2-8</name>
+            <min>0.215</min>
+            <max>0.229</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP9: L2-9</name>
+            <min>0.213</min>
+            <max>0.238</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP10: L2-10</name>
+            <min>0.215</min>
+            <max>0.228</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP11: L2-11</name>
+            <min>0.215</min>
+            <max>0.243</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP12: L2-12</name>
+            <min>0.213</min>
+            <max>0.241</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2599</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+  </temperature>
+  <temperature temp="60C">
+    <mode id="B1" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B1 VSense1</name>
+            <min>8.7</min>
+            <max>9.255</max>
+            <mean>8.996</mean>
+            <std>0.071</std>
+            <count>1263</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B1 VSense2</name>
+            <min>8.723</min>
+            <max>9.187</max>
+            <mean>8.924</mean>
+            <std>0.057</std>
+            <count>1263</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B1 TP1: S1 a</name>
+            <min>1.417</min>
+            <max>1.656</max>
+            <mean>1.482</mean>
+            <std>0.039</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP2: s2</name>
+            <min>1.603</min>
+            <max>1.995</max>
+            <mean>1.7</mean>
+            <std>0.07</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP3: s3</name>
+            <min>1.56</min>
+            <max>1.926</max>
+            <mean>1.655</mean>
+            <std>0.062</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP4: s4</name>
+            <min>1.587</min>
+            <max>1.932</max>
+            <mean>1.644</mean>
+            <std>0.069</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP5: s5</name>
+            <min>1.804</min>
+            <max>1.974</max>
+            <mean>1.907</mean>
+            <std>0.018</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP6: s6</name>
+            <min>1.762</min>
+            <max>1.932</max>
+            <mean>1.864</mean>
+            <std>0.027</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP7: s7</name>
+            <min>1.788</min>
+            <max>2.011</max>
+            <mean>1.899</mean>
+            <std>0.037</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP8: s8</name>
+            <min>1.735</min>
+            <max>1.964</max>
+            <mean>1.834</mean>
+            <std>0.029</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP9: s9</name>
+            <min>1.608</min>
+            <max>2.001</max>
+            <mean>1.713</mean>
+            <std>0.069</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP10: s10</name>
+            <min>1.64</min>
+            <max>1.958</max>
+            <mean>1.733</mean>
+            <std>0.051</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP11: s11</name>
+            <min>1.826</min>
+            <max>1.974</max>
+            <mean>1.93</mean>
+            <std>0.017</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP12: s12</name>
+            <min>1.704</min>
+            <max>1.905</max>
+            <mean>1.741</mean>
+            <std>0.036</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B1 VSense1</name>
+            <min>13.317</min>
+            <max>13.708</max>
+            <mean>13.503</mean>
+            <std>0.052</std>
+            <count>1276</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B1 VSense2</name>
+            <min>13.301</min>
+            <max>13.627</max>
+            <mean>13.45</mean>
+            <std>0.044</std>
+            <count>1276</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B1 TP1: S1 a</name>
+            <min>1.008</min>
+            <max>1.183</max>
+            <mean>1.033</mean>
+            <std>0.033</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP2: s2</name>
+            <min>1.146</min>
+            <max>1.406</max>
+            <mean>1.172</mean>
+            <std>0.052</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP3: s3</name>
+            <min>1.12</min>
+            <max>1.375</max>
+            <mean>1.147</mean>
+            <std>0.051</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP4: s4</name>
+            <min>1.13</min>
+            <max>1.369</max>
+            <mean>1.157</mean>
+            <std>0.047</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP5: s5</name>
+            <min>1.284</min>
+            <max>1.396</max>
+            <mean>1.304</mean>
+            <std>0.02</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP6: s6</name>
+            <min>1.263</min>
+            <max>1.38</max>
+            <mean>1.281</mean>
+            <std>0.021</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP7: s7</name>
+            <min>1.29</min>
+            <max>1.438</max>
+            <mean>1.313</mean>
+            <std>0.027</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP8: s8</name>
+            <min>1.242</min>
+            <max>1.401</max>
+            <mean>1.266</mean>
+            <std>0.03</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP9: s9</name>
+            <min>1.157</min>
+            <max>1.422</max>
+            <mean>1.186</mean>
+            <std>0.053</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP10: s10</name>
+            <min>1.173</min>
+            <max>1.396</max>
+            <mean>1.198</mean>
+            <std>0.045</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP11: s11</name>
+            <min>1.3</min>
+            <max>1.39</max>
+            <mean>1.324</mean>
+            <std>0.015</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP12: s12</name>
+            <min>1.199</min>
+            <max>1.348</max>
+            <mean>1.222</mean>
+            <std>0.028</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B1 VSense1</name>
+            <min>13.893</min>
+            <max>14.29</max>
+            <mean>14.1</mean>
+            <std>0.049</std>
+            <count>2278</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B1 VSense2</name>
+            <min>13.914</min>
+            <max>14.226</max>
+            <mean>14.053</mean>
+            <std>0.04</std>
+            <count>2278</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B1 TP1: S1 a</name>
+            <min>0.966</min>
+            <max>1.136</max>
+            <mean>0.99</mean>
+            <std>0.03</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP2: s2</name>
+            <min>1.088</min>
+            <max>1.348</max>
+            <mean>1.118</mean>
+            <std>0.049</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP3: s3</name>
+            <min>1.067</min>
+            <max>1.316</max>
+            <mean>1.095</mean>
+            <std>0.047</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP4: s4</name>
+            <min>1.083</min>
+            <max>1.306</max>
+            <mean>1.107</mean>
+            <std>0.043</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP5: s5</name>
+            <min>1.226</min>
+            <max>1.343</max>
+            <mean>1.246</mean>
+            <std>0.019</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP6: s6</name>
+            <min>1.199</min>
+            <max>1.321</max>
+            <mean>1.223</mean>
+            <std>0.02</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP7: s7</name>
+            <min>1.231</min>
+            <max>1.375</max>
+            <mean>1.252</mean>
+            <std>0.026</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP8: s8</name>
+            <min>1.189</min>
+            <max>1.343</max>
+            <mean>1.211</mean>
+            <std>0.027</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP9: s9</name>
+            <min>1.104</min>
+            <max>1.364</max>
+            <mean>1.131</mean>
+            <std>0.05</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP10: s10</name>
+            <min>1.12</min>
+            <max>1.343</max>
+            <mean>1.143</mean>
+            <std>0.042</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP11: s11</name>
+            <min>1.242</min>
+            <max>1.337</max>
+            <mean>1.263</mean>
+            <std>0.015</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B1 TP12: s12</name>
+            <min>1.146</min>
+            <max>1.295</max>
+            <mean>1.167</mean>
+            <std>0.026</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B2" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B2 VSense1</name>
+            <min>8.726</min>
+            <max>9.26</max>
+            <mean>9.005</mean>
+            <std>0.067</std>
+            <count>1263</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B2 VSense2</name>
+            <min>8.709</min>
+            <max>9.209</max>
+            <mean>8.944</mean>
+            <std>0.059</std>
+            <count>1263</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B2 TP1: S1 a</name>
+            <min>1.375</min>
+            <max>1.592</max>
+            <mean>1.569</mean>
+            <std>0.037</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP2: s2</name>
+            <min>1.47</min>
+            <max>1.857</max>
+            <mean>1.822</mean>
+            <std>0.065</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP3: s3</name>
+            <min>1.433</min>
+            <max>1.799</max>
+            <mean>1.765</mean>
+            <std>0.059</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP4: s4</name>
+            <min>1.491</min>
+            <max>1.873</max>
+            <mean>1.809</mean>
+            <std>0.065</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP5: s5</name>
+            <min>1.773</min>
+            <max>1.99</max>
+            <mean>1.964</mean>
+            <std>0.033</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP6: s6</name>
+            <min>1.788</min>
+            <max>1.99</max>
+            <mean>1.958</mean>
+            <std>0.038</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP7: s7</name>
+            <min>1.799</min>
+            <max>2.043</max>
+            <mean>2.003</mean>
+            <std>0.045</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP8: s8</name>
+            <min>1.788</min>
+            <max>2.049</max>
+            <mean>2.02</mean>
+            <std>0.044</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP9: s9</name>
+            <min>1.428</min>
+            <max>1.799</max>
+            <mean>1.765</mean>
+            <std>0.064</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP10: s10</name>
+            <min>1.475</min>
+            <max>1.81</max>
+            <mean>1.781</mean>
+            <std>0.053</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP11: s11</name>
+            <min>1.767</min>
+            <max>1.948</max>
+            <mean>1.925</mean>
+            <std>0.031</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP12: s12</name>
+            <min>1.773</min>
+            <max>1.969</max>
+            <mean>1.943</mean>
+            <std>0.035</std>
+            <count>1263</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B2 VSense1</name>
+            <min>13.296</min>
+            <max>13.713</max>
+            <mean>13.509</mean>
+            <std>0.054</std>
+            <count>1276</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B2 VSense2</name>
+            <min>13.317</min>
+            <max>13.628</max>
+            <mean>13.465</mean>
+            <std>0.044</std>
+            <count>1276</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B2 TP1: S1 a</name>
+            <min>0.976</min>
+            <max>1.114</max>
+            <mean>1.092</mean>
+            <std>0.02</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP2: s2</name>
+            <min>1.045</min>
+            <max>1.274</max>
+            <mean>1.252</mean>
+            <std>0.035</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP3: s3</name>
+            <min>1.019</min>
+            <max>1.242</max>
+            <mean>1.218</mean>
+            <std>0.034</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP4: s4</name>
+            <min>1.056</min>
+            <max>1.263</max>
+            <mean>1.239</mean>
+            <std>0.033</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP5: s5</name>
+            <min>1.263</min>
+            <max>1.353</max>
+            <mean>1.335</mean>
+            <std>0.014</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP6: s6</name>
+            <min>1.268</min>
+            <max>1.364</max>
+            <mean>1.343</mean>
+            <std>0.015</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP7: s7</name>
+            <min>1.263</min>
+            <max>1.385</max>
+            <mean>1.369</mean>
+            <std>0.019</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP8: s8</name>
+            <min>1.268</min>
+            <max>1.412</max>
+            <mean>1.386</mean>
+            <std>0.022</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP9: s9</name>
+            <min>1.008</min>
+            <max>1.247</max>
+            <mean>1.222</mean>
+            <std>0.037</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP10: s10</name>
+            <min>1.051</min>
+            <max>1.247</max>
+            <mean>1.226</mean>
+            <std>0.03</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP11: s11</name>
+            <min>1.258</min>
+            <max>1.332</max>
+            <mean>1.312</mean>
+            <std>0.011</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP12: s12</name>
+            <min>1.242</min>
+            <max>1.375</max>
+            <mean>1.354</mean>
+            <std>0.021</std>
+            <count>1276</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B2 VSense1</name>
+            <min>13.888</min>
+            <max>14.348</max>
+            <mean>14.108</mean>
+            <std>0.048</std>
+            <count>2278</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B2 VSense2</name>
+            <min>13.911</min>
+            <max>14.228</max>
+            <mean>14.067</mean>
+            <std>0.038</std>
+            <count>2278</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B2 TP1: S1 a</name>
+            <min>0.939</min>
+            <max>1.061</max>
+            <mean>1.04</mean>
+            <std>0.019</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP2: s2</name>
+            <min>1.003</min>
+            <max>1.221</max>
+            <mean>1.195</mean>
+            <std>0.032</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP3: s3</name>
+            <min>0.976</min>
+            <max>1.183</max>
+            <mean>1.162</mean>
+            <std>0.031</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP4: s4</name>
+            <min>1.008</min>
+            <max>1.199</max>
+            <mean>1.179</mean>
+            <std>0.029</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP5: s5</name>
+            <min>1.21</min>
+            <max>1.295</max>
+            <mean>1.271</mean>
+            <std>0.012</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP6: s6</name>
+            <min>1.205</min>
+            <max>1.3</max>
+            <mean>1.28</mean>
+            <std>0.013</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP7: s7</name>
+            <min>1.205</min>
+            <max>1.327</max>
+            <mean>1.306</mean>
+            <std>0.017</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP8: s8</name>
+            <min>1.215</min>
+            <max>1.343</max>
+            <mean>1.319</mean>
+            <std>0.02</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP9: s9</name>
+            <min>0.971</min>
+            <max>1.189</max>
+            <mean>1.167</mean>
+            <std>0.033</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP10: s10</name>
+            <min>1.008</min>
+            <max>1.194</max>
+            <mean>1.17</mean>
+            <std>0.027</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP11: s11</name>
+            <min>1.205</min>
+            <max>1.268</max>
+            <mean>1.251</mean>
+            <std>0.009</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B2 TP12: s12</name>
+            <min>1.189</min>
+            <max>1.311</max>
+            <mean>1.29</mean>
+            <std>0.019</std>
+            <count>2278</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B3" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B3 VSense1</name>
+            <min>8.398</min>
+            <max>9.382</max>
+            <mean>8.959</mean>
+            <std>0.218</std>
+            <count>66</count>
+            <count-out>3</count-out>
+            <percent-out>4.55%</percent-out>
+            <check>Out of Spec</check>
+          </vsense>
+          <vsense>
+            <name>B3 VSense2</name>
+            <min>8.672</min>
+            <max>9.165</max>
+            <mean>8.909</mean>
+            <std>0.131</std>
+            <count>66</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B3 TP1: S1 a</name>
+            <min>0.971</min>
+            <max>1.118</max>
+            <mean>1.051</mean>
+            <std>0.05</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP2: s2</name>
+            <min>1.066</min>
+            <max>1.332</max>
+            <mean>1.202</mean>
+            <std>0.111</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP3: s3</name>
+            <min>1.085</min>
+            <max>1.299</max>
+            <mean>1.186</mean>
+            <std>0.093</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP4: s4</name>
+            <min>1.071</min>
+            <max>1.293</max>
+            <mean>1.196</mean>
+            <std>0.083</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP5: s5</name>
+            <min>1.205</min>
+            <max>1.327</max>
+            <mean>1.288</mean>
+            <std>0.025</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP6: s6</name>
+            <min>1.181</min>
+            <max>1.303</max>
+            <mean>1.262</mean>
+            <std>0.024</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP7: s7</name>
+            <min>1.211</min>
+            <max>1.361</max>
+            <mean>1.3</mean>
+            <std>0.042</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP8: s8</name>
+            <min>1.221</min>
+            <max>1.303</max>
+            <mean>1.261</mean>
+            <std>0.03</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP9: s9</name>
+            <min>1.084</min>
+            <max>1.332</max>
+            <mean>1.228</mean>
+            <std>0.095</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP10: s10</name>
+            <min>1.101</min>
+            <max>1.308</max>
+            <mean>1.214</mean>
+            <std>0.082</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP11: s11</name>
+            <min>1.218</min>
+            <max>1.323</max>
+            <mean>1.294</mean>
+            <std>0.017</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP12: s12</name>
+            <min>1.163</min>
+            <max>1.269</max>
+            <mean>1.218</mean>
+            <std>0.043</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B3 VSense1</name>
+            <min>13.142</min>
+            <max>13.851</max>
+            <mean>13.48</mean>
+            <std>0.157</std>
+            <count>66</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B3 VSense2</name>
+            <min>13.238</min>
+            <max>13.611</max>
+            <mean>13.435</mean>
+            <std>0.097</std>
+            <count>66</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B3 TP1: S1 a</name>
+            <min>0.701</min>
+            <max>0.803</max>
+            <mean>0.748</mean>
+            <std>0.043</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP2: s2</name>
+            <min>0.767</min>
+            <max>0.952</max>
+            <mean>0.855</mean>
+            <std>0.084</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP3: s3</name>
+            <min>0.763</min>
+            <max>0.932</max>
+            <mean>0.843</mean>
+            <std>0.076</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP4: s4</name>
+            <min>0.78</min>
+            <max>0.922</max>
+            <mean>0.847</mean>
+            <std>0.063</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP5: s5</name>
+            <min>0.875</min>
+            <max>0.946</max>
+            <mean>0.906</mean>
+            <std>0.027</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP6: s6</name>
+            <min>0.858</min>
+            <max>0.937</max>
+            <mean>0.893</mean>
+            <std>0.03</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP7: s7</name>
+            <min>0.871</min>
+            <max>0.975</max>
+            <mean>0.918</mean>
+            <std>0.042</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP8: s8</name>
+            <min>0.859</min>
+            <max>0.945</max>
+            <mean>0.898</mean>
+            <std>0.034</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP9: s9</name>
+            <min>0.793</min>
+            <max>0.963</max>
+            <mean>0.874</mean>
+            <std>0.077</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP10: s10</name>
+            <min>0.793</min>
+            <max>0.946</max>
+            <mean>0.865</mean>
+            <std>0.068</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP11: s11</name>
+            <min>0.887</min>
+            <max>0.945</max>
+            <mean>0.912</mean>
+            <std>0.02</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP12: s12</name>
+            <min>0.834</min>
+            <max>0.911</max>
+            <mean>0.868</mean>
+            <std>0.03</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B3 VSense1</name>
+            <min>13.708</min>
+            <max>14.438</max>
+            <mean>14.1</mean>
+            <std>0.136</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B3 VSense2</name>
+            <min>13.829</min>
+            <max>14.21</max>
+            <mean>14.058</mean>
+            <std>0.09</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B3 TP1: S1 a</name>
+            <min>0.67</min>
+            <max>0.766</max>
+            <mean>0.716</mean>
+            <std>0.04</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP2: s2</name>
+            <min>0.732</min>
+            <max>0.909</max>
+            <mean>0.816</mean>
+            <std>0.08</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP3: s3</name>
+            <min>0.728</min>
+            <max>0.889</max>
+            <mean>0.805</mean>
+            <std>0.072</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP4: s4</name>
+            <min>0.746</min>
+            <max>0.88</max>
+            <mean>0.811</mean>
+            <std>0.057</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP5: s5</name>
+            <min>0.836</min>
+            <max>0.904</max>
+            <mean>0.867</mean>
+            <std>0.024</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP6: s6</name>
+            <min>0.818</min>
+            <max>0.893</max>
+            <mean>0.852</mean>
+            <std>0.029</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP7: s7</name>
+            <min>0.829</min>
+            <max>0.929</max>
+            <mean>0.876</mean>
+            <std>0.04</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP8: s8</name>
+            <min>0.82</min>
+            <max>0.902</max>
+            <mean>0.858</mean>
+            <std>0.031</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP9: s9</name>
+            <min>0.758</min>
+            <max>0.919</max>
+            <mean>0.835</mean>
+            <std>0.072</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP10: s10</name>
+            <min>0.756</min>
+            <max>0.903</max>
+            <mean>0.826</mean>
+            <std>0.065</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP11: s11</name>
+            <min>0.845</min>
+            <max>0.903</max>
+            <mean>0.87</mean>
+            <std>0.019</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B3 TP12: s12</name>
+            <min>0.796</min>
+            <max>0.871</max>
+            <mean>0.829</mean>
+            <std>0.028</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B4" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B4 VSense1</name>
+            <min>8.522</min>
+            <max>9.311</max>
+            <mean>8.998</mean>
+            <std>0.139</std>
+            <count>1296</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B4 VSense2</name>
+            <min>8.488</min>
+            <max>9.296</max>
+            <mean>8.974</mean>
+            <std>0.12</std>
+            <count>1296</count>
+            <count-out>2</count-out>
+            <percent-out>0.15%</percent-out>
+            <check>Out of Spec</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B4 TP1: S1 a</name>
+            <min>0.284</min>
+            <max>0.308</max>
+            <mean>0.298</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP2: s2</name>
+            <min>0.284</min>
+            <max>0.31</max>
+            <mean>0.299</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP3: s3</name>
+            <min>0.283</min>
+            <max>0.307</max>
+            <mean>0.296</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP4: s4</name>
+            <min>0.282</min>
+            <max>0.308</max>
+            <mean>0.298</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP5: s5</name>
+            <min>0.292</min>
+            <max>0.313</max>
+            <mean>0.302</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP6: s6</name>
+            <min>0.286</min>
+            <max>0.308</max>
+            <mean>0.298</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP7: s7</name>
+            <min>0.29</min>
+            <max>0.31</max>
+            <mean>0.3</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP8: s8</name>
+            <min>0.278</min>
+            <max>0.304</max>
+            <mean>0.295</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP9: s9</name>
+            <min>0.276</min>
+            <max>0.304</max>
+            <mean>0.295</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP10: s10</name>
+            <min>0.286</min>
+            <max>0.31</max>
+            <mean>0.301</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP11: s11</name>
+            <min>0.275</min>
+            <max>0.303</max>
+            <mean>0.294</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP12: s12</name>
+            <min>0.285</min>
+            <max>0.307</max>
+            <mean>0.3</mean>
+            <std>0.004</std>
+            <count>1296</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B4 VSense1</name>
+            <min>13.2</min>
+            <max>13.681</max>
+            <mean>13.515</mean>
+            <std>0.069</std>
+            <count>1309</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B4 VSense2</name>
+            <min>13.203</min>
+            <max>13.665</max>
+            <mean>13.501</mean>
+            <std>0.075</std>
+            <count>1309</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B4 TP1: S1 a</name>
+            <min>0.186</min>
+            <max>0.203</max>
+            <mean>0.199</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP2: s2</name>
+            <min>0.184</min>
+            <max>0.204</max>
+            <mean>0.199</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP3: s3</name>
+            <min>0.184</min>
+            <max>0.202</max>
+            <mean>0.197</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP4: s4</name>
+            <min>0.184</min>
+            <max>0.203</max>
+            <mean>0.199</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP5: s5</name>
+            <min>0.189</min>
+            <max>0.205</max>
+            <mean>0.201</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP6: s6</name>
+            <min>0.186</min>
+            <max>0.203</max>
+            <mean>0.199</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP7: s7</name>
+            <min>0.188</min>
+            <max>0.204</max>
+            <mean>0.199</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP8: s8</name>
+            <min>0.18</min>
+            <max>0.201</max>
+            <mean>0.197</mean>
+            <std>0.004</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP9: s9</name>
+            <min>0.181</min>
+            <max>0.202</max>
+            <mean>0.197</mean>
+            <std>0.004</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP10: s10</name>
+            <min>0.186</min>
+            <max>0.205</max>
+            <mean>0.201</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP11: s11</name>
+            <min>0.179</min>
+            <max>0.202</max>
+            <mean>0.196</mean>
+            <std>0.004</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP12: s12</name>
+            <min>0.184</min>
+            <max>0.203</max>
+            <mean>0.199</mean>
+            <std>0.003</std>
+            <count>1309</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B4 VSense1</name>
+            <min>13.793</min>
+            <max>14.269</max>
+            <mean>14.114</mean>
+            <std>0.067</std>
+            <count>2333</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B4 VSense2</name>
+            <min>13.805</min>
+            <max>14.265</max>
+            <mean>14.102</mean>
+            <std>0.073</std>
+            <count>2333</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B4 TP1: S1 a</name>
+            <min>0.179</min>
+            <max>0.195</max>
+            <mean>0.191</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP2: s2</name>
+            <min>0.177</min>
+            <max>0.196</max>
+            <mean>0.192</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP3: s3</name>
+            <min>0.176</min>
+            <max>0.194</max>
+            <mean>0.19</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP4: s4</name>
+            <min>0.176</min>
+            <max>0.195</max>
+            <mean>0.191</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP5: s5</name>
+            <min>0.181</min>
+            <max>0.197</max>
+            <mean>0.192</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP6: s6</name>
+            <min>0.179</min>
+            <max>0.195</max>
+            <mean>0.191</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP7: s7</name>
+            <min>0.18</min>
+            <max>0.196</max>
+            <mean>0.192</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP8: s8</name>
+            <min>0.173</min>
+            <max>0.194</max>
+            <mean>0.189</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP9: s9</name>
+            <min>0.173</min>
+            <max>0.195</max>
+            <mean>0.189</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP10: s10</name>
+            <min>0.179</min>
+            <max>0.197</max>
+            <mean>0.193</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP11: s11</name>
+            <min>0.172</min>
+            <max>0.195</max>
+            <mean>0.188</mean>
+            <std>0.004</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B4 TP12: s12</name>
+            <min>0.176</min>
+            <max>0.195</max>
+            <mean>0.191</mean>
+            <std>0.003</std>
+            <count>2333</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B5" width="15">
+      <voltage value="9.0V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B5 VSense1</name>
+            <min>8.902</min>
+            <max>9.042</max>
+            <mean>8.983</mean>
+            <std>0.049</std>
+            <count>66</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B5 VSense2</name>
+            <min>8.881</min>
+            <max>8.988</max>
+            <mean>8.947</mean>
+            <std>0.039</std>
+            <count>66</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B5 TP1: S1 a</name>
+            <min>1.262</min>
+            <max>1.605</max>
+            <mean>1.43</mean>
+            <std>0.167</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP2: s2</name>
+            <min>1.307</min>
+            <max>1.667</max>
+            <mean>1.483</mean>
+            <std>0.174</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP3: s3</name>
+            <min>1.293</min>
+            <max>1.651</max>
+            <mean>1.468</mean>
+            <std>0.174</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP4: s4</name>
+            <min>1.285</min>
+            <max>1.641</max>
+            <mean>1.459</mean>
+            <std>0.173</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP5: s5</name>
+            <min>1.287</min>
+            <max>1.658</max>
+            <mean>1.468</mean>
+            <std>0.18</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP6: s6</name>
+            <min>1.283</min>
+            <max>1.645</max>
+            <mean>1.46</mean>
+            <std>0.176</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP7: s7</name>
+            <min>1.275</min>
+            <max>1.64</max>
+            <mean>1.453</mean>
+            <std>0.177</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP8: s8</name>
+            <min>1.288</min>
+            <max>1.64</max>
+            <mean>1.46</mean>
+            <std>0.17</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP9: s9</name>
+            <min>1.27</min>
+            <max>1.616</max>
+            <mean>1.439</mean>
+            <std>0.168</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP10: s10</name>
+            <min>1.298</min>
+            <max>1.658</max>
+            <mean>1.474</mean>
+            <std>0.174</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP11: s11</name>
+            <min>1.28</min>
+            <max>1.626</max>
+            <mean>1.449</mean>
+            <std>0.168</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP12: s12</name>
+            <min>1.278</min>
+            <max>1.619</max>
+            <mean>1.446</mean>
+            <std>0.166</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B5 VSense1</name>
+            <min>13.474</min>
+            <max>13.53</max>
+            <mean>13.496</mean>
+            <std>0.016</std>
+            <count>66</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B5 VSense2</name>
+            <min>13.469</min>
+            <max>13.493</max>
+            <mean>13.476</mean>
+            <std>0.008</std>
+            <count>66</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B5 TP1: S1 a</name>
+            <min>0.805</min>
+            <max>1.004</max>
+            <mean>0.904</mean>
+            <std>0.099</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP2: s2</name>
+            <min>0.834</min>
+            <max>1.035</max>
+            <mean>0.934</mean>
+            <std>0.1</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP3: s3</name>
+            <min>0.823</min>
+            <max>1.022</max>
+            <mean>0.922</mean>
+            <std>0.099</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP4: s4</name>
+            <min>0.822</min>
+            <max>1.021</max>
+            <mean>0.921</mean>
+            <std>0.099</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP5: s5</name>
+            <min>0.819</min>
+            <max>1.024</max>
+            <mean>0.922</mean>
+            <std>0.102</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP6: s6</name>
+            <min>0.82</min>
+            <max>1.022</max>
+            <mean>0.921</mean>
+            <std>0.1</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP7: s7</name>
+            <min>0.814</min>
+            <max>1.018</max>
+            <mean>0.915</mean>
+            <std>0.101</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP8: s8</name>
+            <min>0.824</min>
+            <max>1.02</max>
+            <mean>0.922</mean>
+            <std>0.097</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP9: s9</name>
+            <min>0.814</min>
+            <max>1.009</max>
+            <mean>0.911</mean>
+            <std>0.097</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP10: s10</name>
+            <min>0.829</min>
+            <max>1.031</max>
+            <mean>0.929</mean>
+            <std>0.1</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP11: s11</name>
+            <min>0.821</min>
+            <max>1.015</max>
+            <mean>0.918</mean>
+            <std>0.096</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP12: s12</name>
+            <min>0.815</min>
+            <max>1.011</max>
+            <mean>0.913</mean>
+            <std>0.097</std>
+            <count>66</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="15">
+        <vsenses>
+          <vsense>
+            <name>B5 VSense1</name>
+            <min>14.05</min>
+            <max>14.123</max>
+            <mean>14.097</mean>
+            <std>0.017</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+          <vsense>
+            <name>B5 VSense2</name>
+            <min>14.055</min>
+            <max>14.101</max>
+            <mean>14.079</mean>
+            <std>0.012</std>
+            <count>110</count>
+            <count-out>0</count-out>
+            <percent-out>0.0%</percent-out>
+            <check>G</check>
+          </vsense>
+        </vsenses>
+        <systems>
+          <system>
+            <name>B5 TP1: S1 a</name>
+            <min>0.77</min>
+            <max>0.961</max>
+            <mean>0.865</mean>
+            <std>0.094</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP2: s2</name>
+            <min>0.798</min>
+            <max>0.99</max>
+            <mean>0.893</mean>
+            <std>0.094</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP3: s3</name>
+            <min>0.787</min>
+            <max>0.978</max>
+            <mean>0.882</mean>
+            <std>0.094</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP4: s4</name>
+            <min>0.785</min>
+            <max>0.977</max>
+            <mean>0.881</mean>
+            <std>0.094</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP5: s5</name>
+            <min>0.784</min>
+            <max>0.981</max>
+            <mean>0.882</mean>
+            <std>0.096</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP6: s6</name>
+            <min>0.784</min>
+            <max>0.979</max>
+            <mean>0.881</mean>
+            <std>0.095</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP7: s7</name>
+            <min>0.778</min>
+            <max>0.974</max>
+            <mean>0.876</mean>
+            <std>0.096</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP8: s8</name>
+            <min>0.788</min>
+            <max>0.976</max>
+            <mean>0.882</mean>
+            <std>0.092</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP9: s9</name>
+            <min>0.779</min>
+            <max>0.967</max>
+            <mean>0.872</mean>
+            <std>0.092</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP10: s10</name>
+            <min>0.793</min>
+            <max>0.986</max>
+            <mean>0.889</mean>
+            <std>0.095</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP11: s11</name>
+            <min>0.785</min>
+            <max>0.972</max>
+            <mean>0.878</mean>
+            <std>0.092</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B5 TP12: s12</name>
+            <min>0.779</min>
+            <max>0.967</max>
+            <mean>0.873</mean>
+            <std>0.092</std>
+            <count>110</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B6" width="25">
+      <voltage value="9.0V" width="25">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B6 TP1: S1 a</name>
+            <min>-0.017</min>
+            <max>9.395</max>
+            <mean>4.589</mean>
+            <std>4.608</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP2: s2</name>
+            <min>-0.011</min>
+            <max>9.389</max>
+            <mean>4.576</mean>
+            <std>4.608</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP3: s3</name>
+            <min>-0.017</min>
+            <max>9.395</max>
+            <mean>4.555</mean>
+            <std>4.608</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP4: s4</name>
+            <min>-0.017</min>
+            <max>9.406</max>
+            <mean>4.535</mean>
+            <std>4.607</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP5: s5</name>
+            <min>-0.034</min>
+            <max>9.395</max>
+            <mean>4.571</mean>
+            <std>4.595</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP6: s6</name>
+            <min>-0.022</min>
+            <max>9.406</max>
+            <mean>4.62</mean>
+            <std>4.606</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP7: s7</name>
+            <min>-0.017</min>
+            <max>9.4</max>
+            <mean>4.73</mean>
+            <std>4.6</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP8: s8</name>
+            <min>-0.017</min>
+            <max>9.417</max>
+            <mean>4.749</mean>
+            <std>4.607</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP9: s9</name>
+            <min>-0.011</min>
+            <max>9.434</max>
+            <mean>4.763</mean>
+            <std>4.608</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP10: s10</name>
+            <min>-0.017</min>
+            <max>9.423</max>
+            <mean>4.808</mean>
+            <std>4.602</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP11: s11</name>
+            <min>-0.017</min>
+            <max>9.428</max>
+            <mean>4.819</mean>
+            <std>4.602</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP12: s12</name>
+            <min>-0.017</min>
+            <max>9.406</max>
+            <mean>4.796</mean>
+            <std>4.592</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP13: L2-1</name>
+            <min>-0.038</min>
+            <max>0.141</max>
+            <mean>0.055</mean>
+            <std>0.051</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP14: L2-2</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP15: L2-3</name>
+            <min>-0.092</min>
+            <max>0.092</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP16: L2-4</name>
+            <min>-0.097</min>
+            <max>0.087</max>
+            <mean>-0.0</mean>
+            <std>0.052</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP17: L2-5</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.003</mean>
+            <std>0.05</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP18: L2-6</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.049</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP19: L2-7</name>
+            <min>-0.087</min>
+            <max>0.092</max>
+            <mean>0.0</mean>
+            <std>0.05</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP20: L2-8</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.003</mean>
+            <std>0.051</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP21: L2-9</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>0.001</mean>
+            <std>0.051</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP22: L2-10</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.049</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP23: L2-11</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP24: L2-12</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.052</std>
+            <count>1362</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="25">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B6 TP1: S1 a</name>
+            <min>-0.011</min>
+            <max>13.754</max>
+            <mean>6.618</mean>
+            <std>6.826</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP2: s2</name>
+            <min>-0.011</min>
+            <max>13.743</max>
+            <mean>6.605</mean>
+            <std>6.827</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP3: s3</name>
+            <min>-0.011</min>
+            <max>13.759</max>
+            <mean>6.633</mean>
+            <std>6.824</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP4: s4</name>
+            <min>-0.011</min>
+            <max>13.754</max>
+            <mean>6.656</mean>
+            <std>6.826</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP5: s5</name>
+            <min>-0.017</min>
+            <max>13.748</max>
+            <mean>6.629</mean>
+            <std>6.813</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP6: s6</name>
+            <min>-0.073</min>
+            <max>13.765</max>
+            <mean>6.664</mean>
+            <std>6.818</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP7: s7</name>
+            <min>-0.19</min>
+            <max>13.754</max>
+            <mean>6.665</mean>
+            <std>6.816</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP8: s8</name>
+            <min>-0.084</min>
+            <max>13.765</max>
+            <mean>6.711</mean>
+            <std>6.825</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP9: s9</name>
+            <min>-0.011</min>
+            <max>13.771</max>
+            <mean>6.758</mean>
+            <std>6.827</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP10: s10</name>
+            <min>-0.14</min>
+            <max>13.771</max>
+            <mean>6.816</mean>
+            <std>6.824</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP11: s11</name>
+            <min>-0.011</min>
+            <max>13.765</max>
+            <mean>6.9</mean>
+            <std>6.825</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP12: s12</name>
+            <min>-0.011</min>
+            <max>13.759</max>
+            <mean>6.832</mean>
+            <std>6.82</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP13: L2-1</name>
+            <min>-0.038</min>
+            <max>0.146</max>
+            <mean>0.053</mean>
+            <std>0.051</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP14: L2-2</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.049</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP15: L2-3</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.051</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP16: L2-4</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.003</mean>
+            <std>0.051</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP17: L2-5</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP18: L2-6</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.049</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP19: L2-7</name>
+            <min>-0.087</min>
+            <max>0.092</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP20: L2-8</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>0.0</mean>
+            <std>0.05</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP21: L2-9</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP22: L2-10</name>
+            <min>-0.087</min>
+            <max>0.081</max>
+            <mean>-0.0</mean>
+            <std>0.049</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP23: L2-11</name>
+            <min>-0.087</min>
+            <max>0.092</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP24: L2-12</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.051</std>
+            <count>1375</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="25">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B6 TP1: S1 a</name>
+            <min>-0.017</min>
+            <max>14.369</max>
+            <mean>6.793</mean>
+            <std>7.116</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP2: s2</name>
+            <min>-0.028</min>
+            <max>14.352</max>
+            <mean>6.803</mean>
+            <std>7.117</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP3: s3</name>
+            <min>-0.011</min>
+            <max>14.358</max>
+            <mean>6.777</mean>
+            <std>7.114</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP4: s4</name>
+            <min>-0.017</min>
+            <max>14.364</max>
+            <mean>6.807</mean>
+            <std>7.117</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP5: s5</name>
+            <min>-0.168</min>
+            <max>14.352</max>
+            <mean>6.768</mean>
+            <std>7.106</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP6: s6</name>
+            <min>-0.062</min>
+            <max>14.364</max>
+            <mean>6.737</mean>
+            <std>7.106</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP7: s7</name>
+            <min>-0.028</min>
+            <max>14.352</max>
+            <mean>6.829</mean>
+            <std>7.112</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP8: s8</name>
+            <min>-0.034</min>
+            <max>14.369</max>
+            <mean>6.89</mean>
+            <std>7.118</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP9: s9</name>
+            <min>-0.034</min>
+            <max>14.369</max>
+            <mean>6.92</mean>
+            <std>7.118</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP10: s10</name>
+            <min>-0.017</min>
+            <max>14.375</max>
+            <mean>6.944</mean>
+            <std>7.116</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP11: s11</name>
+            <min>-0.017</min>
+            <max>14.364</max>
+            <mean>6.967</mean>
+            <std>7.122</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP12: s12</name>
+            <min>-0.067</min>
+            <max>14.347</max>
+            <mean>7.0</mean>
+            <std>7.116</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP13: L2-1</name>
+            <min>-0.038</min>
+            <max>0.141</max>
+            <mean>0.053</mean>
+            <std>0.052</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP14: L2-2</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.0</mean>
+            <std>0.051</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP15: L2-3</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP16: L2-4</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.0</mean>
+            <std>0.05</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP17: L2-5</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP18: L2-6</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.002</mean>
+            <std>0.05</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP19: L2-7</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.049</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP20: L2-8</name>
+            <min>-0.092</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.049</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP21: L2-9</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP22: L2-10</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.051</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP23: L2-11</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>-0.001</mean>
+            <std>0.05</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B6 TP24: L2-12</name>
+            <min>-0.087</min>
+            <max>0.087</max>
+            <mean>0.0</mean>
+            <std>0.049</std>
+            <count>2443</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+    <mode id="B7" width="13">
+      <voltage value="9.0V" width="13">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B7 TP1: L2-1</name>
+            <min>0.331</min>
+            <max>0.35</max>
+            <mean>0.341</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP2: L2-2</name>
+            <min>0.324</min>
+            <max>0.359</max>
+            <mean>0.342</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP3: L2-3</name>
+            <min>0.318</min>
+            <max>0.349</max>
+            <mean>0.34</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP4: L2-4</name>
+            <min>0.319</min>
+            <max>0.355</max>
+            <mean>0.339</mean>
+            <std>0.002</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP5: L2-5</name>
+            <min>0.324</min>
+            <max>0.344</max>
+            <mean>0.338</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP6: L2-6</name>
+            <min>0.336</min>
+            <max>0.346</max>
+            <mean>0.342</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP7: L2-7</name>
+            <min>0.326</min>
+            <max>0.349</max>
+            <mean>0.343</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP8: L2-8</name>
+            <min>0.328</min>
+            <max>0.352</max>
+            <mean>0.341</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP9: L2-9</name>
+            <min>0.325</min>
+            <max>0.349</max>
+            <mean>0.343</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP10: L2-10</name>
+            <min>0.325</min>
+            <max>0.346</max>
+            <mean>0.342</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP11: L2-11</name>
+            <min>0.322</min>
+            <max>0.36</max>
+            <mean>0.341</mean>
+            <std>0.002</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP12: L2-12</name>
+            <min>0.321</min>
+            <max>0.346</max>
+            <mean>0.341</mean>
+            <std>0.001</std>
+            <count>1494</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="13.5V" width="13">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B7 TP1: L2-1</name>
+            <min>0.223</min>
+            <max>0.239</max>
+            <mean>0.231</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP2: L2-2</name>
+            <min>0.223</min>
+            <max>0.246</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP3: L2-3</name>
+            <min>0.221</min>
+            <max>0.238</max>
+            <mean>0.231</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP4: L2-4</name>
+            <min>0.224</min>
+            <max>0.234</max>
+            <mean>0.231</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP5: L2-5</name>
+            <min>0.221</min>
+            <max>0.238</max>
+            <mean>0.23</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP6: L2-6</name>
+            <min>0.221</min>
+            <max>0.247</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP7: L2-7</name>
+            <min>0.222</min>
+            <max>0.239</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP8: L2-8</name>
+            <min>0.223</min>
+            <max>0.246</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP9: L2-9</name>
+            <min>0.223</min>
+            <max>0.25</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP10: L2-10</name>
+            <min>0.224</min>
+            <max>0.24</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP11: L2-11</name>
+            <min>0.223</min>
+            <max>0.247</max>
+            <mean>0.233</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP12: L2-12</name>
+            <min>0.222</min>
+            <max>0.235</max>
+            <mean>0.232</mean>
+            <std>0.001</std>
+            <count>1507</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+      <voltage value="14.1V" width="13">
+        <vsenses/>
+        <systems>
+          <system>
+            <name>B7 TP1: L2-1</name>
+            <min>0.213</min>
+            <max>0.238</max>
+            <mean>0.222</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP2: L2-2</name>
+            <min>0.216</min>
+            <max>0.23</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP3: L2-3</name>
+            <min>0.214</min>
+            <max>0.228</max>
+            <mean>0.222</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP4: L2-4</name>
+            <min>0.215</min>
+            <max>0.228</max>
+            <mean>0.222</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP5: L2-5</name>
+            <min>0.212</min>
+            <max>0.237</max>
+            <mean>0.221</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP6: L2-6</name>
+            <min>0.216</min>
+            <max>0.236</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP7: L2-7</name>
+            <min>0.212</min>
+            <max>0.232</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP8: L2-8</name>
+            <min>0.213</min>
+            <max>0.233</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP9: L2-9</name>
+            <min>0.214</min>
+            <max>0.236</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP10: L2-10</name>
+            <min>0.215</min>
+            <max>0.227</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP11: L2-11</name>
+            <min>0.215</min>
+            <max>0.236</max>
+            <mean>0.224</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+          <system>
+            <name>B7 TP12: L2-12</name>
+            <min>0.213</min>
+            <max>0.227</max>
+            <mean>0.223</mean>
+            <std>0.001</std>
+            <count>2663</count>
+            <check>NA</check>
+          </system>
+        </systems>
+      </voltage>
+    </mode>
+  </temperature>
+  <user-inputs>
+    <test-name>test</test-name>
+    <folder>L:/LED/Test Engineering/Test Station Software Upgrade/Test Engineering Documents/Validation Program Debug/Trial Files for Python/20180417 TS11 V60 Error and freeze/Test Results</folder>
+    <systems>TP1: L2-1, TP1: S1 a, TP2: L2-2, TP2: s2, TP3: L2-3, TP3: s3, TP4: s4, TP4: L2-4, TP5: s5, TP5: L2-5, TP6: L2-6, TP6: s6, TP7: s7, TP7: L2-7, TP8: s8, TP8: L2-8, TP9: L2-9, TP9: s9, TP10: s10, TP10: L2-10, TP11: s11, TP11: L2-11, TP12: L2-12, TP12: s12, TP13: L2-1, TP14: L2-2, TP15: L2-3, TP16: L2-4, TP17: L2-5, TP18: L2-6, TP19: L2-7, TP20: L2-8, TP21: L2-9, TP22: L2-10, TP23: L2-11, TP24: L2-12</systems>
+    <limits-file/>
+    <temperatures-analyzed>-30, 60</temperatures-analyzed>
+    <temperature-tolerance>5.0</temperature-tolerance>
+    <voltage-tolerance>0.5</voltage-tolerance>
+  </user-inputs>
+</test>
