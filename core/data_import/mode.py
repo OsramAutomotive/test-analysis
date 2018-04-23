@@ -163,6 +163,8 @@ class Mode(object):
                 self.run_current_analysis(temp, voltage, system, xml_systems, limits, run_limit_analysis)
 
     def run_vsense_analysis(self, temp, voltage, vsense, xml_vsenses):
+        # TODO -> only run analysis if temperature is present in data
+        # if (temp in self.hist_dict):
         xml_vsense = etree.SubElement(xml_vsenses, "vsense")
         vsense_min, vsense_max, vsense_mean, vsense_std = get_vsense_stats_at_mode_temp_voltage(
                                                                     vsense, self, temp, voltage)
