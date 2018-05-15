@@ -70,9 +70,10 @@ class Board(object):
         """ Pull name of board (e.g. 'DRL') from limits file (if provided) """
         try:
             self.name = self.test.limits.board_module_pairs[self.id]
+            print('\t', self.id, 'is', self.name)
         except:
             self.name = self.id
-            print('Could not load board name for', self.id)
+            print('\tCould not load board name for', self.id)
 
     def __get_board_systems(self):
         """ Retrieves the systems measured on this board and populates the

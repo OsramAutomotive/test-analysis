@@ -77,8 +77,7 @@ def get_system_test_position_int(system, index=0):
         pass
     return test_position_num
 
-
-### Dataframe filter functions
+# Dataframe filter functions
 def filter_temp_and_voltage(df, ambient, temp, voltage, temperature_tolerance):
     """ Filter input dataframe by temp/voltage condition
     Args:
@@ -121,8 +120,7 @@ def filter_board_on_or_off(df, board_id, board_on_off_code):
     dframe = df.loc[(df[board_id + ' ' + ON_OFF] == board_on_off_code)]
     return dframe
 
-
-### Stats helpers
+# Stats helpers
 def get_system_stats_at_mode_temp_voltage(system, mode, temp, voltage):
     """ Get basic stats for input system at mode/temp/voltage condition
     Args:
@@ -157,7 +155,7 @@ def get_vsense_stats_at_mode_temp_voltage(vsense, mode, temp, voltage):
                round(series.std(), decimal_places)
     return 'NA', 'NA', 'NA', 'NA'
 
-### Outage analysis helpers
+# Outage analysis helpers
 def get_outage_stats_at_temp_voltage(df, board, system, temp, voltage):
     """ Return basic stats for outage at temp/voltage condition """
     decimal_places = 3
@@ -184,8 +182,7 @@ def get_outage_off_stats_single_sys(df, board, system, temp):
                round(series.std(), decimal_places)
     return 'NA', 'NA', 'NA', 'NA'
 
-
-### Out of spec helpers
+# Out of spec helpers
 def check_if_out_of_spec(lower_limit, upper_limit, sys_min, sys_max):
     """ Return True/False if system min/max is out of spec """
     if isinstance(sys_min, float):
@@ -218,6 +215,19 @@ def write_out_of_spec_to_file(df, mode, temp, voltage):
                            mode.name, str(voltage) + 'V', '\n']))
     df.to_csv('!output//out_of_spec.txt', header=df.columns,
               index=True, sep='\t', mode='a')
+
+# Miscellaneous helpers
+def retrieve_board_name(board_id, test_boards):
+    """ Try to retrieve board name from input board id """
+    for board in test_boards:
+        if (board.id == board_id) and (board.name):
+            return board.name
+    return board_id
+
+def replace_board_id_with_board_name(col_label, test_boards):
+    board_id = col_label.split(' ')[0]
+    board_name = retrieve_board_name(board_id, test_boards)
+    return col_label.replace(board_id, board_name)
 
 def clean_empty_keys(d):
     """ Removes empty keys from input dictionary """

@@ -57,8 +57,7 @@ class Limits(object):
             if led_bins:
                 self.binning = True
                 self.led_binning_dict[board] = led_bins.split(' ')
-            # if is_outage == 'YES':
-            if is_outage:
+            if is_outage and is_outage != '':
                 self.outage_board = board
                 self.outage_present = True
 

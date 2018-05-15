@@ -55,7 +55,7 @@ class TestStation(object):
         self.folder = folder
         self.files = []
         self.boards = []
-        self.board_ids = boards if isinstance(boards, list) else []
+        self.board_ids = boards if isinstance(boards, list) else []  # user entered
         self.current_board_ids = []
         self.systems = []
         self.limits = limits
@@ -102,8 +102,8 @@ class TestStation(object):
             datafiles = os.listdir(self.folder)
             datafiles.sort(key=lambda fn: os.path.getmtime(os.path.join(self.folder, fn)))
             for filenumber, filename in enumerate(datafiles):
-                if bool(re.search(REGEX_RAW_DATAFILE, filename)):
-                    print('\tAppending File', '#'+str(filenumber+1)+': ', filename)
+                if bool(re.search(REGEX_RAW_DATAFILE, filename)):  # valid board file
+                    print('\tAppending file', '#'+str(filenumber+1)+': ', filename)
                     try:
                         if run_from_ipython():  # if running from ipython (jupyter)
                             next_file_df = pd.read_csv(self.folder+'/'+ filename,
@@ -122,6 +122,8 @@ class TestStation(object):
                         raise
                     self.files.append(filename)
                     self.df = self.df.append(next_file_df)
+                else:  # not a valid board file
+                    print('\tSkipped file', '#'+str(filenumber+1)+': ', filename)
             self.delete_empty_columns()
             try:
                 self.df = self.df.replace(['OFF'], [0])
@@ -133,7 +135,6 @@ class TestStation(object):
                                  'the Labview raw datafile convention.\n'
         else:
             self.error_msg = '\nThere are no datafiles in the selected folder.\n'
-
 
     def delete_empty_columns(self):
         """ Deletes empty test position and thermocouple columns in dataframe """
@@ -151,15 +152,13 @@ class TestStation(object):
         for col_name in self.df.columns:
             if re.search(REGEX_BOARDS, col_name):
                 set_of_boards.add(re.search(REGEX_BOARDS, col_name).group())
-        present_board_ids = sorted(list(set_of_boards))
-        # Real Time mode (autosense what boards are present)
-        if not self.board_ids:
+        present_board_ids = sorted(list(set_of_boards)) 
+        if not self.board_ids:  # Real Time mode (autosense what boards are present)
             self.board_ids = present_board_ids
-        # Normal mode (boards to analyze are chosen by user)
-        else:
+        else:  # Normal mode (boards to analyze are chosen by user)
             for board_id in self.board_ids:
                 if board_id not in present_board_ids:
-                    raise BoardNotFoundError("BoardNotFoundError: " + '"'+board_id+'"' + \
+                    raise BoardNotFoundError("BoardNotFoundError: " + '"' + board_id + '"' + \
                        " was not found in the raw data. Are you sure it is ON for this test?")
 
     def __scan_for_systems(self):
@@ -202,7 +201,7 @@ class TestStation(object):
 
     def __create_boards(self):
         """ Creates board dataframes for each board passed into TestStation init """
-        print('\nRetrieving board module names: ')
+        print('\nRetrieving board module names...')
         for board in self.board_ids:
             if self.limits and (board == self.limits.outage_board):
                 self.outage = Outage(self, board)
