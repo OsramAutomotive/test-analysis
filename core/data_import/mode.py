@@ -56,8 +56,7 @@ class Mode(object):
 
         self.__scan_for_multimode()
         self.__set_systems()
-        self.__make_hist_dict()
-        self.__populate_hist_dict(df)
+        self.__create_hist_dict(df)
         self.__scan_for_voltage_senses()
         self.__get_mode_name_and_set_binning()
 
@@ -83,15 +82,11 @@ class Mode(object):
         else:
             self.systems = self.boards[0].systems
 
-    def __make_hist_dict(self):
-        """ Create voltage keys for each temp in histogram dictionary """
-        for temp in self.temps:
-            self.hist_dict[temp] = dict.fromkeys(self.voltages)
-
-    def __populate_hist_dict(self, df):
-        """ Fills histogram dictionary, which holds a series for each
+    def __create_hist_dict(self, df):
+        """ Creates histogram dictionary, which holds a series for each
             system's currents at each temperature/voltage condition """
         for temp in self.temps:
+            self.hist_dict[temp] = dict.fromkeys(self.voltages)
             for voltage in self.voltages:
                 self.df = self.create_multimode_cols(df)
                 dframe = filter_temp_and_voltage(self.df, self.test.ambient, temp,
@@ -143,58 +138,90 @@ class Mode(object):
         return hist_dframe
 
     def get_system_by_system_mode_stats(self, xml_temp, temp, run_limit_analysis=False, limits=None):
-        """ Get voltage/current statistics and limit analysis for this mode """
-        xml_header_width = str(len(self.voltage_senses)+len(self.systems)+1)
-        xml_mode = etree.SubElement(xml_temp, "mode", id=self.name, width=xml_header_width)
-        for voltage in self.voltages:
-            xml_voltage = etree.SubElement(xml_mode, "voltage", value=str(voltage)+'V', width=xml_header_width)
-            if run_limit_analysis and limits:
-                xml_limits = etree.SubElement(xml_voltage, "limits", width=xml_header_width)
-                min_current = limits.lim[self.name][temp][voltage][0]
-                max_current = limits.lim[self.name][temp][voltage][1]
-                xml_limits.text = 'Limits:  ' + str(min_current)+'A to '+str(max_current)+'A'
-            # vsense analysis
-            xml_vsenses = etree.SubElement(xml_voltage, "vsenses")
-            for vsense in self.voltage_senses:
-                self.run_vsense_analysis(temp, voltage, vsense, xml_vsenses)
-            # current analysis
-            xml_systems = etree.SubElement(xml_voltage, "systems")
-            for system in self.systems:
-                self.run_current_analysis(temp, voltage, system, xml_systems, limits, run_limit_analysis)
+        """ Get voltage/current statistics and limit analysis for this mode
+        Args:
+            xml_temp (xml obj): part of tables xml file to write stats to
+            temp (int): temperature at which to analyze
+            run_limit_analysis (boolean): T/F user entry on whether to run limit analysis
+            limits (Limits obj): input limits for test samples (currents and perhaps outage)
+        Returns:
+            None
+        """
+        if (temp in self.hist_dict): # data exists at this temperature
+            xml_header_width = str(len(self.voltage_senses)+len(self.systems)+1)
+            xml_mode = etree.SubElement(xml_temp, "mode", id=self.name, width=xml_header_width)
+            for voltage in self.voltages:
+                xml_voltage = etree.SubElement(xml_mode, "voltage", value=str(voltage)+'V', width=xml_header_width)
+                if run_limit_analysis and limits:
+                    xml_limits = etree.SubElement(xml_voltage, "limits", width=xml_header_width)
+                    min_current = limits.lim[self.name][temp][voltage][0]
+                    max_current = limits.lim[self.name][temp][voltage][1]
+                    xml_limits.text = 'Limits:  ' + str(min_current)+'A to '+str(max_current)+'A'
+                # vsense analysis
+                xml_vsenses = etree.SubElement(xml_voltage, "vsenses")
+                for vsense in self.voltage_senses:
+                    self.run_vsense_analysis(temp, voltage, vsense, xml_vsenses)
+                # current analysis
+                xml_systems = etree.SubElement(xml_voltage, "systems")
+                for system in self.systems:
+                    self.run_current_analysis(temp, voltage, system, xml_systems, limits, run_limit_analysis)
+        else:  # data does not exist at this temperature
+            print('\tData does not exist for', self.name, 'at', temp, 'C.')
 
     def run_vsense_analysis(self, temp, voltage, vsense, xml_vsenses):
-        # TODO -> only run analysis if temperature is present in data
-        # if (temp in self.hist_dict):
-        xml_vsense = etree.SubElement(xml_vsenses, "vsense")
-        vsense_min, vsense_max, vsense_mean, vsense_std = get_vsense_stats_at_mode_temp_voltage(
-                                                                    vsense, self, temp, voltage)
-        out_of_spec_bool = check_if_out_of_spec(voltage-self.test.voltage_tolerance,
-                                                voltage+self.test.voltage_tolerance,
-                                                vsense_min, vsense_max)
-        vsense_series = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage,
-                                                self.test.temperature_tolerance)[vsense]
-        total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
-             vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
-        xml_name = etree.SubElement(xml_vsense, "name")
-        xml_name.text = str(vsense)
-        xml_min = etree.SubElement(xml_vsense, "min")
-        xml_min.text = str(vsense_min)
-        xml_max = etree.SubElement(xml_vsense, "max")
-        xml_max.text = str(vsense_max)
-        xml_mean = etree.SubElement(xml_vsense, "mean")
-        xml_mean.text = str(vsense_mean)
-        xml_mean = etree.SubElement(xml_vsense, "std")
-        xml_mean.text = str(vsense_std)
-        xml_count = etree.SubElement(xml_vsense, "count")
-        xml_count.text = str(total_count)
-        xml_count = etree.SubElement(xml_vsense, "count-out")
-        xml_count.text = str(out_of_spec_count)
-        xml_percent_out = etree.SubElement(xml_vsense, "percent-out")
-        xml_percent_out.text = str(percent_out)
-        xml_check = etree.SubElement(xml_vsense, "check")
-        xml_check.text = 'Out of Spec' if out_of_spec_bool else 'G'
+        """ Run voltage sensing analysis for each temp/voltage/system condition in this mode.
+            Builds an xml table displaying basic results and statistics.
+        Args:
+            temp (int): temperature at which to analyze
+            voltage (float): voltage at which to analyze
+            vsense (string): dataframe column header of mode vsense
+            xml_vsenses (xml object): part of tables file to write vsense stats to
+        Returns:
+            None
+        """
+        if (temp in self.hist_dict):
+            xml_vsense = etree.SubElement(xml_vsenses, "vsense")
+            vsense_min, vsense_max, vsense_mean, vsense_std = get_vsense_stats_at_mode_temp_voltage(
+                                                                        vsense, self, temp, voltage)
+            out_of_spec_bool = check_if_out_of_spec(voltage - self.test.voltage_tolerance,
+                                                    voltage + self.test.voltage_tolerance,
+                                                    vsense_min, vsense_max)
+            vsense_series = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage,
+                                                    self.test.temperature_tolerance)[vsense]
+            total_count, out_of_spec_count, percent_out = count_num_out_of_spec(
+                 vsense_series, voltage-self.test.voltage_tolerance, voltage+self.test.voltage_tolerance)
+            xml_name = etree.SubElement(xml_vsense, "name")
+            xml_name.text = str(vsense)
+            xml_min = etree.SubElement(xml_vsense, "min")
+            xml_min.text = str(vsense_min)
+            xml_max = etree.SubElement(xml_vsense, "max")
+            xml_max.text = str(vsense_max)
+            xml_mean = etree.SubElement(xml_vsense, "mean")
+            xml_mean.text = str(vsense_mean)
+            xml_mean = etree.SubElement(xml_vsense, "std")
+            xml_mean.text = str(vsense_std)
+            xml_count = etree.SubElement(xml_vsense, "count")
+            xml_count.text = str(total_count)
+            xml_count = etree.SubElement(xml_vsense, "count-out")
+            xml_count.text = str(out_of_spec_count)
+            xml_percent_out = etree.SubElement(xml_vsense, "percent-out")
+            xml_percent_out.text = str(percent_out)
+            xml_check = etree.SubElement(xml_vsense, "check")
+            xml_check.text = 'Out of Spec' if out_of_spec_bool else 'G'
 
     def run_current_analysis(self, temp, voltage, system, xml_systems, limits, run_limit_analysis):
+        """ Run current analysis for each temp/voltage/system condition in this mode. Builds
+            an xml table displaying basic results and statistics. 
+        Args:
+            temp (int): temperature at which to analyze
+            voltage (float):  
+            system (string): dataframe column header of system in this mode
+            xml_systems (xml object): part of tables file to write system stats to
+            limits (Limits object): input limits for test samples (currents and perhaps outage)
+            run_limit_analysis (boolean): T/F user entry on whether to run limit analysis
+        Returns:
+            None
+        """
         xml_system = etree.SubElement(xml_systems, "system")
         out_of_spec_bool = 'NA'
         out_of_spec_count = 'NA'
@@ -224,6 +251,8 @@ class Mode(object):
                          else 'Out of Spec' if out_of_spec_bool else 'G'
 
     def run_current_limit_analysis(self, temp, voltage, system, xml_system, limits, sys_min, sys_max):
+        """ Conducts limit analysis of current with input limits file. 
+            Limit row denoting 'G' or 'Out of Spec' added to xml tables output. """
         if self.has_led_binning:
             mode_limit_dict = get_limits_for_system_with_binning(
                                   limits, self, temp, voltage, system)
@@ -242,13 +271,14 @@ class Mode(object):
         return out_of_spec_bool
 
     def run_multimode_ratio_analysis(self, temp, voltage, system, xml_system):
+        """ Conducts multimode ratio analysis. For example the amount of current 
+            drawn by DRL and TURN in DRL+TURN mode. Rows added to xml tables output. """
         dframe = filter_temp_and_voltage(self.df, self.test.ambient, temp, voltage, 
                                          self.test.temperature_tolerance)
         for i, board_id in enumerate(self.current_board_ids):
             field = system.replace(self.board_mode, board_id)
             series = dframe[field]
-            # retrieve board name from limits
-            try:
+            try: # retrieve board name from limits
                 board_name = self.test.limits.board_module_pairs[board_id]
             except:
                 board_name = board_id
@@ -258,7 +288,7 @@ class Mode(object):
             xml_board_max.text = str(series.max())
 
     def get_out_of_spec_data(self):
-        """ Retrieves out_of_spec raw data from test in this mode """
+        """ Retrieves out_of_spec raw data from test in this mode. """
         for temp in self.temps:
             for voltage in self.voltages:
                 df, out_of_spec_df = pd.DataFrame(), pd.DataFrame()
@@ -267,11 +297,11 @@ class Mode(object):
                 mode_limit_dict = get_limits_at_mode_temp_voltage(self.test.limits, 
                                                                   self, temp, voltage)
                 if self.has_led_binning:
-                    ## TODO: Make this work for LED binning
+                    # TODO: Make this work for LED binning
                     raise NotImplementedError
                 else:
                     lower_limit, upper_limit = mode_limit_dict['LL'] , mode_limit_dict['UL']
-                    ## select all rows where any system has out of spec currents
+                    # select all rows where any system has out of spec currents
                     out_of_spec_df = df.loc[ (df[self.systems].values<lower_limit).any(1) | (df[self.systems].values>upper_limit).any(1) ]
                     if not out_of_spec_df.empty:  ## if out_of_spec df is not empty
                         write_out_of_spec_to_file(df, self, temp, voltage)

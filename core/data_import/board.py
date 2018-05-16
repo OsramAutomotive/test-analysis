@@ -38,7 +38,7 @@ class Board(object):
     """
 
     AMB_TEMP = 'Temp TC1'
-    VSETPOINT = 'VSetpoint'
+    VSETPOINT = 'Vsetpoint'
 
     def __init__(self, test, board_number):
         self.test = test
@@ -100,8 +100,7 @@ class Outage(Board):
         systems (list): list of Outage systems
 
     Essential Methods:
-        get_system_by_system_outage_stats:
-
+        get_system_by_system_outage_stats
     """
     def __init__(self, test, board_number):
         Board.__init__(self, test, board_number)
