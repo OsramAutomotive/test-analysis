@@ -35,7 +35,7 @@ class Mode(object):
     Essential methods:
 
     """
-    VSETPOINT = 'VSetpoint'
+    VSETPOINT = 'Vsetpoint'
 
     def __init__(self, test, board_mode, df, voltages, *temps):
         self.test = test
