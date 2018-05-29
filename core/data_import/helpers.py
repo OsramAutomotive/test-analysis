@@ -229,6 +229,10 @@ def replace_board_id_with_board_name(col_label, test_boards):
     board_name = retrieve_board_name(board_id, test_boards)
     return col_label.replace(board_id, board_name)
 
+def delete_all_object_attributes(obj):
+    for attr in list(obj.__dict__.keys()):
+        delattr(obj, attr)
+
 def clean_empty_keys(d):
     """ Removes empty keys from input dictionary """
     if not isinstance(d, (dict, list)):

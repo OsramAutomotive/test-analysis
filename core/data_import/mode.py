@@ -211,7 +211,7 @@ class Mode(object):
 
     def run_current_analysis(self, temp, voltage, system, xml_systems, limits, run_limit_analysis):
         """ Run current analysis for each temp/voltage/system condition in this mode. Builds
-            an xml table displaying basic results and statistics. 
+            an xml table displaying basic results and statistics.
         Args:
             temp (int): temperature at which to analyze
             voltage (float):  

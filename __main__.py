@@ -2,22 +2,24 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from core.data_import.dv_station import *
-from core.analysis.plots import *
-from core.analysis.histograms import *
-from core.analysis.tables import *
-from core.limits_import.limits import *
+import os
+import gc
+import time
+import win32file
+import win32event
+import win32con
 
 import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
-import os
-import time
-import win32file
-import win32event
-import win32con
+from core.data_import.dv_station import *
+from core.analysis.plots import *
+from core.analysis.histograms import *
+from core.analysis.tables import *
+from core.limits_import.limits import *
+from core.data_import.helpers import delete_all_object_attributes
 
 
 # constants for user input parameters
@@ -431,7 +433,7 @@ class realTimeThread(QThread):
             while 1:
                 result = win32event.WaitForSingleObject (change_handle, 500)
                 if result == win32con.WAIT_OBJECT_0:
-                  time.sleep(5)
+                  time.sleep(10)
                   new_path_contents = dict ([(f, None) for f in os.listdir (path_to_watch)])
                   added = [f for f in new_path_contents if not f in old_path_contents]
                   if added: 
@@ -448,7 +450,19 @@ class realTimeThread(QThread):
                            self.multimode, self.temperature_tolerance, self.voltage_tolerance, *self.temps)
         close_browser('iexplore')
         create_xml_tables(test, self.run_limit_analysis, self.limits)
+        self._delete_created_variables(test)
         print('\n\n\n ==> Analysis complete.')
+
+    def _delete_created_variables(self, test):
+        for board in test.boards:
+            delete_all_object_attributes(board)
+            del board
+        for mode in test.modes:
+            delete_all_object_attributes(mode)
+            del mode
+        delete_all_object_attributes(test)
+        del test
+        gc.collect()
 
     def run(self):
         self._real_time_loop()
