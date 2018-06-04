@@ -205,7 +205,8 @@ def count_num_out_of_spec(series, lower_limit, upper_limit):
     if total_count == 0:
         percent_out = '0.0%'
     else:
-        percent_out = str(round(count_out_of_spec/total_count, 4) * 100) + '%'
+        percent_out = '%.2f' % (round(count_out_of_spec/total_count, 4)*100)
+        percent_out += '%'
     return total_count, count_out_of_spec, percent_out
 
 def write_out_of_spec_to_file(df, mode, temp, voltage):
