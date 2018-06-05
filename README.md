@@ -3,20 +3,29 @@
 This program analyzes raw environmental test data for automotive lighting systems. The tests expose lighting systems to various temperature profiles while the systems are powered. Each test system is comprised of many modules (e.g. - Turn, DRL, Park, Outage, etc.) and can be run in different modes (e.g. – Park only, Turn only, Park+Turn, DRL+Park, etc.). These various modes are excited at different voltages throughout testing. The primary function of this project is to analyze the distributions of current for each temperature/mode/voltage condition.
 
 
-## Getting Started
+# Installing
 
-Python (version 3.5 or later) must be installed on your computer in order to use this data analysis program: https://www.python.org/
+For development, Python (any subversion of 3.5) must be installed on your computer in order to use this data analysis program:  [https://www.python.org/](https://www.python.org/).  If you are only interested in running the program then you may use the executable. The latest Averna compatible executable is available on the network. 
 
 ### Dependencies
 
-Download this repository's code to your local environment. Ensure you have pip installed and from the command line run the following to collect the required python packages:
+Download this repository&#39;s code to your local environment. Ensure you have pip installed and from the command line run the following command to collect the required python packages:
 
 ```
 pip install -r requirements.txt
 ```
 
+### Building an executable
 
-## The DV Test Station
+To build a standalone executable, navigate to the project root folder in the terminal and run the command:
+
+```
+pyinstaller __main__.spec
+```
+
+This command will create a series of log and working files in the &quot;build&quot; folder and most importantly an executable in the &quot;dist&quot; folder. This &quot;dist&quot; folder contains everything required to run the software; the executable, dlls, and other files the program relies upon. This folder may be copied to any computer with a Windows operating system and the executable may be run from there.
+
+# The DV Test Station
 The raw data that this program analyzes is produced by our DV Test Stations. These test stations consist of 2 power supplies, 2 DAQ systems, and 6 pc boards. The test systems are wired to the boards and currents are measured across high precision shunt resistors. Each board is used for a single module in the system. For instance, a lighting project may be set up on the boards of a DV Test Station like this: 
 
 ```
@@ -82,10 +91,20 @@ Here is an example of a system by system histogram:
 ![Example histogram](images/sys-by-sys.png)
 
 ### 3) Summary Tables
-An excel file is created with the basic statistics for the various temperature/mode/voltage conditions for each system. A new tab is created for each test temperature the user wishes to analyze. 
+_Note: Chrome may not be used to view summary tables. Firefox or Internet Explorer browsers are compatible for viewing these xml summary tables. For Internet Explorer, be sure to click “Allow blocked content” on opening the file._
+
+An xml file is created with the temperature data and basic statistics for the various temperature/mode/voltage conditions for each system. A small table at the top summarizes the minimum and maximum test temperatures. Nested tables are created for each mode present in each temperature entered for analysis by the user. 
+
+By default the xml data tables are saved in the “!output” folder where the main application executable is located. There is also a “templates” folder inside the “!output” folder that contains a couple xsl and css files that describe the layout and styling for displaying these xml files in a browser. Do not delete these templates. 
 
 ### 4) Out of spec data
 A text file containing all the raw out of spec data is created. The file lists the data by condition (temperature/mode/voltage) so the user knows what currents were out of specification. No file is created if there is no out of spec data for the analyzed test data. 
+
+
+# How to Use
+A GUI is provided for users to run DV Station test analysis. See Figure 4 for GUI display. There are a number of test parameters that the user must enter to define the test data to analyze and the type of analysis to perform. 
+
+![DV Test Station Analysis GUI](images/gui.png)
 
 ## **Test Data Parameters**
 
@@ -142,11 +161,9 @@ If the multimode condition is checked, the program will analyze by board combina
 
 Let&#39;s take a look at an example.
 
+![Example functional cycle](images/fc.png)
 
-
-Table 3. Example functional cycle
-
-Suppose our test uses the functional cycle in Table 3. The analysis would be the following:
+Suppose our test uses the functional cycle described above. The analysis would be the following:
 
 - Modes for analysis:  B1, B2, B5, B6, B1+B2, B3+B5
 - Ignored:  B1+B2+B3+B4 (this mode has more than 2 boards on)
@@ -163,26 +180,17 @@ Once all parameters have been entered, click the &quot;Analyze&quot; button at t
 
 If any errors occur while running the program they will be printed to the terminal window. Most errors are handled and a user feedback message describing the problem will be displayed. See Figure 5 for an example.
 
- 
-
-Figure 5. Example of an error displayed in the command line window
-
 ## **Real Time Mode**
 
 The user may run the program in a semi real time mode to analyze data on a test station computer for an ongoing test. To switch the program to this mode, navigate to File &gt; Real Time.
 
-The GUI skin will change to indicate the program has switched to real time mode. This mode permits analysis summary tables only (plotting and histograms are not permitted). &quot;Tables&quot; is preselected under analysis and many parameters are disabled and greyed out. See Figure 6. The user must provide analysis temperatures and a test name. The user may provide a limits file and tweak analysis conditions or tolerances if desired. The analysis will automatically re-run each time new data files are created by Labview and display the table summaries of the data collected thus far.
+The GUI skin will change to indicate the program has switched to real time mode. This mode permits analysis summary tables only (plotting and histograms are not permitted). The &quot;Tables&quot; field is preselected under analysis and many parameters are disabled and greyed out. The user must provide analysis temperatures and a test name. The user may provide a limits file and tweak analysis conditions or tolerances if desired. The analysis will automatically re-run each time new data files are created by Labview and display the table summaries of the data collected thus far.
 
+![DV Test Station Analysis GUI in Real Time Mode](images/gui-real-time.png)
 
-
-Figure 6. DV Test Station Analysis GUI in Real Time Mode
-
-#
 # Limits Files in Detail
 
 Current limits are established for each lighting project at various temperature/mode/voltage environmental testing conditions. Their purpose is to provide an expected range for comparison with measured current data. This helps recognize both hard and soft failures. Limits can be used for any environmental test and are stored in an html file, which is read by the program. Limits also contain information about the project modules and how the test station boards were used for a particular test.
-
-See Figure 7for an example of a limits file.
 
 ## **Board and Module Information**
 
@@ -200,9 +208,8 @@ The &quot;LED Bin&quot; column lists the different LED bins (if any) used for ea
 
 Outage is a signal relayed to the car&#39;s main control that indicates if a certain light module is on or off. It is often linked to Turn. Not all automotive lighting systems have Outage. The &quot;Outage Link&quot; column indicates which light module is linked to Outage.
 
+![Example of a limits file](images/limits-example.png)
 
-
-Figure 7. Example of a limits file
 
 ## **Limits for Each Mode**
 
@@ -234,8 +241,6 @@ Click &quot;(-) Remove Board&quot; to remove the last board from the table. This
 
 Modes may be added or removed by clicking the &quot;(+) Add Mode&quot; or &quot;(-) Remove Mode&quot; buttons. This will prompt a dialog window asking the user to enter the name of the mode, which will then be deleted or added accordingly. Note that the mode names must be a module name (or combination of module names, e.g. - &quot;PARKTURN&quot;) from the board module information table. The prompt will also ask for a color for the mode. You may specify the color value in hexadecimal, RGB, or HTML name format.
 
-
-
 ### **► Add/Remove Outage**
 
 Outage may be added or removed by clicking the &quot;(+) Add Outage&quot; or &quot;(-) Remove Outage&quot; buttons. An outage container will be added at the end of the file with two tables for limits inputs: an ON table and an OFF table. The table fields may be filled just like a mode current limits table.
@@ -246,12 +251,9 @@ Temperatures may be added or removed by clicking the &quot;(+) Add Temp&quot; or
 
 When a temperature is added, a current limit table at that temperature is created in each mode section using the voltages present in the file. When a temperature is removed, if the entered temperature is present in the file then those tables will be removed.
 
-
-
 ### **► Add/Remove Voltage**
 
 Voltages may be added or removed by clicking the &quot;(+) Add Voltage&quot; or &quot;(-) Remove Voltage&quot; buttons. This will prompt a dialog window asking the user to enter a voltage (integer or float), which will then be deleted or added accordingly. The voltage will be added/removed from each current table in the document. A user will be prevented from adding a voltage that is already present in the file or removing one that is not.
-
 
 
 ## **Creating and Editing Limits Files**
@@ -262,33 +264,7 @@ All current and outage fields in limits tables are editable. To change a current
 
 After making changes click the &quot;Update&quot; button at the top of the file. This will update all the values and ids on the page but will not save it. To save the changes, press &quot;Ctrl+s&quot; on the keyboard and select the file format &quot;webpage, complete.&quot; You may save over the current file or rename it and save as a new file.
 
-There is a template limits file on the network with a blank framework: [&quot;L:\LED\Test Engineering\Python Data Analysis\Limits Template&quot;](../../L:%5CLED%5CTest%20Engineering%5CPython%20Data%20Analysis%5CLimits%20Template)
-
-This template may be used as a starting point to create new limits files. Fill out the project and board information and use the action buttons to add mode, outage, temperature, and voltage fields to the limits file. When finished entering information, click the &quot;Update&quot; button at the top of the page and save as a new file.
-
-#
-# Installing the software
-
-## Getting Started
-
-For development, Python (any subversion of 3.5) must be installed on your computer in order to use this data analysis program:  [https://www.python.org/](https://www.python.org/).  If you are only interested in running the program then you may use the executable. The latest Averna compatible executable &quot;\_\_main\_\_.exe&quot; is available on the network here: [&quot;L:\LED\Test Engineering\Python Data Analysis\Averna DV Analysis - Current Build&quot;](../../L:%5CLED%5CTest%20Engineering%5CPython%20Data%20Analysis%5CAverna%20DV%20Analysis%20-%20Current%20Build)
-
-### Dependencies and Version Control
-
-A github repository of the data analysis software program is hosted at [https://github.com/OsramAutomotive/test-analysis/tree/averna](https://github.com/OsramAutomotive/test-analysis/tree/averna). Download this repository&#39;s code to your local environment. Ensure you have pip installed and from the command line run the following command to collect the required python packages:
-
-pip install -r requirements.txt
-
-The &quot;requirements.txt&quot; file lists all the required packages and the pip module collects them. At this point, you will be able to run the program in your local Python environment.
-
-### Building an executable
-
-To build a standalone executable, navigate to the project root folder in the terminal and run the command:
-
-pyinstaller \_\_main\_\_.spec
-
-This command will create a series of log and working files in the &quot;build&quot; folder and most importantly an executable in the &quot;dist&quot; folder. This &quot;dist&quot; folder contains everything required to run the software; the executable, dlls, and other files the program relies upon. This folder may be copied to any computer with a Windows operating system and the executable may be run from there.
-
+There is a template limits file on the network with a blank framework. This template may be used as a starting point to create new limits files. Fill out the project and board information and use the action buttons to add mode, outage, temperature, and voltage fields to the limits file. When finished entering information, click the &quot;Update&quot; button at the top of the page and save as a new file.
 
 
 ## Built With
