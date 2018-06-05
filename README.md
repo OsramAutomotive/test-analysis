@@ -3,7 +3,7 @@
 This program analyzes raw environmental test data for automotive lighting systems. The tests expose lighting systems to various temperature profiles while the systems are powered. Each test system is comprised of many modules (e.g. - Turn, DRL, Park, Outage, etc.) and can be run in different modes (e.g. – Park only, Turn only, Park+Turn, DRL+Park, etc.). These various modes are excited at different voltages throughout testing. The primary function of this project is to analyze the distributions of current for each temperature/mode/voltage condition.
 
 
-# Installing
+## Installing
 
 For development, Python (any subversion of 3.5) must be installed on your computer in order to use this data analysis program:  [https://www.python.org/](https://www.python.org/).  If you are only interested in running the program then you may use the executable. The latest Averna compatible executable is available on the network. 
 
@@ -25,7 +25,7 @@ pyinstaller __main__.spec
 
 This command will create a series of log and working files in the &quot;build&quot; folder and most importantly an executable in the &quot;dist&quot; folder. This &quot;dist&quot; folder contains everything required to run the software; the executable, dlls, and other files the program relies upon. This folder may be copied to any computer with a Windows operating system and the executable may be run from there.
 
-# The DV Test Station
+## The DV Test Station
 The raw data that this program analyzes is produced by our DV Test Stations. These test stations consist of 2 power supplies, 2 DAQ systems, and 6 pc boards. The test systems are wired to the boards and currents are measured across high precision shunt resistors. Each board is used for a single module in the system. For instance, a lighting project may be set up on the boards of a DV Test Station like this: 
 
 ```
