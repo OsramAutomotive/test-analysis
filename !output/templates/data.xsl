@@ -5,9 +5,9 @@
   <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
   <html>
     <head>
+      <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
       <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1" />
-	  <meta http-equiv="pragma" content="no-cache" />
-      <!-- <link rel="stylesheet" type="text/css" href="styles.css"></link> -->
+	    <meta http-equiv="pragma" content="no-cache" />
       <style>
         body {
           font-family: Calibri, Tahoma, Verdana, Segoe, sans-serif;
