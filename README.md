@@ -271,8 +271,7 @@ There is a template limits file on the network with a blank framework. This temp
 
 * [Pandas](http://pandas.pydata.org/) - Data wrangling and processing
 * [Matplotlib](http://matplotlib.org/) - Plotting and histograms
-* [XlsWriter](http://xlsxwriter.readthedocs.io/) - Creates analysis tables
-* [Openpyxl](https://openpyxl.readthedocs.io/en/default/) - Pulling current limits from excel files
+* [lxml](http://lxml.de/) - Creates analysis tables in xml
 
 
 ## Authors
