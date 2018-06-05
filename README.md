@@ -102,7 +102,7 @@ A text file containing all the raw out of spec data is created. The file lists t
 
 
 # How to Use
-A GUI is provided for users to run DV Station test analysis. See Figure 4 for GUI display. There are a number of test parameters that the user must enter to define the test data to analyze and the type of analysis to perform. 
+A GUI is provided for users to run DV Station test analysis. There are a number of test parameters that the user must enter to define the test data to analyze and the type of analysis to perform. 
 
 ![DV Test Station Analysis GUI](images/gui.png)
 
@@ -178,7 +178,7 @@ Once all parameters have been entered, click the &quot;Analyze&quot; button at t
 
 ## **Errors**
 
-If any errors occur while running the program they will be printed to the terminal window. Most errors are handled and a user feedback message describing the problem will be displayed. See Figure 5 for an example.
+If any errors occur while running the program they will be printed to the terminal window. Most errors are handled and a user feedback message describing the problem will be displayed. 
 
 ## **Real Time Mode**
 
