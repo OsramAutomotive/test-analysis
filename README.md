@@ -28,7 +28,7 @@ Board 5 - Turn
 Board 6 - Outage
 ```
 
-A Labview program defines the functional cycle of testing (which modules are powered and when) and outputs raw DAQ voltage and current data of each system for each board. A single board's raw data looks like this: 
+A Labview program defines the functional cycle of testing (which modules are powered and when) and outputs raw DAQ voltage and current data of each system for each board. The ouptut format is a text file that often contains thousands of rows of data. A few rows of a single board's raw data looks like this: 
 ```
 | Date     | Time       | Amb Temp TC1 | TC2    | TC3    | TC4    | VSetpoint | VSense 1 | VSense 2 | Board on/off | TP1: System 82 | TP2: System 83 | TP3: System 84 | TP4: System 85 | TP5: System 86 | TP6: System 87 | TP7: System 88 | TP8: System 89 | TP9: System 90 | TP10: System 91 | TP11: System 92 | TP12: System 93 |
 |----------|------------|--------------|--------|--------|--------|-----------|----------|----------|--------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|-----------------|-----------------|-----------------|
@@ -45,17 +45,19 @@ A Labview program defines the functional cycle of testing (which modules are pow
 
 ```
 
-## Current Limits
-For each lighting project current limits are established for the various temperature/mode/voltage conditions. These limits can be used for any particular environmental test. These limits are stored in an excel file and pulled by the program into a simple dictionary. Limits are excellent for comparing the measured currents to an expected or acceptable range. They also aid in recognizing subtle failures. 
+## **Current Limits**
 
-Not all LEDs are created equal. Some LEDs are more efficient than others (lower current will produce same light output) and so LEDs are allocated into different bins. LED binning is accounted for in the limits files so that different current limits can be used for samples of the same module type but different LED bin. 
+For each lighting project current limits are established for the various temperature/mode/voltage conditions. These limits can be used for any particular environmental test. These limits are stored in an html file and read by the program. Limits are excellent for comparing the measured currents to an expected or acceptable range. They also aid in recognizing subtle failures.
 
-## Analysis
+Not all LEDs are created equal. Some LEDs are more efficient than others (the same current will produce greater light output) and so LEDs are allocated into different bins. LED binning is accounted for in the limits files so that different current limits can be used for samples of the same module type but different LED bin.
+
+## **Analysis**
 
 The analysis consists of four components:
+
 1. Temporal Plotting
 2. Current Histograms
-3. Summary Tables with basic statisitcs and comparison to limits 
+3. Summary Tables with basic statistics and comparison to limits
 4. Out of spec data
 
 ### 1) Temporal Plotting
@@ -84,42 +86,6 @@ An excel file is created with the basic statistics for the various temperature/m
 
 ### 4) Out of spec data
 A text file containing all the raw out of spec data is created. The file lists the data by condition (temperature/mode/voltage) so the user knows what currents were out of specification. No file is created if there is no out of spec data for the analyzed test data. 
-
-
-
-## **Current Limits**
-
-For each lighting project current limits are established for the various temperature/mode/voltage conditions. These limits can be used for any particular environmental test. These limits are stored in an html file and read by the program. Limits are excellent for comparing the measured currents to an expected or acceptable range. They also aid in recognizing subtle failures.
-
-Not all LEDs are created equal. Some LEDs are more efficient than others (the same current will produce greater light output) and so LEDs are allocated into different bins. LED binning is accounted for in the limits files so that different current limits can be used for samples of the same module type but different LED bin.
-
-## **Analysis**
-
-The analysis consists of four components:
-
-1. Temporal Plotting
-2. Current Histograms
-3. Summary Tables with basic statistics and comparison to limits
-4. Out of spec data
-
-### **1) Temporal Plotting**
-
-A set of temporal subplots may be created (see Figure 1 for an example):
-
-- Voltage and functional cycle
-- Temperature profile
-- Current measurements for each mode that is present in test
-
-
-
-Figure 1. Example of a temporal plot created by program
-
-### 2) Current Histograms
-
-Histograms may be created to visualize the distribution of currents at different test conditions. If provided, limits are drawn as vertical dashed lines. These may be created from the test population as a whole or on a system by system basis. See Figure 2 and Figure 3 for examples. Note that these images are not saved by default. Use the save button to save an image and make sure to resize the window to the desired size before doing so.
-
- 
-Figure 4. DV Test Analysis Program GUI
 
 ## **Test Data Parameters**
 
