@@ -209,12 +209,13 @@ def count_num_out_of_spec(series, lower_limit, upper_limit):
         percent_out += '%'
     return total_count, count_out_of_spec, percent_out
 
-def write_out_of_spec_to_file(df, mode, temp, voltage):
+def write_out_of_spec_to_file(filename, df, mode, temp, voltage):
     """ Append out of spec mode/temp/voltage condition to out of spec file """
-    with open('!output//out_of_spec.txt', 'a+') as f:
+    file = '!output//' + filename + ' - out_of_spec.txt'
+    with open(file, 'a+') as f:
         f.write('\t'.join(['\n\n\n\n\n' + str(temp) + u'\N{DEGREE SIGN}C',
                            mode.name, str(voltage) + 'V', '\n']))
-    df.to_csv('!output//out_of_spec.txt', header=df.columns,
+    df.to_csv(file, header=df.columns,
               index=True, sep='\t', mode='a')
 
 # Miscellaneous helpers
