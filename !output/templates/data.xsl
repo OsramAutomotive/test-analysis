@@ -125,12 +125,22 @@
         <xsl:for-each select="mode">
 
           <table border="1">
-            <!-- Mode Header -->
+            <!-- Test Name Header -->
+            <tr bgcolor="#989898">
+              <th>
+                <xsl:attribute name="colspan"><xsl:value-of select="@width"/></xsl:attribute>
+                <div contenteditable="true"><xsl:value-of select="../../@name"/></div>
+              </th>
+            </tr>
+
+            <!-- Mode Temperature Header -->
             <tr>
               <xsl:attribute name="class"><xsl:value-of select="@id"/></xsl:attribute>
               <th>
                 <xsl:attribute name="colspan"><xsl:value-of select="@width"/></xsl:attribute>
-                <div contenteditable="true"><xsl:value-of select="@id"/></div>
+                <div contenteditable="true">
+                  <xsl:value-of select="@id"/> at <xsl:value-of select="../@temp"/>
+                </div>
               </th>
             </tr>
             <xsl:for-each select="voltage">

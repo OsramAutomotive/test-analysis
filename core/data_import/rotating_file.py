@@ -12,7 +12,7 @@ import sys
 
 class RotatingFile(object):
     def __init__(self, directory='', filename='out_of_spec', max_files=99,
-        max_file_size=20000000):
+                 max_file_size=20000000):
         self.ii = 1
         self.directory, self.filename      = directory, filename
         self.max_file_size, self.max_files = max_file_size, max_files
