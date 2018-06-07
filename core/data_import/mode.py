@@ -5,7 +5,6 @@ This module contains the Mode class which models a mode excited in a lighting
 project. For eaxample, "DRL" or "Park" or "Park+Turn" could be modes.
 """
 
-
 import re
 import pandas as pd
 from lxml import etree
@@ -18,8 +17,11 @@ from core.data_import.helpers import copy_and_remove_b6_from, \
                                      get_vsense_stats_at_mode_temp_voltage, \
                                      write_out_of_spec_to_file
 
+from core.data_import.rotating_file import RotatingFile
+
 from core.limits_import.limits import get_limits_for_system_with_binning, \
                                       get_limits_at_mode_temp_voltage
+
 
 class Mode(object):
     """
@@ -290,6 +292,8 @@ class Mode(object):
 
     def get_out_of_spec_data(self):
         """ Retrieves out_of_spec raw data from test in this mode. """
+        out_of_spec_file = RotatingFile(directory='!output//', 
+                                        filename=self.test.name+' - out of spec')
         for temp in self.temps:
             for voltage in self.voltages:
                 df, out_of_spec_df = pd.DataFrame(), pd.DataFrame()
@@ -306,4 +310,8 @@ class Mode(object):
                     out_of_spec_df = df.loc[ (df[self.systems].values<lower_limit).any(1) | (df[self.systems].values>upper_limit).any(1) ]
                     if not out_of_spec_df.empty:
                         out_of_spec_df = out_of_spec_df[~out_of_spec_df.index.duplicated(keep='first')]  # remove duplicates
-                        write_out_of_spec_to_file(self.test.name, df, self, temp, voltage)
+                        write_out_of_spec_to_file(out_of_spec_file, df, self, temp, voltage)
+        try:
+            out_of_spec_file.close()
+        except:
+            print('File already closed')

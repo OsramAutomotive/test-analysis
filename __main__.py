@@ -280,14 +280,14 @@ class TestAnalysisUI(QWidget):
         elif analysis_name == 'Tables':
             create_xml_tables(test, run_limit_analysis, limits)
         elif analysis_name == 'Out of Spec':
-            print('\nCreating out of spec raw data text file...')
+            print('\nCreating out of spec raw data text file(s)...')
             if limits:
                 for mode in test.modes:
                     mode.get_out_of_spec_data()
                 print('...complete.')
             else:
                 print('...limits were not provided. Raw out of spec ' \
-                      'file cannot be created without limits.')
+                      'file(s) cannot be created without limits.')
         else:
             print('Analysis tool not found')
 
