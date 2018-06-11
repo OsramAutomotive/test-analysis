@@ -180,7 +180,7 @@ Once all parameters have been entered, click the &quot;Analyze&quot; button at t
 
 ## **Errors**
 
-If any errors occur while running the program they will be printed to the terminal window. Most errors are handled and a user feedback message describing the problem will be displayed. 
+Any errors that occur while running the program will be printed to the terminal window. Most errors are handled and a user feedback message describing the problem will be displayed. 
 
 ## **Real Time Mode**
 
@@ -206,9 +206,9 @@ The module names are listed under the &quot;Module&quot; column and line up with
 
 The &quot;LED Bin&quot; column lists the different LED bins (if any) used for each module separated by spaces. For example if the Turn module uses 8J and 6K LEDs, then &quot;8J 6K&quot; would be listed for that module.
 
-### **► Outage Link**
+### **► Outage**
 
-Outage is a signal relayed to the car&#39;s main control that indicates if a certain light module is on or off. It is often linked to Turn. Not all automotive lighting systems have Outage. The &quot;Outage Link&quot; column indicates which light module is linked to Outage.
+Outage is a signal relayed to the car&#39;s main control that indicates if a certain light module is on or off. It is often linked to Turn but not all automotive lighting systems have Outage. The &quot;Outage&quot; column indicates whether a board is Outage.
 
 ![Example of a limits file](images/limits-example.png)
 
