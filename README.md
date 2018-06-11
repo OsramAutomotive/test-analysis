@@ -26,7 +26,7 @@ pyinstaller __main__.spec
 This command will create a series of log and working files in the &quot;build&quot; folder and most importantly an executable in the &quot;dist&quot; folder. This &quot;dist&quot; folder contains everything required to run the software; the executable, dlls, and other files the program relies upon. This folder may be copied to any computer with a Windows operating system and the executable may be run from there.
 
 ## The DV Test Station
-The raw data that this program analyzes is produced by our DV Test Stations. These test stations consist of 2 power supplies, 2 DAQ systems, and 6 pc boards. The test systems are wired to the boards and currents are measured across high precision shunt resistors. Each board is used for a single module in the system. For instance, a lighting project may be set up on the boards of a DV Test Station like this: 
+The raw data that this program analyzes is produced by our DV Test Stations. These test stations typically consist of at least 2 power supplies, 2 DAQ systems, and 6 measurement boards (current or outage boards). However, the stations and Labview software support scalibility so additional measurement boards may be used. The test systems are wired to the boards and currents are measured across high precision shunt resistors. Each board is used for a single module in the system. For instance, a lighting project may be set up on the boards of a DV Test Station like this: 
 
 ```
 Board 1 - Low Beam
@@ -35,6 +35,7 @@ Board 3 - DRL
 Board 4 - Park
 Board 5 - Turn
 Board 6 - Outage
+Board 7 - L2
 ```
 
 A Labview program defines the functional cycle of testing (which modules are powered and when) and outputs raw DAQ voltage and current data of each system for each board. The output format is a text file that contains hundreds to thousands of rows of data. A few rows of a raw output data file looks like this: 
