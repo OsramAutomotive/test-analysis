@@ -305,12 +305,24 @@ class Mode(object):
                     # TODO: Make this work for LED binning
                     raise NotImplementedError
                 else:
-                    lower_limit, upper_limit = mode_limit_dict['LL'] , mode_limit_dict['UL']
-                    # select all rows where any system has out of spec currents
-                    out_of_spec_df = df.loc[ (df[self.systems].values<lower_limit).any(1) | (df[self.systems].values>upper_limit).any(1) ]
+                    # select all rows where any Vsense has out of spec voltages
+                    lower_limit, upper_limit = voltage - self.test.voltage_tolerance , voltage + self.test.voltage_tolerance
+                    out_of_spec_df = df.loc[ (df[self.voltage_senses].values<lower_limit).any(1) | (df[self.voltage_senses].values>upper_limit).any(1) ]
+                    # add them to the out of spec file
                     if not out_of_spec_df.empty:
+                        analysis_type = 'Out of spec data rows - Vin'
                         out_of_spec_df = out_of_spec_df[~out_of_spec_df.index.duplicated(keep='first')]  # remove duplicates
-                        write_out_of_spec_to_file(out_of_spec_file, df, self, temp, voltage)
+                        write_out_of_spec_to_file(out_of_spec_file, out_of_spec_df, self, temp, voltage, analysis_type)
+
+                    # select all rows where any system has out of spec currents
+                    lower_limit, upper_limit = mode_limit_dict['LL'] , mode_limit_dict['UL']
+                    out_of_spec_df = df.loc[ (df[self.systems].values<lower_limit).any(1) | (df[self.systems].values>upper_limit).any(1) ]
+                    # add them to the out of spec file
+                    if not out_of_spec_df.empty:
+                        analysis_type = 'Out of spec data rows - Iin'
+                        out_of_spec_df = out_of_spec_df[~out_of_spec_df.index.duplicated(keep='first')]  # remove duplicates
+                        write_out_of_spec_to_file(out_of_spec_file, out_of_spec_df, self, temp, voltage, analysis_type)
+
         try:
             out_of_spec_file.close()
         except:
