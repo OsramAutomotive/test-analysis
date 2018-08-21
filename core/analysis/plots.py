@@ -34,12 +34,13 @@ def set_up_plot_area(test, pstyle='ggplot'):
 def plot_voltage_functional_cycle(test, ax):
     ax.plot_date(test.df.index.to_pydatetime(), test.df[test.VSETPOINT], 'k--', 
                  linewidth=3, zorder=10)  # plot voltage setpoint on first subplot
-    cmap = plt.get_cmap('inferno')
+    cmap = plt.get_cmap('viridis')
     colors = cmap(np.linspace(0, 1.0, len(test.thermocouples))) 
     vsenses = [vsense for vsense in test.voltage_senses \
                if any(board_id in vsense for board_id in test.board_ids)]
     vsense_labels = [replace_board_id_with_board_name(vsense, test.boards) \
                      for vsense in vsenses]
+    vsetpoint_vsense_labels = ['Vsetpoint'] + vsense_labels  # adds Vsetpoint label to legend
     for vsense, color in zip(vsenses, colors):
         test.df[vsense].plot(ax=ax, linewidth=2, c=color)
     ax.set_title("Voltage and Functional Cycle")
@@ -48,7 +49,7 @@ def plot_voltage_functional_cycle(test, ax):
     ax.yaxis.set_major_locator(ticker.MaxNLocator(4))
     ncol = determine_legend_ncols(vsenses)
     ax.legend(fontsize=8, loc='center left', bbox_to_anchor=(1.0, 0.5),
-              ncol=ncol, labels=vsense_labels)
+              ncol=ncol, labels=vsetpoint_vsense_labels)
 
 def plot_temperature_cycle(test, ax):
     cmap = plt.get_cmap('viridis')
